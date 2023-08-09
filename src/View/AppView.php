@@ -13,6 +13,7 @@ declare(strict_types=1);
  * @since     3.0.0
  * @license   https://opensource.org/licenses/mit-license.php MIT License
  */
+
 namespace App\View;
 
 use Cake\View\View;
@@ -23,9 +24,9 @@ use Cake\View\View;
  * Your application's default view class
  *
  * @link https://book.cakephp.org/4/en/views.html#the-app-view
+ * @property \Authentication\View\Helper\IdentityHelper Identity Authentication Plugin Identity view helper
  */
-class AppView extends View
-{
+class AppView extends View {
     /**
      * Initialization hook method.
      *
@@ -35,7 +36,13 @@ class AppView extends View
      *
      * @return void
      */
-    public function initialize(): void
-    {
+    public function initialize(): void {
+        // Load FormHelper with custom template
+        $this->loadHelper('Form', [
+            'templates' => 'templates_form_milligram-columns',
+        ]);
+
+        // Load View Helper of Authentication plugin
+        $this->loadHelper('Authentication.Identity');
     }
 }

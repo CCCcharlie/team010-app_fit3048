@@ -32,7 +32,7 @@
                     <td><?= $this->Number->format($user->age) ?></td>
                     <td><?= h($user->email) ?></td>
                     <td><?= h($user->timezone) ?></td>
-                    <td><?= h($user->admin_status) ?></td>
+                    <td><?= h($user->admin_status ? "✅" : "❌") ?></td>
                     <td><?= h($user->nonce) ?></td>
                     <td><?= h($user->nonce_expiry) ?></td>
                     <td class="actions">

@@ -14,9 +14,11 @@ declare(strict_types=1);
  * @since     0.2.9
  * @license   https://opensource.org/licenses/mit-license.php MIT License
  */
+
 namespace App\Controller;
 
 use Cake\Controller\Controller;
+use Cake\Event\EventInterface;
 
 /**
  * Application Controller
@@ -25,6 +27,8 @@ use Cake\Controller\Controller;
  * will inherit them.
  *
  * @link https://book.cakephp.org/4/en/controllers.html#the-app-controller
+ *
+ * @property \Authentication\Controller\Component\AuthenticationComponent Authentication
  */
 class AppController extends Controller
 {
@@ -49,5 +53,34 @@ class AppController extends Controller
          * see https://book.cakephp.org/4/en/controllers/components/form-protection.html
          */
         //$this->loadComponent('FormProtection');
+
+        // Load component from Authentication plugin
+        $this->loadComponent('Authentication.Authentication');
+    }
+
+    /**
+     * beforeRender override in AppController
+     *
+     * Use this function override in AppController to apply variables to all child views
+     *
+     * @return void
+     */
+    public function beforeRender(EventInterface $event)
+    {
+        parent::beforeRender($event);
+
+        // Load global keys from ContentBlocks
+//        $globalContentBlocks = $this
+//            ->fetchTable('ContentBlocks')
+//            ->find('list', [
+//                'keyField' => 'hint',
+//                'valueField' => 'content_value'
+//            ])
+//            ->where(['parent' => 'global'])  // Limit the search to home page only by the parent field
+//            ->toArray();
+//
+//        $this->set(compact('globalContentBlocks'));
+//    }
+
     }
 }

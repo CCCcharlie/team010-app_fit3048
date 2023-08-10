@@ -15,7 +15,7 @@ GAMBLOCK® - STAFF PASSWORD RESET
 
 Hi <?= h($f_name) ?>,
 
-Thank you for your request to reset the password of your account on GamBlock®.
+Thank you for your request to reset the password of your account on GamBlock® staff portal.
 
 To reset your account password, use the button below to access the reset password page:
 <?= $this->Url->build(['controller' => 'Staff', 'action' => 'resetpassword', $nonce], ['fullBase' => true]) ?>

@@ -19,7 +19,7 @@ $this->assign('title', 'Login');
 
                 <fieldset>
 
-                    <legend>Login</legend>
+                    <legend>GamBlockLogin</legend>
 
                     <?= $this->Flash->render() ?>
 

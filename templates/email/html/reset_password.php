@@ -3,8 +3,8 @@
  * Reset Password HTML email template
  *
  * @var \App\View\AppView $this
- * @var string $first_name email recipient's first name
- * @var string $last_name email recipient's last name
+ * @var string $f_name email recipient's first name
+ * @var string $l_name email recipient's last name
  * @var string $email email recipient's email address
  * @var string $nonce nonce used to reset the password
  */
@@ -19,7 +19,7 @@
                     <tr>
                         <td>
                             <h3>Reset your account password</h3>
-                            <p>Hi <?= h($first_name) ?>, </p>
+                            <p>Hi <?= h($f_name) ?>, </p>
                             <p>Thank you for your request to reset the password of your account on <b>GamBlock®</b>. </p>
                             <p></p>
                             <p>To reset your account password, use the button below to access the reset password page: </p>
@@ -53,7 +53,7 @@
         <table role="presentation" border="0" cellpadding="0" cellspacing="0">
             <tr>
                 <td class="content-block">
-                    This email is addressed to <?= $first_name ?>  <?= $last_name ?> &lt;<?= $email ?>&gt; at GamBlock®<br>
+                    This email is addressed to <?= $f_name?>  <?= $l_name ?> &lt;<?= $email ?>&gt; at GamBlock®<br>
                     Please discard this email if it not meant for you
                     <br>
                     <br>

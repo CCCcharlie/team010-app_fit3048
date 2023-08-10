@@ -70,4 +70,16 @@ class PagesController extends AppController
             throw new NotFoundException();
         }
     }
+    public function home() {
+        $user = $this->Auth->user(); // Get the logged-in user
+        $f_name = $user['f_name'];
+        $l_name = $user['l_name'];
+
+        $this->set(compact('f_name', 'l_name'));
+
+        // Debugging
+        debug(compact('f_name', 'l_name'));
+    }
+
+
 }

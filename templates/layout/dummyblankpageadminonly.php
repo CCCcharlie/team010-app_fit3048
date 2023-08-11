@@ -132,7 +132,7 @@ endif;
                                 <ul class="nav flex-column">
                                     <li class="nav-item">
                                         <a class="nav-link" href="Customers/index">Assigned to me</a>
-<!--                                        Change my link to assigned to me page when done.-->
+                                        <!--                                        Change my link to assigned to me page when done.-->
                                     </li>
                                     <li class="nav-item">
                                         <a class="nav-link" href="Customers/index">View All</a>
@@ -158,7 +158,7 @@ endif;
                         </li>
                         <li class="nav-divider">
                             Admin Features
-<!--                            Change to me admin only visable.-->
+                            <!--                            Change to me admin only visable.-->
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="#" data-toggle="collapse" aria-expanded="false" data-target="#submenu-6" aria-controls="submenu-6"><i class="fas fa-fw fa-file"></i>Staff Management</a>
@@ -194,8 +194,8 @@ endif;
             <div class="row">
                 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                     <div class="page-header">
-                            <h2 class="pageheader-title">Welcome!</h2>
-<!--                            Can you add login user to name here if you get chance Bryan?-->
+                        <h2 class="pageheader-title">Welcome!</h2>
+                        <!--                            Can you add login user to name here if you get chance Bryan?-->
                         <p class="pageheader-text">Proin placerat ante duiullam scelerisque a velit ac porta, fusce sit amet vestibulum mi. Morbi lobortis pulvinar quam.</p>
                     </div>
                 </div>

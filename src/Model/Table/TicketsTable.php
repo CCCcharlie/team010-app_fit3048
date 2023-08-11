@@ -74,13 +74,16 @@ class TicketsTable extends Table
 
         $validator
             ->dateTime('createtime')
-            ->requirePresence('createtime', 'create')
             ->notEmptyDateTime('createtime');
 
         $validator
             ->dateTime('closetime')
-            ->requirePresence('closetime', 'create')
-            ->notEmptyDateTime('closetime');
+            ->allowEmptyDateTime('closetime');
+
+        $validator
+            ->boolean('closed')
+            ->requirePresence('closed', 'create')
+            ->notEmptyString('closed');
 
         $validator
             ->integer('cust_id')

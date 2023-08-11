@@ -42,6 +42,10 @@
                     <th><?= __('Closetime') ?></th>
                     <td><?= h($ticket->closetime) ?></td>
                 </tr>
+                <tr>
+                    <th><?= __('Closed') ?></th>
+                    <td><?= $ticket->closed ? __('Yes') : __('No'); ?></td>
+                </tr>
             </table>
             <div class="related">
                 <h4><?= __('Related Contents') ?></h4>
@@ -53,6 +57,7 @@
                             <th><?= __('Content') ?></th>
                             <th><?= __('Createtime') ?></th>
                             <th><?= __('Ticket Id') ?></th>
+                            <th><?= __('Content Type') ?></th>
                             <th class="actions"><?= __('Actions') ?></th>
                         </tr>
                         <?php foreach ($ticket->contents as $contents) : ?>
@@ -61,6 +66,7 @@
                             <td><?= h($contents->content) ?></td>
                             <td><?= h($contents->createtime) ?></td>
                             <td><?= h($contents->ticket_id) ?></td>
+                            <td><?= h($contents->content_type) ?></td>
                             <td class="actions">
                                 <?= $this->Html->link(__('View'), ['controller' => 'Contents', 'action' => 'view', $contents->id]) ?>
                                 <?= $this->Html->link(__('Edit'), ['controller' => 'Contents', 'action' => 'edit', $contents->id]) ?>

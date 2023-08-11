@@ -21,8 +21,9 @@ class ContentsFixture extends TestFixture
             [
                 'id' => 1,
                 'content' => 'Lorem ipsum dolor sit amet',
-                'createtime' => '2023-08-07 10:48:08',
+                'createtime' => '2023-08-11 05:28:33',
                 'ticket_id' => 1,
+                'content_type' => 'Lorem ip',
             ],
         ];
         parent::init();

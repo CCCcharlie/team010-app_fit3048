@@ -11,7 +11,8 @@ use Cake\ORM\Entity;
  * @property int $id
  * @property string $type
  * @property \Cake\I18n\FrozenTime $createtime
- * @property \Cake\I18n\FrozenTime $closetime
+ * @property \Cake\I18n\FrozenTime|null $closetime
+ * @property bool $closed
  * @property int $cust_id
  * @property int $staff_id
  *
@@ -34,6 +35,7 @@ class Ticket extends Entity
         'type' => true,
         'createtime' => true,
         'closetime' => true,
+        'closed' => true,
         'cust_id' => true,
         'staff_id' => true,
         'customer' => true,

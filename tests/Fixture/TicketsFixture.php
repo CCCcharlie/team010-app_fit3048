@@ -21,8 +21,9 @@ class TicketsFixture extends TestFixture
             [
                 'id' => 1,
                 'type' => 'Lorem ipsum dolor sit amet',
-                'createtime' => '2023-08-07 10:47:58',
-                'closetime' => '2023-08-07 10:47:58',
+                'createtime' => '2023-08-11 05:48:15',
+                'closetime' => '2023-08-11 05:48:15',
+                'closed' => 1,
                 'cust_id' => 1,
                 'staff_id' => 1,
             ],

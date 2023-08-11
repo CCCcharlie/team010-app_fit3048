@@ -15,6 +15,7 @@
                     <th><?= $this->Paginator->sort('type') ?></th>
                     <th><?= $this->Paginator->sort('createtime') ?></th>
                     <th><?= $this->Paginator->sort('closetime') ?></th>
+                    <th><?= $this->Paginator->sort('closed') ?></th>
                     <th><?= $this->Paginator->sort('cust_id') ?></th>
                     <th><?= $this->Paginator->sort('staff_id') ?></th>
                     <th class="actions"><?= __('Actions') ?></th>
@@ -27,6 +28,7 @@
                     <td><?= h($ticket->type) ?></td>
                     <td><?= h($ticket->createtime) ?></td>
                     <td><?= h($ticket->closetime) ?></td>
+                    <td><?= h($ticket->closed) ?></td>
                     <td><?= $ticket->has('customer') ? $this->Html->link($ticket->customer->id, ['controller' => 'Customers', 'action' => 'view', $ticket->customer->id]) : '' ?></td>
                     <td><?= $ticket->has('user') ? $this->Html->link($ticket->user->id, ['controller' => 'Users', 'action' => 'view', $ticket->user->id]) : '' ?></td>
                     <td class="actions">

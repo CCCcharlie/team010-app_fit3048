@@ -21,7 +21,8 @@
                 <?php
                     echo $this->Form->control('type');
                     echo $this->Form->control('createtime');
-                    echo $this->Form->control('closetime');
+                    echo $this->Form->control('closetime', ['empty' => true]);
+                    echo $this->Form->control('closed');
                     echo $this->Form->control('cust_id', ['options' => $customers]);
                     echo $this->Form->control('staff_id', ['options' => $users]);
                 ?>

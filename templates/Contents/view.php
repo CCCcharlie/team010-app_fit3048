@@ -27,6 +27,10 @@
                     <td><?= $content->has('ticket') ? $this->Html->link($content->ticket->id, ['controller' => 'Tickets', 'action' => 'view', $content->ticket->id]) : '' ?></td>
                 </tr>
                 <tr>
+                    <th><?= __('Content Type') ?></th>
+                    <td><?= h($content->content_type) ?></td>
+                </tr>
+                <tr>
                     <th><?= __('Id') ?></th>
                     <td><?= $this->Number->format($content->id) ?></td>
                 </tr>

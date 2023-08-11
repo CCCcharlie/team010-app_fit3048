@@ -14,13 +14,18 @@
     </aside>
     <div class="column-responsive column-80">
         <div class="contents form content">
-            <?= $this->Form->create($content) ?>
+            <?= $this->Form->create($content, ['type'=> 'file']) ?>
             <fieldset>
                 <legend><?= __('Add Content') ?></legend>
                 <?php
                     echo $this->Form->control('content');
-                    echo $this->Form->control('createtime');
+//                    echo $this->Form->control('createtime');
                     echo $this->Form->control('ticket_id', ['options' => $tickets]);
+                    echo $this->Form->control('content_type', [
+                        'type' => 'select',
+                        'options' => $content_types,
+                    ]);
+                    echo $this->Form->control('file', ['type' => 'file']);
                 ?>
             </fieldset>
             <?= $this->Form->button(__('Submit')) ?>

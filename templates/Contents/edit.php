@@ -26,6 +26,7 @@
                     echo $this->Form->control('content');
                     echo $this->Form->control('createtime');
                     echo $this->Form->control('ticket_id', ['options' => $tickets]);
+                    echo $this->Form->control('content_type');
                 ?>
             </fieldset>
             <?= $this->Form->button(__('Submit')) ?>

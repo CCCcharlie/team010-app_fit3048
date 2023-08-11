@@ -1345,7 +1345,7 @@ Top Header
     border: none;
 }
 
-.notification-list-user-img {
+.notification-list-user-file {
     float: left;
 }
 
@@ -5709,18 +5709,18 @@ Vertical Timeline - by CodyHouse.co
     color: #212529;
 }
 
-.mailbox .message-center .message-item .user-img {
+.mailbox .message-center .message-item .user-file {
     width: 40px;
     position: relative;
     display: inline-block;
     margin: 0 0px 15px 0;
 }
 
-.mailbox .message-center .message-item .user-img img {
+.mailbox .message-center .message-item .user-file img {
     width: 100%;
 }
 
-.mailbox .message-center .message-item .user-img .profile-status {
+.mailbox .message-center .message-item .user-file .profile-status {
     border: 2px solid #fff;
     border-radius: 50%;
     display: inline-block;
@@ -5731,19 +5731,19 @@ Vertical Timeline - by CodyHouse.co
     width: 10px;
 }
 
-.mailbox .message-center .message-item .user-img .online {
+.mailbox .message-center .message-item .user-file .online {
     background: #36bea6;
 }
 
-.mailbox .message-center .message-item .user-img .busy {
+.mailbox .message-center .message-item .user-file .busy {
     background: #f62d51;
 }
 
-.mailbox .message-center .message-item .user-img .away {
+.mailbox .message-center .message-item .user-file .away {
     background: #ffbc34;
 }
 
-.mailbox .message-center .message-item .user-img .offline {
+.mailbox .message-center .message-item .user-file .offline {
     background: #ffbc34;
 }
 

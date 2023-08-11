@@ -12,6 +12,7 @@ use Cake\ORM\Entity;
  * @property string $content
  * @property \Cake\I18n\FrozenTime $createtime
  * @property int $ticket_id
+ * @property string $content_type
  *
  * @property \App\Model\Entity\Ticket $ticket
  */
@@ -30,6 +31,7 @@ class Content extends Entity
         'content' => true,
         'createtime' => true,
         'ticket_id' => true,
+        'content_type' => true,
         'ticket' => true,
     ];
 }

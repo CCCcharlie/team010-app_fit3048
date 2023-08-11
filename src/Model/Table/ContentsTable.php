@@ -65,12 +65,17 @@ class ContentsTable extends Table
 
         $validator
             ->dateTime('createtime')
-            ->requirePresence('createtime', 'create')
             ->notEmptyDateTime('createtime');
 
         $validator
             ->integer('ticket_id')
             ->notEmptyString('ticket_id');
+
+        $validator
+            ->scalar('content_type')
+            ->maxLength('content_type', 10)
+            ->requirePresence('content_type', 'create')
+            ->notEmptyString('content_type');
 
         return $validator;
     }

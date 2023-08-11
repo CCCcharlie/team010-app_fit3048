@@ -18,10 +18,28 @@ class CustomersController extends AppController
      */
     public function index()
     {
-        $customers = $this->paginate($this->Customers);
+        $query = $this->Customers->find();
+
+        $search = $this->request->getQuery('search');
+        if (!empty($search)) {
+            $searchConditions = [
+                'OR' => [
+                    'f_name LIKE' => '%' . $search . '%',
+                    'l_name LIKE' => '%' . $search . '%',
+                    'CONCAT(f_name, " ", l_name) LIKE' => '%' . $search . '%',
+                ]
+            ];
+            $query->where($searchConditions);
+        }
+
+        $this->paginate = [
+            'contain' => [],
+        ];
+        $customers = $this->paginate($query);
 
         $this->set(compact('customers'));
     }
+
 
     /**
      * View method

@@ -68,10 +68,23 @@ class ContentsController extends AppController
 
             //FOR VALIDATION, GO TO ContentsTable.PHP
 
-            //if no error, run this
-            if (!$content->getErrors()) {
+            //if no error, run this.. Also check if the fieldname for 'file' or 'image' exists, we dont want to do anything to them
+            //if they are null
+            $checkFile = $this->request->getData('file');
+            $checkImage = $this->request->getData('image');
+
+//            debug($checkFile);
+//            debug($checkImage);
+//            debug($content);
+
+            if (!$content->getErrors() && ($checkFile || $checkImage)) {
+                //IMPORTANT NOTE: File here is both file and image (I know its confusing)
                 //This line gets data (image) with name of 'image_file' (from services' add.php)
-                $file = $this->request->getData('file');
+                if ($checkFile) {
+                    $file = $this->request->getData('file');
+                } else if ($checkImage) {
+                    $file = $this->request->getData('image');
+                }
 
                 //If we were to type
 //                  debug($file);

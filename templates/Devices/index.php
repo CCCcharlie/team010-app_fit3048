@@ -11,6 +11,7 @@
         <table>
             <thead>
                 <tr>
+                    <th><?= $this->Paginator->sort('id') ?></th>
                     <th><?= $this->Paginator->sort('transactionid') ?></th>
                     <th><?= $this->Paginator->sort('device_model') ?></th>
                     <th><?= $this->Paginator->sort('session_id') ?></th>
@@ -22,6 +23,7 @@
             <tbody>
                 <?php foreach ($devices as $device): ?>
                 <tr>
+                    <td><?= $this->Number->format($device->id) ?></td>
                     <td><?= h($device->transactionid) ?></td>
                     <td><?= h($device->device_model) ?></td>
                     <td><?= h($device->session_id) ?></td>

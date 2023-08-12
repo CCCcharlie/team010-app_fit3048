@@ -58,6 +58,12 @@ class DevicesTable extends Table
     public function validationDefault(Validator $validator): Validator
     {
         $validator
+            ->scalar('transactionid')
+            ->maxLength('transactionid', 8)
+            ->requirePresence('transactionid', 'create')
+            ->notEmptyString('transactionid');
+
+        $validator
             ->scalar('device_model')
             ->maxLength('device_model', 55)
             ->allowEmptyString('device_model');

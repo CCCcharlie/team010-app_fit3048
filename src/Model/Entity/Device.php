@@ -8,6 +8,7 @@ use Cake\ORM\Entity;
 /**
  * Device Entity
  *
+ * @property int $id
  * @property string $transactionid
  * @property string|null $device_model
  * @property string|null $session_id
@@ -28,6 +29,7 @@ class Device extends Entity
      * @var array<string, bool>
      */
     protected $_accessible = [
+        'transactionid' => true,
         'device_model' => true,
         'session_id' => true,
         'technical_details' => true,

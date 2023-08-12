@@ -19,7 +19,8 @@ class DevicesFixture extends TestFixture
     {
         $this->records = [
             [
-                'transactionid' => 'fb718813-7bac-466e-b776-85fbcb155b26',
+                'id' => 1,
+                'transactionid' => 'Lorem ',
                 'device_model' => 'Lorem ipsum dolor sit amet',
                 'session_id' => 'Lorem ipsum dolor sit ',
                 'technical_details' => 'Lorem ipsum dolor sit amet',

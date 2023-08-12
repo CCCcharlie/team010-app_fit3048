@@ -18,6 +18,7 @@
             <fieldset>
                 <legend><?= __('Add Device') ?></legend>
                 <?php
+                    echo $this->Form->control('id');
                     echo $this->Form->control('device_model');
                     echo $this->Form->control('session_id');
                     echo $this->Form->control('technical_details');

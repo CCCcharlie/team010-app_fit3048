@@ -38,6 +38,10 @@
                     <th><?= __('Customer') ?></th>
                     <td><?= $device->has('customer') ? $this->Html->link($device->customer->id, ['controller' => 'Customers', 'action' => 'view', $device->customer->id]) : '' ?></td>
                 </tr>
+                <tr>
+                    <th><?= __('Id') ?></th>
+                    <td><?= $this->Number->format($device->id) ?></td>
+                </tr>
             </table>
         </div>
     </div>

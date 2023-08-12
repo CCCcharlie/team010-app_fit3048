@@ -69,6 +69,7 @@ endif;
     <!-- Bootstrap CSS -->
     <!-- In-built CSS -->
     <?= $this->Html->css(['style', 'bootstrap.min',]) ?>
+    <?= $this->Html->css(['fontawesome-all'], ['block' => true]) ?>
 
 
 
@@ -224,10 +225,30 @@ endif;
                             </div>
                             <?= $this->Form->button(__('Search'), ['class' => 'btn btn-primary']) ?>
                             <?= $this->Form->end() ?>
-                        </div>
+
+                            <h4>Sort by: </h4>
+                            <br>
+                            <tr>
+
+                                <th><?= $this->Paginator->sort('id', 'ID') ?></th>
+                                <th><?= $this->Paginator->sort('f_name', 'First Name') ?></th>
+                                <th><?= $this->Paginator->sort('l_name', 'Last Name') ?></th>
+                                <th><?= $this->Paginator->sort('age', 'Age') ?></th>
+                                <th><?= $this->Paginator->sort('email', 'Email') ?></th>
+
+                            </tr>
+                            <br>
+
                     </div>
 
                     <br>
+
+                    <style>
+                        /* I know this is really bad coding practice, but short on time.*/
+                        .nav-pills .nav-link.active {
+                            font-weight: bolder;
+                        }
+                    </style>
 
                     <div class="row">
                         <?php foreach ($customers as $customer): ?>
@@ -236,24 +257,34 @@ endif;
                                     <div class="card-header d-flex">
                                         <h4 class="card-header-title"><?= h($customer->f_name) ?> <?= h($customer->l_name) ?></h4>
                                         <div class="toolbar card-toolbar-tabs ml-auto">
-                                            <ul class="nav nav-pills" id="pills-tab" role="tablist">
+                                            <ul class="nav nav-pills" role="tablist">
                                                 <li class="nav-item">
-                                                    <a class="nav-link active" id="pills-home-tab" data-toggle="pill" href="#pills-home" role="tab" aria-controls="pills-home" aria-selected="true">Home</a>
+                                                    <a class="nav-link active" id="pills-home-tab-<?= $customer->id ?>" data-toggle="pill" href="#pills-home-<?= $customer->id ?>" role="tab" aria-controls="pills-home" aria-selected="true">Home</a>
                                                 </li>
                                                 <li class="nav-item">
-                                                    <a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#pills-profile" role="tab" aria-controls="pills-profile" aria-selected="false">Profile</a>
+                                                    <a class="nav-link" id="pills-profile-tab-<?= $customer->id ?>" data-toggle="pill" href="#pills-profile-<?= $customer->id ?>" role="tab" aria-controls="pills-profile" aria-selected="false">Profile</a>
                                                 </li>
                                                 <li class="nav-item">
-                                                    <a class="nav-link" id="pills-contact-tab" data-toggle="pill" href="#pills-contact" role="tab" aria-controls="pills-contact" aria-selected="false">Contact</a>
+                                                    <a class="nav-link" id="pills-contact-tab-<?= $customer->id ?>" data-toggle="pill" href="#pills-contact-<?= $customer->id ?>" role="tab" aria-controls="pills-contact" aria-selected="false">Contact</a>
                                                 </li>
                                             </ul>
                                         </div>
                                     </div>
                                     <div class="card-body">
-                                        <div class="tab-content mb-3" id="pills-tabContent">
-                                            <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">  <br> Status: <?= h($customer->status) ?></div></div>
-                                            <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">Email: <?= h($customer->email) ?>
-                                            <div class="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab"></div>
+                                        <div class="tab-content mb-3" id="pills-tabContent-<?= $customer->id ?>">
+                                            <div class="tab-pane fade show active" id="pills-home-<?= $customer->id ?>" role="tabpanel" aria-labelledby="pills-home-tab-<?= $customer->id ?>">
+                                                <br> Status: <?= h($customer->status) ?>
+                                                <br> Notes: <?= h($customer->notes) ?>
+<!--                                                Add stuff like, tags here. Device ID/etc.-->
+                                            </div>
+                                            <div class="tab-pane fade" id="pills-profile-<?= $customer->id ?>" role="tabpanel" aria-labelledby="pills-profile-tab-<?= $customer->id ?>">
+                                                <br>Age: <?= h($customer->age) ?>
+<!--                                                Add stuff like personal details here.-->
+                                            </div>
+                                            <div class="tab-pane fade" id="pills-contact-<?= $customer->id ?>" role="tabpanel" aria-labelledby="pills-contact-tab-<?= $customer->id ?>">
+                                                <br>Email: <?= h($customer->email) ?>
+
+                                            </div>
                                         </div>
                                         <?= $this->Html->link(__('View Profile'), ['action' => 'view', $customer->id], ['class' => 'btn btn-primary']) ?>
                                     </div>
@@ -266,14 +297,8 @@ endif;
                         <?php endif; ?>
                     </div>
 
+
                     <div class="paginator">
-                        <ul class="pagination">
-                            <?= $this->Paginator->first('<< ' . __('first')) ?>
-                            <?= $this->Paginator->prev('< ' . __('previous')) ?>
-                            <?= $this->Paginator->numbers() ?>
-                            <?= $this->Paginator->next(__('next') . ' >') ?>
-                            <?= $this->Paginator->last(__('last') . ' >>') ?>
-                        </ul>
                         <p><?= $this->Paginator->counter(__('Page {{page}} of {{pages}}, showing {{current}} record(s) out of {{count}} total')) ?></p>
                     </div>
 

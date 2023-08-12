@@ -60,7 +60,7 @@ class ContentsTable extends Table
         $validator
             ->scalar('content')
             ->maxLength('content', 500)
-            ->requirePresence('content', 'create')
+//            ->requirePresence('content', 'create');
             ->notEmptyString('content');
 
         $validator
@@ -76,6 +76,17 @@ class ContentsTable extends Table
             ->maxLength('content_type', 10)
             ->requirePresence('content_type', 'create')
             ->notEmptyString('content_type');
+
+        $validator
+            //Validation for adding images in content blocks
+            //Add validation; image cannot be empty, and the file can only be jpg, png, jpeg.
+            ->notEmptyFile('image')
+            ->add( 'image', [
+                'mimeType' => [
+                    'rule' => [ 'mimeType', [ 'image/jpg', 'image/png', 'image/jpeg' ] ],
+                    'message' => 'Please upload only jpg and png.',
+                ],
+            ] );
 
         return $validator;
     }

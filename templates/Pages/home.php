@@ -1,5 +1,11 @@
 <?php
 /**
+ * @var \App\View\AppView $this
+ * @var iterable<\App\Model\Entity\Customer> $customers
+ */
+?>
+<?php
+/**
  * CakePHP(tm) : Rapid Development Framework (https://cakephp.org)
  * Copyright (c) Cake Software Foundation, Inc. (https://cakefoundation.org)
  *
@@ -59,10 +65,11 @@ endif;
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>GamBlock® - Customer Management Homepage</title>
+    <title>GamBlock® - Customer Management: Customers</title>
     <!-- Bootstrap CSS -->
     <!-- In-built CSS -->
     <?= $this->Html->css(['style', 'bootstrap.min',]) ?>
+    <?= $this->Html->css(['fontawesome-all'], ['block' => true]) ?>
 
 
 
@@ -131,14 +138,14 @@ endif;
                             <div id="submenu-1" class="collapse submenu" style="">
                                 <ul class="nav flex-column">
                                     <li class="nav-item">
-                                        <a class="nav-link" href="Customers/index">Assigned to me</a>
-<!--                                        Change my link to assigned to me page when done.-->
+                                        <a class="nav-link" href="/team010-app_fit3048/customers/">Assigned to me</a>
+                                        <!--                                        Change my link to assigned to me page when done.-->
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link" href="Customers/index">View All</a>
+                                        <a class="nav-link" href="/team010-app_fit3048/customers">View All</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link" href="Customers/add">Add a Customer Profile</a>
+                                        <a class="nav-link" href="/team010-app_fit3048/customers/add">Add a Customer Profile</a>
                                     </li>
                                 </ul>
                             </div>
@@ -148,29 +155,26 @@ endif;
                             <div id="submenu-2" class="collapse submenu" style="">
                                 <ul class="nav flex-column">
                                     <li class="nav-item">
-                                        <a class="nav-link" href="Tags/index">View All Tags<span class="badge badge-secondary">New</span></a>
+                                        <a class="nav-link" href="/team010-app_fit3048/Tags/index">View All Tags<span class="badge badge-secondary">New</span></a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link" href="Tags/add">Create a new Tag!</a>
+                                        <a class="nav-link" href="/team010-app_fit3048/Tags/add">Add some Tags<span class="badge badge-secondary">New</span></a>
                                     </li>
                                 </ul>
                             </div>
                         </li>
                         <li class="nav-divider">
                             Admin Features
-<!--                            Change to me admin only visable.-->
+                            <!--                            Change to me admin only visable.-->
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="#" data-toggle="collapse" aria-expanded="false" data-target="#submenu-6" aria-controls="submenu-6"><i class="fas fa-fw fa-file"></i>Staff Management</a>
                             <div id="submenu-6" class="collapse submenu" style="">
                                 <ul class="nav flex-column">
                                     <li class="nav-item">
-                                        <a class="nav-link" href="Users/index">View All Staff Accounts </a>
+                                        <a class="nav-link" href="/team010-app_fit3048/Users/">View All Staff Accounts </a>
                                     </li>
 
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="Users/index">Edit Permissions </a>
-                                    </li>
                                 </ul>
                             </div>
 

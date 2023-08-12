@@ -226,17 +226,88 @@ endif;
                             <?= $this->Form->button(__('Search'), ['class' => 'btn btn-primary']) ?>
                             <?= $this->Form->end() ?>
 
+
+                            <br>
                             <h4>Sort by: </h4>
                             <br>
                             <tr>
+                                <th>
+                                    <?php
+                                    $sortField = 'f_name';
+                                    $sortDir = 'asc';
+                                    if ($this->Paginator->sortKey() === $sortField) {
+                                        $sortDir = ($this->Paginator->sortDir() === 'asc') ? 'desc' : 'asc';
+                                    }
+                                    ?>
+                                    <?= $this->Paginator->sort('f_name', 'First Name', ['direction' => $sortDir]) ?>
+                                    <?php if ($this->Paginator->sortKey() === 'f_name') : ?>
+                                        <?php if ($sortDir === 'asc') : ?>
+                                            <img src="<?= $this->Url->image('arrow-down.png', ['fullBase' => true, 'webroot' => 'img/', 'width' => 10]) ?>" alt="Down Arrow">
+                                        <?php else : ?>
+                                            <img src="<?= $this->Url->image('arrow-up.png', ['fullBase' => true, 'webroot' => 'img/', 'width' => 10]) ?>" alt="Up Arrow">
+                                        <?php endif; ?>
+                                    <?php endif; ?>
+                                    |
+                                </th>
 
-                                <th><?= $this->Paginator->sort('id', 'ID') ?></th>
-                                <th><?= $this->Paginator->sort('f_name', 'First Name') ?></th>
-                                <th><?= $this->Paginator->sort('l_name', 'Last Name') ?></th>
-                                <th><?= $this->Paginator->sort('age', 'Age') ?></th>
-                                <th><?= $this->Paginator->sort('email', 'Email') ?></th>
+                                <th>
+                                    <?php
+                                    $sortField = 'l_name';
+                                    $sortDir = 'asc';
+                                    if ($this->Paginator->sortKey() === $sortField) {
+                                        $sortDir = ($this->Paginator->sortDir() === 'asc') ? 'desc' : 'asc';
+                                    }
+                                    ?>
+                                    <?= $this->Paginator->sort('l_name', 'Last Name', ['direction' => $sortDir]) ?>
+                                    <?php if ($this->Paginator->sortKey() === 'l_name') : ?>
+                                        <?php if ($sortDir === 'asc') : ?>
+                                            <img src="<?= $this->Url->image('arrow-down.png', ['fullBase' => true, 'webroot' => 'img/', 'width' => 10]) ?>" alt="Down Arrow">
+                                        <?php else : ?>
+                                            <img src="<?= $this->Url->image('arrow-up.png', ['fullBase' => true, 'webroot' => 'img/', 'width' => 10]) ?>" alt="Up Arrow">
+                                        <?php endif; ?>
+                                    <?php endif; ?>
+                                    |
+                                </th>
 
+                                <th>
+                                    <?php
+                                    $sortField = 'age';
+                                    $sortDir = 'asc';
+                                    if ($this->Paginator->sortKey() === $sortField) {
+                                        $sortDir = ($this->Paginator->sortDir() === 'asc') ? 'desc' : 'asc';
+                                    }
+                                    ?>
+                                    <?= $this->Paginator->sort('age', 'Age', ['direction' => $sortDir]) ?>
+                                    <?php if ($this->Paginator->sortKey() === 'age') : ?>
+                                        <?php if ($sortDir === 'asc') : ?>
+                                            <img src="<?= $this->Url->image('arrow-down.png', ['fullBase' => true, 'webroot' => 'img/', 'width' => 10]) ?>" alt="Down Arrow">
+                                        <?php else : ?>
+                                            <img src="<?= $this->Url->image('arrow-up.png', ['fullBase' => true, 'webroot' => 'img/', 'width' => 10]) ?>" alt="Up Arrow">
+                                        <?php endif; ?>
+                                    <?php endif; ?>
+                                    |
+                                </th>
+
+                                <th>
+                                    <?php
+                                    $sortField = 'email';
+                                    $sortDir = 'asc';
+                                    if ($this->Paginator->sortKey() === $sortField) {
+                                        $sortDir = ($this->Paginator->sortDir() === 'asc') ? 'desc' : 'asc';
+                                    }
+                                    ?>
+                                    <?= $this->Paginator->sort('email', 'Email', ['direction' => $sortDir]) ?>
+                                    <?php if ($this->Paginator->sortKey() === 'email') : ?>
+                                        <?php if ($sortDir === 'asc') : ?>
+                                            <img src="<?= $this->Url->image('arrow-down.png', ['fullBase' => true, 'webroot' => 'img/', 'width' => 10]) ?>" alt="Down Arrow">
+                                        <?php else : ?>
+                                            <img src="<?= $this->Url->image('arrow-up.png', ['fullBase' => true, 'webroot' => 'img/', 'width' => 10]) ?>" alt="Up Arrow">
+                                        <?php endif; ?>
+                                    <?php endif; ?>
+                                </th>
                             </tr>
+
+                            <br>
                             <br>
 
                     </div>
@@ -262,7 +333,7 @@ endif;
                                                     <a class="nav-link active" id="pills-home-tab-<?= $customer->id ?>" data-toggle="pill" href="#pills-home-<?= $customer->id ?>" role="tab" aria-controls="pills-home" aria-selected="true">Home</a>
                                                 </li>
                                                 <li class="nav-item">
-                                                    <a class="nav-link" id="pills-profile-tab-<?= $customer->id ?>" data-toggle="pill" href="#pills-profile-<?= $customer->id ?>" role="tab" aria-controls="pills-profile" aria-selected="false">Profile</a>
+                                                    <a class="nav-link" id="pills-profile-tab-<?= $customer->id ?>" data-toggle="pill" href="#pills-profile-<?= $customer->id ?>" role="tab" aria-controls="pills-profile" aria-selected="false">Details</a>
                                                 </li>
                                                 <li class="nav-item">
                                                     <a class="nav-link" id="pills-contact-tab-<?= $customer->id ?>" data-toggle="pill" href="#pills-contact-<?= $customer->id ?>" role="tab" aria-controls="pills-contact" aria-selected="false">Contact</a>
@@ -286,7 +357,7 @@ endif;
 
                                             </div>
                                         </div>
-                                        <?= $this->Html->link(__('View Profile'), ['action' => 'view', $customer->id], ['class' => 'btn btn-primary']) ?>
+                                        <?= $this->Html->link(__('View Full Profile'), ['action' => 'view', $customer->id], ['class' => 'btn btn-primary']) ?>
                                     </div>
                                 </div>
                             </div>

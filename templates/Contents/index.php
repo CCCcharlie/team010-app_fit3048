@@ -17,6 +17,7 @@
                     <th><?= $this->Paginator->sort('ticket_id') ?></th>
                     <th><?= $this->Paginator->sort('content_type') ?></th>
                     <th><?= $this->Paginator->sort('content image') ?></th>
+                    <th><?= $this->Paginator->sort('name') ?></th>
                     <th class="actions"><?= __('Actions') ?></th>
                 </tr>
             </thead>
@@ -29,6 +30,7 @@
                     <td><?= $content->has('ticket') ? $this->Html->link($content->ticket->id, ['controller' => 'Tickets', 'action' => 'view', $content->ticket->id]) : '' ?></td>
                     <td><?= h($content->content_type) ?></td>
                     <td><?= @$this->Html->image($content->content) ?> </td>
+                    <td><?= h($content->ticket->customer->f_name) ?></td>
                     <td class="actions">
                         <?= $this->Html->link(__('View'), ['action' => 'view', $content->id]) ?>
                         <?= $this->Html->link(__('Edit'), ['action' => 'edit', $content->id]) ?>

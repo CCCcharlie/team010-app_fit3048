@@ -40,6 +40,11 @@ class CustomersTable extends Table
         $this->setTable('customers');
         $this->setDisplayField('id');
         $this->setPrimaryKey('id');
+
+        //Added this cause it was lacking the association when baking it for the second time
+        $this->hasMany('Tickets', [
+            'foreignKey' => 'cust_id',
+        ]);
     }
 
     /**

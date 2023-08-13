@@ -19,6 +19,7 @@
  * @license   https://opensource.org/licenses/mit-license.php MIT License
  * @var \App\View\AppView $this
  */
+
 use Cake\Cache\Cache;
 use Cake\Core\Configure;
 use Cake\Core\Plugin;
@@ -104,9 +105,6 @@ endif;
     <?= $this->Html->css(['fontawesome-all'], ['block' => true]) ?>
 
 
-
-
-
 </head>
 
 <body>
@@ -120,9 +118,11 @@ endif;
     <div class="dashboard-header">
         <nav class="navbar navbar-expand-lg bg-white fixed-top">
             <a class="navbar-brand" href="/home.php">
-                <?= $this->Html->image('cake-logo.png', ['alt' => 'GamBlock Logo', 'class' => 'navbar-brand', 'style' => 'width: 225px; height: auto;']); ?> -Staff Portal
+                <?= $this->Html->image('cake-logo.png', ['alt' => 'GamBlock Logo', 'class' => 'navbar-brand', 'style' => 'width: 225px; height: auto;']); ?>
+                -Staff Portal
             </a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
@@ -134,13 +134,18 @@ endif;
                     </li>
 
                     <li class="nav-item dropdown nav-user">
-                        <a class="nav-link nav-user-file" href="#" id="navbarDropdownMenuLink2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="../assets/images/avatar-1.jpg" alt="" class="user-avatar-md rounded-circle"></a>
-                        <div class="dropdown-menu dropdown-menu-right nav-user-dropdown" aria-labelledby="navbarDropdownMenuLink2">
+                        <a class="nav-link nav-user-file" href="#" id="navbarDropdownMenuLink2" data-toggle="dropdown"
+                           aria-haspopup="true" aria-expanded="false"><img src="../assets/images/avatar-1.jpg" alt=""
+                                                                           class="user-avatar-md rounded-circle"></a>
+                        <div class="dropdown-menu dropdown-menu-right nav-user-dropdown"
+                             aria-labelledby="navbarDropdownMenuLink2">
                             <div class="nav-user-info">
                                 <h5 class="mb-0 text-white nav-user-name">
                                     Example User</h5>
                             </div>
-                            <a class="dropdown-item" href="#"><i class="fas fa-power-off mr-2"></i> <?php echo $this->Html->link(__('Logout'), ['controller' => 'Auth', 'action' => 'logout']); ?></a>
+                            <a class="dropdown-item" href="#"><i
+                                    class="fas fa-power-off mr-2"></i> <?php echo $this->Html->link(__('Logout'), ['controller' => 'Auth', 'action' => 'logout']); ?>
+                            </a>
                         </div>
                     </li>
                 </ul>
@@ -157,7 +162,8 @@ endif;
         <div class="menu-list">
             <nav class="navbar navbar-expand-lg navbar-light">
                 <a class="d-xl-none d-lg-none" href="#">Customer View</a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+                        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarNav">
@@ -166,7 +172,10 @@ endif;
                             Menu
                         </li>
                         <li class="nav-item ">
-                            <a class="nav-link active" href="#" data-toggle="collapse" aria-expanded="false" data-target="#submenu-1" aria-controls="submenu-1"><i class="fa fa-fw fa-user-circle"></i>Customer Management <span class="badge badge-success">6</span></a>
+                            <a class="nav-link active" href="#" data-toggle="collapse" aria-expanded="false"
+                               data-target="#submenu-1" aria-controls="submenu-1"><i
+                                    class="fa fa-fw fa-user-circle"></i>Customer Management <span
+                                    class="badge badge-success">6</span></a>
                             <div id="submenu-1" class="collapse submenu" style="">
                                 <ul class="nav flex-column">
                                     <li class="nav-item">
@@ -177,20 +186,25 @@ endif;
                                         <a class="nav-link" href="/team010-app_fit3048/customers">View All</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link" href="/team010-app_fit3048/customers/add">Add a Customer Profile</a>
+                                        <a class="nav-link" href="/team010-app_fit3048/customers/add">Add a Customer
+                                            Profile</a>
                                     </li>
                                 </ul>
                             </div>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#" data-toggle="collapse" aria-expanded="false" data-target="#submenu-2" aria-controls="submenu-2"><i class="fa fa-fw fa-rocket"></i>Tag Management</a>
+                            <a class="nav-link" href="#" data-toggle="collapse" aria-expanded="false"
+                               data-target="#submenu-2" aria-controls="submenu-2"><i class="fa fa-fw fa-rocket"></i>Tag
+                                Management</a>
                             <div id="submenu-2" class="collapse submenu" style="">
                                 <ul class="nav flex-column">
                                     <li class="nav-item">
-                                        <a class="nav-link" href="/team010-app_fit3048/Tags/index">View All Tags<span class="badge badge-secondary">New</span></a>
+                                        <a class="nav-link" href="/team010-app_fit3048/Tags/index">View All Tags<span
+                                                class="badge badge-secondary">New</span></a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link" href="/team010-app_fit3048/Tags/add">Add some Tags<span class="badge badge-secondary">New</span></a>
+                                        <a class="nav-link" href="/team010-app_fit3048/Tags/add">Add some Tags<span
+                                                class="badge badge-secondary">New</span></a>
                                     </li>
                                 </ul>
                             </div>
@@ -200,11 +214,14 @@ endif;
                             <!--                            Change to me admin only visable.-->
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#" data-toggle="collapse" aria-expanded="false" data-target="#submenu-6" aria-controls="submenu-6"><i class="fas fa-fw fa-file"></i>Staff Management</a>
+                            <a class="nav-link" href="#" data-toggle="collapse" aria-expanded="false"
+                               data-target="#submenu-6" aria-controls="submenu-6"><i class="fas fa-fw fa-file"></i>Staff
+                                Management</a>
                             <div id="submenu-6" class="collapse submenu" style="">
                                 <ul class="nav flex-column">
                                     <li class="nav-item">
-                                        <a class="nav-link" href="/team010-app_fit3048/Users/">View All Staff Accounts </a>
+                                        <a class="nav-link" href="/team010-app_fit3048/Users/">View All Staff
+                                            Accounts </a>
                                     </li>
 
                                 </ul>
@@ -230,9 +247,18 @@ endif;
             <div class="row">
                 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                     <div class="page-header">
-                        <h2 class="pageheader-title">Welcome!</h2>
-                        <!--                            Can you add login user to name here if you get chance Bryan?-->
-                        <p class="pageheader-text">Proin placerat ante duiullam scelerisque a velit ac porta, fusce sit amet vestibulum mi. Morbi lobortis pulvinar quam.</p>
+                        <!-- To obtain the identity, use $identity = $this->request->getAttribute('authentication')->getIdentity(); to find the currently logged in entity
+                        to get the name or any value in the staff table, use the get and then the name of the attribute $identity->get('staff_fname')-->
+                        <?php $identity = $this->request->getAttribute('authentication')->getIdentity();
+                        //                        debug($identity->get('f_name'));
+                        //                        exit();
+                        ?>
+                        <h2 class="pageheader-title">Welcome, <?= $identity->get('f_name'); ?></h2>
+                        <!-- Can you add login user to name here if you get chance Bryan?  -->
+                        <!-- Sure Alex-->
+
+                        <p class="pageheader-text">Proin placerat ante duiullam scelerisque a velit ac porta, fusce sit
+                            amet vestibulum mi. Morbi lobortis pulvinar quam.</p>
                     </div>
                 </div>
             </div>
@@ -240,7 +266,7 @@ endif;
             <!-- end pageheader -->
             <!-- ============================================================== -->
             <div class="row">
-                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12" style="padding-bottom: 100px">
 
                     </aside>
                     <div class="column-responsive column-80">
@@ -248,11 +274,11 @@ endif;
                             <h3><?= h($customer->id) ?></h3>
                             <table>
                                 <tr>
-                                    <th><?= __('F Name') ?></th>
+                                    <th><?= __('First Name') ?></th>
                                     <td><?= h($customer->f_name) ?></td>
                                 </tr>
                                 <tr>
-                                    <th><?= __('L Name') ?></th>
+                                    <th><?= __('Last Name') ?></th>
                                     <td><?= h($customer->l_name) ?></td>
                                 </tr>
                                 <tr>
@@ -277,9 +303,10 @@ endif;
                                 </tr>
                             </table>
 
-                            <div style="position: fixed; top: 110px; right: 10px; background-color: #f5f5f5; padding: 20px; width: 250px;">
+                            <div
+                                style="position: fixed; top: 110px; right: 10px; background-color: #f5f5f5; padding: 20px; width: 250px;">
                                 <ul style="padding: 0; margin: 0; list-style: none;">
-                                <h4>Actions: </h4>
+                                    <h4>Actions: </h4>
                                     <li><?= $this->Html->link(__('> Edit Customer'), ['action' => 'edit', $customer->id], ['style' => 'display: block; padding: 10px 0; text-decoration: none; color: #333; border: 1px solid transparent; transition: border-color 0.3s ease;']) ?></li>
                                     <li><?= $this->Form->postLink(__('> Delete Customer'), ['action' => 'delete', $customer->id], ['confirm' => __('Are you sure you want to delete # {0}?', $customer->id), 'style' => 'display: block; padding: 10px 0; text-decoration: none; color: #333; border: 1px solid transparent; transition: border-color 0.3s ease;']) ?></li>
                                     <li><?= $this->Html->link(__('> List Customers'), ['action' => 'index'], ['style' => 'display: block; padding: 10px 0; text-decoration: none; color: #333; border: 1px solid transparent; transition: border-color 0.3s ease;']) ?></li>
@@ -293,41 +320,85 @@ endif;
                                     border-color: #aaa;
                                 }
                             </style>
-
-
-
-                        </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
-        <!-- ============================================================== -->
-        <!-- footer -->
-        <!-- ============================================================== -->
-        <div class="footer">
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12">
-                        Copyright ©  GamBlock®. All rights reserved. This site is for access by GamBlock® Staff Only. Template by <a href="https://colorlib.com/wp/">Colorlib</a>.
-                    </div>
-                    <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12">
-                        <div class="text-md-right footer-links d-none d-sm-block">
-                            <a href="javascript: void(0);">Getting Started</a>
-                            <a href="javascript: void(0);">Documentation</a>
-                            <a href="javascript: void(0);">Contact Points</a>
+                <!-- recent orders  -->
+                <!-- ============================================================== -->
+                <div class="col-xl-12 col-lg-12 col-md-6 col-sm-12 col-12">
+                    <div class="card">
+                        <h5 class="card-header"><?= $customer->f_name ?>'s Tickets</h5>
+                        <?php foreach ($tickets as $ticket): ?>
+                        <div class="card-body p-0">
+                            <div class="table-responsive">
+                                <table class="table">
+                                    <thead class="bg-light">
+                                    <tr>
+                                        <th><?= $this->Paginator->sort('id') ?></th>
+                                        <th><?= $this->Paginator->sort('type') ?></th>
+                                        <th><?= $this->Paginator->sort('createtime') ?></th>
+                                        <th><?= $this->Paginator->sort('closetime') ?></th>
+                                        <th><?= $this->Paginator->sort('closed') ?></th>
+                                        <th><?= $this->Paginator->sort('cust_id') ?></th>
+                                        <th><?= $this->Paginator->sort('staff_id') ?></th>
+                                        <th class="actions"><?= __('Actions') ?></th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr class="border-0">
+                                        <td><?= $this->Number->format($ticket->id) ?></td>
+                                        <td><?= h($ticket->type) ?></td>
+                                        <td><?= h($ticket->createtime) ?></td>
+                                        <td><?= h($ticket->closetime) ?></td>
+                                        <td><?= $ticket->closed ? "✅" : "❌"?></td>
+                                        <td><?= h($customer->f_name) ?></td>
+                                        <td><?= $this->Html->link(__($ticket->user->f_name), ['controller' => 'Users', 'action' => 'view', $ticket->staff_id]) ?></td>
+                                        <td class="actions">
+                                            <?= $this->Html->link(__('Ticket Details'), ['controller' => 'Tickets', 'action' => 'view', $ticket->id]) ?>
+<!--                                            --><?php //= $this->Html->link(__('Edit'), ['action' => 'edit', $ticket->id]) ?>
+<!--                                            --><?php //= $this->Form->postLink(__('Delete'), ['action' => 'delete', $ticket->id], ['confirm' => __('Are you sure you want to delete # {0}?', $ticket->id)]) ?>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                    </thead>
+                                </table>
+                            </div>
                         </div>
+                        <?php endforeach ?>
                     </div>
                 </div>
+                <!-- ============================================================== -->
+                <!-- end recent orders  -->
             </div>
         </div>
-        <!-- ============================================================== -->
-        <!-- end footer -->
-        <!-- ============================================================== -->
     </div>
     <!-- ============================================================== -->
-    <!-- end main wrapper -->
+    <!-- footer -->
     <!-- ============================================================== -->
+    <div class="footer">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12">
+                    Copyright © GamBlock®. All rights reserved. This site is for access by GamBlock® Staff Only.
+                    Template by <a href="https://colorlib.com/wp/">Colorlib</a>.
+                </div>
+                <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12">
+                    <div class="text-md-right footer-links d-none d-sm-block">
+                        <a href="javascript: void(0);">Getting Started</a>
+                        <a href="javascript: void(0);">Documentation</a>
+                        <a href="javascript: void(0);">Contact Points</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- ============================================================== -->
+    <!-- end footer -->
+    <!-- ============================================================== -->
+</div>
+<!-- ============================================================== -->
+<!-- end main wrapper -->
+<!-- ============================================================== -->
 </div>
 <!-- ============================================================== -->
 <!-- end main wrapper -->

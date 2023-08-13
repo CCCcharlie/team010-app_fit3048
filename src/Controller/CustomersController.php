@@ -33,7 +33,7 @@ class CustomersController extends AppController
         }
 
         $this->paginate = [
-            'contain' => [],
+            'contain' => ['Tickets'],
         ];
         $customers = $this->paginate($query);
 
@@ -51,10 +51,15 @@ class CustomersController extends AppController
     public function view($id = null)
     {
         $customer = $this->Customers->get($id, [
-            'contain' => [],
+            'contain' => ['Tickets'],
         ]);
 
-        $this->set(compact('customer'));
+        $tickets = $this->Customers->Tickets->find('all')
+            ->where(['cust_id' => $customer->id])
+            ->contain(['Users']) // I want to retrieve the name of the staff (users), so this is added so I can reference it
+            ->toArray();
+
+        $this->set(compact('customer', 'tickets'));
     }
 
     /**

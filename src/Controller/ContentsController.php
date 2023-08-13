@@ -31,8 +31,13 @@ class ContentsController extends AppController
      */
     public function index()
     {
+        //If I want to get the name of the customer, from a ticket, shown in contents,
+        // "'contain' => ['Tickets.Customers']"
+        //this ^ is how you can do it instead of ['Tickets', 'Customers']
+        // ['Tickets', 'Customers'] only works if contents has direct association (FK) with customers.
+        // Which in how we did in our ERD, it does not (Customers - tickets - Content)
         $this->paginate = [
-            'contain' => ['Tickets'],
+            'contain' => ['Tickets.Customers'],
         ];
         $contents = $this->paginate($this->Contents);
 

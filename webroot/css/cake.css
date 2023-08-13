@@ -1,6 +1,6 @@
 /* Miligram overrides */
 body {
-    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-family: Calibri, sans-serif;
     font-weight: 400;
 }
 
@@ -62,6 +62,8 @@ body {
     /* Thanks Stripe */
     box-shadow: 0 7px 14px 0 rgba(60, 66, 87, 0.1),
         0 3px 6px 0 rgba(0, 0, 0, 0.07);
+    width: inherit;
+    height: inherit;
 }
 .actions a {
     font-weight: bold;

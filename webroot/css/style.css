@@ -330,7 +330,9 @@ textarea:focus::-webkit-input-placeholder {
     color: #5969ff !important;
 }
 
-button.btn {}
+button.btn {
+    margin-top: 10px;
+}
 
 button.btn-default {}
 
@@ -1957,10 +1959,16 @@ Splash Container / Wrapper
 -------------------------*/
 
 .splash-container {
-    width: 100%;
-    max-width: 375px;
+    width: 100vh;
+    max-width: 100%;
     padding: 15px;
     margin: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh; /* height */
+
 }
 
 .splash-container .card-header {
@@ -2656,8 +2664,8 @@ clip-path: polygon(10% 25%, 10% 0, 35% 0%, 65% 0%, 90% 0, 90% 25%, 90% 50%, 91% 
 
 .btn-primary {
     color: #fff;
-    background-color: #5969ff;
-    border-color: #5969ff;
+    background-color: #00a1f2ff;
+    border-color: #00a1f2ff;
 }
 
 .btn-primary:hover {
@@ -3208,6 +3216,8 @@ btn-link
     -webkit-box-shadow: 0px 1px 2px 1px rgba(154, 154, 204, 0.22);
     -moz-box-shadow: 0px 1px 2px 1px rgba(154, 154, 204, 0.22);
     box-shadow: 0px 1px 2px 1px rgba(154, 154, 204, 0.22);
+    min-width: 80%;
+    min-height: 75%;
 }
 
 .card-header {
@@ -3221,7 +3231,10 @@ btn-link
     font-size: 14px;
 }
 
-.card-body {}
+.card-body {
+    width:inherit;
+    height: inherit;
+}
 
 .card-text {}
 
@@ -4572,7 +4585,11 @@ tr.group:hover {
 
 /*-----------------------
 6.3 Login
--------------------------*/
+  -----------------------*/
+.button-custom-color {
+        background-color: #00a1f2ff !important; /* Custom color */
+    }
+/*-------------------------*/
 
 
 /*-----------------------

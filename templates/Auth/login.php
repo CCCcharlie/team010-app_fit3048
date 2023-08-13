@@ -10,10 +10,14 @@ $debug = Configure::read('debug');
 $this->layout = 'login';
 $this->assign('title', 'Login');
 ?>
-<div class="container login">
-    <div class="row">
-        <div class="column column-50 column-offset-25">
-            <div class="users form content">
+<div class="splash-container login">
+
+    <div class="card ">
+        <div class="card-header text-center"><a href="../index.html"><img class="logo-img" src="/team010-app_fit3048/img/cake-logo.png" alt="logo"></a><span class="splash-description">Please enter your user information.</span></div>
+        <div class="card-body">
+<!--    <div class="row">-->
+<!--        <div class="column column-50 column-offset-25">-->
+            <div class=" form-group content">
 
                 <?= $this->Form->create() ?>
 
@@ -36,17 +40,19 @@ $this->assign('title', 'Login');
                         'type' => 'email',
                         'required' => true,
                         'autofocus' => true,
-                        'value' => $debug ? "test@example.com" : ""
+                        'value' => $debug ? "test@example.com" : "",
+                        'class' => 'form-control form-control-lg'
                     ]);
                     echo $this->Form->control('password', [
                         'type' => 'password',
                         'required' => true,
+                        'class' => 'form-control form-control-lg',
                         'value' => $debug ? 'password' : ''
                     ]);
                     ?>
                 </fieldset>
 
-                <?= $this->Form->button('Login') ?>
+                <?= $this->Form->button('Login',['class' => 'btn btn-primary btn-lg btn-block']) ?>
                 <?= $this->Html->link('Forgot password?', ['controller' => 'Auth', 'action' => 'forgetPassword'], ['class' => 'button button-outline']) ?>
                 <?= $this->Form->end() ?>
 
@@ -57,4 +63,13 @@ $this->assign('title', 'Login');
             </div>
         </div>
     </div>
+    </div>
 </div>
+</div>
+        <?php $this->start('footer_script'); ?>
+        <script>
+            <script src="/webroot/js/jquery-3.3.1.min.js"></script>
+        <script src="/webroot/js/bootstrap.bundle.js"></script>
+        </script>
+        <?php $this->end(); ?>
+

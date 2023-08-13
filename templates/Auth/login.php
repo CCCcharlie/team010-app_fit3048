@@ -17,7 +17,7 @@ $this->assign('title', 'Login');
         <div class="card-body">
 <!--    <div class="row">-->
 <!--        <div class="column column-50 column-offset-25">-->
-            <div class=" form-group content">
+            <div class=" form-group">
 
                 <?= $this->Form->create() ?>
 

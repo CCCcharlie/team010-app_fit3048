@@ -78,13 +78,34 @@ class ContentsTable extends Table
             ->notEmptyString('content_type');
 
         $validator
-            //Validation for adding images in content blocks
+            //Validation for adding images in Content
             //Add validation; image cannot be empty, and the file can only be jpg, png, jpeg.
             ->notEmptyFile('image')
             ->add( 'image', [
                 'mimeType' => [
                     'rule' => [ 'mimeType', [ 'image/jpg', 'image/png', 'image/jpeg' ] ],
                     'message' => 'Please upload only jpg and png.',
+                ],
+                //Filesize is a rule that apparently exists, ensures an upper limit to how much data can be uploaded
+                'fileSize' => [
+                    'rule' => ['uploadedFile', ['maxSize' => '2MB']], // Adjust the size limit as needed
+                    'message' => 'Image size must be 2MB or less.', // Change the message as needed
+                ],
+            ] );
+
+        $validator
+            //Validation for adding files in Content
+            //Add validation; file cannot be empty, and the file can only be PDF, DOCX, TXT.
+            ->notEmptyFile('file')
+            ->add( 'file', [
+                'mimeType' => [
+                    'rule' => [ 'mimeType', [ 'application/pdf', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document', 'text/plain' ] ],
+                    'message' => 'Please upload only PDF, DOCX, or TXT files',
+                ],
+                //Filesize is a rule that apparently exists, ensures an upper limit to how much data can be uploaded
+                'fileSize' => [
+                    'rule' => ['uploadedFile', ['maxSize' => '100MB']], // Adjust the size limit as needed
+                    'message' => 'File size must be 100MB or less.', // Change the message as needed
                 ],
             ] );
 

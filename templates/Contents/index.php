@@ -33,6 +33,9 @@
                         <?= $this->Html->link(__('View'), ['action' => 'view', $content->id]) ?>
                         <?= $this->Html->link(__('Edit'), ['action' => 'edit', $content->id]) ?>
                         <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $content->id], ['confirm' => __('Are you sure you want to delete # {0}?', $content->id)]) ?>
+                        <!-- Why urlencode? because since im storing images as "conversation/image.png", passing $content->content as it is would only pass
+                             "conversation", not good. As such, as it is passed to download, you must decode it-->
+                        <?= $this->Html->link('Download content', ['action' => 'download', urlencode($content->content)]) ?>
                     </td>
                 </tr>
                 <?php endforeach; ?>

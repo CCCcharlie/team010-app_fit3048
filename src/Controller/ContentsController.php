@@ -3,6 +3,8 @@ declare(strict_types=1);
 
 namespace App\Controller;
 
+use Cake\Http\Response; // since we use response, add this line
+
 /**
  * Contents Controller
  *
@@ -105,7 +107,7 @@ class ContentsController extends AppController
                     if (!is_dir(WWW_ROOT . 'img' . DS . 'conversation')) {
                         mkdir(WWW_ROOT . 'img' . DS . 'conversation');
                     }
-                    //Set target path to webroot/img/user-img/name_of_image
+                    //Set target path to webroot/img/conversation/name_of_image
                     $targetPath = WWW_ROOT . 'img' . DS . 'conversation' . DS . $file_name;
 
                     //Move the image obtained from the form, to the path defined above
@@ -132,8 +134,8 @@ class ContentsController extends AppController
                     if ($file_name) {
                         $file->moveTo($targetPath);
                     }
-                    //then, send the image to services' attribute, "image_name" including the path name so it can render properly.
-                    $content->content = 'user-file/' . $file_name;
+                    //For regular files [PDF, DOCX OR TXT], save it as only its file name
+                    $content->content = $file_name;
                 }
             }
 
@@ -191,5 +193,41 @@ class ContentsController extends AppController
         }
 
         return $this->redirect(['action' => 'index']);
+    }
+
+    /**
+     * Download method
+     *
+     * @param string|null $encodedFilename Encoded file name.
+     * @return \Cake\Http\Response|null|void Redirects to index.
+     * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
+     */
+    public function download($encodedFilename)
+    {
+        $fileName = urldecode($encodedFilename);
+        $filePath = WWW_ROOT . 'file' . DS . 'user-file' . DS . $fileName; // Path to the uploaded file
+        $imageFilePath = WWW_ROOT . 'img' . DS . $fileName; //path to the image file
+
+//        debug($fileName);
+//        debug($filePath);
+//        debug($imageFilePath);
+//        exit;
+
+        //Because filename is expected to be receiving both IMAGES and FILES, we need to check if the item exists or not for both
+        //cases in the if statement below
+        $response = new Response();
+
+        //If file [docx, pdf, txt] exists: download it
+        if (file_exists($filePath)) {
+            $response = $response->withFile($filePath, ['download' => true, 'name' => $fileName]);
+            return $response;
+            // However if its not a regular file, if its an Image file that exists: download it
+        }else if(file_exists($imageFilePath)) {
+            $response = $response->withFile($imageFilePath, ['download' => true, 'name' => $fileName]);
+            return $response;
+        } else {
+            $this->Flash->error('File not found.');
+            return $this->redirect(['action' => 'index']); // Redirect if file not found
+        }
     }
 }

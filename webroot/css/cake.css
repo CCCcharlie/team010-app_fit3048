@@ -1,7 +1,9 @@
 /* Miligram overrides */
 body {
     font-family: Calibri, sans-serif;
-    font-weight: 400;
+
+    color: #429bc7ff ;
+    font-weight: bolder;
 }
 
 .top-nav-links,

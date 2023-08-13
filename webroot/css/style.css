@@ -156,7 +156,7 @@
    ========================================================================== */
 
 body {
-    font-family: 'Circular Std Book';
+    font-family: poppins, Arial, sans-serif;!important;
     font-style: normal;
     font-weight: normal;
     font-size: 14px;
@@ -1200,6 +1200,7 @@ Legends
 
 .legend-item {
     font-size: 14px;
+    color: #429bc7ff  ;
 }
 
 .legend-title {}
@@ -1244,6 +1245,8 @@ Top Header
     text-transform: uppercase;
     font-weight: 700;
     color: #007bff;
+    font-family: poppins, Arial, sans-serif;
+
 }
 .navbar-brand:hover{
     color: #007bff;

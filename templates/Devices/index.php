@@ -41,12 +41,48 @@
     </div>
     <div class="paginator">
         <ul class="pagination">
-            <?= $this->Paginator->first('<< ' . __('first')) ?>
-            <?= $this->Paginator->prev('< ' . __('previous')) ?>
-            <?= $this->Paginator->numbers() ?>
-            <?= $this->Paginator->next(__('next') . ' >') ?>
-            <?= $this->Paginator->last(__('last') . ' >>') ?>
+            <li class="pagination-item"><?= $this->Paginator->first('<< ' . __('first')) ?></li>
+            <li class="pagination-item"><?= $this->Paginator->prev('< ' . __('previous')) ?></li>
+            <li class="pagination-item"><?= $this->Paginator->numbers() ?></li>
+            <li class="pagination-item"><?= $this->Paginator->next(__('next') . ' >') ?></li>
+            <li class="pagination-item"><?= $this->Paginator->last(__('last') . ' >>') ?></li>
         </ul>
-        <p><?= $this->Paginator->counter(__('Page {{page}} of {{pages}}, showing {{current}} record(s) out of {{count}} total')) ?></p>
+        <p class="pagination-counter"><?= $this->Paginator->counter(__('Page {{page}} of {{pages}}, showing {{current}} record(s) out of {{count}} total')) ?></p>
     </div>
+<style>
+
+    .paginator {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-top: 20px;
+    }
+
+    .pagination {
+        list-style: none;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .pagination-item {
+        display: inline-block;
+        margin: 0 5px;
+        padding: 5px 10px;
+        border: 1px solid #ccc;
+        cursor: pointer;
+        transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+    }
+
+    .pagination-item:hover {
+        background-color: #007bff;
+        color: white;
+        border-color: #007bff;
+    }
+
+    .pagination-counter {
+        margin-top: 10px;
+    }
+</style>
+
 </div>

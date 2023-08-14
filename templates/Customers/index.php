@@ -221,12 +221,15 @@ endif;
                                 <?= $this->Form->input('search', ['type' => 'text', 'class' => 'form-control', 'placeholder' => 'Search by name']) ?>
                             </div>
                             <?= $this->Form->button(__('Search'), ['class' => 'btn btn-primary']) ?>
+    `
+
                             <?= $this->Form->end() ?>
 
 
                             <br>
                             <h4>Sort by: </h4>
                             <br>
+
                             <tr>
                                 <th>
                                     <?php
@@ -303,18 +306,25 @@ endif;
                                     <?php endif; ?>
                                 </th>
                             </tr>
+                            <?= $this->Html->link(__('New Customer'), ['action' => 'add'], ['class' => 'btn btn-primary float-right']) ?>
 
                             <br>
                             <br>
 
-                    </div>
+
+
+                        </div>
 
                     <br>
+
 
                     <style>
                         /* I know this is really bad coding practice, but short on time.*/
                         .nav-pills .nav-link.active {
                             font-weight: bolder;
+                        }
+                        .align-right{
+                        right: 0px;
                         }
                     </style>
 
@@ -330,10 +340,10 @@ endif;
                                                     <a class="nav-link active" id="pills-home-tab-<?= $customer->id ?>" data-toggle="pill" href="#pills-home-<?= $customer->id ?>" role="tab" aria-controls="pills-home" aria-selected="true">Home</a>
                                                 </li>
                                                 <li class="nav-item">
-                                                    <a class="nav-link" id="pills-profile-tab-<?= $customer->id ?>" data-toggle="pill" href="#pills-profile-<?= $customer->id ?>" role="tab" aria-controls="pills-profile" aria-selected="false">Details</a>
+                                                    <a class="nav-link" id="pills-profile-tab-<?= $customer->id ?>" data-toggle="pill" href="#pills-profile-<?= $customer->id ?>" role="tab" aria-controls="pills-profile" aria-selected="false">Technical Details</a>
                                                 </li>
                                                 <li class="nav-item">
-                                                    <a class="nav-link" id="pills-contact-tab-<?= $customer->id ?>" data-toggle="pill" href="#pills-contact-<?= $customer->id ?>" role="tab" aria-controls="pills-contact" aria-selected="false">Contact</a>
+                                                    <a class="nav-link" id="pills-contact-tab-<?= $customer->id ?>" data-toggle="pill" href="#pills-contact-<?= $customer->id ?>" role="tab" aria-controls="pills-contact" aria-selected="false">Contact Methods</a>
                                                 </li>
                                             </ul>
                                         </div>
@@ -343,12 +353,25 @@ endif;
                                             <div class="tab-pane fade show active" id="pills-home-<?= $customer->id ?>" role="tabpanel" aria-labelledby="pills-home-tab-<?= $customer->id ?>">
                                                 <br> Status: <?= h($customer->status) ?>
                                                 <br> Notes: <?= h($customer->notes) ?>
-<!--                                                Add stuff like, tags here. Device ID/etc.-->
+
                                             </div>
                                             <div class="tab-pane fade" id="pills-profile-<?= $customer->id ?>" role="tabpanel" aria-labelledby="pills-profile-tab-<?= $customer->id ?>">
-                                                <br>Age: <?= h($customer->age) ?>
-<!--                                                Add stuff like personal details here.-->
+                                                <!-- Add stuff like technical details and devices. -->
+                                                <?php
+                                                if (!empty($customer->devices)) {
+                                                    foreach ($customer->devices as $device) {
+                                                        echo '<div class="device">';
+                                                        echo '<p>Device Model: ' . h($device->device_model) . '</p>';
+                                                        echo '<p>Technical Details: ' . h($device->technical_details) . '</p>';
+                                                        echo '<p>Session ID: ' . h($device->session_id) . '</p>';
+                                                        echo '</div>';
+                                                    }
+                                                } else {
+                                                    echo '<p>No devices associated with this customer.</p>';
+                                                }
+                                                ?>
                                             </div>
+
                                             <div class="tab-pane fade" id="pills-contact-<?= $customer->id ?>" role="tabpanel" aria-labelledby="pills-contact-tab-<?= $customer->id ?>">
                                                 <br>Email: <?= h($customer->email) ?>
 
@@ -365,10 +388,70 @@ endif;
                         <?php endif; ?>
                     </div>
 
+                        <div class = "card-footer-item" >
 
-                    <div class="paginator">
-                        <p><?= $this->Paginator->counter(__('Page {{page}} of {{pages}}, showing {{current}} record(s) out of {{count}} total')) ?></p>
+
+
+
+                            <div class="pagination-controls">
+                                <p class="pagination-counter">
+                                <form class="pagination-goto">
+                                    <label for="goto-page">Go to page:</label>
+
+                                    <input type="text" id="goto-page" name="page">
+                                    <button class="btn btn-primary" type="submit">Go</button>
+
+                                </form>
+                            </div>
+                            <p class="pagination-counter"><?= $this->Paginator->counter(__('Page {{page}} of {{pages}}, showing {{current}} record(s) out of {{count}} total')) ?></p>
+                        </div>
+
+
+
+
                     </div>
+                    <style>
+                        .paginator {
+                            display: flex;
+                            flex-direction: column;
+                            align-items: center;
+                            justify-content: center;
+                            margin-top: 20px;
+                        }
+
+                        .pagination-container {
+                            display: flex;
+                            justify-content: center;
+                            align-items: center;
+                            margin-top: 10px;
+                        }
+
+                        .pagination {
+                            list-style: none;
+                            display: flex;
+                            align-items: center;
+                            padding: 0;
+                        }
+
+                        .pagination-item {
+                            margin: 0 5px;
+                            cursor: pointer;
+                            transition: background-color 0.3s, color 0.3s;
+                        }
+
+                        .pagination-item:hover {
+                            background-color: #007bff;
+                            color: white;
+                        }
+
+                        .pagination-counter {
+                            margin-top: 10px;
+                        }
+                    </style>
+
+
+
+
 
                     <br>
                     <br>

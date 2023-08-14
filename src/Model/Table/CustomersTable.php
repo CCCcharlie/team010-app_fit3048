@@ -45,6 +45,12 @@ class CustomersTable extends Table
         $this->hasMany('Tickets', [
             'foreignKey' => 'cust_id',
         ]);
+
+        $this->hasMany('Devices', [ // Add this line for the devices association
+            'foreignKey' => 'cust_id',
+        ]);
+
+
     }
 
     /**

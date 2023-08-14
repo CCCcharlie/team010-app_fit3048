@@ -109,4 +109,24 @@ class TicketsController extends AppController
 
         return $this->redirect(['action' => 'index']);
     }
+
+    public function updateTicket($id = null) {
+        $this->request->allowMethod(['post', 'delete']);
+        $ticket = $this->Tickets->get($id);
+
+        // Flip the replied field value (should be a boolean)
+        $ticket->closed = !$ticket->closed;
+
+        $successMessage = 'Status of Ticket ID: ' . $ticket->id . ' Successfully changed';
+        if ($this->Tickets->save($ticket)) {
+            $this->Flash->success(__($successMessage));
+        } else {
+            $this->Flash->error(__('The contact form could not be updated. Please, try again.'));
+        }
+
+        // Instead of redirect to index page, redirect to where the user came from
+        // Remember the function is being called from both index listing and view page sidebar
+        return $this->redirect($this->referer());
+    }
+
 }

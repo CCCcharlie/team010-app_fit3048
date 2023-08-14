@@ -22,23 +22,30 @@
         <div class="side-nav">
             <h4 class="heading"><?= __('Actions') ?></h4>
             <?= $this->Html->link(__('List Contents'), ['action' => 'index'], ['class' => 'side-nav-item']) ?>
+            <button onclick="history.back()">Go Back</button>
         </div>
     </aside>
     <div class="column-responsive column-80">
         <div class="contents form content">
             <?= $this->Form->create($content, ['type'=> 'file']) ?>
             <fieldset>
-                <legend><?= __('Add Content') ?></legend>
+                <legend>
+                    <?= __('Add content for customer: ' . $fullName) ?>
+                    <br>
+                    <?= __('Ticket Id: ' . $ticketId) ?>
+                </legend>
                 <?php
 //                    echo $this->Form->control('content');
 //                    echo $this->Form->control('createtime');
-                    echo $this->Form->control('ticket_id', ['options' => $tickets]);
-                        echo $this->Form->control('content_type', [
-                            'type' => 'select',
-                            'options' => $content_types,
-                            //onchange actually exists to call JS
-                            'onchange' => 'switchInput()',
-                        ]);
+//                    echo $this->Form->control('ticket_id', ['options' => $tickets, 'default' => $ticketId]);
+                //Default value, not very safe
+                //echo $this->Form->text('ticket_id', ['value' => $ticketId, 'readonly' => true, 'class' => 'form-control']);
+                    echo $this->Form->control('content_type', [
+                                'type' => 'select',
+                                'options' => $content_types,
+                                //onchange actually exists to call JS
+                                'onchange' => 'switchInput()',
+                            ]);
 //                    echo $this->Form->control('file', ['type' => 'file']);
                     echo '<div id="inputContainer" >';
                     // The dynamic input field will be added here
@@ -53,10 +60,10 @@
                 <?= $this->Form->error('image'); ?>
                 <!-- Display validation error for the 'image' field -->
                 <?= $this->Form->error('file'); ?>
+
             </fieldset>
             <?= $this->Form->button(__('Submit')) ?>
             <?= $this->Form->end() ?>
-
         </div>
     </div>
 </div>

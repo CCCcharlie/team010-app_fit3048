@@ -90,6 +90,11 @@ endif;
         border-color: #aaa;
     }
 
+    .card-info {
+        margin-right: 0.5em; /* Equal spacing */
+        font-weight: bold; /* You can style the label text if needed */
+    }
+
 
 </style>
 
@@ -243,6 +248,26 @@ endif;
     <!-- ============================================================== -->
     <div class="dashboard-wrapper">
         <div class="container-fluid dashboard-content">
+
+            <!-- ============================================================== -->
+            <!-- Flash rendering -->
+            <!-- ============================================================== -->
+            <?php
+            // Check if the flash message exists and has content
+            $flashMessage = $this->Flash->render();
+            if (!empty($flashMessage)) {
+                ?>
+                <!-- Flash message, ONLY shows up if ticket is successfully opened/closed -->
+                <div class="alert alert-success" role="alert">
+                    <?= $flashMessage; ?>
+                </div>
+                <?php
+            }
+            ?>
+            <!-- ============================================================== -->
+
+
+
             <!-- ============================================================== -->
             <!-- pageheader -->
             <!-- ============================================================== -->
@@ -377,18 +402,33 @@ endif;
             <?php foreach ($tickets as $ticket): ?>
             <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
                 <div class="card">
-                    <div class="card-header d-flex">
-                        <h4 class="card-header-title"><?= h($ticket->type) ?></h4>
+                    <?php if($ticket->closed == true) : ?>
+                    <div class="card-header d-flex" style="background-color: lightcoral">
+                    <?php elseif($ticket->closed == false) : ?>
+                    <div class="card-header d-flex" style="background-color: lightgreen">
+                    <?php endif; ?>
+                        <h4 class="card-header-title">Ticket ID: <?= h($ticket->id) ?></h4>
                         <div class="toolbar ml-auto">
-                            <a href="#" class="btn btn-primary btn-sm ">CSV</a>
-                            <a href="#" class="btn btn-light btn-sm">PDF</a>
+                                <?php
+                                //if true means it is closed. Allow option to open ticket
+                                if ($ticket->closed) {
+                                    echo $this->Form->postLink(__('Open ticket'), ['controller' => 'Tickets', 'action' => 'update_ticket', $ticket->id], ['class' => 'btn btn-primary', 'confirm' => __("Are you sure you want to close ticket ID: {0} \n Customer: {1} {2} ", $ticket->id, $customer->f_name, $customer->l_name)]);
+                                } else {
+                                    echo $this->Form->postLink(__('Close ticket'), ['controller' => 'Tickets', 'action' => 'update_ticket', $ticket->id], ['class' => 'btn btn-primary', 'confirm' => __("Are you sure you want to Re-open ticket ID: {0} \n Customer: {1} {2} ", $ticket->id, $customer->f_name, $customer->l_name)]);
+                                }
+                                ?>
                         </div>
                     </div>
                     <div class="card-body">
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                        <a href="#" class="btn btn-primary card__button" id="showButton">Go somewhere</a>\
+                        <div class="card-text">
+                            <p><span class="card-info">Customer:</span> <?= h($customer->f_name) ?></p>
+                            <p><span class="card-info">Assigned staff:</span> <?= $this->Html->link(__($ticket->user->f_name), ['controller' => 'Users', 'action' => 'view', $ticket->staff_id]) ?></p>
+                            <p><span class="card-info">Create time:</span> <?= h($ticket->createtime) ?></p>
+                            <br>
+                        </div>
+                        <a href="#" class="btn btn-primary card__button" id="showButton">Go somewhere</a>
                         <a class="btn btn-primary" data-toggle="collapse" href="#collapseExample<?= $ticket->id ?>" role="button" aria-expanded="false" aria-controls="collapseExample">
-                            Expand
+                            Expand Attachments
                         </a>
                     </div>
                     <!-- In order to show unique collapse for each class, its id must be different. -->
@@ -403,9 +443,34 @@ endif;
 
                                   We can reiterate contents for that ticket here as follows
                             -->
-                            <?php foreach ($ticket->contents as $content): ?>
-                                <p><?= h($content->content) ?></p>
-                            <?php endforeach; ?>
+
+                            <!-- In order to pass a query to a controller, must add the '?'. Can be obtained via key value pair in the controller -->
+                            <?= $this->Html->link(__('Add Attachments +'), ['controller' => 'Contents', 'action' => 'add',
+                                '?' => ['ticket_id' => $ticket->id,
+                                        'f_name' => $customer->f_name,
+                                        'l_name' => $customer->l_name
+                                ],
+                            ], ['class' => 'btn btn-rounded btn-primary', 'style' => 'margin: 10px']); ?>
+
+                            <?php if($ticket->contents) : ?>
+                                <?php foreach ($ticket->contents as $content): ?>
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <h5 class="card-title">Attachment Type: <?= $content->content_type?></h5>
+                                            <p class="card-text"><?= h($content->content) ?></p>
+                                            <!-- Why urlencode? because since im storing images as "conversation/image.png", passing $content->content as it is would only pass
+                                                 "conversation", not good. As such, as it is passed to download, you must decode it-->
+                                            <?= $this->Html->link('Download Attachment', ['controller' => 'Contents', 'action' => 'download', urlencode($content->content)], ['class' => 'btn btn-primary card__button', 'id' => 'showButton']) ?>
+                                        </div>
+                                    </div>
+                                <?php endforeach; ?>
+                            <?php else: ?>
+                                <div class="card">
+                                    <div class="card-body">
+                                        <p> No attachments </p>
+                                    </div>
+                                </div>
+                                    <?php endif; ?>
                         </div>
                     </div>
                 </div>

@@ -89,6 +89,8 @@ endif;
         background-color: #ddd;
         border-color: #aaa;
     }
+
+
 </style>
 
 
@@ -370,6 +372,46 @@ endif;
                 <!-- ============================================================== -->
                 <!-- end recent orders  -->
             </div>
+
+            <!-- Cards section -->
+            <?php foreach ($tickets as $ticket): ?>
+            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                <div class="card">
+                    <div class="card-header d-flex">
+                        <h4 class="card-header-title"><?= h($ticket->type) ?></h4>
+                        <div class="toolbar ml-auto">
+                            <a href="#" class="btn btn-primary btn-sm ">CSV</a>
+                            <a href="#" class="btn btn-light btn-sm">PDF</a>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                        <a href="#" class="btn btn-primary card__button" id="showButton">Go somewhere</a>\
+                        <a class="btn btn-primary" data-toggle="collapse" href="#collapseExample<?= $ticket->id ?>" role="button" aria-expanded="false" aria-controls="collapseExample">
+                            Expand
+                        </a>
+                    </div>
+                    <!-- In order to show unique collapse for each class, its id must be different. -->
+                    <div class="collapse" id="collapseExample<?= $ticket->id ?>">
+                        <div class="card card-body">
+                            <!-- Because contents is already asked in Customers controller in this query
+
+                                    $tickets = $this->Customers->Tickets->find('all')
+                                    ->where(['cust_id' => $customer->id])
+                                    ->contain(['Users', 'Contents']) // I want to retrieve the name of the staff (users) & contents, so this is added so I can reference it
+                                    ->toArray();
+
+                                  We can reiterate contents for that ticket here as follows
+                            -->
+                            <?php foreach ($ticket->contents as $content): ?>
+                                <p><?= h($content->content) ?></p>
+                            <?php endforeach; ?>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <?php endforeach ?>
+
         </div>
     </div>
     <!-- ============================================================== -->
@@ -411,6 +453,7 @@ endif;
 <!--SlimScroll - JS Plugin. Allows for any div to be scrollable.-->
 <!--Jquery  - Essential Javascript library-->
 <!--Add any explinations here for any scripts you add. - Alex-->
+
 
 <?= $this->Html->script(['jquery-3.3.1.min.js', 'bootstrap.bundle.js', 'main-js', 'jquery.slimscroll.js']) ?>
 

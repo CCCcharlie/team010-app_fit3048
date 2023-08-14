@@ -59,40 +59,6 @@ endif;
 <!doctype html>
 <html lang="en">
 
-<style>
-    .sidebar-nav-fixed {
-        width: 250px;
-        position: fixed;
-        top: 0;
-        right: 0;
-        background-color: transparent;
-        padding: 20px;
-        box-sizing: border-box;
-    }
-
-    .list-unstyled {
-        padding: 0;
-        margin: 0;
-        list-style: none;
-    }
-
-    .side-nav-item {
-        display: block;
-        padding: 10px 0;
-        text-decoration: none;
-        color: #333;
-        border: 1px solid transparent;
-        transition: border-color 0.3s ease;
-    }
-
-    .side-nav-item:hover {
-        background-color: #ddd;
-        border-color: #aaa;
-    }
-
-
-</style>
-
 
 <head>
     <?= $this->Html->meta('icon', 'favicon.ico', ['type' => 'icon']) ?>
@@ -127,6 +93,7 @@ endif;
                     aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
+
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav ml-auto navbar-right-top">
                     <li class="nav-item">
@@ -256,11 +223,10 @@ endif;
                         //                        exit();
                         ?>
                         <h2 class="pageheader-title">Welcome, <?= $identity->get('f_name'); ?></h2>
+
                         <!-- Can you add login user to name here if you get chance Bryan?  -->
                         <!-- Sure Alex-->
 
-                        <p class="pageheader-text">Proin placerat ante duiullam scelerisque a velit ac porta, fusce sit
-                            amet vestibulum mi. Morbi lobortis pulvinar quam.</p>
                     </div>
                 </div>
             </div>
@@ -269,52 +235,96 @@ endif;
             <!-- ============================================================== -->
             <div class="row">
                 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12" style="padding-bottom: 100px">
+                    <div style="position: sticky; top: 0px; float: right; background-color: #f5f5f5; padding: 20px; width: 250px;">
+                        <ul style="padding: 0; margin: 0; list-style: none;">
+                            <h4>Actions:</h4>
+                            <li><?= $this->Html->link(__('> Edit Customer'), ['action' => 'edit', $customer->id], ['style' => 'display: block; padding: 10px 0; text-decoration: none; color: #333; border: 1px solid transparent; transition: border-color 0.3s ease;']) ?></li>
+                            <li><?= $this->Form->postLink(__('> Delete Customer'), ['action' => 'delete', $customer->id], ['confirm' => __('Are you sure you want to delete # {0}?', $customer->id), 'style' => 'display: block; padding: 10px 0; text-decoration: none; color: #333; border: 1px solid transparent; transition: border-color 0.3s ease;']) ?></li>
+                        </ul>
+                    </div>
 
                     </aside>
-                    <div class="column-responsive column-80">
-                        <div class="customers view content">
-                            <h3><?= h($customer->id) ?></h3>
-                            <table>
-                                <tr>
-                                    <th><?= __('First Name') ?></th>
-                                    <td><?= h($customer->f_name) ?></td>
-                                </tr>
-                                <tr>
-                                    <th><?= __('Last Name') ?></th>
-                                    <td><?= h($customer->l_name) ?></td>
-                                </tr>
-                                <tr>
-                                    <th><?= __('Email') ?></th>
-                                    <td><?= h($customer->email) ?></td>
-                                </tr>
-                                <tr>
-                                    <th><?= __('Status') ?></th>
-                                    <td><?= h($customer->status) ?></td>
-                                </tr>
-                                <tr>
-                                    <th><?= __('Notes') ?></th>
-                                    <td><?= h($customer->notes) ?></td>
-                                </tr>
-                                <tr>
-                                    <th><?= __('Id') ?></th>
-                                    <td><?= $this->Number->format($customer->id) ?></td>
-                                </tr>
-                                <tr>
-                                    <th><?= __('Age') ?></th>
-                                    <td><?= $this->Number->format($customer->age) ?></td>
-                                </tr>
-                            </table>
-
-                            <div
-                                style="position: fixed; top: 110px; right: 10px; background-color: #f5f5f5; padding: 20px; width: 250px;">
-                                <ul style="padding: 0; margin: 0; list-style: none;">
-                                    <h4>Actions: </h4>
-                                    <li><?= $this->Html->link(__('> Edit Customer'), ['action' => 'edit', $customer->id], ['style' => 'display: block; padding: 10px 0; text-decoration: none; color: #333; border: 1px solid transparent; transition: border-color 0.3s ease;']) ?></li>
-                                    <li><?= $this->Form->postLink(__('> Delete Customer'), ['action' => 'delete', $customer->id], ['confirm' => __('Are you sure you want to delete # {0}?', $customer->id), 'style' => 'display: block; padding: 10px 0; text-decoration: none; color: #333; border: 1px solid transparent; transition: border-color 0.3s ease;']) ?></li>
-                                    <li><?= $this->Html->link(__('> List Customers'), ['action' => 'index'], ['style' => 'display: block; padding: 10px 0; text-decoration: none; color: #333; border: 1px solid transparent; transition: border-color 0.3s ease;']) ?></li>
-                                    <li><?= $this->Html->link(__('> New Customer'), ['action' => 'add'], ['style' => 'display: block; padding: 10px 0; text-decoration: none; color: #333; border: 1px solid transparent; transition: border-color 0.3s ease;']) ?></li>
-                                </ul>
+                    <div class="row">
+                        <!-- ============================================================== -->
+                        <!-- profile -->
+                        <!-- ============================================================== -->
+                        <div class="col-xl-3 col-lg-3 col-md-5 col-sm-12 col-12">
+                            <!-- ============================================================== -->
+                            <!-- card profile -->
+                            <!-- ============================================================== -->
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="user-avatar text-center d-block">
+                                        <img src="/img/avatar-1.png" alt="User Avatar">
+                                    </div>
+                                    <div class="text-center">
+                                        <h2 class="font-24 mb-0"><?= h($customer->f_name) ?> <?= h($customer->l_name) ?></h2>
+                                        <p>Status: <?= h($customer->status) ?></p>
+                                    </div>
+                                </div>
+                                <div class="card-body border-top">
+                                    <h3 class="font-16">Main E-Mail:</h3>
+                                    <div class="">
+                                        <ul class="list-unstyled mb-0">
+                                            <li class="mb-2"><i class="fas fa-fw fa-envelope mr-2"></i><?= h($customer->email) ?></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="card-body border-top">
+                                    <h3 class="font-16">Notes:</h3>
+                                    <p class="mb-0"><?= h($customer->notes) ?></>
+                                </div>
                             </div>
+                            <!-- ============================================================== -->
+                            <!-- end card profile -->
+                            <!-- ============================================================== -->
+                        </div>
+                        <!-- ============================================================== -->
+                        <!-- end profile -->
+                        <!-- ============================================================== -->
+                        <div class="col-xl-9 col-lg-9 col-md-7 col-sm-12 col-12">
+                            <!-- ============================================================== -->
+                            <!-- campaign tab one -->
+                            <!-- ============================================================== -->
+                            <div class="influence-profile-content pills-regular">
+                                <ul class="nav nav-pills mb-3 nav-justified" id="pills-tab" role="tablist">
+                                    <li class="nav-item">
+                                        <a class="nav-link active" id="pills-campaign-tab" data-toggle="pill" href="#pills-campaign" role="tab" aria-controls="pills-campaign" aria-selected="true">Tickets</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" id="pills-packages-tab" data-toggle="pill" href="#pills-packages" role="tab" aria-controls="pills-packages" aria-selected="false">Alternative Communcation Methods</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" id="pills-review-tab" data-toggle="pill" href="#pills-review" role="tab" aria-controls="pills-review" aria-selected="false">Checklist</a>
+                                    </li>
+                                </ul>
+                                <div class="tab-content" id="pills-tabContent">
+                                    <div class="tab-pane fade show active" id="pills-campaign" role="tabpanel" aria-labelledby="pills-campaign-tab">
+                                    <p>Move Tickets in here</p>
+                                    </div>
+                                    <div class="tab-pane fade" id="pills-packages" role="tabpanel" aria-labelledby="pills-packages-tab">
+                                    <p>Put Methods in here when they link properly.</p>
+                                    </div>
+                                    <div class="tab-pane fade" id="pills-review" role="tabpanel" aria-labelledby="pills-review-tab">
+                                    <p>Low Priority: Checklist goes in here. </p>
+                                    </div>
+
+
+
+                            </div>
+                        </div>
+                        <!-- ============================================================== -->
+                        <!-- end data -->
+                        <!-- ============================================================== -->
+                    </div>
+                </div>
+            </div>
+            <!-- ============================================================== -->
+            <!-- end content -->
+            <!-- ============================================================== -->
+
+
+
 
                             <style>
                                 ul li:hover {
@@ -322,10 +332,9 @@ endif;
                                     border-color: #aaa;
                                 }
                             </style>
-                        </div>
-                    </div>
+
                 </div>
-                <!-- recent orders  -->
+                <!-- tickets -->
                 <!-- ============================================================== -->
                 <div class="col-xl-12 col-lg-12 col-md-6 col-sm-12 col-12">
                     <div class="card">
@@ -411,37 +420,41 @@ endif;
                 </div>
             </div>
             <?php endforeach ?>
-
-        </div>
-    </div>
-    <!-- ============================================================== -->
-    <!-- footer -->
-    <!-- ============================================================== -->
-    <div class="footer">
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12">
-                    Copyright © GamBlock®. All rights reserved. This site is for access by GamBlock® Staff Only.
-                    Template by <a href="https://colorlib.com/wp/">Colorlib</a>.
-                </div>
-                <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12">
-                    <div class="text-md-right footer-links d-none d-sm-block">
-                        <a href="javascript: void(0);">Getting Started</a>
-                        <a href="javascript: void(0);">Documentation</a>
-                        <a href="javascript: void(0);">Contact Points</a>
+        <!-- ============================================================== -->
+        <!-- footer -->
+        <!-- ============================================================== -->
+        <div class="footer">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12">
+                        Copyright © GamBlock®. All rights reserved. This site is for access by GamBlock® Staff Only.
+                        Template by <a href="https://colorlib.com/wp/">Colorlib</a>.
+                    </div>
+                    <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12">
+                        <div class="text-md-right footer-links d-none d-sm-block">
+                            <a href="javascript: void(0);">Getting Started</a>
+                            <a href="javascript: void(0);">Documentation</a>
+                            <a href="javascript: void(0);">Contact Points</a>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
+
+        </div>
     </div>
+
     <!-- ============================================================== -->
     <!-- end footer -->
     <!-- ============================================================== -->
 </div>
+
+
 <!-- ============================================================== -->
 <!-- end main wrapper -->
 <!-- ============================================================== -->
 </div>
+
 <!-- ============================================================== -->
 <!-- end main wrapper -->
 <!-- ============================================================== -->
@@ -458,5 +471,6 @@ endif;
 <?= $this->Html->script(['jquery-3.3.1.min.js', 'bootstrap.bundle.js', 'main-js', 'jquery.slimscroll.js']) ?>
 
 </body>
+
 
 </html>

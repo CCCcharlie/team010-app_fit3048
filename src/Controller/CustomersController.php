@@ -56,17 +56,22 @@ class CustomersController extends AppController
     public function view($id = null)
     {
         $customer = $this->Customers->get($id, [
-            'contain' => ['Tickets'],
+            'contain' => ['Tickets', 'Devices'], // Include 'Devices' association
         ]);
 
         $tickets = $this->Customers->Tickets->find('all')
             ->where(['cust_id' => $customer->id])
-            ->contain(['Users', 'Contents']) // I want to retrieve the name of the staff (users), so this is added so I can reference it
+            ->contain(['Users', 'Contents'])
             ->toArray();
 
+        $devices = $this->Customers->Devices->find('all')
+            ->where(['cust_id' => $customer->id])
+            ->contain(['Customers'])
+            ->toArray();
 
-        $this->set(compact('customer', 'tickets'));
+        $this->set(compact('customer', 'tickets', 'devices'));
     }
+
 
     /**
      * Add method

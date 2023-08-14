@@ -355,26 +355,32 @@ endif;
                                                 <br> Notes: <?= h($customer->notes) ?>
 
                                             </div>
-                                            <div class="tab-pane fade" id="pills-profile-<?= $customer->id ?>" role="tabpanel" aria-labelledby="pills-profile-tab-<?= $customer->id ?>">
-                                                <!-- Add stuff like technical details and devices. -->
-                                                <?php
-                                                if (!empty($customer->devices)) {
-                                                    foreach ($customer->devices as $device) {
-                                                        echo '<div class="device">';
-                                                        echo '<p>Device Model: ' . h($device->device_model) . '</p>';
-                                                        echo '<p>Technical Details: ' . h($device->technical_details) . '</p>';
-                                                        echo '<p>Session ID: ' . h($device->session_id) . '</p>';
-                                                        echo '</div>';
+                                                <div class="tab-pane fade" id="pills-profile-<?= $customer->id ?>" role="tabpanel" aria-labelledby="pills-profile-tab-<?= $customer->id ?>">
+                                                    <!-- Add stuff like technical details and devices. -->
+                                                    <?php
+                                                    if (!empty($customer->devices)) {
+                                                        foreach ($devices as $device) {
+                                                            echo '<p>Device Model: ' . h($device->device_model) . '</p>';
+                                                            echo '<p>Technical Details: ' . h($device->technical_details) . '</p>';
+                                                            echo '<p>Session ID: ' . h($device->session_id) . '</p>';
+                                                        }
+                                                    } else {
+                                                        echo '<p>No devices associated with this customer.</p>';
                                                     }
-                                                } else {
-                                                    echo '<p>No devices associated with this customer.</p>';
-                                                }
-                                                ?>
-                                            </div>
+                                                    ?>
+                                                </div>
 
                                             <div class="tab-pane fade" id="pills-contact-<?= $customer->id ?>" role="tabpanel" aria-labelledby="pills-contact-tab-<?= $customer->id ?>">
                                                 <br>Email: <?= h($customer->email) ?>
-
+                                                <?php
+                                                if (!empty($customer->commdetails)) {
+                                                    foreach ($commdetails as $commdetail) {
+                                                        echo '<p>Method: ' . h($commdetail->link) . '</p>';
+                                                    }
+                                                } else {
+                                                    echo '<p>No other contact methods were found</p>';
+                                                }
+                                                ?>
                                             </div>
                                         </div>
                                         <?= $this->Html->link(__('View Full Profile'), ['action' => 'view', $customer->id], ['class' => 'btn btn-primary']) ?>

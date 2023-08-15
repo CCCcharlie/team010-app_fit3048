@@ -17,15 +17,15 @@
             <fieldset>
                 <legend><?= __('Add Customer') ?></legend>
                 <?php
-                    echo $this->Form->control('f_name');
-                    echo $this->Form->control('l_name');
-                    echo $this->Form->control('age');
-                    echo $this->Form->control('email');
-                    echo $this->Form->control('status');
-                    echo $this->Form->control('notes');
+                    echo $this->Form->control('f_name',['class' => 'form-control form-control-lg']);
+                    echo $this->Form->control('l_name',['class' => 'form-control form-control-lg']);
+                    echo $this->Form->control('age',['class' => 'form-control form-control-lg']);
+                    echo $this->Form->control('email',['class' => 'form-control form-control-lg']);
+                    echo $this->Form->control('status',['class' => 'form-control form-control-lg']);
+                    echo $this->Form->control('notes',['class' => 'form-control form-control-lg']);
                 ?>
             </fieldset>
-            <?= $this->Form->button(__('Submit')) ?>
+            <?= $this->Form->button(__('Submit'),['class' => 'btn btn-primary btn-lg btn-block']) ?>
             <?= $this->Form->end() ?>
         </div>
     </div>

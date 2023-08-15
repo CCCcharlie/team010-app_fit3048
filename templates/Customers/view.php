@@ -294,6 +294,46 @@ endif;
                                     <h3 class="font-16">Notes:</h3>
                                     <p class="mb-0"><?= h($customer->notes) ?></>
                                 </div>
+                                <div class="card-body border-top">
+                                    <h3 class="font-16">Counsellor :</h3>
+                                    <p class="mb-0">
+                                    <table class="table table-bordered">
+                                        <thead>
+                                        <tr>
+                                            <th scope="col">Name</th>
+                                            <th scope="col">Contact</th>
+                                            <th scope="col">Notes</th>
+                                            <th scope="col">Actions</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <?php
+                                        if (!empty($customer->counsellor)) {
+                                            foreach ($customer->counsellor as $counsellor) {
+                                                echo '<tr>';
+                                                echo '<td>' . h($counsellor->f_name . ' ' . $counsellor->l_name) . '</td>';
+                                                echo '<td>' . h($counsellor->contact) . '</td>';
+                                                echo '<td>' . h($counsellor->notes) . '</td>';
+
+                                                // Actions column with Edit and Delete buttons
+                                                echo '<td>';
+                                                echo $this->Html->link(__('Edit'), ['controller' => 'Counsellors', 'action' => 'edit', $counsellor->id], ['class' => 'btn btn-primary']);
+                                                echo ' ';
+                                                echo $this->Form->postLink(__('Delete'), ['controller' => 'Counsellors', 'action' => 'delete', $counsellor->id], ['class' => 'btn btn-danger', 'confirm' => __('Are you sure you want to delete this counselor?')]);
+                                                echo '</td>';
+
+                                                echo '</tr>';
+                                            }
+                                        } else {
+                                            echo '<tr><td colspan="4">No Counsellors have been assigned to this customer.</td></tr>';
+                                        }
+                                        ?>
+                                        </tbody>
+                                    </table>
+                                    <?php echo $this->Html->link(__('Add New Counsellor'), ['controller' => 'Counsellors', 'action' => 'add', 'customer_id' => $customer->id], ['class' => 'btn btn-success mt-3']); ?>
+                                    </p>
+                                </div>
+
                             </div>
                             <!-- ============================================================== -->
                             <!-- end card profile -->
@@ -312,10 +352,10 @@ endif;
                                         <a class="nav-link active" id="pills-campaign-tab" data-toggle="pill" href="#pills-campaign" role="tab" aria-controls="pills-campaign" aria-selected="true">Tickets</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link" id="pills-packages-tab" data-toggle="pill" href="#pills-packages" role="tab" aria-controls="pills-packages" aria-selected="false">Alternative Communcation Methods</a>
+                                        <a class="nav-link" id="pills-packages-tab" data-toggle="pill" href="#pills-packages" role="tab" aria-controls="pills-packages" aria-selected="false">Alt. Communcation Methods</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link" id="pills-review-tab" data-toggle="pill" href="#pills-review" role="tab" aria-controls="pills-review" aria-selected="false">Checklist</a>
+                                        <a class="nav-link" id="pills-review-tab" data-toggle="pill" href="#pills-review" role="tab" aria-controls="pills-review" aria-selected="false">Technical Details</a>
                                     </li>
                                 </ul>
                                 <div class="tab-content" id="pills-tabContent">
@@ -412,11 +452,75 @@ endif;
                                             <!-- End card section --></p>
                                     </div>
                                     <div class="tab-pane fade" id="pills-packages" role="tabpanel" aria-labelledby="pills-packages-tab">
-                                        <p>Put Methods in here when they link properly.</p>
+                                        <?php
+                                        if (!empty($customer->commdetails)) {
+                                            echo '<div class="card">';
+                                            echo '<h5 class="card-header">Primary E-mail: ' . h($customer->email) . '</h5>';
+                                            echo '<div class="card-body">';
+                                            echo '<ul class="list-group list-group-flush">';
+
+                                            foreach ($customer->commdetails as $commdetail) {
+                                                // Output a list item for each communication detail
+                                                echo '<li class="list-group-item">';
+                                                echo '<h5>' . h($commdetail->type) . ': ' . h($commdetail->link) . '</h5>';
+
+                                                // Add an Edit button with a link to the edit page
+                                                echo $this->Html->link(__('Edit'), ['controller' => 'Commdetails', 'action' => 'edit', $commdetail->id], ['class' => 'btn btn-primary']);
+                                                echo $this->Html->link(__('Delete'), ['controller' => 'Commdetails', 'action' => 'delete', $commdetail->id], ['class' => 'btn btn-danger']);
+
+
+                                                echo '</li>';
+                                            }
+
+                                            echo '</ul>';
+                                            echo '</div>';
+                                            echo '</div>';
+                                        } else {
+                                            echo '<p>No other contact methods were found</p>';
+                                        }
+
+                                        echo $this->Html->link(__('Add another communication detail'), ['controller' => 'Commdetails', 'action' => 'add', 'customer_id' => $customer->id], ['class' => 'btn btn-success mt-3']);
+                                        ?>
+
+
                                     </div>
-                                    <div class="tab-pane fade" id="pills-review" role="tabpanel" aria-labelledby="pills-review-tab">
-                                        <p>Low Priority: Checklist goes in here. </p>
-                                    </div>
+                                        <div class="tab-pane fade" id="pills-review" role="tabpanel" aria-labelledby="pills-review-tab">
+                                            <h4>Devices</h4>
+                                            <?php
+                                            if (!empty($customer->devices)) {
+                                                echo '<table class="table table-bordered">';
+                                                echo '<thead><tr><th scope="col">Device Model</th><th scope="col">Technical Details</th><th scope="col">Session ID</th><th scope="col">Transaction ID</th><th scope="col">Actions</th></tr></thead>';
+                                                echo '<tbody>';
+
+                                                foreach ($customer->devices as $device) {
+                                                    echo '<tr>';
+                                                    echo '<td>' . h($device->device_model) . '</td>';
+                                                    echo '<td>' . h($device->technical_details) . '</td>';
+                                                    echo '<td>' . h($device->session_id) . '</td>';
+                                                    echo '<td>' . h($device->transaction_id) . '</td>';
+
+                                                    // Actions column with Edit and Delete buttons
+                                                    echo '<td>';
+                                                    echo $this->Html->link(__('Edit'), ['controller' => 'Devices', 'action' => 'edit', $device->id], ['class' => 'btn btn-primary']);
+                                                    echo ' ';
+                                                    echo $this->Form->postLink(__('Delete'), ['controller' => 'Devices', 'action' => 'delete', $device->id], ['class' => 'btn btn-danger', 'confirm' => __('Are you sure you want to delete this device?')]);
+                                                    echo '</td>';
+
+                                                    echo '</tr>';
+                                                }
+
+                                                echo '</tbody>';
+                                                echo '</table>';
+                                            } else {
+                                                echo '<p>No devices associated with this customer.</p>';
+                                            }
+                                            ?>
+
+
+
+                                            <?php echo $this->Html->link(__('Add New Device'), ['controller' => 'Devices', 'action' => 'add', 'customer_id' => $customer->id], ['class' => 'btn btn-success mt-3']); ?>
+
+                                        </div
                                 </div>
                             </div>
                             <!-- ============================================================== -->

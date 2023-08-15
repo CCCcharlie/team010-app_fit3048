@@ -50,17 +50,24 @@ class CommdetailsController extends AppController
     public function add()
     {
         $commdetail = $this->Commdetails->newEmptyEntity();
+
+        // Retrieve customer ID from URL parameter
+        $customerId = $this->request->getQuery('customer_id');
+
+        $customers = $this->Commdetails->Customers->find('all')
+            ->where(['id' => $customerId])
+            ->contain(['Customers'])
+            ->toArray();
+
+        $this->set(compact('commdetail', 'customers'));
+
         if ($this->request->is('post')) {
             $commdetail = $this->Commdetails->patchEntity($commdetail, $this->request->getData());
             if ($this->Commdetails->save($commdetail)) {
-                $this->Flash->success(__('The commdetail has been saved.'));
-
-                return $this->redirect(['action' => 'index']);
+                // Redirect to customer's page after successful save
+                return $this->redirect(['controller' => 'Customers', 'action' => 'view', $customerId]);
             }
-            $this->Flash->error(__('The commdetail could not be saved. Please, try again.'));
         }
-        $customers = $this->Commdetails->Customers->find('list', ['limit' => 200])->all();
-        $this->set(compact('commdetail', 'customers'));
     }
 
     /**

@@ -54,6 +54,9 @@ class CustomersTable extends Table
             'foreignKey' => 'cust_id',
         ]);
 
+        $this->hasMany('Counsellors', [ // Add this line for the commdetails association
+            'foreignKey' => 'cust_id',
+        ]);
 
     }
 

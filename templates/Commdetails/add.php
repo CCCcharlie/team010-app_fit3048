@@ -18,9 +18,11 @@
             <fieldset>
                 <legend><?= __('Add Commdetail') ?></legend>
                 <?php
-                    echo $this->Form->control('type');
-                    echo $this->Form->control('link');
-                    echo $this->Form->control('cust_id', ['options' => $customers]);
+                echo $this->Form->control('type');
+                echo $this->Form->control('link');
+
+                // Hidden input field to pre-fill customer ID
+                echo $this->Form->hidden('cust_id', ['value' => $customerId]);
                 ?>
             </fieldset>
             <?= $this->Form->button(__('Submit')) ?>

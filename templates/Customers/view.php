@@ -308,8 +308,16 @@ endif;
                                         </thead>
                                         <tbody>
                                         <?php
-                                        if (!empty($customer->counsellor)) {
-                                            foreach ($customer->counsellor as $counsellor) {
+                                        //Because the counsellors query is picked up in the view:
+
+//                                        $counsellors = $this->Customers->Counsellors->find('all')
+//                                            ->where(['cust_id' => $customer->id])
+//                                            ->contain(['Customers'])
+//                                            ->toArray();
+//
+                                        //Means that $counsellors is how we access counsellors for a customer
+                                        if (!empty($counsellors)) {
+                                            foreach ($counsellors as $counsellor) {
                                                 echo '<tr>';
                                                 echo '<td>' . h($counsellor->f_name . ' ' . $counsellor->l_name) . '</td>';
                                                 echo '<td>' . h($counsellor->contact) . '</td>';

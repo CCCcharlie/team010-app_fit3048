@@ -4579,7 +4579,10 @@ tr.group:hover {
 /*-----------------------
 6.1 Blank Page
 -------------------------*/
-
+.add-from {
+    min-width: 70%;
+    min-height: 70%;
+}
 
 /*-----------------------
 6.2 Blank Page Header

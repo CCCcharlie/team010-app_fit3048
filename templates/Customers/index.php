@@ -365,6 +365,8 @@ endif;
                                                             echo '<p>Device Model: ' . h($device->device_model) . '</p>';
                                                             echo '<p>Technical Details: ' . h($device->technical_details) . '</p>';
                                                             echo '<p>Session ID: ' . h($device->session_id) . '</p>';
+                                                            echo '<p>Transaction ID: ' . h($device->transaction_id) . '</p>';
+
                                                         }
                                                     } else {
                                                         echo '<p>No devices associated with this customer.</p>';

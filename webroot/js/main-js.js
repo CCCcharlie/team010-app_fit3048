@@ -2,9 +2,9 @@
 jQuery(document).ready(function($) {
     'use strict';
 
-    // ============================================================== 
+    // ==============================================================
     // Notification list
-    // ============================================================== 
+    // ==============================================================
     if ($(".notification-list").length) {
 
         $('.notification-list').slimScroll({
@@ -13,9 +13,9 @@ jQuery(document).ready(function($) {
 
     }
 
-    // ============================================================== 
+    // ==============================================================
     // Menu Slim Scroll List
-    // ============================================================== 
+    // ==============================================================
 
 
     if ($(".menu-list").length) {
@@ -24,9 +24,9 @@ jQuery(document).ready(function($) {
         });
     }
 
-    // ============================================================== 
-    // Sidebar scrollnavigation 
-    // ============================================================== 
+    // ==============================================================
+    // Sidebar scrollnavigation
+    // ==============================================================
 
     if ($(".sidebar-nav-fixed a").length) {
         $('.sidebar-nav-fixed a')
@@ -69,26 +69,26 @@ jQuery(document).ready(function($) {
 
     }
 
-    // ============================================================== 
+    // ==============================================================
     // tooltip
-    // ============================================================== 
+    // ==============================================================
     if ($('[data-toggle="tooltip"]').length) {
-            
+
             $('[data-toggle="tooltip"]').tooltip()
 
         }
 
-     // ============================================================== 
+     // ==============================================================
     // popover
-    // ============================================================== 
+    // ==============================================================
        if ($('[data-toggle="popover"]').length) {
             $('[data-toggle="popover"]').popover()
 
     }
-     // ============================================================== 
+     // ==============================================================
     // Chat List Slim Scroll
-    // ============================================================== 
-        
+    // ==============================================================
+
 
         if ($('.chat-list').length) {
             $('.chat-list').slimScroll({
@@ -98,9 +98,29 @@ jQuery(document).ready(function($) {
 
         });
     }
-    // ============================================================== 
+    // ==============================================================
     // dropzone script
-    // ============================================================== 
+    // ==============================================================
+
+    // document.addEventListener("DOMContentLoaded", () => {
+    //     const checklistForm = document.getElementById("checklist-form");
+    //
+    //     // Load previously checked items from local storage
+    //     for (let i = 0; i < checklistForm.elements.length; i++) {
+    //         const element = checklistForm.elements[i];
+    //         if (element.type === "checkbox") {
+    //             const isChecked = localStorage.getItem(element.name) === "true";
+    //             element.checked = isChecked;
+    //         }
+    //     }
+    //
+    //     // Save checked items to local storage when checkboxes are clicked
+    //     checklistForm.addEventListener("change", (event) => {
+    //         if (event.target.type === "checkbox") {
+    //             localStorage.setItem(event.target.name, event.target.checked);
+    //         }
+    //     });
+    // });
 
  //     if ($('.dz-clickable').length) {
  //            $(".dz-clickable").dropzone({ url: "/file/post" });
@@ -113,7 +133,7 @@ jQuery(document).ready(function($) {
 //     "use strict";
 
 
-    
+
 
    // var monkeyList = new List('test-list', {
     //    valueNames: ['name']
@@ -126,7 +146,7 @@ jQuery(document).ready(function($) {
 
 
 
-   
-   
+
+
 
 // });

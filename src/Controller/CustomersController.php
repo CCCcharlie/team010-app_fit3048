@@ -39,7 +39,7 @@ class CustomersController extends AppController
 
         $this->paginate = [
             'limit' => $totalRecords, // Set the limit to the total number of records
-            'contain' => ['Tickets', 'Devices', 'Commdetails'], // We want to include devices as well, not just the tickets. So add '
+            'contain' => ['Tickets', 'Devices', 'Commdetails', 'Counsellors'], // We want to include devices as well, not just the tickets. So add '
         ];
         $customers = $this->paginate($query);
 
@@ -56,7 +56,7 @@ class CustomersController extends AppController
     public function view($id = null)
     {
         $customer = $this->Customers->get($id, [
-            'contain' => ['Tickets', 'Devices', 'Commdetails'], // Include 'Devices' association
+            'contain' => ['Tickets', 'Devices', 'Commdetails', 'Counsellors'], // Include 'Devices' association
         ]);
 
         $tickets = $this->Customers->Tickets->find('all')
@@ -69,8 +69,13 @@ class CustomersController extends AppController
             ->contain(['Customers'])
             ->toArray();
 
+        $counsellors = $this->Customers->Counsellors->find('all')
+            ->where(['cust_id' => $customer->id])
+            ->contain(['Customers'])
+            ->toArray();
 
-        $this->set(compact('customer', 'tickets', 'devices'));
+
+        $this->set(compact('customer', 'tickets', 'devices','counsellors'));
     }
 
 

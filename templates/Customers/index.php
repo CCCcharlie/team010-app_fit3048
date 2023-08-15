@@ -374,7 +374,7 @@ endif;
                                                 <br>Email: <?= h($customer->email) ?>
                                                 <?php
                                                 if (!empty($customer->commdetails)) {
-                                                    foreach ($commdetails as $commdetail) {
+                                                    foreach ($customer->commdetails as $commdetail) {
                                                         echo '<p>Method: ' . h($commdetail->link) . '</p>';
                                                     }
                                                 } else {

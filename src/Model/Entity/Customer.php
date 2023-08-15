@@ -35,5 +35,6 @@ class Customer extends Entity
         'status' => true,
         'notes' => true,
         'devices' => true,
+        'commdetails' => true,
     ];
 }

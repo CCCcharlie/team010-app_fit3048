@@ -217,7 +217,9 @@ class ContentsController extends AppController
             $this->Flash->error(__('The content could not be deleted. Please, try again.'));
         }
 
-        return $this->redirect(['action' => 'index']);
+        // Instead of redirect to index page, redirect to where the user came from
+        // Remember the function is being called from both index listing and view page sidebar
+        return $this->redirect($this->referer());
     }
 
     /**

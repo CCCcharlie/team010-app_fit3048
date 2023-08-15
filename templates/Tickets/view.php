@@ -52,27 +52,23 @@
                 <?php if (!empty($ticket->contents)) : ?>
                 <div class="table-responsive">
                     <table>
+                        <thead>
                         <tr>
-                            <th><?= __('Id') ?></th>
-                            <th><?= __('Content') ?></th>
-                            <th><?= __('Createtime') ?></th>
-                            <th><?= __('Ticket Id') ?></th>
-                            <th><?= __('Content Type') ?></th>
-                            <th class="actions"><?= __('Actions') ?></th>
+                            <th><?= $this->Paginator->sort('id') ?></th>
+                            <th><?= $this->Paginator->sort('content') ?></th>
+                            <th><?= $this->Paginator->sort('createtime') ?></th>
+                            <th><?= $this->Paginator->sort('content_type') ?></th>
+                            <th><?= $this->Paginator->sort('content image') ?></th>
                         </tr>
-                        <?php foreach ($ticket->contents as $contents) : ?>
-                        <tr>
-                            <td><?= h($contents->id) ?></td>
-                            <td><?= h($contents->content) ?></td>
-                            <td><?= h($contents->createtime) ?></td>
-                            <td><?= h($contents->ticket_id) ?></td>
-                            <td><?= h($contents->content_type) ?></td>
-                            <td class="actions">
-                                <?= $this->Html->link(__('View'), ['controller' => 'Contents', 'action' => 'view', $contents->id]) ?>
-                                <?= $this->Html->link(__('Edit'), ['controller' => 'Contents', 'action' => 'edit', $contents->id]) ?>
-                                <?= $this->Form->postLink(__('Delete'), ['controller' => 'Contents', 'action' => 'delete', $contents->id], ['confirm' => __('Are you sure you want to delete # {0}?', $contents->id)]) ?>
-                            </td>
-                        </tr>
+                        </thead>
+                        <?php foreach ($ticket->contents as $content) : ?>
+                            <tr>
+                                <td><?= $this->Number->format($content->id) ?></td>
+                                <td><?= h($content->content) ?></td>
+                                <td><?= h($content->createtime) ?></td>
+                                <td><?= h($content->content_type) ?></td>
+                                <td><?= @$this->Html->image($content->content) ?> </td>
+                            </tr>
                         <?php endforeach; ?>
                     </table>
                 </div>

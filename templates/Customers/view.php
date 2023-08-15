@@ -465,13 +465,24 @@ endif;
                                     <div class="card">
                                         <div class="card-body">
                                             <h5 class="card-title">Attachment Type: <?= $content->content_type?></h5>
+                                            <h6 class="card-title">Create date: <?= $content->createtime?></h6>
                                             <p class="card-text"><?= h($content->content) ?></p>
                                             <!-- Why urlencode? because since im storing images as "conversation/image.png", passing $content->content as it is would only pass
                                                  "conversation", not good. As such, as it is passed to download, you must decode it-->
-                                            <?= $this->Html->link('Download Attachment', ['controller' => 'Contents', 'action' => 'download', urlencode($content->content)], ['class' => 'btn btn-primary card__button', 'id' => 'showButton']) ?>
+                                            <div style="display: flex; justify-content: space-between">
+                                            <?= $this->Html->link('Download Attachment', ['controller' => 'Contents', 'action' => 'download', urlencode($content->content)], ['class' => 'btn btn-primary card__button']) ?>
+                                            <?= $this->Form->postLink(__('Delete'), ['controller' => 'Contents', 'action' => 'delete', $content->id], ['confirm' => __('Are you sure you want to delete # {0}?', $content->id), 'class' => 'btn btn-rounded btn-danger']) ?>
+                                            </div>
                                         </div>
                                     </div>
                                 <?php endforeach; ?>
+                                <!-- In order to pass a query to a controller, must add the '?'. Can be obtained via key value pair in the controller -->
+                                <?= $this->Html->link(__('Add Attachments +'), ['controller' => 'Contents', 'action' => 'add',
+                                    '?' => ['ticket_id' => $ticket->id,
+                                        'f_name' => $customer->f_name,
+                                        'l_name' => $customer->l_name
+                                    ],
+                                ], ['class' => 'btn btn-rounded btn-primary', 'style' => 'margin: 10px']); ?>
                             <?php else: ?>
                                 <div class="card">
                                     <div class="card-body">

@@ -70,12 +70,7 @@ class CustomersController extends AppController
             ->toArray();
 
 
-        $commdetails = $this->Customers->Commdetails>find('all')
-            ->where(['cust_id' => $customer->id])
-            ->contain(['Customers'])
-            ->toArray();
-
-        $this->set(compact('customer', 'tickets', 'devices','commdetails'));
+        $this->set(compact('customer', 'tickets', 'devices'));
     }
 
 

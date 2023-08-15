@@ -371,11 +371,11 @@ endif;
                                                 </div>
 
                                             <div class="tab-pane fade" id="pills-contact-<?= $customer->id ?>" role="tabpanel" aria-labelledby="pills-contact-tab-<?= $customer->id ?>">
-                                                <br>Email: <?= h($customer->email) ?>
+                                                <br>Primary E-mail: <?= h($customer->email) ?>
                                                 <?php
                                                 if (!empty($customer->commdetails)) {
                                                     foreach ($customer->commdetails as $commdetail) {
-                                                        echo '<p>Method: ' . h($commdetail->link) . '</p>';
+                                                        echo '<p>Alternate Contact: ' . h($commdetail->link) . '</p>';
                                                     }
                                                 } else {
                                                     echo '<p>No other contact methods were found</p>';

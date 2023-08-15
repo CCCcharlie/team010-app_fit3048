@@ -52,6 +52,10 @@ class TicketsController extends AppController
         $ticket = $this->Tickets->newEmptyEntity();
         if ($this->request->is('post')) {
             $ticket = $this->Tickets->patchEntity($ticket, $this->request->getData());
+
+            //closed is a boolean variable where closed = 0 mean it is Open
+            $ticket->closed = false;
+
             if ($this->Tickets->save($ticket)) {
                 $this->Flash->success(__('The ticket has been saved.'));
 

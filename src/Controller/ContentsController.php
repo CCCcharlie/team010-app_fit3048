@@ -78,9 +78,11 @@ class ContentsController extends AppController
         $ticketId = $this->request->getQuery('ticket_id');
         $firstName = $this->request->getQuery('f_name');
         $lastName = $this->request->getQuery('l_name');
+        $custId = $this->request->getQuery('cust_id');
         $fullName = $firstName . ' ' . $lastName;
+
         // Set the ticket ID as a default value for the form field
-        $this->set(compact('ticketId', 'fullName'));
+        $this->set(compact('ticketId', 'fullName', 'custId'));
 
         $content = $this->Contents->newEmptyEntity();
         if ($this->request->is('post')) {

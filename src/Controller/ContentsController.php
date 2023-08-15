@@ -67,6 +67,21 @@ class ContentsController extends AppController
      */
     public function add()
     {
+//        $this->paginate = [
+//            'contain' => ['Tickets.Customers'],
+//        ];
+//        $contents = $this->paginate($this->Contents);
+//
+//        $this->set(compact('contents'));
+
+        //Obtain the query via key value pair [called from customer table view]
+        $ticketId = $this->request->getQuery('ticket_id');
+        $firstName = $this->request->getQuery('f_name');
+        $lastName = $this->request->getQuery('l_name');
+        $fullName = $firstName . ' ' . $lastName;
+        // Set the ticket ID as a default value for the form field
+        $this->set(compact('ticketId', 'fullName'));
+
         $content = $this->Contents->newEmptyEntity();
         if ($this->request->is('post')) {
             $content = $this->Contents->patchEntity($content, $this->request->getData());
@@ -143,11 +158,16 @@ class ContentsController extends AppController
                     $content->content = $file_name;
                 }
             }
+            //Set content id here because we dont want them to use html to modify other queries
+            $content->ticket_id = $ticketId;
 
             if ($this->Contents->save($content)) {
-                $this->Flash->success(__('The content has been saved.'));
+                $message = "The attachment for Ticket" . $content->ticket_id .  "Saved successfully";
+                $this->Flash->success(__($message));
 
-                return $this->redirect(['action' => 'index']);
+                // Instead of redirect to index page, redirect to where the user came from
+                // Remember the function is being called from both index listing and view page sidebar
+                return $this->redirect($this->referer());
             }
             $this->Flash->error(__('The content could not be saved. Please, try again.'));
         }
@@ -197,7 +217,9 @@ class ContentsController extends AppController
             $this->Flash->error(__('The content could not be deleted. Please, try again.'));
         }
 
-        return $this->redirect(['action' => 'index']);
+        // Instead of redirect to index page, redirect to where the user came from
+        // Remember the function is being called from both index listing and view page sidebar
+        return $this->redirect($this->referer());
     }
 
     /**
@@ -232,7 +254,9 @@ class ContentsController extends AppController
             return $response;
         } else {
             $this->Flash->error('File not found.');
-            return $this->redirect(['action' => 'index']); // Redirect if file not found
+            // Instead of redirect to index page, redirect to where the user came from
+            // Remember the function is being called from both index listing and view page sidebar
+            return $this->redirect($this->referer());
         }
     }
 }

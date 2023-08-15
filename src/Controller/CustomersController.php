@@ -27,19 +27,24 @@ class CustomersController extends AppController
                     'f_name LIKE' => '%' . $search . '%',
                     'l_name LIKE' => '%' . $search . '%',
                     'CONCAT(f_name, " ", l_name) LIKE' => '%' . $search . '%',
+                    'email LIKE' => '%' . $search . '%',
+                    'status LIKE' => '%' . $search . '%',
+                    'notes LIKE' => '%' . $search . '%'
                 ]
             ];
             $query->where($searchConditions);
         }
 
+        $totalRecords = $query->count(); // Get the total number of records
+
         $this->paginate = [
-            'contain' => ['Tickets'],
+            'limit' => $totalRecords, // Set the limit to the total number of records
+            'contain' => ['Tickets', 'Devices'], // We want to include devices as well, not just the tickets. So add '
         ];
         $customers = $this->paginate($query);
 
         $this->set(compact('customers'));
     }
-
 
     /**
      * View method
@@ -51,17 +56,22 @@ class CustomersController extends AppController
     public function view($id = null)
     {
         $customer = $this->Customers->get($id, [
-            'contain' => ['Tickets'],
+            'contain' => ['Tickets', 'Devices'], // Include 'Devices' association
         ]);
 
         $tickets = $this->Customers->Tickets->find('all')
             ->where(['cust_id' => $customer->id])
-            ->contain(['Users', 'Contents']) // I want to retrieve the name of the staff (users), so this is added so I can reference it
+            ->contain(['Users', 'Contents'])
             ->toArray();
 
+        $devices = $this->Customers->Devices->find('all')
+            ->where(['cust_id' => $customer->id])
+            ->contain(['Customers'])
+            ->toArray();
 
-        $this->set(compact('customer', 'tickets'));
+        $this->set(compact('customer', 'tickets', 'devices'));
     }
+
 
     /**
      * Add method

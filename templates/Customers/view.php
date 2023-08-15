@@ -320,8 +320,96 @@ endif;
                                 </ul>
                                 <div class="tab-content" id="pills-tabContent">
                                     <div class="tab-pane fade show active" id="pills-campaign" role="tabpanel" aria-labelledby="pills-campaign-tab">
-                                        <div>
-                                        <p>Move Tickets in here</p>
+                                        <p>            <!-- Cards section -->
+                                            <?php foreach ($tickets as $ticket): ?>
+                                        <div class="col-xl-12 col-lg-6 col-md-6 col-sm-12 col-12">
+                                            <div class="card">
+                                                <?php if($ticket->closed == true) : ?>
+                                                <div class="card-header d-flex" style="background-color: lightcoral">
+                                                    <?php elseif($ticket->closed == false) : ?>
+                                                    <div class="card-header d-flex" style="background-color: lightgreen">
+                                                        <?php endif; ?>
+                                                        <h4 class="card-header-title">Ticket ID: <?= h($ticket->id) ?></h4>
+                                                        <div class="toolbar ml-auto">
+                                                            <?php
+                                                            //if true means it is closed. Allow option to open ticket
+                                                            if ($ticket->closed) {
+                                                                echo $this->Form->postLink(__('Open ticket'), ['controller' => 'Tickets', 'action' => 'update_ticket', $ticket->id], ['class' => 'btn btn-primary', 'confirm' => __("Are you sure you want to close ticket ID: {0} \n Customer: {1} {2} ", $ticket->id, $customer->f_name, $customer->l_name)]);
+                                                            } else {
+                                                                echo $this->Form->postLink(__('Close ticket'), ['controller' => 'Tickets', 'action' => 'update_ticket', $ticket->id], ['class' => 'btn btn-primary', 'confirm' => __("Are you sure you want to Re-open ticket ID: {0} \n Customer: {1} {2} ", $ticket->id, $customer->f_name, $customer->l_name)]);
+                                                            }
+                                                            ?>
+                                                        </div>
+                                                    </div>
+                                                    <div class="card-body">
+                                                        <div class="card-text">
+                                                            <p><span class="card-info">Customer:</span> <?= h($customer->f_name) ?></p>
+                                                            <p><span class="card-info">Assigned staff:</span> <?= $this->Html->link(__($ticket->user->f_name), ['controller' => 'Users', 'action' => 'view', $ticket->staff_id]) ?></p>
+                                                            <p><span class="card-info">Create time:</span> <?= h($ticket->createtime) ?></p>
+                                                            <br>
+                                                        </div>
+                                                        <a href="#" class="btn btn-primary card__button" id="showButton">Go somewhere</a>
+                                                        <a class="btn btn-primary" data-toggle="collapse" href="#collapseExample<?= $ticket->id ?>" role="button" aria-expanded="false" aria-controls="collapseExample">
+                                                            Expand Attachments
+                                                        </a>
+                                                    </div>
+                                                    <!-- In order to show unique collapse for each class, its id must be different. -->
+                                                    <div class="collapse" id="collapseExample<?= $ticket->id ?>">
+                                                        <div class="card card-body">
+                                                            <!-- Because contents is already asked in Customers controller in this query
+
+                                                                    $tickets = $this->Customers->Tickets->find('all')
+                                                                    ->where(['cust_id' => $customer->id])
+                                                                    ->contain(['Users', 'Contents']) // I want to retrieve the name of the staff (users) & contents, so this is added so I can reference it
+                                                                    ->toArray();
+
+                                                                  We can reiterate contents for that ticket here as follows
+                                                            -->
+
+                                                            <!-- In order to pass a query to a controller, must add the '?'. Can be obtained via key value pair in the controller -->
+                                                            <?= $this->Html->link(__('Add Attachments +'), ['controller' => 'Contents', 'action' => 'add',
+                                                                '?' => ['ticket_id' => $ticket->id,
+                                                                    'f_name' => $customer->f_name,
+                                                                    'l_name' => $customer->l_name
+                                                                ],
+                                                            ], ['class' => 'btn btn-rounded btn-primary', 'style' => 'margin: 10px']); ?>
+
+                                                            <?php if($ticket->contents) : ?>
+                                                                <?php foreach ($ticket->contents as $content): ?>
+                                                                    <div class="card">
+                                                                        <div class="card-body">
+                                                                            <h5 class="card-title">Attachment Type: <?= $content->content_type?></h5>
+                                                                            <h6 class="card-title">Create date: <?= $content->createtime?></h6>
+                                                                            <p class="card-text"><?= h($content->content) ?></p>
+                                                                            <!-- Why urlencode? because since im storing images as "conversation/image.png", passing $content->content as it is would only pass
+                                                                                 "conversation", not good. As such, as it is passed to download, you must decode it-->
+                                                                            <div style="display: flex; justify-content: space-between">
+                                                                                <?= $this->Html->link('Download Attachment', ['controller' => 'Contents', 'action' => 'download', urlencode($content->content)], ['class' => 'btn btn-primary card__button']) ?>
+                                                                                <?= $this->Form->postLink(__('Delete'), ['controller' => 'Contents', 'action' => 'delete', $content->id], ['confirm' => __('Are you sure you want to delete # {0}?', $content->id), 'class' => 'btn btn-rounded btn-danger']) ?>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                <?php endforeach; ?>
+                                                                <!-- In order to pass a query to a controller, must add the '?'. Can be obtained via key value pair in the controller -->
+                                                                <?= $this->Html->link(__('Add Attachments +'), ['controller' => 'Contents', 'action' => 'add',
+                                                                    '?' => ['ticket_id' => $ticket->id,
+                                                                        'f_name' => $customer->f_name,
+                                                                        'l_name' => $customer->l_name
+                                                                    ],
+                                                                ], ['class' => 'btn btn-rounded btn-primary', 'style' => 'margin: 10px']); ?>
+                                                            <?php else: ?>
+                                                                <div class="card">
+                                                                    <div class="card-body">
+                                                                        <p> No attachments </p>
+                                                                    </div>
+                                                                </div>
+                                                            <?php endif; ?>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <?php endforeach ?>
+                                            <!-- End card section --></p>
                                     </div>
                                     <div class="tab-pane fade" id="pills-packages" role="tabpanel" aria-labelledby="pills-packages-tab">
                                         <p>Put Methods in here when they link properly.</p>
@@ -329,9 +417,6 @@ endif;
                                     <div class="tab-pane fade" id="pills-review" role="tabpanel" aria-labelledby="pills-review-tab">
                                         <p>Low Priority: Checklist goes in here. </p>
                                     </div>
-
-
-
                                 </div>
                             </div>
                             <!-- ============================================================== -->

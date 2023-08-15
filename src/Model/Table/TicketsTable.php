@@ -82,7 +82,7 @@ class TicketsTable extends Table
 
         $validator
             ->boolean('closed')
-            ->requirePresence('closed', 'create')
+//            ->requirePresence('closed', 'create')
             ->notEmptyString('closed');
 
         $validator

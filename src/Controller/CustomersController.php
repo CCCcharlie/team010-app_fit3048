@@ -39,7 +39,7 @@ class CustomersController extends AppController
 
         $this->paginate = [
             'limit' => $totalRecords, // Set the limit to the total number of records
-            'contain' => ['Tickets'],
+            'contain' => ['Tickets', 'Devices'], // We want to include devices as well, not just the tickets. So add '
         ];
         $customers = $this->paginate($query);
 

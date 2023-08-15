@@ -320,6 +320,7 @@ endif;
                                 </ul>
                                 <div class="tab-content" id="pills-tabContent">
                                     <div class="tab-pane fade show active" id="pills-campaign" role="tabpanel" aria-labelledby="pills-campaign-tab">
+                                        <div>
                                         <p>Move Tickets in here</p>
                                     </div>
                                     <div class="tab-pane fade" id="pills-packages" role="tabpanel" aria-labelledby="pills-packages-tab">
@@ -483,6 +484,8 @@ endif;
                 </div>
             </div>
             <?php endforeach ?>
+            <!-- End card section -->
+
         <!-- ============================================================== -->
         <!-- footer -->
         <!-- ============================================================== -->

@@ -359,7 +359,7 @@ endif;
                                                     <!-- Add stuff like technical details and devices. -->
                                                     <?php
                                                     if (!empty($customer->devices)) {
-                                                        foreach ($devices as $device) {
+                                                        foreach ($customer->devices as $device) {
                                                             echo '<p>Device Model: ' . h($device->device_model) . '</p>';
                                                             echo '<p>Technical Details: ' . h($device->technical_details) . '</p>';
                                                             echo '<p>Session ID: ' . h($device->session_id) . '</p>';

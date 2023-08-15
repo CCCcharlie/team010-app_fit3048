@@ -68,8 +68,8 @@ endif;
     <title>GamBlock® - Customer Management: Customers</title>
     <!-- Bootstrap CSS -->
     <!-- In-built CSS -->
-    <?= $this->Html->css(['style', 'bootstrap.min',]) ?>
-    <?= $this->Html->css(['fontawesome-all'], ['block' => true]) ?>
+    <?= $this->Html->css(['style', 'bootstrap.min', 'returntoparrow']) ?>
+    <link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
 
 
 
@@ -198,7 +198,7 @@ endif;
                     <div class="row">
                         <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                             <div class="page-header" id="top">
-                                <p class="pageheader-text">Proin placerat ante duiullam scelerisque a velit ac porta, fusce sit amet vestibulum mi. Morbi lobortis pulvinar quam.</p>
+                                <p class="pageheader-text"></p>
                             </div>
                         </div>
                     </div>
@@ -229,6 +229,8 @@ endif;
                             <br>
                             <h4>Sort by: </h4>
                             <br>
+
+
 
                             <tr>
                                 <th>
@@ -392,10 +394,12 @@ endif;
                         <?php if ($this->Paginator->counter(__('Page {{page}} of {{pages}}, showing {{current}} record(s) out of {{count}} total')) === 'Page 1 of 0, showing 0 record(s) out of 0 total'): ?>
                             <p>No results found.</p>
                         <?php endif; ?>
+
+
                     </div>
 
+                        <a href="javascript: " id="return-to-top"><i class="icon-chevron-up"></i></a>
                         <div class = "card-footer-item" >
-
 
 
 
@@ -491,8 +495,11 @@ endif;
                     <!--Jquery  - Essential Javascript library-->
                     <!--Add any explinations here for any scripts you add. - Alex-->
 
-                    <?= $this->Html->script(['jquery-3.3.1.min.js', 'bootstrap.bundle.js', 'main-js', 'jquery.slimscroll.js']) ?>
 
+
+
+
+                    <?= $this->Html->script(['jquery-3.3.1.min.js', 'bootstrap.bundle.js', 'main-js', 'jquery.slimscroll.js', 'gototoparrow.js']) ?>
 </body>
 
 </html>

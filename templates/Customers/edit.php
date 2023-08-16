@@ -24,7 +24,7 @@
                 <?php
                     echo $this->Form->control('f_name');
                     echo $this->Form->control('l_name');
-                    echo $this->Form->control('age');
+//                    echo $this->Form->control('age');
                     echo $this->Form->control('email');
                     echo $this->Form->control('status');
                     echo $this->Form->control('notes');

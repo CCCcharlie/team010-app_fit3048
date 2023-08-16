@@ -12,7 +12,7 @@ use Cake\ORM\Entity;
  * @property int $id
  * @property string $f_name
  * @property string $l_name
- * @property int $age
+// * @property int $age
  * @property string $email
  * @property string $password
  * @property string|null $timezone
@@ -34,7 +34,7 @@ class User extends Entity
     protected $_accessible = [
         'f_name' => true,
         'l_name' => true,
-        'age' => true,
+//        'age' => true,
         'email' => true,
         'password' => true,
         'timezone' => true,

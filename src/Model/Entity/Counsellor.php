@@ -12,6 +12,7 @@ use Cake\ORM\Entity;
  * @property string $f_name
  * @property string $l_name
  * @property string|null $notes
+ * @property string $contact
  * @property int|null $cust_id
  *
  * @property \App\Model\Entity\Customer $customer
@@ -32,6 +33,7 @@ class Counsellor extends Entity
         'l_name' => true,
         'notes' => true,
         'cust_id' => true,
+        'contact' => true,
         'customer' => true,
     ];
 }

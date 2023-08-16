@@ -19,6 +19,7 @@
             <fieldset>
                 <legend><?= __('Add Ticket') ?></legend>
                 <?php
+                    echo $this->Form->control('title');
                     echo $this->Form->control('type');
 //                    echo $this->Form->control('createtime');
 //                    echo $this->Form->control('closetime', ['empty' => true]);

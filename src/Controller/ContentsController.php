@@ -4,6 +4,10 @@ declare(strict_types=1);
 namespace App\Controller;
 
 use Cake\Http\Response; // since we use response, add this line
+// Composer library to sanitize HTML from sumemrnote
+//  composer require ezyang/htmlpurifier
+use HTMLPurifier;
+use HTMLPurifier_Config;
 
 /**
  * Contents Controller
@@ -97,9 +101,14 @@ class ContentsController extends AppController
             $checkFile = $this->request->getData('file');
             $checkImage = $this->request->getData('image');
 
+            $checkText = $this->request->getData('content');
+
+
 //            debug($checkFile);
 //            debug($checkImage);
-//            debug($content);
+//            debug($checkText);
+
+//            exit;
 
             if (!$content->getErrors() && ($checkFile || $checkImage)) {
                 //IMPORTANT NOTE: File here is both file and image (I know its confusing)
@@ -159,8 +168,47 @@ class ContentsController extends AppController
                     //For regular files [PDF, DOCX OR TXT], save it as only its file name
                     $content->content = $file_name;
                 }
+                //No error, textbox not null
+            } else if (!$content->getErrors() && $checkText){
+                if (!is_dir(WWW_ROOT . 'file')) {
+                    mkdir(WWW_ROOT . 'file');
+                }
+                //To make storing files easier, create a folder creatd-text  where it is all stored there
+                if (!is_dir(WWW_ROOT . 'file' . DS . 'created-text')) {
+                    mkdir(WWW_ROOT . 'file' . DS . 'created-text');
+                }
+
+                //In order to create the file with unique name, we use uniqid() as seed (which seeds in microseconds)
+                // and CRC32 hash to add more variety.
+                // Assume that over the business lifetime, there wouldbe no more than  2^32 or 4,294,967,296 text attachments coz
+                // nearing that number would collide and replace uniqueness
+                $seed = uniqid();
+                mt_srand(crc32($seed)); // Using CRC32 hash of the uniqid as the seed
+//                debug(mt_rand());
+//                debug("hi");
+//                $seed = uniqid();
+//                srand(crc32($seed)); // Using CRC32 hash of the uniqid as the seed
+
+                $createTextFileName = 'created_text_' . mt_rand() . '.html';
+
+//                Create the text file path
+                $filePath = WWW_ROOT . 'file' . DS . 'created-text' . DS . $createTextFileName;
+
+                // SANITIZE HTML INPUT
+                // Firstly, Configure HTML Purifier
+                $config = HTMLPurifier_Config::createDefault();
+                $purifier = new HTMLPurifier($config);
+
+                // Then we sanitize the input
+                $sanitizedContent = $purifier->purify($content->content);
+
+                //Write the contents into the file
+                file_put_contents($filePath, $sanitizedContent);
+
+                //For created text [PDF, DOCX OR TXT], save it as only its file name
+                $content->content = $createTextFileName;
             }
-            //Set content id here because we dont want them to use html to modify other queries
+            //Set ticket id here because we dont want them to use html to modify other tickets
             $content->ticket_id = $ticketId;
 
             if ($this->Contents->save($content)) {
@@ -236,17 +284,19 @@ class ContentsController extends AppController
         $fileName = urldecode($encodedFilename);
         $filePath = WWW_ROOT . 'file' . DS . 'user-file' . DS . $fileName; // Path to the uploaded file
         $imageFilePath = WWW_ROOT . 'img' . DS . $fileName; //path to the image file
+        $createTextFilePath = WWW_ROOT . 'file' . DS . 'created-text' . DS . $fileName; // path to the created text file
 
 //        debug($fileName);
 //        debug($filePath);
 //        debug($imageFilePath);
+//        debug($createTextFilePath);
 //        exit;
 
         //Because filename is expected to be receiving both IMAGES and FILES, we need to check if the item exists or not for both
         //cases in the if statement below
         $response = new Response();
 
-        //If file [docx, pdf, txt] exists: download it
+            //If uploaded file [docx, pdf, txt] exists: download it
         if (file_exists($filePath)) {
             $response = $response->withFile($filePath, ['download' => true, 'name' => $fileName]);
             return $response;
@@ -254,7 +304,12 @@ class ContentsController extends AppController
         }else if(file_exists($imageFilePath)) {
             $response = $response->withFile($imageFilePath, ['download' => true, 'name' => $fileName]);
             return $response;
-        } else {
+            // If it is a created text file, download it with the right file path instead
+        }else if(file_exists($createTextFilePath)) {
+            $response = $response->withFile($createTextFilePath, ['download' => true, 'name' => $fileName]);
+            return $response;
+        }
+        else {
             $this->Flash->error('File not found.');
             // Instead of redirect to index page, redirect to where the user came from
             // Remember the function is being called from both index listing and view page sidebar

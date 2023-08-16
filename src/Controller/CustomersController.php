@@ -90,11 +90,11 @@ class CustomersController extends AppController
         if ($this->request->is('post')) {
             $customer = $this->Customers->patchEntity($customer, $this->request->getData());
             if ($this->Customers->save($customer)) {
-                $this->Flash->success(__('The customer has been saved.'));
+                $this->Flash->success(__('{0} {1} has been added to the system!', $customer->f_name, $customer->l_name));
 
                 return $this->redirect(['action' => 'index']);
             }
-            $this->Flash->error(__('The customer could not be saved. Please, try again.'));
+            $this->Flash->error(__('{0} {1} could not be added to the system, please try again', $customer->f_name, $customer->l_name));
         }
         $this->set(compact('customer'));
     }
@@ -114,11 +114,11 @@ class CustomersController extends AppController
         if ($this->request->is(['patch', 'post', 'put'])) {
             $customer = $this->Customers->patchEntity($customer, $this->request->getData());
             if ($this->Customers->save($customer)) {
-                $this->Flash->success(__('The customer has been saved.'));
+                $this->Flash->success(__('The profile edit has been saved!.'));
 
-                return $this->redirect(['action' => 'index']);
+                return $this->redirect(['action' => 'view', $customer -> id]);
             }
-            $this->Flash->error(__('The customer could not be saved. Please, try again.'));
+            $this->Flash->error(__('The profile edit could not be saved. Please, try again.'));
         }
         $this->set(compact('customer'));
     }

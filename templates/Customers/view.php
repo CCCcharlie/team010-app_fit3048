@@ -289,53 +289,53 @@ endif;
                                     <h3 class="font-16">Notes:</h3>
                                     <p class="mb-0"><?= h($customer->notes) ?></>
                                 </div>
-                                <div class="card-body border-top">
-                                    <h3 class="font-16">Counsellor :</h3>
-                                    <p class="mb-0">
-                                    <table class="table table-bordered">
-                                        <thead>
-                                        <tr>
-                                            <th scope="col">Name</th>
-                                            <th scope="col">Contact</th>
-                                            <th scope="col">Notes</th>
-                                            <th scope="col">Actions</th>
-                                        </tr>
-                                        </thead>
-                                        <tbody>
-                                        <?php
-                                        //Because the counsellors query is picked up in the view:
-
-//                                        $counsellors = $this->Customers->Counsellors->find('all')
-//                                            ->where(['cust_id' => $customer->id])
-//                                            ->contain(['Customers'])
-//                                            ->toArray();
+<!--                                <div class="card-body border-top">-->
+<!--                                    <h3 class="font-16">Counsellor :</h3>-->
+<!--                                    <p class="mb-0">-->
+<!--                                    <table class="table table-bordered">-->
+<!--                                        <thead>-->
+<!--                                        <tr>-->
+<!--                                            <th scope="col">Name</th>-->
+<!--                                            <th scope="col">Contact</th>-->
+<!--                                            <th scope="col">Notes</th>-->
+<!--                                            <th scope="col">Actions</th>-->
+<!--                                        </tr>-->
+<!--                                        </thead>-->
+<!--                                        <tbody>-->
+<!--                                        --><?php
+//                                        //Because the counsellors query is picked up in the view:
 //
-                                        //Means that $counsellors is how we access counsellors for a customer
-                                        if (!empty($counsellors)) {
-                                            foreach ($counsellors as $counsellor) {
-                                                echo '<tr>';
-                                                echo '<td>' . h($counsellor->f_name . ' ' . $counsellor->l_name) . '</td>';
-                                                echo '<td>' . h($counsellor->contact) . '</td>';
-                                                echo '<td>' . h($counsellor->notes) . '</td>';
-
-                                                // Actions column with Edit and Delete buttons
-                                                echo '<td>';
-                                                echo $this->Html->link(__('Edit'), ['controller' => 'Counsellors', 'action' => 'edit', $counsellor->id], ['class' => 'btn btn-primary']);
-                                                echo ' ';
-                                                echo $this->Form->postLink(__('Delete'), ['controller' => 'Counsellors', 'action' => 'delete', $counsellor->id], ['class' => 'btn btn-danger', 'confirm' => __('Are you sure you want to delete this counselor?')]);
-                                                echo '</td>';
-
-                                                echo '</tr>';
-                                            }
-                                        } else {
-                                            echo '<tr><td colspan="4">No Counsellors have been assigned to this customer.</td></tr>';
-                                        }
-                                        ?>
-                                        </tbody>
-                                    </table>
-                                    <?php echo $this->Html->link(__('Add New Counsellor'), ['controller' => 'Counsellors', 'action' => 'add', 'customer_id' => $customer->id], ['class' => 'btn btn-success mt-3']); ?>
-                                    </p>
-                                </div>
+////                                        $counsellors = $this->Customers->Counsellors->find('all')
+////                                            ->where(['cust_id' => $customer->id])
+////                                            ->contain(['Customers'])
+////                                            ->toArray();
+////
+//                                        //Means that $counsellors is how we access counsellors for a customer
+//                                        if (!empty($counsellors)) {
+//                                            foreach ($counsellors as $counsellor) {
+//                                                echo '<tr>';
+//                                                echo '<td>' . h($counsellor->f_name . ' ' . $counsellor->l_name) . '</td>';
+//                                                echo '<td>' . h($counsellor->contact) . '</td>';
+//                                                echo '<td>' . h($counsellor->notes) . '</td>';
+//
+//                                                // Actions column with Edit and Delete buttons
+//                                                echo '<td>';
+//                                                echo $this->Html->link(__('Edit'), ['controller' => 'Counsellors', 'action' => 'edit', $counsellor->id], ['class' => 'btn btn-primary']);
+//                                                echo ' ';
+//                                                echo $this->Form->postLink(__('Delete'), ['controller' => 'Counsellors', 'action' => 'delete', $counsellor->id], ['class' => 'btn btn-danger', 'confirm' => __('Are you sure you want to delete this counselor?')]);
+//                                                echo '</td>';
+//
+//                                                echo '</tr>';
+//                                            }
+//                                        } else {
+//                                            echo '<tr><td colspan="4">No Counsellors have been assigned to this customer.</td></tr>';
+//                                        }
+//                                        ?>
+<!--                                        </tbody>-->
+<!--                                    </table>-->
+<!--                                    --><?php //echo $this->Html->link(__('Add New Counsellor'), ['controller' => 'Counsellors', 'action' => 'add', 'customer_id' => $customer->id], ['class' => 'btn btn-success mt-3']); ?>
+<!--                                    </p>-->
+<!--                                </div>-->
 
                             </div>
                             <!-- ============================================================== -->
@@ -750,7 +750,7 @@ endif;
                                             <?php
                                             if (!empty($customer->devices)) {
                                                 echo '<table class="table table-bordered">';
-                                                echo '<thead><tr><th scope="col">Device Model</th><th scope="col">Technical Details</th><th scope="col">Session ID</th><th scope="col">Transaction ID</th><th scope="col">Actions</th></tr></thead>';
+                                                echo '<thead><tr><th scope="col">Device Model</th><th scope="col">Technical Details</th><th scope="col">Session ID</th><th scope="col">Transaction ID</th><th scope="col">Platform</th><th scope="col">Gamblock Ver.</th><th scope="col">Actions</th></tr></thead>';
                                                 echo '<tbody>';
 
                                                 foreach ($customer->devices as $device) {
@@ -759,6 +759,9 @@ endif;
                                                     echo '<td>' . h($device->technical_details) . '</td>';
                                                     echo '<td>' . h($device->sessionid) . '</td>';
                                                     echo '<td>' . h($device->transactionid) . '</td>';
+                                                    echo '<td>' . h($device->platform) . '</td>';
+                                                    echo '<td>' . h($device->gamblock_ver) . '</td>';
+
 
                                                     // Actions column with Edit and Delete buttons
                                                     echo '<td>';

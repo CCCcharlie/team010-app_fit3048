@@ -183,27 +183,27 @@ $this->disableAutoLayout();
                                 <fieldset>
                                     <div class="form-group">
                                         <?= $this->Form->label('transactionid', 'Transaction ID', ['class' => 'col-form-label']) ?>
-                                        <?= $this->Form->input('transactionid', ['class' => 'form-control', 'required' => true, 'placeholder' => 'Transaction ID']) ?>
+                                        <?= $this->Form->input('transactionid', ['class' => 'form-control', 'required' => true, 'maxlength' => 7, 'placeholder' => 'Transaction ID']) ?>
                                     </div>
                                     <div class="form-group">
                                         <?= $this->Form->label('device_model', 'Device Model', ['class' => 'col-form-label']) ?>
-                                        <?= $this->Form->input('device_model', ['class' => 'form-control', 'required' => true, 'placeholder' => 'eg. Samsung Galaxy S9']) ?>
+                                        <?= $this->Form->input('device_model', ['class' => 'form-control', 'required' => true, 'maxlength' => 54, 'placeholder' => 'eg. Samsung Galaxy S9']) ?>
                                     </div>
                                     <div class="form-group">
                                         <?= $this->Form->label('sessionid', 'Session ID', ['class' => 'col-form-label']) ?>
-                                        <?= $this->Form->input('sessionid', ['class' => 'form-control', 'required' => true, 'placeholder' => 'Session ID']) ?>
+                                        <?= $this->Form->input('sessionid', ['class' => 'form-control', 'required' => true, 'maxlength' => 23, 'placeholder' => 'Session ID']) ?>
                                     </div>
                                     <div class="form-group">
                                         <?= $this->Form->label('technical_details', 'Technical Details', ['class' => 'col-form-label']) ?>
-                                        <?= $this->Form->input('technical_details', ['class' => 'form-control', 'required' => true, 'placeholder' => 'eg. Android 13 API 33']) ?>
+                                        <?= $this->Form->input('technical_details', ['class' => 'form-control', 'required' => true, 'maxlength' => 150, 'placeholder' => 'eg. Android 13 API 33']) ?>
                                     </div>
                                     <div class="form-group">
                                         <?= $this->Form->label('platform', 'Platform', ['class' => 'col-form-label']) ?>
-                                        <?= $this->Form->input('platform', ['class' => 'form-control', 'required' => true, 'placeholder' => 'eg. Android/IOS/MacOS Windows']) ?>
+                                        <?= $this->Form->input('platform', ['class' => 'form-control', 'required' => true, 'maxlength' => 20, 'placeholder' => 'eg. Android/IOS/MacOS Windows']) ?>
                                     </div>
                                     <div class="form-group">
                                         <?= $this->Form->label('gamblock_ver', 'GamBlock Version', ['class' => 'col-form-label']) ?>
-                                        <?= $this->Form->input('gamblock_ver', ['class' => 'form-control', 'required' => true, 'placeholder' => 'eg. Ver 1.1']) ?>
+                                        <?= $this->Form->input('gamblock_ver', ['class' => 'form-control', 'required' => true, 'maxlength' => 30, 'placeholder' => 'eg. Ver 1.1']) ?>
                                     </div>
                                 </fieldset>
                                 <div class="form-group d-flex justify-content-between align-items-center">

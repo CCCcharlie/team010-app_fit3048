@@ -364,7 +364,7 @@ endif;
                                 </ul>
                                 <div class="tab-content" id="pills-tabContent">
                                     <div class="tab-pane fade show active" id="pills-campaign" role="tabpanel" aria-labelledby="pills-campaign-tab">
-
+                                        <div>
                                         <div class="card">
                                             <!-- Header buttons -->
                                         <div class="card-header">
@@ -704,6 +704,7 @@ endif;
                                             </p>
                                         </div>
                                     </div>
+                                        </div>
                                     <div class="tab-pane fade" id="pills-packages" role="tabpanel" aria-labelledby="pills-packages-tab">
                                         <?php
                                         if (!empty($customer->commdetails)) {

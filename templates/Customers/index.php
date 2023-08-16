@@ -2,6 +2,7 @@
 /**
  * @var \App\View\AppView $this
  * @var iterable<\App\Model\Entity\Customer> $customers
+ *
  */
 ?>
 <?php
@@ -132,14 +133,16 @@ endif;
                             <div id="submenu-1" class="collapse submenu" style="">
                                 <ul class="nav flex-column">
                                     <li class="nav-item">
-                                        <a class="nav-link" href="/">Assigned to me</a>
+
+                                        <a class="nav-link" href="/team010-app_fit3048/customers/assigntome">Assigned to me</a>
+                                    </li>
                                         <!--                                        Change my link to assigned to me page when done.-->
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link" href="/customers">View All</a>
+                                        <a class="nav-link" href="/team010-app_fit3048/customers">View All</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link" href="/customers/add">Add a Customer Profile</a>
+                                        <a class="nav-link" href="/team010-app_fit3048/customers/add">Add a Customer Profile</a>
                                     </li>
                                 </ul>
                             </div>
@@ -323,7 +326,10 @@ endif;
                         right: 0px;
                         }
                     </style>
-
+                        <!-- Space reserver -->
+                        <div id="filtered-content">
+                            <!-- content show for assign to me -->
+                        </div>
                     <div class="row">
                         <?php foreach ($customers as $customer): ?>
                             <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
@@ -479,6 +485,8 @@ endif;
                                     </div>
                                 </div>
                             </div>
+
+
                         </div>
                         <!-- ============================================================== -->
                         <!-- end footer -->
@@ -495,6 +503,11 @@ endif;
 
                     <?= $this->Html->script('https://kit.fontawesome.com/b5c616a120.js', ['crossorigin' => 'anonymous']) ?>
                     <?= $this->Html->script(['jquery-3.3.1.min.js', 'bootstrap.bundle.js', 'main-js', 'jquery.slimscroll.js', 'gototoparrow.js']) ?>
+
+
+
+
+
 </body>
 
 </html>

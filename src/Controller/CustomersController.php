@@ -51,29 +51,29 @@ class CustomersController extends AppController
     }
     /**
  * Fillter option
- *
- * @return \Cake\Http\Response|null|void Redirects on successful add, renders view otherwise.
+     * @param string|null $id Customer id.
+     * @return \Cake\Http\Response|null|void Renders view
+     * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
+
  */
     public function assigntome()
     {
-//        get the current user id
+        // 获取当前用户的 ID
         $identity = $this->request->getAttribute('authentication')->getIdentity();
-        //                        debug($identity->get('f_name'));
-        //                        exit();
-
         $currentStaffId = $identity->get('id');
-//        debug($identity->get('id'));
-//                                exit();
 
-// check the client
+        // 获取与当前用户相关的客户数据
         $assignedCustomers = $this->Customers->find()
             ->innerJoinWith('Tickets', function ($query) use ($currentStaffId) {
                 return $query->where(['Tickets.staff_id' => $currentStaffId]);
             })
             ->all();
 
+        // 将数据渲染为视图，以便通过 Ajax 响应返回
         $this->set('assignedCustomers', $assignedCustomers);
+
     }
+
     /**
      * View method
      *
@@ -104,6 +104,22 @@ class CustomersController extends AppController
 
 
         $this->set(compact('customer', 'tickets', 'devices','counsellors'));
+
+//                get the current user id
+
+        $identity = $this->request->getAttribute('authentication')->getIdentity();
+        $currentStaffId = $identity->get('id');
+        $assignedCustomers = $this->Customers->find()
+            ->innerJoinWith('Tickets', function ($query) use ($currentStaffId) {
+                return $query->where(['Tickets.staff_id' => $currentStaffId]);
+            })
+            ->all();
+
+        $this->set(compact('assignedCustomers', 'assignedCustomers'));
+
+
+
+
     }
 
 

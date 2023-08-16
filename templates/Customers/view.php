@@ -144,9 +144,9 @@ endif;
                             <div id="submenu-1" class="collapse submenu" style="">
                                 <ul class="nav flex-column">
                                     <li class="nav-item">
-                                        <?= $this->Html->link('Assigntome', ['controller' => 'Customers', 'action' => 'Assigntome'], ['class' => 'nav-link']) ?>
+                                        <a class="nav-link" href="/team010-app_fit3048/customers/assigntome">Assigned to me</a>
 
-                                        <!--                                        Change my link to assigned to me page when done.-->
+<!--                                                                                Change my link to assigned to me page when done.-->
                                     </li>
                                     <li class="nav-item">
                                         <a class="nav-link" href="/team010-app_fit3048/customers">View All</a>
@@ -856,6 +856,11 @@ endif;
                 $("#openticket").hide();
             }
         });
+    });
+
+    document.getElementById('Filter').addEventListener('change', function() {
+        var selectedValue = this.value;
+        // send request
     });
 </script>
 

@@ -146,6 +146,10 @@ $this->disableAutoLayout();
                     <!-- ============================================================== -->
                     <div class="row">
                         <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                            <?php if (isset($successMessage)): ?>
+                                <div class="p-3 mb-2 bg-success text-white"><?= h($successMessage) ?></div>
+                            <?php endif; ?>
+
                             <div class="page-header" id="top">
                                 <p class="pageheader-text"></p>
                             </div>

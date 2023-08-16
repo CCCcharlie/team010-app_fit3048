@@ -5,34 +5,240 @@
  */
 
 
+$this->disableAutoLayout();
 
 ?>
-<div class="row">
-    <aside class="column">
-        <div class="side-nav">
-            <h4 class="heading"><?= __('Actions') ?></h4>
-            <?= $this->Html->link(__('List Users'), ['action' => 'index'], ['class' => 'side-nav-item']) ?>
+
+<!doctype html>
+<html lang="en">
+
+
+<head>
+    <?= $this->Html->meta('icon', 'favicon.ico', ['type' => 'icon']) ?>
+
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>GamBlock® - Customer Management: Customers</title>
+    <!-- Bootstrap CSS -->
+    <!-- In-built CSS -->
+    <?= $this->Html->css(['style', 'bootstrap.min',]) ?>
+    <?= $this->Html->css(['fontawesome-all'], ['block' => true]) ?>
+
+
+
+
+
+</head>
+
+<body>
+<!-- ============================================================== -->
+<!-- main wrapper -->
+<!-- ============================================================== -->
+<div class="dashboard-main-wrapper">
+    <!-- ============================================================== -->
+    <!-- navbar -->
+    <!-- ============================================================== -->
+    <div class="dashboard-header">
+        <nav class="navbar navbar-expand-lg bg-white fixed-top">
+            <a class="navbar-brand" href="/home.php">
+                <?= $this->Html->image('cake-logo.png', ['alt' => 'GamBlock Logo', 'class' => 'navbar-brand', 'style' => 'width: 225px; height: auto;']); ?> -Staff Portal
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav ml-auto navbar-right-top">
+
+                    <li class="nav-item dropdown nav-user">
+                        <a class="nav-link nav-user-file" href="#" id="navbarDropdownMenuLink2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="../assets/images/avatar-1.jpg" alt="" class="user-avatar-md rounded-circle"></a>
+                        <div class="dropdown-menu dropdown-menu-right nav-user-dropdown" aria-labelledby="navbarDropdownMenuLink2">
+                            <div class="nav-user-info">
+                                <h5 class="mb-0 text-white nav-user-name">
+                                    Example User</h5>
+                            </div>
+                            <a class="dropdown-item" href="#"><i class="fas fa-power-off mr-2"></i> <?php echo $this->Html->link(__('Logout'), ['controller' => 'Auth', 'action' => 'logout']); ?></a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </div>
+    <!-- ============================================================== -->
+    <!-- end navbar -->
+    <!-- ============================================================== -->
+    <!-- ============================================================== -->
+    <!-- left sidebar -->
+    <!-- ============================================================== -->
+    <div class="nav-left-sidebar sidebar-dark">
+        <div class="menu-list">
+            <nav class="navbar navbar-expand-lg navbar-light">
+                <a class="d-xl-none d-lg-none" href="#">Customer View</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav flex-column">
+                        <li class="nav-divider">
+                            Menu
+                        </li>
+                        <li class="nav-item ">
+                            <a class="nav-link active" href="#" data-toggle="collapse" aria-expanded="false" data-target="#submenu-1" aria-controls="submenu-1"><i class="fa fa-fw fa-user-circle"></i>Customer Management <span class="badge badge-success">6</span></a>
+                            <div id="submenu-1" class="collapse submenu" style="">
+                                <ul class="nav flex-column">
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="/">Assigned to me</a>
+                                        <!--                                        Change my link to assigned to me page when done.-->
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="/customers">View All</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="/customers/add">Add a Customer Profile</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#" data-toggle="collapse" aria-expanded="false" data-target="#submenu-2" aria-controls="submenu-2"><i class="fa-solid fa-user-tag"></i>Tag Management</a>
+                            <div id="submenu-2" class="collapse submenu" style="">
+                                <ul class="nav flex-column">
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="/Tags/index">View All Tags<span class="badge badge-secondary">New</span></a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="/Tags/add">Add some Tags<span class="badge badge-secondary">New</span></a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li class="nav-divider">
+                            Admin Features
+                            <!--                            Change to me admin only visable.-->
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#" data-toggle="collapse" aria-expanded="false" data-target="#submenu-6" aria-controls="submenu-6"><i class="fa-solid fa-user-tie"></i>Staff Management</a>
+                            <div id="submenu-6" class="collapse submenu" style="">
+                                <ul class="nav flex-column">
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="/Users/">View All Staff Accounts </a>
+                                    </li>
+
+                                </ul>
+                            </div>
+
+
+                    </ul>
+                </div>
+            </nav>
         </div>
+    </div>
+    <!-- ============================================================== -->
+    <!-- end left sidebar -->
+
+
+    <!-- ============================================================== -->
+
+    <div class="dashboard-wrapper">
+
+        <div class="container-fluid dashboard-content">
     </aside>
-    <div class="column-responsive column-80">
-        <div class="users form content">
-            <?= $this->Form->create($user) ?>
-            <fieldset>
-                <legend><?= __('Add User') ?></legend>
-                <?php
-                    echo $this->Form->control('f_name');
-                    echo $this->Form->control('l_name');
-//                    echo $this->Form->control('age');
-                    echo $this->Form->control('email');
-                    echo $this->Form->control('password');
-                    echo $this->Form->control('timezone');
-                    echo $this->Form->control('admin_status');
-                    echo $this->Form->control('nonce');
-                    echo $this->Form->control('nonce_expiry');
-                ?>
-            </fieldset>
-            <?= $this->Form->button(__('Submit')) ?>
-            <?= $this->Form->end() ?>
+            <div class="row">
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                    <div class="section-block" id="basicform">
+                    </div>
+                    <div class="card">
+                        <h5 class="card-header">Add a New User</h5>
+                        <div class="card-body">
+                            <?= $this->Form->create($user, ['onsubmit' => 'return validateEmail();']) ?>
+                            <div class="form-group">
+                                <?= $this->Form->label('f_name', 'First Name', ['class' => 'col-form-label']) ?>
+                                <?= $this->Form->input('f_name', [
+                                    'class' => 'form-control',
+                                    'maxlength' => 32, // Maximum of 32 characters
+                                    'required' => true,
+                                    'title' => 'Please enter your first name using letters and hyphens only',
+                                    'pattern' => '^[A-Za-z-]+$'
+                                ]) ?>
+                                <small class="form-text text-muted">Letters and hyphens only.</small>
+                            </div>
+                            <div class="form-group">
+                                <?= $this->Form->label('l_name', 'Last Name', ['class' => 'col-form-label']) ?>
+                                <?= $this->Form->input('l_name', [
+                                    'class' => 'form-control',
+                                    'maxlength' => 32, // Maximum of 32 characters
+                                    'required' => true,
+                                    'title' => 'Please enter your last name using letters and hyphens only',
+                                    'pattern' => '^[A-Za-z-]+$'
+                                ]) ?>
+                                <small class="form-text text-muted">Letters and hyphens only.</small>
+                            </div>
+                            <div class="form-group">
+                                <?= $this->Form->label('email', 'Email Address') ?>
+                                <?= $this->Form->input('email', [
+                                    'class' => 'form-control',
+                                    'placeholder' => 'name@mail.com',
+                                    'type' => 'email',
+                                    'required' => true,
+                                    'pattern' => '[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}',
+                                    'title' => 'Please enter a valid email address with a domain (e.g., name@mail.com)',
+                                    'maxlength' => 320 // Maximum of 320 characters
+                                ]) ?>
+                                <small class="form-text text-muted">Please enter a valid email address.</small>
+                            </div>
+                            <div class="form-group">
+                                <?= $this->Form->label('password', 'Password') ?>
+                                <?= $this->Form->input('password', [
+                                    'class' => 'form-control',
+                                    'required' => true,
+                                    'title' => 'Please enter a password (at least 6 characters with at least one number)',
+                                    'maxlength' => 124, // Maximum of 124 characters
+                                    'pattern' => '(?=.*\d).{6,}', // At least 6 characters with at least one number
+                                ]) ?>
+                                <small class="form-text text-muted">At least 6 characters with at least one number.</small>
+                            </div>
+
+                            <small class="text-muted" style="font-style: italic;">Please note: Setting a user to Admin will give them control over ALL other accounts. Including this one. Use this sparingly.</small>
+                            <div class="form-group" style="display: flex; align-items: center;">
+                                <?= $this->Form->label('Set User As Admin?', null, ['class' => 'col-form-label', 'style' => 'margin-right: 10px;']) ?>
+                                <?= $this->Form->control('admin_status', ['label' => false, 'class' => 'form-control']) ?>
+                            </div>
+
+                            <br>
+                            <div class="form-group d-flex justify-content-between align-items-center">
+                                <?= $this->Html->link(__('Cancel'), ['action' => 'index'], ['class' => 'btn btn-secondary']) ?>
+                                <?= $this->Form->button(__('Submit'), ['class' => 'btn btn-primary']) ?>
+                            </div>
+                            <?= $this->Form->end() ?>
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+            <!-- ============================================================== -->
+            <!-- footer -->
+            <!-- ============================================================== -->
+            <div class="footer">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12">
+                            Copyright ©  GamBlock®. All rights reserved. This site is for access by GamBlock® Staff Only. Template by <a href="https://colorlib.com/wp/">Colorlib</a>.
+                        </div>
+                        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12">
+                            <div class="text-md-right footer-links d-none d-sm-block">
+                                <a href="javascript: void(0);">Documentation</a>
+                                <a href="javascript: void(0);">Contact Points</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+
+
         </div>
     </div>
 </div>

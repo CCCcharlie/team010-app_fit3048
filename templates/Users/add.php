@@ -140,7 +140,22 @@ $this->disableAutoLayout();
     <!-- ============================================================== -->
 
     <div class="dashboard-wrapper">
-
+        <!-- ============================================================== -->
+        <!-- Flash rendering -->
+        <!-- ============================================================== -->
+        <?php
+        // Check if the flash message exists and has content
+        $flashMessage = $this->Flash->render();
+        if (!empty($flashMessage)) {
+            ?>
+            <!-- Flash message, ONLY shows up if ticket is successfully opened/closed -->
+            <div class="alert alert-success" role="alert">
+                <?= $flashMessage; ?>
+            </div>
+            <?php
+        }
+        ?>
+        <!-- ============================================================== -->
         <div class="container-fluid dashboard-content">
     </aside>
             <div class="row">

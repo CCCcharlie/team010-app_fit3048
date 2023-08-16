@@ -70,7 +70,6 @@ endif;
     <!-- Bootstrap CSS -->
     <!-- In-built CSS -->
     <?= $this->Html->css(['style', 'bootstrap.min',]) ?>
-    <?= $this->Html->css(['fontawesome-all'], ['block' => true]) ?>
 
 
 </head>
@@ -422,7 +421,6 @@ endif;
                                                                 <p><span class="card-info">Create time:</span> <?= h($ticket->createtime) ?></p>
                                                                 <br>
                                                             </div>
-                                                            <a href="#" class="btn btn-primary card__button" id="showButton">Go somewhere</a>
                                                             <a class="btn btn-primary" data-toggle="collapse" href="#collapseExample<?= $ticket->id ?>" role="button" aria-expanded="false" aria-controls="collapseExample">
                                                                 Expand Attachments
                                                             </a>
@@ -513,11 +511,14 @@ endif;
                                                                         <?php
                                                                         //if true means it is closed. Allow option to open ticket
                                                                         if ($ticket->closed) {
-                                                                            echo $this->Form->postLink(__('Open ticket'), ['controller' => 'Tickets', 'action' => 'update_ticket', $ticket->id], ['class' => 'btn btn-primary', 'confirm' => __("Are you sure you want to close ticket ID: {0} \n Customer: {1} {2} ", $ticket->id, $customer->f_name, $customer->l_name)]);
+                                                                            echo $this->Form->postLink(__('Open ticket'), ['controller' => 'Tickets', 'action' => 'update_ticket', $ticket->id], ['class' => 'btn btn-primary', 'confirm' => __("Are you sure you want to close: {0} \n Customer: {1} {2}'s ticket?",  $customer->f_name, $customer->l_name)]);
                                                                         } else {
-                                                                            echo $this->Form->postLink(__('Close ticket'), ['controller' => 'Tickets', 'action' => 'update_ticket', $ticket->id], ['class' => 'btn btn-primary', 'confirm' => __("Are you sure you want to Re-open ticket ID: {0} \n Customer: {1} {2} ", $ticket->id, $customer->f_name, $customer->l_name)]);
+                                                                            echo $this->Form->postLink(__('Close ticket'), ['controller' => 'Tickets', 'action' => 'update_ticket', $ticket->id], ['class' => 'btn btn-primary', 'confirm' => __("Are you sure you want to Re-open ticket ID: {0} \n Customer: {1} {2}'s ticket ", $customer->f_name, $customer->l_name)]);
                                                                         }
+
+
                                                                         ?>
+
                                                                     </div>
                                                                 </div>
                                                                 <div class="card-body">
@@ -566,7 +567,7 @@ endif;
                                                                                              "conversation", not good. As such, as it is passed to download, you must decode it-->
                                                                                         <div style="display: flex; justify-content: space-between">
                                                                                             <?= $this->Html->link('Download Attachment', ['controller' => 'Contents', 'action' => 'download', urlencode($content->content)], ['class' => 'btn btn-primary card__button']) ?>
-                                                                                            <?= $this->Form->postLink(__('Delete'), ['controller' => 'Contents', 'action' => 'delete', $content->id], ['confirm' => __('Are you sure you want to delete # {0}?', $content->id), 'class' => 'btn btn-rounded btn-danger']) ?>
+                                                                                            <?= $this->Form->postLink(__('Delete'), ['controller' => 'Contents', 'action' => 'delete', $content->id], ['confirm' => __('Are you sure you want to delete: {0}?', $content->content), 'class' => 'btn btn-rounded btn-danger']) ?>
                                                                                         </div>
                                                                                     </div>
                                                                                 </div>

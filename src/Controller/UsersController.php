@@ -21,7 +21,7 @@ class UsersController extends AppController
         // Check if user is not an admin and redirect to index
         $adminStatus = $this->Authentication->getIdentity()->admin_status;
 
-        if ($this->request->getParam('action') === 'add' && $adminStatus != 1) {
+        if (($this->request->getParam('action') === 'edit' || $this->request->getParam('action') === 'delete') && $adminStatus != 1) {
             return $this->redirect(['action' => 'index']);
         }
     }
@@ -66,7 +66,7 @@ class UsersController extends AppController
         if ($this->request->is('post')) {
             $user = $this->Users->patchEntity($user, $this->request->getData());
             if ($this->Users->save($user)) {
-                $this->Flash->success(__('The User: {0} {1} has been saved.', $user->f_name, $user->l_name));
+                $this->Flash->success(__('You have successfully deleted the following account: {0} {1}', $user->f_name, $user->l_name));
 
 
                 return $this->redirect(['action' => 'index']);

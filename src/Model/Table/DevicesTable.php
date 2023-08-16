@@ -41,7 +41,7 @@ class DevicesTable extends Table
 
         $this->setTable('devices');
         $this->setDisplayField('transactionid');
-        $this->setPrimaryKey('transactionid');
+        $this->setPrimaryKey('id');
 
         $this->belongsTo('Customers', [
             'foreignKey' => 'cust_id',
@@ -77,6 +77,16 @@ class DevicesTable extends Table
             ->scalar('technical_details')
             ->maxLength('technical_details', 150)
             ->allowEmptyString('technical_details');
+
+        $validator
+            ->scalar('platform')
+            ->maxLength('platform', 20)
+            ->allowEmptyString('platform');
+
+        $validator
+            ->scalar('gamblock_ver')
+            ->maxLength('gamblock_ver', 30)
+            ->allowEmptyString('gamblock_ver');
 
         $validator
             ->integer('cust_id')

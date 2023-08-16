@@ -66,6 +66,13 @@ class TicketsTable extends Table
      */
     public function validationDefault(Validator $validator): Validator
     {
+
+        $validator
+            ->scalar('title')
+            ->maxLength('title', 50)
+            ->requirePresence('title', 'create')
+            ->notEmptyString('title');
+
         $validator
             ->scalar('type')
             ->maxLength('type', 32)

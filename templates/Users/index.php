@@ -14,7 +14,7 @@
                     <th><?= $this->Paginator->sort('id') ?></th>
                     <th><?= $this->Paginator->sort('f_name') ?></th>
                     <th><?= $this->Paginator->sort('l_name') ?></th>
-                    <th><?= $this->Paginator->sort('age') ?></th>
+<!--                    <th>--><?php //= $this->Paginator->sort('age') ?><!--</th>-->
                     <th><?= $this->Paginator->sort('email') ?></th>
                     <th><?= $this->Paginator->sort('timezone') ?></th>
                     <th><?= $this->Paginator->sort('admin_status') ?></th>

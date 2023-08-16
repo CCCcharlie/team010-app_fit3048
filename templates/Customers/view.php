@@ -390,7 +390,7 @@ endif;
                                                         <?php elseif($ticket->closed == false) : ?>
                                                         <div class="card-header d-flex" style="background-color: lightgreen">
                                                             <?php endif; ?>
-                                                            <h4 class="card-header-title">Ticket ID: <?= h($ticket->id) ?></h4>
+                                                            <h4 class="card-header-title">Title:  <?= h($ticket->title) ?></h4>
                                                             <div class="toolbar ml-auto">
                                                                 <?php
                                                                 //if true means it is closed. Allow option to open ticket
@@ -404,6 +404,7 @@ endif;
                                                         </div>
                                                         <div class="card-body">
                                                             <div class="card-text">
+                                                                <p><span class="card-info">Ticket ID:</span> <?= h($ticket->id) ?></p>
                                                                 <p><span class="card-info">Customer:</span> <?= h($customer->f_name) ?></p>
                                                                 <p><span class="card-info">Assigned staff:</span> <?= $this->Html->link(__($ticket->user->f_name), ['controller' => 'Users', 'action' => 'view', $ticket->staff_id]) ?></p>
                                                                 <p><span class="card-info">Create time:</span> <?= h($ticket->createtime) ?></p>

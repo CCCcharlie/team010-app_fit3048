@@ -271,24 +271,24 @@ endif;
                                     |
                                 </th>
 
-                                <th>
-                                    <?php
-                                    $sortField = 'age';
-                                    $sortDir = 'asc';
-                                    if ($this->Paginator->sortKey() === $sortField) {
-                                        $sortDir = ($this->Paginator->sortDir() === 'asc') ? 'desc' : 'asc';
-                                    }
-                                    ?>
-                                    <?= $this->Paginator->sort('age', 'Age', ['direction' => $sortDir]) ?>
-                                    <?php if ($this->Paginator->sortKey() === 'age') : ?>
-                                        <?php if ($sortDir === 'asc') : ?>
-                                            <img src="<?= $this->Url->image('arrow-down.png', ['fullBase' => true, 'webroot' => 'img/', 'width' => 10]) ?>" alt="Down Arrow">
-                                        <?php else : ?>
-                                            <img src="<?= $this->Url->image('arrow-up.png', ['fullBase' => true, 'webroot' => 'img/', 'width' => 10]) ?>" alt="Up Arrow">
-                                        <?php endif; ?>
-                                    <?php endif; ?>
-                                    |
-                                </th>
+<!--                                <th>-->
+<!--                                    --><?php
+//                                    $sortField = 'age';
+//                                    $sortDir = 'asc';
+//                                    if ($this->Paginator->sortKey() === $sortField) {
+//                                        $sortDir = ($this->Paginator->sortDir() === 'asc') ? 'desc' : 'asc';
+//                                    }
+//                                    ?>
+<!--                                    --><?php //= $this->Paginator->sort('age', 'Age', ['direction' => $sortDir]) ?>
+<!--                                    --><?php //if ($this->Paginator->sortKey() === 'age') : ?>
+<!--                                        --><?php //if ($sortDir === 'asc') : ?>
+<!--                                            <img src="--><?php //= $this->Url->image('arrow-down.png', ['fullBase' => true, 'webroot' => 'img/', 'width' => 10]) ?><!--" alt="Down Arrow">-->
+<!--                                        --><?php //else : ?>
+<!--                                            <img src="--><?php //= $this->Url->image('arrow-up.png', ['fullBase' => true, 'webroot' => 'img/', 'width' => 10]) ?><!--" alt="Up Arrow">-->
+<!--                                        --><?php //endif; ?>
+<!--                                    --><?php //endif; ?>
+<!--                                    |-->
+<!--                                </th>-->
 
                                 <th>
                                     <?php

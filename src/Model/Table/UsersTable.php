@@ -70,10 +70,10 @@ class UsersTable extends Table
             ->requirePresence('l_name', 'create')
             ->notEmptyString('l_name');
 
-        $validator
-            ->integer('age')
-            ->requirePresence('age', 'create')
-            ->notEmptyString('age');
+//        $validator
+//            ->integer('age')
+//            ->requirePresence('age', 'create')
+//            ->notEmptyString('age');
 
         $validator
             ->email('email')

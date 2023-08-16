@@ -9,6 +9,7 @@ use Cake\ORM\Entity;
  * Ticket Entity
  *
  * @property int $id
+ * @property string $title
  * @property string $type
  * @property \Cake\I18n\FrozenTime $createtime
  * @property \Cake\I18n\FrozenTime|null $closetime
@@ -32,6 +33,7 @@ class Ticket extends Entity
      * @var array<string, bool>
      */
     protected $_accessible = [
+        'title' => true,
         'type' => true,
         'createtime' => true,
         'closetime' => true,

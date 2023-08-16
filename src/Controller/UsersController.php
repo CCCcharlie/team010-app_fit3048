@@ -9,19 +9,33 @@ namespace App\Controller;
  * @property \App\Model\Table\UsersTable $Users
  * @method \App\Model\Entity\User[]|\Cake\Datasource\ResultSetInterface paginate($object = null, array $settings = [])
  */
+use Cake\Event\EventInterface;
+
 class UsersController extends AppController
 {
-    /**
-     * Index method
-     *
-     * @return \Cake\Http\Response|null|void Renders view
-     */
+
+    public function beforeFilter(EventInterface $event)
+    {
+        parent::beforeFilter($event);
+
+        // Check if user is not an admin and redirect to index
+        $adminStatus = $this->Authentication->getIdentity()->admin_status;
+
+        if ($this->request->getParam('action') === 'add' && $adminStatus != 1) {
+            return $this->redirect(['action' => 'index']);
+        }
+    }
+
+
     public function index()
     {
         $users = $this->paginate($this->Users);
 
         $this->set(compact('users'));
+
+
     }
+
 
     /**
      * View method
@@ -46,6 +60,8 @@ class UsersController extends AppController
      */
     public function add()
     {
+
+
         $user = $this->Users->newEmptyEntity();
         if ($this->request->is('post')) {
             $user = $this->Users->patchEntity($user, $this->request->getData());
@@ -68,6 +84,8 @@ class UsersController extends AppController
      */
     public function edit($id = null)
     {
+
+
         $user = $this->Users->get($id, [
             'contain' => [],
         ]);
@@ -95,9 +113,9 @@ class UsersController extends AppController
         $this->request->allowMethod(['post', 'delete']);
         $user = $this->Users->get($id);
         if ($this->Users->delete($user)) {
-            $this->Flash->success(__('The user has been deleted.'));
+            $this->Flash->success(__('You have successfully deleted the following account: {0} {1}', $user->f_name, $user->l_name));
         } else {
-            $this->Flash->error(__('The user could not be deleted. Please, try again.'));
+            $this->Flash->error(__('There was an error deleting the following account: {0} {1}. If the issue persists please contact your network administrator.', $user->f_name, $user->l_name));
         }
 
         return $this->redirect(['action' => 'index']);

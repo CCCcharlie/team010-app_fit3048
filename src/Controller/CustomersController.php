@@ -58,18 +58,22 @@ class CustomersController extends AppController
  */
     public function assigntome()
     {
-        // 获取当前用户的 ID
+        // Get the current user id
         $identity = $this->request->getAttribute('authentication')->getIdentity();
         $currentStaffId = $identity->get('id');
 
-        // 获取与当前用户相关的客户数据
+        // get the relate cust
         $assignedCustomers = $this->Customers->find()
             ->innerJoinWith('Tickets', function ($query) use ($currentStaffId) {
-                return $query->where(['Tickets.staff_id' => $currentStaffId]);
+                return $query->where([
+                    'Tickets.staff_id' => $currentStaffId,
+                    'Tickets.closetime IS NULL'
+                ]);
             })
             ->all();
 
-        // 将数据渲染为视图，以便通过 Ajax 响应返回
+
+        // pass data
         $this->set('assignedCustomers', $assignedCustomers);
 
     }

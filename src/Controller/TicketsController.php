@@ -49,22 +49,41 @@ class TicketsController extends AppController
      */
     public function add()
     {
+        //Obtain the query via key value pair [called from customer table view]
+        $firstName = $this->request->getQuery('f_name');
+        $lastName = $this->request->getQuery('l_name');
+        $custId = $this->request->getQuery('cust_id');
+        $fullName = $firstName . ' ' . $lastName;
+
+        $this->set(compact('fullName', 'custId'));
+
         $ticket = $this->Tickets->newEmptyEntity();
         if ($this->request->is('post')) {
             $ticket = $this->Tickets->patchEntity($ticket, $this->request->getData());
 
             //closed is a boolean variable where closed = 0 mean it is Open
             $ticket->closed = false;
+            $ticket->cust_id = $custId;
 
             if ($this->Tickets->save($ticket)) {
-                $this->Flash->success(__('The ticket has been saved.'));
+                $this->Flash->success(__('The ticket for ' . $fullName . ' Is successfully created'));
 
-                return $this->redirect(['action' => 'index']);
+                return $this->redirect($this->referer());
             }
-            $this->Flash->error(__('The ticket could not be saved. Please, try again.'));
+            $this->Flash->error(__('The ticket for ' . $fullName . ' could not be created'));
         }
         $customers = $this->Tickets->Customers->find('list', ['limit' => 200])->all();
-        $users = $this->Tickets->Users->find('list', ['limit' => 200])->all();
+
+        //Users are written in a way to display in a drop down easily.
+        //Key field refers to what will be stored in the form
+        // Value field is what will be shown
+        //In this case, it shows f_name of Staff but it stores the ID into the database
+        $users = $this->Tickets->Users->find('list', [
+            'keyField' => 'id',
+            'valueField' => 'f_name',
+            'limit' => 200
+        ])->all();
+
         $this->set(compact('ticket', 'customers', 'users'));
     }
 

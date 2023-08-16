@@ -148,14 +148,14 @@ endif;
                             <div id="submenu-1" class="collapse submenu" style="">
                                 <ul class="nav flex-column">
                                     <li class="nav-item">
-                                        <a class="nav-link" href="/team010-app_fit3048/customers/">Assigned to me</a>
+                                        <a class="nav-link" href="/customers/">Assigned to me</a>
                                         <!--                                        Change my link to assigned to me page when done.-->
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link" href="/team010-app_fit3048/customers">View All</a>
+                                        <a class="nav-link" href="/customers">View All</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link" href="/team010-app_fit3048/customers/add">Add a Customer
+                                        <a class="nav-link" href="/customers/add">Add a Customer
                                             Profile</a>
                                     </li>
                                 </ul>
@@ -168,11 +168,11 @@ endif;
                             <div id="submenu-2" class="collapse submenu" style="">
                                 <ul class="nav flex-column">
                                     <li class="nav-item">
-                                        <a class="nav-link" href="/team010-app_fit3048/Tags/index">View All Tags<span
+                                        <a class="nav-link" href="/Tags/index">View All Tags<span
                                                 class="badge badge-secondary">New</span></a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link" href="/team010-app_fit3048/Tags/add">Add some Tags<span
+                                        <a class="nav-link" href="/Tags/add">Add some Tags<span
                                                 class="badge badge-secondary">New</span></a>
                                     </li>
                                 </ul>
@@ -189,7 +189,7 @@ endif;
                             <div id="submenu-6" class="collapse submenu" style="">
                                 <ul class="nav flex-column">
                                     <li class="nav-item">
-                                        <a class="nav-link" href="/team010-app_fit3048/Users/">View All Staff
+                                        <a class="nav-link" href="/Users">View All Staff
                                             Accounts </a>
                                     </li>
 
@@ -368,19 +368,35 @@ endif;
                                 </ul>
                                 <div class="tab-content" id="pills-tabContent">
                                     <div class="tab-pane fade show active" id="pills-campaign" role="tabpanel" aria-labelledby="pills-campaign-tab">
-                                        <div class="btn-group btn-group-toggle" data-toggle="buttons" style="padding-right: 10px">
-                                            <label class="btn btn-primary active">
-                                                <input type="radio" name="options" id="showallticket" checked>All
-                                            </label>
-                                            <label class="btn btn-primary">
-                                                <input type="radio" name="options" id="showcloseticket"> Closed
-                                            </label>
-                                            <label class="btn btn-primary">
-                                                <input type="radio" name="options" id="showopenticket"> Open
-                                            </label>
-                                        </div>
 
+                                        <div class="card">
+                                            <!-- Header buttons -->
+                                        <div class="card-header">
+                                        <div style="display: flex; justify-content: space-between; margin: 10px">
+                                            <div class="btn-group btn-group-toggle" data-toggle="buttons" style="padding-right: 10px">
+                                                <label class="btn btn-primary active">
+                                                    <input type="radio" name="options" id="showallticket" checked>All
+                                                </label>
+                                                <label class="btn btn-primary">
+                                                    <input type="radio" name="options" id="showcloseticket"> Closed
+                                                </label>
+                                                <label class="btn btn-primary">
+                                                    <input type="radio" name="options" id="showopenticket"> Open
+                                                </label>
+                                            </div>
+                                            <?= $this->Html->link(__('Create Ticket +'), ['controller' => 'Tickets', 'action' => 'add',
+                                                '?' => [
+                                                    'f_name' => $customer->f_name,
+                                                    'l_name' => $customer->l_name,
+                                                    'cust_id' => $customer->id
+                                                ],
+                                            ], ['class' => 'btn btn-rounded btn-primary']); ?>
+                                        </div>
+                                        </div>
+                                        </div>
+                                            <!-- End of Header buttons -->
                                         <div id="allticket">
+                                            <div class="card">
                                             <p>            <!-- Cards section -->
                                                 <?php foreach ($tickets as $ticket): ?>
                                             <div class="col-xl-12 col-lg-12 col-md-12col-sm-12 col-12">
@@ -390,7 +406,7 @@ endif;
                                                         <?php elseif($ticket->closed == false) : ?>
                                                         <div class="card-header d-flex" style="background-color: lightgreen">
                                                             <?php endif; ?>
-                                                            <h4 class="card-header-title">Title:  <?= h($ticket->title) ?></h4>
+                                                            <h4 class="card-header-title">Title:  <?= h($ticket->title) ?> | Type: <?= h($ticket->type) ?></h4>
                                                             <div class="toolbar ml-auto">
                                                                 <?php
                                                                 //if true means it is closed. Allow option to open ticket
@@ -475,9 +491,12 @@ endif;
                                                 <?php endforeach ?>
                                                 <!-- End card section -->
                                                 </p>
+                                            </div>
+                                            </div>
                                         </div>
 
                                         <div id="closeticket" style="display: none;">
+                                            <div class="card">
                                             <!-- Checks first whether or not there are any tickets that are closed. If so, say that there
                                             are no closed tickets (same is applied for open tickets-->
                                             <?php if (empty(array_filter($tickets, function($ticket) {
@@ -493,7 +512,7 @@ endif;
                                                         <?php if($ticket->closed == true) : ?>
                                                             <div class="card">
                                                                 <div class="card-header d-flex" style="background-color: lightcoral">
-                                                                    <h4 class="card-header-title">Ticket ID: <?= h($ticket->id) ?></h4>
+                                                                    <h4 class="card-header-title">Title:  <?= h($ticket->title) ?> | Type: <?= h($ticket->type) ?></h4>
                                                                     <div class="toolbar ml-auto">
                                                                         <?php
                                                                         //if true means it is closed. Allow option to open ticket
@@ -507,6 +526,7 @@ endif;
                                                                 </div>
                                                                 <div class="card-body">
                                                                     <div class="card-text">
+                                                                        <p><span class="card-info">Ticket ID:</span> <?= h($ticket->id) ?></p>
                                                                         <p><span class="card-info">Customer:</span> <?= h($customer->f_name) ?></p>
                                                                         <p><span class="card-info">Assigned staff:</span> <?= $this->Html->link(__($ticket->user->f_name), ['controller' => 'Users', 'action' => 'view', $ticket->staff_id]) ?></p>
                                                                         <p><span class="card-info">Create time:</span> <?= h($ticket->createtime) ?></p>
@@ -580,9 +600,11 @@ endif;
                                                 <!-- End card section -->
                                                 </p>
                                             <?php endif; ?>
+                                            </div>
                                         </div>
 
                                         <div id="openticket" style="display: none;">
+                                            <div class="card">
                                             <?php if (empty(array_filter($tickets, function($ticket) {
                                                 return $ticket->closed == false;
                                             }))) : ?>
@@ -596,7 +618,7 @@ endif;
                                                         <?php if($ticket->closed == false) : ?>
                                                             <div class="card">
                                                                 <div class="card-header d-flex" style="background-color: lightgreen">
-                                                                    <h4 class="card-header-title">Ticket ID: <?= h($ticket->id) ?></h4>
+                                                                    <h4 class="card-header-title">Title:  <?= h($ticket->title) ?> | Type: <?= h($ticket->type) ?></h4>
                                                                     <div class="toolbar ml-auto">
                                                                         <?php
                                                                         //if true means it is closed. Allow option to open ticket
@@ -610,6 +632,7 @@ endif;
                                                                 </div>
                                                                 <div class="card-body">
                                                                     <div class="card-text">
+                                                                        <p><span class="card-info">Ticket ID:</span> <?= h($ticket->id) ?></p>
                                                                         <p><span class="card-info">Customer:</span> <?= h($customer->f_name) ?></p>
                                                                         <p><span class="card-info">Assigned staff:</span> <?= $this->Html->link(__($ticket->user->f_name), ['controller' => 'Users', 'action' => 'view', $ticket->staff_id]) ?></p>
                                                                         <p><span class="card-info">Create time:</span> <?= h($ticket->createtime) ?></p>
@@ -713,7 +736,13 @@ endif;
                                             echo '<p>No other contact methods were found</p>';
                                         }
 
-                                        echo $this->Html->link(__('Add another communication detail'), ['controller' => 'Commdetails', 'action' => 'add', 'customer_id' => $customer->id], ['class' => 'btn btn-success mt-3']);
+                                        echo $this->Html->link(__('Add another communication detail'), ['controller' => 'Commdetails', 'action' => 'add',
+                                            '?' => [
+                                                'f_name' => $customer->f_name,
+                                                'l_name' => $customer->l_name,
+                                                'cust_id' => $customer->id
+                                            ],
+                                        ], ['class' => 'btn btn-success mt-3']);
                                         ?>
 
 
@@ -730,8 +759,8 @@ endif;
                                                     echo '<tr>';
                                                     echo '<td>' . h($device->device_model) . '</td>';
                                                     echo '<td>' . h($device->technical_details) . '</td>';
-                                                    echo '<td>' . h($device->session_id) . '</td>';
-                                                    echo '<td>' . h($device->transaction_id) . '</td>';
+                                                    echo '<td>' . h($device->sessionid) . '</td>';
+                                                    echo '<td>' . h($device->transactionid) . '</td>';
 
                                                     // Actions column with Edit and Delete buttons
                                                     echo '<td>';
@@ -752,7 +781,13 @@ endif;
 
 
 
-                                            <?php echo $this->Html->link(__('Add New Device'), ['controller' => 'Devices', 'action' => 'add', 'customer_id' => $customer->id], ['class' => 'btn btn-success mt-3']); ?>
+                                            <?php echo $this->Html->link(__('Add New Device'), ['controller' => 'Devices', 'action' => 'add',
+                                                '?' => [
+                                                    'f_name' => $customer->f_name,
+                                                    'l_name' => $customer->l_name,
+                                                    'cust_id' => $customer->id
+                                                ],
+                                            ], ['class' => 'btn btn-success mt-3']); ?>
 
                                         </div
                                 </div>

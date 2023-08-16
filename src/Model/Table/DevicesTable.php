@@ -69,9 +69,9 @@ class DevicesTable extends Table
             ->allowEmptyString('device_model');
 
         $validator
-            ->scalar('session_id')
-            ->maxLength('session_id', 24)
-            ->allowEmptyString('session_id');
+            ->scalar('sessionid')
+            ->maxLength('sessionid', 24)
+            ->allowEmptyString('sessionid');
 
         $validator
             ->scalar('technical_details')

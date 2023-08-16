@@ -14,7 +14,7 @@
                     <th><?= $this->Paginator->sort('id') ?></th>
                     <th><?= $this->Paginator->sort('transactionid') ?></th>
                     <th><?= $this->Paginator->sort('device_model') ?></th>
-                    <th><?= $this->Paginator->sort('session_id') ?></th>
+                    <th><?= $this->Paginator->sort('sessionid') ?></th>
                     <th><?= $this->Paginator->sort('technical_details') ?></th>
                     <th><?= $this->Paginator->sort('platform') ?></th>
                     <th><?= $this->Paginator->sort('gamblock_ver') ?></th>
@@ -28,7 +28,7 @@
                     <td><?= $this->Number->format($device->id) ?></td>
                     <td><?= h($device->transactionid) ?></td>
                     <td><?= h($device->device_model) ?></td>
-                    <td><?= h($device->session_id) ?></td>
+                    <td><?= h($device->sessionid) ?></td>
                     <td><?= h($device->technical_details) ?></td>
                     <td><?= h($device->platform) ?></td>
                     <td><?= h($device->gamblock_ver) ?></td>

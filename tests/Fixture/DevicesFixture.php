@@ -22,7 +22,7 @@ class DevicesFixture extends TestFixture
                 'id' => 1,
                 'transactionid' => 'Lorem ',
                 'device_model' => 'Lorem ipsum dolor sit amet',
-                'session_id' => 'Lorem ipsum dolor sit ',
+                'sessionid' => 'Lorem ipsum dolor sit ',
                 'technical_details' => 'Lorem ipsum dolor sit amet',
                 'platform' => 'Lorem ipsum dolor ',
                 'gamblock_ver' => 'Lorem ipsum dolor sit amet',

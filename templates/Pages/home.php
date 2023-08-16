@@ -138,7 +138,7 @@ endif;
                                     <li class="nav-item">
                                         <a class="nav-link" href="/customers?filter=assigned">Assigned Customers</a>
 
-                                        Change my link to assigned to me page when done.
+<!--                                        Change my link to assigned to me page when done.-->
                                     </li>
                                     <li class="nav-item">
                                         <a class="nav-link" href="/team010-app_fit3048/customers">View All</a>

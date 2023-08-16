@@ -49,11 +49,6 @@ $this->disableAutoLayout();
             </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav ml-auto navbar-right-top">
-                    <li class="nav-item">
-                        <div id="custom-search" class="top-search-bar">
-                            <input class="form-control" type="text" placeholder="Search..">
-                        </div>
-                    </li>
 
                     <li class="nav-item dropdown nav-user">
                         <a class="nav-link nav-user-file" href="#" id="navbarDropdownMenuLink2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="../assets/images/avatar-1.jpg" alt="" class="user-avatar-md rounded-circle"></a>
@@ -105,7 +100,7 @@ $this->disableAutoLayout();
                             </div>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#" data-toggle="collapse" aria-expanded="false" data-target="#submenu-2" aria-controls="submenu-2"><i class="fa fa-fw fa-rocket"></i>Tag Management</a>
+                            <a class="nav-link" href="#" data-toggle="collapse" aria-expanded="false" data-target="#submenu-2" aria-controls="submenu-2"><i class="fa-solid fa-user-tag"></i>Tag Management</a>
                             <div id="submenu-2" class="collapse submenu" style="">
                                 <ul class="nav flex-column">
                                     <li class="nav-item">
@@ -122,7 +117,7 @@ $this->disableAutoLayout();
                             <!--                            Change to me admin only visable.-->
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#" data-toggle="collapse" aria-expanded="false" data-target="#submenu-6" aria-controls="submenu-6"><i class="fas fa-fw fa-file"></i>Staff Management</a>
+                            <a class="nav-link" href="#" data-toggle="collapse" aria-expanded="false" data-target="#submenu-6" aria-controls="submenu-6"><i class="fa-solid fa-user-tie"></i>Staff Management</a>
                             <div id="submenu-6" class="collapse submenu" style="">
                                 <ul class="nav flex-column">
                                     <li class="nav-item">
@@ -183,7 +178,7 @@ $this->disableAutoLayout();
                     <td><?= h($user->l_name) ?></td>
                     <td><?= h($user->email) ?></td>
                     <td><?= h($user->timezone) ?></td>
-                    <td><?= h($user->admin_status ? '<i class="fa-solid fa-user-check"></i>' : '<i class="fas fa-times"></i>') ?></td>
+                    <td><?= h($user->admin_status ? '✅' : '❌') ?></td>
                     <td class="actions">
                         <?php if ($this->Identity->get('admin_status') == 1): ?>
                             <?= $this->Html->link(__('Edit'), ['action' => 'edit', $user->id], ['class' => 'btn btn-primary']) ?>
@@ -192,7 +187,7 @@ $this->disableAutoLayout();
                                 'confirm' => __('Are you sure you want to delete {0} {1}?', $user->f_name, $user->l_name)
                             ]) ?>
                         <?php else: ?>
-                            <p>Please contact Admin to edit me.</p>
+                            <p>Please contact an Admin to edit me.</p>
                         <?php endif; ?>
 
 
@@ -214,7 +209,6 @@ $this->disableAutoLayout();
                                 </div>
                                 <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12">
                                     <div class="text-md-right footer-links d-none d-sm-block">
-                                        <a href="javascript: void(0);">Getting Started</a>
                                         <a href="javascript: void(0);">Documentation</a>
                                         <a href="javascript: void(0);">Contact Points</a>
                                     </div>

@@ -48,13 +48,6 @@ $checkConnection = function (string $name) {
     return compact('connected', 'error');
 };
 
-if (!Configure::read('debug')) :
-    throw new NotFoundException(
-        'Not Found Exception'
-    );
-endif;
-
-
 ?>
 <!doctype html>
 <html lang="en">

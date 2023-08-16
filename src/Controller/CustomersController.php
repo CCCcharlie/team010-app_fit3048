@@ -44,8 +44,36 @@ class CustomersController extends AppController
         $customers = $this->paginate($query);
 
         $this->set(compact('customers'));
-    }
 
+
+
+
+    }
+    /**
+ * Fillter option
+ *
+ * @return \Cake\Http\Response|null|void Redirects on successful add, renders view otherwise.
+ */
+    public function assigntome()
+    {
+//        get the current user id
+        $identity = $this->request->getAttribute('authentication')->getIdentity();
+        //                        debug($identity->get('f_name'));
+        //                        exit();
+
+        $currentStaffId = $identity->get('id');
+//        debug($identity->get('id'));
+//                                exit();
+
+// check the client
+        $assignedCustomers = $this->Customers->find()
+            ->innerJoinWith('Tickets', function ($query) use ($currentStaffId) {
+                return $query->where(['Tickets.staff_id' => $currentStaffId]);
+            })
+            ->all();
+
+        $this->set('assignedCustomers', $assignedCustomers);
+    }
     /**
      * View method
      *

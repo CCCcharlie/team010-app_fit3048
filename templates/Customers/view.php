@@ -148,7 +148,8 @@ endif;
                             <div id="submenu-1" class="collapse submenu" style="">
                                 <ul class="nav flex-column">
                                     <li class="nav-item">
-                                        <a class="nav-link" href="/team010-app_fit3048/customers/">Assigned to me</a>
+                                        <?= $this->Html->link('Assigntome', ['controller' => 'Customers', 'action' => 'Assigntome'], ['class' => 'nav-link']) ?>
+
                                         <!--                                        Change my link to assigned to me page when done.-->
                                     </li>
                                     <li class="nav-item">
@@ -239,8 +240,8 @@ endif;
                         <!-- To obtain the identity, use $identity = $this->request->getAttribute('authentication')->getIdentity(); to find the currently logged in entity
                         to get the name or any value in the staff table, use the get and then the name of the attribute $identity->get('staff_fname')-->
                         <?php $identity = $this->request->getAttribute('authentication')->getIdentity();
-                        //                        debug($identity->get('f_name'));
-                        //                        exit();
+//                        debug($identity->get('id'));
+//                        exit();
                         ?>
                         <h2 class="pageheader-title">Welcome, <?= $identity->get('f_name'); ?></h2>
 

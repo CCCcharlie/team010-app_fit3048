@@ -88,4 +88,5 @@ return static function (RouteBuilder $routes) {
      * });
      * ```
      */
+
 };

@@ -130,7 +130,7 @@ $cakeDescription = 'CakePHP: The rapid development PHP framework';
                         Menu
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/controller_name/index">Home page</a>
+                        <a class="nav-link" href="/">Home page</a>
                     </li>
 
                     <li class="nav-divider">

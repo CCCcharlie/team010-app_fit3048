@@ -22,8 +22,8 @@
         <div class="side-nav">
             <h4 class="heading"><?= __('Actions') ?></h4>
             <?= $this->Html->link(__('List Contents'), ['action' => 'index'], ['class' => 'side-nav-item']) ?>
-            <button onclick="history.back()">Go Back</button>
         </div>
+        <?= $this->Html->link(__('Go back'), ['controller' => 'Customers', 'action' => 'view', $custId], ['class' => 'btn btn-rounded btn-primary']) ?>
     </aside>
     <div class="column-responsive column-80">
         <div class="contents form content">

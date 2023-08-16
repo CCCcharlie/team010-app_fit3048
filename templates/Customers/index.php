@@ -138,14 +138,14 @@ endif;
                             <div id="submenu-1" class="collapse submenu" style="">
                                 <ul class="nav flex-column">
                                     <li class="nav-item">
-                                        <a class="nav-link" href="/team010-app_fit3048/customers/">Assigned to me</a>
+                                        <a class="nav-link" href="/">Assigned to me</a>
                                         <!--                                        Change my link to assigned to me page when done.-->
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link" href="/team010-app_fit3048/customers">View All</a>
+                                        <a class="nav-link" href="/customers">View All</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link" href="/team010-app_fit3048/customers/add">Add a Customer Profile</a>
+                                        <a class="nav-link" href="/customers/add">Add a Customer Profile</a>
                                     </li>
                                 </ul>
                             </div>
@@ -155,10 +155,10 @@ endif;
                             <div id="submenu-2" class="collapse submenu" style="">
                                 <ul class="nav flex-column">
                                     <li class="nav-item">
-                                        <a class="nav-link" href="/team010-app_fit3048/Tags/index">View All Tags<span class="badge badge-secondary">New</span></a>
+                                        <a class="nav-link" href="/Tags/index">View All Tags<span class="badge badge-secondary">New</span></a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link" href="/team010-app_fit3048/Tags/add">Add some Tags<span class="badge badge-secondary">New</span></a>
+                                        <a class="nav-link" href="/Tags/add">Add some Tags<span class="badge badge-secondary">New</span></a>
                                     </li>
                                 </ul>
                             </div>
@@ -172,7 +172,7 @@ endif;
                             <div id="submenu-6" class="collapse submenu" style="">
                                 <ul class="nav flex-column">
                                     <li class="nav-item">
-                                        <a class="nav-link" href="/team010-app_fit3048/Users/">View All Staff Accounts </a>
+                                        <a class="nav-link" href="/Users/">View All Staff Accounts </a>
                                     </li>
 
                                 </ul>
@@ -271,24 +271,24 @@ endif;
                                     |
                                 </th>
 
-                                <th>
-                                    <?php
-                                    $sortField = 'age';
-                                    $sortDir = 'asc';
-                                    if ($this->Paginator->sortKey() === $sortField) {
-                                        $sortDir = ($this->Paginator->sortDir() === 'asc') ? 'desc' : 'asc';
-                                    }
-                                    ?>
-                                    <?= $this->Paginator->sort('age', 'Age', ['direction' => $sortDir]) ?>
-                                    <?php if ($this->Paginator->sortKey() === 'age') : ?>
-                                        <?php if ($sortDir === 'asc') : ?>
-                                            <img src="<?= $this->Url->image('arrow-down.png', ['fullBase' => true, 'webroot' => 'img/', 'width' => 10]) ?>" alt="Down Arrow">
-                                        <?php else : ?>
-                                            <img src="<?= $this->Url->image('arrow-up.png', ['fullBase' => true, 'webroot' => 'img/', 'width' => 10]) ?>" alt="Up Arrow">
-                                        <?php endif; ?>
-                                    <?php endif; ?>
-                                    |
-                                </th>
+<!--                                <th>-->
+<!--                                    --><?php
+//                                    $sortField = 'age';
+//                                    $sortDir = 'asc';
+//                                    if ($this->Paginator->sortKey() === $sortField) {
+//                                        $sortDir = ($this->Paginator->sortDir() === 'asc') ? 'desc' : 'asc';
+//                                    }
+//                                    ?>
+<!--                                    --><?php //= $this->Paginator->sort('age', 'Age', ['direction' => $sortDir]) ?>
+<!--                                    --><?php //if ($this->Paginator->sortKey() === 'age') : ?>
+<!--                                        --><?php //if ($sortDir === 'asc') : ?>
+<!--                                            <img src="--><?php //= $this->Url->image('arrow-down.png', ['fullBase' => true, 'webroot' => 'img/', 'width' => 10]) ?><!--" alt="Down Arrow">-->
+<!--                                        --><?php //else : ?>
+<!--                                            <img src="--><?php //= $this->Url->image('arrow-up.png', ['fullBase' => true, 'webroot' => 'img/', 'width' => 10]) ?><!--" alt="Up Arrow">-->
+<!--                                        --><?php //endif; ?>
+<!--                                    --><?php //endif; ?>
+<!--                                    |-->
+<!--                                </th>-->
 
                                 <th>
                                     <?php
@@ -365,6 +365,8 @@ endif;
                                                             echo '<p>Device Model: ' . h($device->device_model) . '</p>';
                                                             echo '<p>Technical Details: ' . h($device->technical_details) . '</p>';
                                                             echo '<p>Session ID: ' . h($device->session_id) . '</p>';
+                                                            echo '<p>Transaction ID: ' . h($device->transaction_id) . '</p>';
+
                                                         }
                                                     } else {
                                                         echo '<p>No devices associated with this customer.</p>';

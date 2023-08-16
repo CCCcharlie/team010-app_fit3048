@@ -18,10 +18,12 @@
             <fieldset>
                 <legend><?= __('Add Device') ?></legend>
                 <?php
-                    echo $this->Form->control('id');
+                    echo $this->Form->control('transactionid');
                     echo $this->Form->control('device_model');
                     echo $this->Form->control('session_id');
                     echo $this->Form->control('technical_details');
+                    echo $this->Form->control('platform');
+                    echo $this->Form->control('gamblock_ver');
                     echo $this->Form->control('cust_id', ['options' => $customers]);
                 ?>
             </fieldset>

@@ -42,10 +42,10 @@
                     <th><?= __('Id') ?></th>
                     <td><?= $this->Number->format($user->id) ?></td>
                 </tr>
-                <tr>
-                    <th><?= __('Age') ?></th>
-                    <td><?= $this->Number->format($user->age) ?></td>
-                </tr>
+<!--                <tr>-->
+<!--                    <th>--><?php //= __('Age') ?><!--</th>-->
+<!--                    <td>--><?php //= $this->Number->format($user->age) ?><!--</td>-->
+<!--                </tr>-->
                 <tr>
                     <th><?= __('Nonce Expiry') ?></th>
                     <td><?= h($user->nonce_expiry) ?></td>

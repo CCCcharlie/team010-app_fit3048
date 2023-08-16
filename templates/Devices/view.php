@@ -8,8 +8,8 @@
     <aside class="column">
         <div class="side-nav">
             <h4 class="heading"><?= __('Actions') ?></h4>
-            <?= $this->Html->link(__('Edit Device'), ['action' => 'edit', $device->transactionid], ['class' => 'side-nav-item']) ?>
-            <?= $this->Form->postLink(__('Delete Device'), ['action' => 'delete', $device->transactionid], ['confirm' => __('Are you sure you want to delete # {0}?', $device->transactionid), 'class' => 'side-nav-item']) ?>
+            <?= $this->Html->link(__('Edit Device'), ['action' => 'edit', $device->id], ['class' => 'side-nav-item']) ?>
+            <?= $this->Form->postLink(__('Delete Device'), ['action' => 'delete', $device->id], ['confirm' => __('Are you sure you want to delete # {0}?', $device->id), 'class' => 'side-nav-item']) ?>
             <?= $this->Html->link(__('List Devices'), ['action' => 'index'], ['class' => 'side-nav-item']) ?>
             <?= $this->Html->link(__('New Device'), ['action' => 'add'], ['class' => 'side-nav-item']) ?>
         </div>
@@ -33,6 +33,14 @@
                 <tr>
                     <th><?= __('Technical Details') ?></th>
                     <td><?= h($device->technical_details) ?></td>
+                </tr>
+                <tr>
+                    <th><?= __('Platform') ?></th>
+                    <td><?= h($device->platform) ?></td>
+                </tr>
+                <tr>
+                    <th><?= __('Gamblock Ver') ?></th>
+                    <td><?= h($device->gamblock_ver) ?></td>
                 </tr>
                 <tr>
                     <th><?= __('Customer') ?></th>

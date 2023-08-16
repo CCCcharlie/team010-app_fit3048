@@ -54,6 +54,9 @@ class CustomersTable extends Table
             'foreignKey' => 'cust_id',
         ]);
 
+        $this->hasMany('Counsellors', [ // Add this line for the commdetails association
+            'foreignKey' => 'cust_id',
+        ]);
 
     }
 
@@ -77,10 +80,11 @@ class CustomersTable extends Table
             ->requirePresence('l_name', 'create')
             ->notEmptyString('l_name');
 
-        $validator
-            ->integer('age')
-            ->requirePresence('age', 'create')
-            ->notEmptyString('age');
+        //Age removed, validation unecessary
+//        $validator
+//            ->integer('age')
+//            ->requirePresence('age', 'create')
+//            ->notEmptyString('age');
 
         $validator
             ->email('email')

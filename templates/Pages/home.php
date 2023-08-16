@@ -138,14 +138,14 @@ endif;
                             <div id="submenu-1" class="collapse submenu" style="">
                                 <ul class="nav flex-column">
                                     <li class="nav-item">
-                                        <a class="nav-link" href="/team010-app_fit3048/customers/">Assigned to me</a>
+                                        <a class="nav-link" href="/">Assigned to me</a>
                                         <!--                                        Change my link to assigned to me page when done.-->
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link" href="/team010-app_fit3048/customers">View All</a>
+                                        <a class="nav-link" href="/customers">View All</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link" href="/team010-app_fit3048/customers/add">Add a Customer Profile</a>
+                                        <a class="nav-link" href="/customers/add">Add a Customer Profile</a>
                                     </li>
                                 </ul>
                             </div>
@@ -155,10 +155,10 @@ endif;
                             <div id="submenu-2" class="collapse submenu" style="">
                                 <ul class="nav flex-column">
                                     <li class="nav-item">
-                                        <a class="nav-link" href="/team010-app_fit3048/Tags/index">View All Tags<span class="badge badge-secondary">New</span></a>
+                                        <a class="nav-link" href="/Tags/index">View All Tags<span class="badge badge-secondary">New</span></a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link" href="/team010-app_fit3048/Tags/add">Add some Tags<span class="badge badge-secondary">New</span></a>
+                                        <a class="nav-link" href="/Tags/add">Add some Tags<span class="badge badge-secondary">New</span></a>
                                     </li>
                                 </ul>
                             </div>
@@ -172,7 +172,7 @@ endif;
                             <div id="submenu-6" class="collapse submenu" style="">
                                 <ul class="nav flex-column">
                                     <li class="nav-item">
-                                        <a class="nav-link" href="/team010-app_fit3048/Users/">View All Staff Accounts </a>
+                                        <a class="nav-link" href="/Users/">View All Staff Accounts </a>
                                     </li>
 
                                 </ul>

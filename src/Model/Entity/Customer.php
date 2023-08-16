@@ -11,7 +11,7 @@ use Cake\ORM\Entity;
  * @property int $id
  * @property string $f_name
  * @property string $l_name
- * @property int $age
+// * @property int $age
  * @property string $email
  * @property string $status
  * @property string|null $notes
@@ -30,11 +30,13 @@ class Customer extends Entity
     protected $_accessible = [
         'f_name' => true,
         'l_name' => true,
-        'age' => true,
+        //'age' => true,
         'email' => true,
         'status' => true,
         'notes' => true,
         'devices' => true,
         'commdetails' => true,
+        'counsellors' => true,
+
     ];
 }

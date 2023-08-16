@@ -19,7 +19,7 @@
                 <?php
                     echo $this->Form->control('f_name',['class' => 'form-control form-control-lg']);
                     echo $this->Form->control('l_name',['class' => 'form-control form-control-lg']);
-                    echo $this->Form->control('age',['class' => 'form-control form-control-lg']);
+//                    echo $this->Form->control('age',['class' => 'form-control form-control-lg']);
                     echo $this->Form->control('email',['class' => 'form-control form-control-lg']);
                     echo $this->Form->control('status',['class' => 'form-control form-control-lg']);
                     echo $this->Form->control('notes',['class' => 'form-control form-control-lg']);

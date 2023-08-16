@@ -13,6 +13,8 @@ use Cake\ORM\Entity;
  * @property string|null $device_model
  * @property string|null $session_id
  * @property string|null $technical_details
+ * @property string|null $platform
+ * @property string|null $gamblock_ver
  * @property int $cust_id
  *
  * @property \App\Model\Entity\Customer $customer
@@ -33,6 +35,8 @@ class Device extends Entity
         'device_model' => true,
         'session_id' => true,
         'technical_details' => true,
+        'platform' => true,
+        'gamblock_ver' => true,
         'cust_id' => true,
         'customer' => true,
     ];

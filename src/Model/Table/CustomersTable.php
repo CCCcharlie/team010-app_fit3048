@@ -72,13 +72,26 @@ class CustomersTable extends Table
             ->scalar('f_name')
             ->maxLength('f_name', 32)
             ->requirePresence('f_name', 'create')
-            ->notEmptyString('f_name');
+            ->notEmptyString('f_name')
+            ->add('f_name', [
+                'validCharacters' => [
+                    'rule' => ['custom', '/^[a-zA-Z]+(?:[-\'\s]{1}[a-zA-Z]+)*$/'],
+                    'message' => 'Please enter a valid name. Names cannot have multiple "-", or apostrophes in a row. Names cannot have numbers. '
+                ]
+            ]);
 
-        $validator
-            ->scalar('l_name')
-            ->maxLength('l_name', 32)
-            ->requirePresence('l_name', 'create')
-            ->notEmptyString('l_name');
+            $validator
+                ->scalar('l_name')
+                ->maxLength('l_name', 32)
+                ->requirePresence('l_name', 'create')
+                ->notEmptyString('l_name')
+                ->add('l_name', [
+                    'validCharacters' => [
+                        'rule' => ['custom', '/^[a-zA-Z]+(?:[-\'\s]{1}[a-zA-Z]+)*$/'],
+                        'message' => 'Please enter a valid name. Names cannot have multiple "-", or apostrophes in a row. Names cannot have numbers. '
+                    ]
+                ]);
+
 
         //Age removed, validation unecessary
 //        $validator

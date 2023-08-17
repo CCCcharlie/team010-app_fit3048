@@ -207,7 +207,6 @@ $this->disableAutoLayout();
                 <th><?= $this->Paginator->sort('f_name', 'First Name') ?></th>
                 <th><?= $this->Paginator->sort('l_name', 'Last Name') ?></th>
                 <th><?= $this->Paginator->sort('email', 'E-mail') ?></th>
-                <th><?= $this->Paginator->sort('timezone', 'Timezone') ?></th>
                 <th><?= $this->Paginator->sort('admin_status', 'Is user an admin?') ?></th>
                 <th class="actions"><?= __('Actions') ?></th>
             </tr>

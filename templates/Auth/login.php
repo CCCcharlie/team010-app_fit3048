@@ -13,7 +13,8 @@ $this->assign('title', 'Login');
 <div class="splash-container login">
 
     <div class="card ">
-        <div class="card-header text-center"><a href="../index.html"><img class="logo-img" src="/team010-app_fit3048/img/cake-logo.png" alt="logo"></a><span class="splash-description">Please enter your user information.</span></div>
+        <div class="card-header text-center"><a href="../index.html"><img class="logo-img" src="/img/cake-logo.png" alt="logo"></a><span class="splash-description">Please enter your user information.</span></div>
+        <title>GamBlock® - Customer Management</title>
         <div class="card-body">
 <!--    <div class="row">-->
 <!--        <div class="column column-50 column-offset-25">-->
@@ -23,7 +24,7 @@ $this->assign('title', 'Login');
 
                 <fieldset>
 
-                    <legend>GamBlockLogin</legend>
+                    <legend>GamBlock® Login</legend>
 
                     <?= $this->Flash->render() ?>
 

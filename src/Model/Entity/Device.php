@@ -11,7 +11,7 @@ use Cake\ORM\Entity;
  * @property int $id
  * @property string $transactionid
  * @property string|null $device_model
- * @property string|null $session_id
+ * @property string|null $sessionid
  * @property string|null $technical_details
  * @property string|null $platform
  * @property string|null $gamblock_ver
@@ -33,7 +33,7 @@ class Device extends Entity
     protected $_accessible = [
         'transactionid' => true,
         'device_model' => true,
-        'session_id' => true,
+        'sessionid' => true,
         'technical_details' => true,
         'platform' => true,
         'gamblock_ver' => true,

@@ -208,7 +208,7 @@ class AuthController extends AppController {
         if ($result && $result->isValid()) {
             $this->Authentication->logout();
 
-            $this->Flash->success('You have been logged out successfully. ');
+
         }
 
         // Otherwise just send them to the login page

@@ -48,13 +48,6 @@ $checkConnection = function (string $name) {
     return compact('connected', 'error');
 };
 
-if (!Configure::read('debug')) :
-    throw new NotFoundException(
-        'Please replace templates/Pages/home.php with your own version or re-enable debug mode.'
-    );
-endif;
-
-
 ?>
 <!doctype html>
 <html lang="en">
@@ -147,19 +140,19 @@ endif;
                                 </ul>
                             </div>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#" data-toggle="collapse" aria-expanded="false" data-target="#submenu-2" aria-controls="submenu-2"><i class="fa-solid fa-user-tie""></i>Tag Management</a>
-                            <div id="submenu-2" class="collapse submenu" style="">
-                                <ul class="nav flex-column">
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="/Tags/index">View All Tags<span class="badge badge-secondary">New</span></a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="/Tags/add">Add some Tags<span class="badge badge-secondary">New</span></a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </li>
+<!--                        <li class="nav-item">-->
+<!--                            <a class="nav-link" href="#" data-toggle="collapse" aria-expanded="false" data-target="#submenu-2" aria-controls="submenu-2"><i class="fa-solid fa-user-tie""></i>Tag Management</a>-->
+<!--                            <div id="submenu-2" class="collapse submenu" style="">-->
+<!--                                <ul class="nav flex-column">-->
+<!--                                    <li class="nav-item">-->
+<!--                                        <a class="nav-link" href="/Tags/index">View All Tags<span class="badge badge-secondary">New</span></a>-->
+<!--                                    </li>-->
+<!--                                    <li class="nav-item">-->
+<!--                                        <a class="nav-link" href="/Tags/add">Add some Tags<span class="badge badge-secondary">New</span></a>-->
+<!--                                    </li>-->
+<!--                                </ul>-->
+<!--                            </div>-->
+<!--                        </li>-->
                         <li class="nav-divider">
                             Admin Features
                             <!--                            Change to me admin only visable.-->

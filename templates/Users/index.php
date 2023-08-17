@@ -12,14 +12,13 @@ $this->disableAutoLayout();
 <!doctype html>
 <html lang="en">
 
-
 <head>
     <?= $this->Html->meta('icon', 'favicon.ico', ['type' => 'icon']) ?>
 
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>GamBlock® - Customer Management: Customers</title>
+    <title>GamBlock® - Customer Management: Users</title>
     <!-- Bootstrap CSS -->
     <!-- In-built CSS -->
     <?= $this->Html->css(['style', 'bootstrap.min', 'returntoparrow']) ?>
@@ -41,7 +40,7 @@ $this->disableAutoLayout();
     <!-- ============================================================== -->
     <div class="dashboard-header">
         <nav class="navbar navbar-expand-lg bg-white fixed-top">
-            <a class="navbar-brand" href="/home.php">
+            <a class="navbar-brand" href="/">
                 <?= $this->Html->image('cake-logo.png', ['alt' => 'GamBlock Logo', 'class' => 'navbar-brand', 'style' => 'width: 225px; height: auto;']); ?> -Staff Portal
             </a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -87,31 +86,31 @@ $this->disableAutoLayout();
                             <div id="submenu-1" class="collapse submenu" style="">
                                 <ul class="nav flex-column">
                                     <li class="nav-item">
-                                        <a class="nav-link" href="/team010-app_fit3048/customers/">Assigned to me</a>
+                                        <a class="nav-link" href="/customers/">Assigned to me</a>
                                         <!--                                        Change my link to assigned to me page when done.-->
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link" href="/team010-app_fit3048/customers">View All</a>
+                                        <a class="nav-link" href="/customers">View All</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link" href="/team010-app_fit3048/customers/add">Add a Customer Profile</a>
+                                        <a class="nav-link" href="/customers/add">Add a Customer Profile</a>
                                     </li>
                                 </ul>
                             </div>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#" data-toggle="collapse" aria-expanded="false" data-target="#submenu-2" aria-controls="submenu-2"><i class="fa-solid fa-user-tag"></i>Tag Management</a>
-                            <div id="submenu-2" class="collapse submenu" style="">
-                                <ul class="nav flex-column">
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="/team010-app_fit3048/Tags/index">View All Tags<span class="badge badge-secondary">New</span></a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="/team010-app_fit3048/Tags/add">Add some Tags<span class="badge badge-secondary">New</span></a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </li>
+<!--                        <li class="nav-item">-->
+<!--                            <a class="nav-link" href="#" data-toggle="collapse" aria-expanded="false" data-target="#submenu-2" aria-controls="submenu-2"><i class="fa-solid fa-user-tag"></i>Tag Management</a>-->
+<!--                            <div id="submenu-2" class="collapse submenu" style="">-->
+<!--                                <ul class="nav flex-column">-->
+<!--                                    <li class="nav-item">-->
+<!--                                        <a class="nav-link" href="/Tags/index">View All Tags<span class="badge badge-secondary">New</span></a>-->
+<!--                                    </li>-->
+<!--                                    <li class="nav-item">-->
+<!--                                        <a class="nav-link" href="/Tags/add">Add some Tags<span class="badge badge-secondary">New</span></a>-->
+<!--                                    </li>-->
+<!--                                </ul>-->
+<!--                            </div>-->
+<!--                        </li>-->
                         <li class="nav-divider">
                             Admin Features
                             <!--                            Change to me admin only visable.-->
@@ -139,6 +138,22 @@ $this->disableAutoLayout();
 
     <div class="dashboard-wrapper">
         <div class="container-fluid dashboard-content">
+            <!-- ============================================================== -->
+            <!-- Flash rendering -->
+            <!-- ============================================================== -->
+            <?php
+            // Check if the flash message exists and has content
+            $flashMessage = $this->Flash->render();
+            if (!empty($flashMessage)) {
+                ?>
+                <!-- Flash message, ONLY shows up if ticket is successfully opened/closed -->
+                <div class="alert alert-success" role="alert">
+                    <?= $flashMessage; ?>
+                </div>
+                <?php
+            }
+            ?>
+            <!-- ============================================================== -->
             <div class="row">
                 <div class="col-xl-10">
                     <!-- ============================================================== -->
@@ -146,6 +161,10 @@ $this->disableAutoLayout();
                     <!-- ============================================================== -->
                     <div class="row">
                         <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                            <?php if (isset($successMessage)): ?>
+                                <div class="p-3 mb-2 bg-success text-white"><?= h($successMessage) ?></div>
+                            <?php endif; ?>
+
                             <div class="page-header" id="top">
                                 <p class="pageheader-text"></p>
                             </div>
@@ -155,6 +174,23 @@ $this->disableAutoLayout();
                     <!-- end pageheader  -->
                     <!-- ============================================================== -->
 <div class="users index content"><?php if ($this->Identity->get('admin_status') == 1): ?>
+
+        <!-- ============================================================== -->
+        <!-- Flash rendering -->
+        <!-- ============================================================== -->
+        <?php
+        // Check if the flash message exists and has content
+        $flashMessage = $this->Flash->render();
+        if (!empty($flashMessage)) {
+            ?>
+            <!-- Flash message, ONLY shows up if ticket is successfully opened/closed -->
+            <div class="alert alert-success" role="alert">
+                <?= $flashMessage; ?>
+            </div>
+            <?php
+        }
+        ?>
+        <!-- ============================================================== -->
         <?= $this->Html->link(__('Add a Staff Member'), ['action' => 'add'], ['class' => 'float-right btn btn-success']) ?>
     <?php endif; ?>
 
@@ -177,7 +213,6 @@ $this->disableAutoLayout();
                     <td><?= h($user->f_name) ?></td>
                     <td><?= h($user->l_name) ?></td>
                     <td><?= h($user->email) ?></td>
-                    <td><?= h($user->timezone) ?></td>
                     <td><?= h($user->admin_status ? '✅' : '❌') ?></td>
                     <td class="actions">
                         <?php if ($this->Identity->get('admin_status') == 1): ?>
@@ -207,11 +242,11 @@ $this->disableAutoLayout();
                                 <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12">
                                     Copyright ©  GamBlock®. All rights reserved. This site is for access by GamBlock® Staff Only. Template by <a href="https://colorlib.com/wp/">Colorlib</a>.
                                 </div>
-                                <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12">
-                                    <div class="text-md-right footer-links d-none d-sm-block">
-                                        <a href="javascript: void(0);">Documentation</a>
-                                        <a href="javascript: void(0);">Contact Points</a>
-                                    </div>
+<!--                                <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12">-->
+<!--                                    <div class="text-md-right footer-links d-none d-sm-block">-->
+<!--                                        <a href="javascript: void(0);">Documentation</a>-->
+<!--                                        <a href="javascript: void(0);">Contact Points</a>-->
+<!--                                    </div>-->
                                 </div>
                             </div>
                         </div>

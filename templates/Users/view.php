@@ -31,10 +31,6 @@
                     <td><?= h($user->email) ?></td>
                 </tr>
                 <tr>
-                    <th><?= __('Timezone') ?></th>
-                    <td><?= h($user->timezone) ?></td>
-                </tr>
-                <tr>
                     <th><?= __('Nonce') ?></th>
                     <td><?= h($user->nonce) ?></td>
                 </tr>

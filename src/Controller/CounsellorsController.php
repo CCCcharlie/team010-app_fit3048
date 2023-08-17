@@ -49,13 +49,25 @@ class CounsellorsController extends AppController
      */
     public function add()
     {
+
+        $firstName = $this->request->getQuery('f_name');
+        $lastName = $this->request->getQuery('l_name');
+        $custId = $this->request->getQuery('cust_id');
+        $fullName = $firstName . ' ' . $lastName;
+
+        $this->set(compact('fullName', 'custId'));
+
         $counsellor = $this->Counsellors->newEmptyEntity();
         if ($this->request->is('post')) {
             $counsellor = $this->Counsellors->patchEntity($counsellor, $this->request->getData());
-            if ($this->Counsellors->save($counsellor)) {
-                $this->Flash->success(__('The counsellor has been saved.'));
 
-                return $this->redirect(['action' => 'index']);
+
+            $counsellor->cust_id = $custId;
+
+            if ($this->Counsellors->save($counsellor)) {
+                $this->Flash->success(__('The communication details for: ' . $fullName . ' has been saved'));
+
+                return $this->redirect($this->view($custId));
             }
             $this->Flash->error(__('The counsellor could not be saved. Please, try again.'));
         }
@@ -105,6 +117,6 @@ class CounsellorsController extends AppController
             $this->Flash->error(__('The counsellor could not be deleted. Please, try again.'));
         }
 
-        return $this->redirect(['action' => 'index']);
+        return $this->redirect($this->referer());
     }
 }

@@ -49,25 +49,30 @@ class CommdetailsController extends AppController
      */
     public function add()
     {
+        //Obtain the query via key value pair [called from customer table view]
+        $firstName = $this->request->getQuery('f_name');
+        $lastName = $this->request->getQuery('l_name');
+        $custId = $this->request->getQuery('cust_id');
+        $fullName = $firstName . ' ' . $lastName;
+
+        $this->set(compact('fullName', 'custId'));
+
         $commdetail = $this->Commdetails->newEmptyEntity();
-
-        // Retrieve customer ID from URL parameter
-        $customerId = $this->request->getQuery('customer_id');
-
-        $customers = $this->Commdetails->Customers->find('all')
-            ->where(['id' => $customerId])
-            ->contain(['Customers'])
-            ->toArray();
-
-        $this->set(compact('commdetail', 'customers'));
-
         if ($this->request->is('post')) {
             $commdetail = $this->Commdetails->patchEntity($commdetail, $this->request->getData());
+
+            //Server add into the customer id based on $custId query rather than the form
+            $commdetail->cust_id = $custId;
+
             if ($this->Commdetails->save($commdetail)) {
-                // Redirect to customer's page after successful save
-                return $this->redirect(['controller' => 'Customers', 'action' => 'view', $customerId]);
+                $this->Flash->success(__('The communication details for: ' . $fullName . ' has been saved'));
+
+                return $this->redirect($this->referer());
             }
+            $this->Flash->error(__('The communication details for: ' . $fullName . ' could not be saved, please try again'));
         }
+        $customers = $this->Commdetails->Customers->find('list', ['limit' => 200])->all();
+        $this->set(compact('commdetail', 'customers'));
     }
 
     /**
@@ -77,19 +82,30 @@ class CommdetailsController extends AppController
      * @return \Cake\Http\Response|null|void Redirects on successful edit, renders view otherwise.
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
      */
-    public function edit($id = null)
+    public function edit()
     {
-        $commdetail = $this->Commdetails->get($id, [
-            'contain' => [],
-        ]);
-        if ($this->request->is(['patch', 'post', 'put'])) {
-            $commdetail = $this->Commdetails->patchEntity($commdetail, $this->request->getData());
-            if ($this->Commdetails->save($commdetail)) {
-                $this->Flash->success(__('The commdetail has been saved.'));
 
-                return $this->redirect(['action' => 'index']);
+        $firstName = $this->request->getQuery('f_name');
+        $lastName = $this->request->getQuery('l_name');
+        $custId = $this->request->getQuery('cust_id');
+        $fullName = $firstName . ' ' . $lastName;
+
+        $this->set(compact('fullName', 'custId'));
+
+        $commdetail = $this->Commdetails->newEmptyEntity();
+        if ($this->request->is(['patch', 'post', 'put'])) {
+
+
+            $commdetail = $this->Commdetails->patchEntity($commdetail, $this->request->getData());
+
+            $commdetail->cust_id = $custId;
+
+            if ($this->Commdetails->save($commdetail)) {
+                $this->Flash->success(__('The communication details for: ' . $fullName . ' has been saved'));
+
+                return $this->redirect($this->referer());
             }
-            $this->Flash->error(__('The commdetail could not be saved. Please, try again.'));
+            $this->Flash->error(__('The communication details for: ' . $fullName . ' could not be saved, please try again'));
         }
         $customers = $this->Commdetails->Customers->find('list', ['limit' => 200])->all();
         $this->set(compact('commdetail', 'customers'));

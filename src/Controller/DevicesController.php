@@ -49,13 +49,25 @@ class DevicesController extends AppController
      */
     public function add()
     {
+        //Obtain the query via key value pair [called from customer table view]
+        $firstName = $this->request->getQuery('f_name');
+        $lastName = $this->request->getQuery('l_name');
+        $custId = $this->request->getQuery('cust_id');
+        $fullName = $firstName . ' ' . $lastName;
+
+        $this->set(compact('fullName', 'custId'));
+
         $device = $this->Devices->newEmptyEntity();
         if ($this->request->is('post')) {
             $device = $this->Devices->patchEntity($device, $this->request->getData());
+
+            //Set the custId here instead of the form
+            $device->cust_id = $custId;
+
             if ($this->Devices->save($device)) {
                 $this->Flash->success(__('The device has been saved.'));
-
-                return $this->redirect(['action' => 'index']);
+                //Return back to the referer of this function
+                return $this->redirect($this->referer());
             }
             $this->Flash->error(__('The device could not be saved. Please, try again.'));
         }
@@ -72,15 +84,28 @@ class DevicesController extends AppController
      */
     public function edit($id = null)
     {
+
+        //Obtain the query via key value pair [called from customer table view]
+        $firstName = $this->request->getQuery('f_name');
+        $lastName = $this->request->getQuery('l_name');
+        $custId = $this->request->getQuery('cust_id');
+        $fullName = $firstName . ' ' . $lastName;
+
+        $this->set(compact('fullName', 'custId'));
+
         $device = $this->Devices->get($id, [
             'contain' => [],
         ]);
         if ($this->request->is(['patch', 'post', 'put'])) {
             $device = $this->Devices->patchEntity($device, $this->request->getData());
+
+            //Set the custId here instead of the form
+            $device->cust_id = $custId;
+
             if ($this->Devices->save($device)) {
                 $this->Flash->success(__('The device has been saved.'));
 
-                return $this->redirect(['action' => 'index']);
+                return $this->redirect($this->referer());
             }
             $this->Flash->error(__('The device could not be saved. Please, try again.'));
         }

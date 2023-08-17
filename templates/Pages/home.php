@@ -47,11 +47,6 @@ $checkConnection = function (string $name) {
     return compact('connected', 'error');
 };
 
-if (!Configure::read('debug')) :
-    throw new NotFoundException(
-        'Please replace templates/Pages/home.php with your own version or re-enable debug mode.'
-    );
-endif;
 
 
 ?>
@@ -87,7 +82,7 @@ endif;
     <!-- ============================================================== -->
     <div class="dashboard-header">
         <nav class="navbar navbar-expand-lg bg-white fixed-top">
-            <a class="navbar-brand" href="/home.php">
+            <a class="navbar-brand" href="/">
                 <?= $this->Html->image('cake-logo.png', ['alt' => 'GamBlock Logo', 'class' => 'navbar-brand', 'style' => 'width: 225px; height: auto;']); ?> -Staff Portal
             </a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -129,35 +124,40 @@ endif;
                             Menu
                         </li>
                         <li class="nav-item ">
-                            <a class="nav-link active" href="#" data-toggle="collapse" aria-expanded="false" data-target="#submenu-1" aria-controls="submenu-1"><i class="fa fa-fw fa-user-circle"></i>Customer Management <span class="badge badge-success">6</span></a>
+                            <a class="nav-link active" href="#" data-toggle="collapse" aria-expanded="false"
+                               data-target="#submenu-1" aria-controls="submenu-1"><i
+                                    class="fa fa-fw fa-user-circle"></i>Customer Management <span
+                                    class="badge badge-success">6</span></a>
                             <div id="submenu-1" class="collapse submenu" style="">
                                 <ul class="nav flex-column">
                                     <li class="nav-item">
-                                        <a class="nav-link" href="/">Assigned to me</a>
-                                        <!--                                        Change my link to assigned to me page when done.-->
+                                        <a class="nav-link" href="/customers?filter=assigned">Assigned Customers</a>
+
+<!--                                        Change my link to assigned to me page when done.-->
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link" href="/customers">View All</a>
+                                        <a class="nav-link" href="/team010-app_fit3048/customers">View All</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link" href="/customers/add">Add a Customer Profile</a>
+                                        <a class="nav-link" href="/team010-app_fit3048/customers/add">Add a Customer
+                                            Profile</a>
                                     </li>
                                 </ul>
                             </div>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#" data-toggle="collapse" aria-expanded="false" data-target="#submenu-2" aria-controls="submenu-2"><i class="fa-solid fa-user-tag"></i>Tag Management</a>
-                            <div id="submenu-2" class="collapse submenu" style="">
-                                <ul class="nav flex-column">
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="/Tags/index">View All Tags<span class="badge badge-secondary">New</span></a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="/Tags/add">Add some Tags<span class="badge badge-secondary">New</span></a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </li>
+<!--                        <li class="nav-item">-->
+<!--                            <a class="nav-link" href="#" data-toggle="collapse" aria-expanded="false" data-target="#submenu-2" aria-controls="submenu-2"><i class="fa-solid fa-user-tag"></i>Tag Management</a>-->
+<!--                            <div id="submenu-2" class="collapse submenu" style="">-->
+<!--                                <ul class="nav flex-column">-->
+<!--                                    <li class="nav-item">-->
+<!--                                        <a class="nav-link" href="/Tags/index">View All Tags<span class="badge badge-secondary">New</span></a>-->
+<!--                                    </li>-->
+<!--                                    <li class="nav-item">-->
+<!--                                        <a class="nav-link" href="/Tags/add">Add some Tags<span class="badge badge-secondary">New</span></a>-->
+<!--                                    </li>-->
+<!--                                </ul>-->
+<!--                            </div>-->
+<!--                        </li>-->
                         <li class="nav-divider">
                             Admin Features
                             <!--                            Change to me admin only visable.-->
@@ -194,12 +194,12 @@ endif;
                 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                     <div class="page-header">
                             <h2 class="pageheader-title">Welcome!</h2>
-<!--                            Can you add login user to name here if you get chance Bryan?-->
+<!--
                         <p class="pageheader-text">Proin placerat ante duiullam scelerisque a velit ac porta, fusce sit amet vestibulum mi. Morbi lobortis pulvinar quam.</p>
                     </div>
                 </div>
             </div>
-            <!-- ============================================================== -->
+            <!- ============================================================== -->
             <!-- end pageheader -->
             <!-- ============================================================== -->
             <div class="row">
@@ -219,10 +219,10 @@ endif;
                         Copyright ©  GamBlock®. All rights reserved. This site is for access by GamBlock® Staff Only. Template by <a href="https://colorlib.com/wp/">Colorlib</a>.
                     </div>
                     <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12">
-                        <div class="text-md-right footer-links d-none d-sm-block">
-                            <a href="javascript: void(0);">Documentation</a>
-                            <a href="javascript: void(0);">Contact Points</a>
-                        </div>
+<!--                        <div class="text-md-right footer-links d-none d-sm-block">-->
+<!--                            <a href="javascript: void(0);">Documentation</a>-->
+<!--                            <a href="javascript: void(0);">Contact Points</a>-->
+<!--                        </div>-->
                     </div>
                 </div>
             </div>

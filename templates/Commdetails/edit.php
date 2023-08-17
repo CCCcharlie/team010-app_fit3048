@@ -220,12 +220,12 @@ $this->disableAutoLayout();
                     <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12">
                         Copyright ©  GamBlock®. All rights reserved. This site is for access by GamBlock® Staff Only. Template by <a href="https://colorlib.com/wp/">Colorlib</a>.
                     </div>
-                    <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12">
-                        <div class="text-md-right footer-links d-none d-sm-block">
-                            <a href="javascript: void(0);">Documentation</a>
-                            <a href="javascript: void(0);">Contact Points</a>
-                        </div>
-                    </div>
+<!--                    <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12">-->
+<!--                        <div class="text-md-right footer-links d-none d-sm-block">-->
+<!--                            <a href="javascript: void(0);">Documentation</a>-->
+<!--                            <a href="javascript: void(0);">Contact Points</a>-->
+<!--                        </div>-->
+<!--                    </div>-->
                 </div>
             </div>
         </div>

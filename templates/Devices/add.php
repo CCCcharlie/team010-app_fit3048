@@ -176,10 +176,10 @@ $this->disableAutoLayout();
                     <div class="commdetails form content">
                         <div class="card">
 
-                            <h5 class="card-header"> <legend><?= __('Add Communication details for: ' . $fullName) ?></legend></h5>
+                            <h5 class="card-header"> <legend><?= __('Add Device details for: ' . $fullName) ?></legend></h5>
                             <?= $this->Form->create($device) ?>
                             <div class="card-body">
-                                <p> You have the ability to make multiple tickets in a row here. Hit 'Return to Customer' when done.</p>
+                                <p> You have the ability to make multiple devices in a row here. Hit 'Return to Customer' when done.</p>
                                 <fieldset>
                                     <div class="form-group">
                                         <?= $this->Form->label('transactionid', 'Transaction ID', ['class' => 'col-form-label']) ?>

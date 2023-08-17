@@ -6,8 +6,7 @@
  */
 $this->disableAutoLayout();
 ?>
-$this->disableAutoLayout();
-?>
+
 
 <!doctype html>
 <html lang="en">

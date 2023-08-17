@@ -169,7 +169,7 @@ $checkConnection = function (string $name) {
 
                                 </ul>
                             </div>
-
+                        </li>
 
                     </ul>
                 </div>

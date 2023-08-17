@@ -758,7 +758,13 @@ $checkConnection = function (string $name) {
 
                                                     // Actions column with Edit and Delete buttons
                                                     echo '<td>';
-                                                    echo $this->Html->link(__('Edit'), ['controller' => 'Devices', 'action' => 'edit', $device->id], ['class' => 'btn btn-primary']);
+                                                    echo $this->Html->link(__('Edit'), ['controller' => 'Devices', 'action' => 'edit', $device->id,
+                                                        '?' => [
+                                                                'f_name' => $customer->f_name,
+                                                                'l_name' => $customer->l_name,
+                                                                'cust_id' => $customer->id
+                                                        ],
+                                                    ], ['class' => 'btn btn-primary']);
                                                     echo ' ';
                                                     echo $this->Form->postLink(__('Delete'), ['controller' => 'Devices', 'action' => 'delete', $device->id], ['class' => 'btn btn-danger', 'confirm' => __('Are you sure you want to delete this device?')]);
                                                     echo '</td>';
@@ -862,6 +868,8 @@ $checkConnection = function (string $name) {
 <?= $this->Html->script('https://kit.fontawesome.com/b5c616a120.js', ['crossorigin' => 'anonymous']) ?>
 
 <script>
+    //Script I came up to show tickets based on whether its open or not, the if function exists
+    //in php form for that to happen
     $(document).ready(function() {
         // Initial state setup
         $("#allticket").show();

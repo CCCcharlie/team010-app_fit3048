@@ -12,9 +12,27 @@ $this->assign('title', 'Login');
 ?>
 <div class="splash-container login">
 
+
+
     <div class="card ">
         <div class="card-header text-center"><a href="../index.html"><img class="logo-img" src="/img/cake-logo.png" alt="logo"></a><span class="splash-description">Please enter your user information.</span></div>
         <title>GamBlock® - Customer Management</title>
+
+        <!-- ============================================================== -->
+        <!-- Flash rendering -->
+        <!-- ============================================================== -->
+        <?php
+        // Check if the flash message exists and has content
+        $flashMessage = $this->Flash->render();
+        if (!empty($flashMessage)) {
+            ?>
+            <!-- Flash message, ONLY shows up if ticket is successfully opened/closed -->
+            <?= $flashMessage; ?>
+            <?php
+        }
+        ?>
+        <!-- ============================================================== -->
+
         <div class="card-body">
 <!--    <div class="row">-->
 <!--        <div class="column column-50 column-offset-25">-->

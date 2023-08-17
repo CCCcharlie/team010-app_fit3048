@@ -5,6 +5,8 @@
  * @var string[]|\Cake\Collection\CollectionInterface $customers
  * @var string[]|\Cake\Collection\CollectionInterface $users
  */
+
+$this->disableAutoLayout();
 ?><!doctype html>
 <html lang="en">
 

@@ -40,6 +40,7 @@ $this->assign('title', 'Login');
                     echo $this->Form->control('email', [
                         'type' => 'email',
                         'required' => true,
+                        'maxlength' => 320,
                         'autofocus' => true,
                         'value' => $debug ? "test@example.com" : "",
                         'class' => 'form-control form-control-lg'
@@ -48,7 +49,8 @@ $this->assign('title', 'Login');
                         'type' => 'password',
                         'required' => true,
                         'class' => 'form-control form-control-lg',
-                        'value' => $debug ? 'password' : ''
+                        'value' => $debug ? 'password' : '',
+                        'maxlength' => 124,
                     ]);
                     ?>
                 </fieldset>

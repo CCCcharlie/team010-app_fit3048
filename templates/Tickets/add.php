@@ -7,6 +7,7 @@
  */
 
 $this->disableAutoLayout();
+// Test.
 ?>
 
 <!doctype html>

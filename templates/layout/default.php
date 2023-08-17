@@ -39,6 +39,9 @@ $cakeDescription = 'CakePHP: The rapid development PHP framework';
     <link rel="stylesheet" href="/webroot/css/bootstrap.min.css">
     <link href="/webroot/css/style.css" rel="stylesheet">
     <link rel="stylesheet" href="/webroot/css/style.css">
+<!--    breadcrumb file-->
+    {% include breadcrumbs.html %}
+
 </head>
 <body>
 <!-- main wrapper -->
@@ -49,7 +52,7 @@ $cakeDescription = 'CakePHP: The rapid development PHP framework';
     <!--==============================================================-->
     <div class="dashboard-header">
         <nav class="navbar navbar-expand-lg bg-white fixed-top">
-            <a class="navbar-brand" href="/">Gamblock</a>
+            <a class="navbar-brand" href="/">Customer view</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
                     aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -83,9 +86,9 @@ $cakeDescription = 'CakePHP: The rapid development PHP framework';
                         <div class="page-breadcrumb">
                             <nav aria-label="breadcrumb">
                                 <ol class="breadcrumb">
-                                    <li class="breadcrumb-item"><a href="#" class="breadcrumb-link">Dashboard</a></li>
+                                    <li class="breadcrumb-item"><a href="/" class="breadcrumb-link">Home</a></li>
                                     <li class="breadcrumb-item"><a href="#" class="breadcrumb-link">Pages</a></li>
-                                    <li class="breadcrumb-item active" aria-current="page">Blank Page header</li>
+                                    <li class="breadcrumb-item active" aria-current="page">Currencly action</li>
                                 </ol>
                             </nav>
                         </div>
@@ -136,7 +139,7 @@ $cakeDescription = 'CakePHP: The rapid development PHP framework';
                         <div id="submenu-1" class="collapse submenu" style="">
                             <ul class="nav flex-column">
                                 <li class="nav-item">
-                                    <a class="nav-link" href="/customers?filter=assigned">Assigned Customers</a>
+                                    <a class="nav-link" href="team010-app_fit3048/customers/assigntome">Assigned Customers</a>
 
                                     <!--                                        Change my link to assigned to me page when done.-->
                                 </li>
@@ -177,6 +180,7 @@ $cakeDescription = 'CakePHP: The rapid development PHP framework';
 
                             </ul>
                         </div>
+
 
 
                 </ul>

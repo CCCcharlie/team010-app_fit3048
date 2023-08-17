@@ -160,7 +160,7 @@ $this->disableAutoLayout();
                                         'class' => 'form-control',
                                         'maxlength' => 32,
                                         'required' => true,
-                                        'title' => 'Please enter the first name using letters and hyphens only',
+                                        'title' => 'Please enter the first name using letters apostrophes and hyphens only',
                                         'pattern' => '^[A-Za-z-]+$'
                                     ]) ?>
                                     <small class="form-text text-muted">Letters and hyphens only.</small>
@@ -171,7 +171,7 @@ $this->disableAutoLayout();
                                         'class' => 'form-control',
                                         'maxlength' => 32,
                                         'required' => true,
-                                        'title' => 'Please enter the last name using letters and hyphens only',
+                                        'title' => 'Please enter the last name using letters, apostrophes and hyphens only',
                                         'pattern' => '^[A-Za-z-]+$'
                                     ]) ?>
                                     <small class="form-text text-muted">Letters and hyphens only.</small>

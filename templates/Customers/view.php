@@ -414,9 +414,32 @@ $checkConnection = function (string $name) {
                                                                         <p><span class="card-info">Create time:</span> <?= h($ticket->createtime) ?></p>
                                                                         <br>
                                                                     </div>
+                                                                    <div style="display: flex; justify-content: space-between">
                                                                     <a class="btn btn-primary" data-toggle="collapse" href="#collapseExample<?= $ticket->id ?>" role="button" aria-expanded="false" aria-controls="collapseExample">
                                                                         Expand Attachments
                                                                     </a>
+                                                                        <span>
+                                                                    <?php if ($this->Identity->get('admin_status') == 1): ?>
+                                                                        <?php echo $this->Html->link(__('Edit'), ['controller' => 'Tickets', 'action' => 'edit', $ticket->id,
+                                                                            '?' => [
+                                                                                'f_name' => $customer->f_name,
+                                                                                'l_name' => $customer->l_name,
+                                                                                'cust_id' => $customer->id,
+//                                                                                'ticket_closed' => $ticket->closed
+                                                                            ],
+                                                                        ], ['class' => 'btn btn-primary']);
+
+                                                                        //Removed delete for now, it breaks if try to delete with an attachment present inside
+
+                                                                        ?>
+<!--                                                                        --><?php //= $this->Form->postLink(__('Delete'), ['controller' => 'Tickets', 'action' => 'delete', $ticket->id], [
+//                                                                            'class' => 'btn btn-danger',
+//                                                                            'confirm' => __('Are you sure you want to delete Ticket title:  {0} \n From customer {1} {2}?', $ticket->title , $customer->f_name, $customer->l_name)
+//                                                                        ]) ?>
+                                                                    <?php else: ?>
+                                                                    <?php endif; ?>
+                                                                        </span>
+                                                                    </div>
                                                                 </div>
                                                                 <!-- In order to show unique collapse for each class, its id must be different. -->
                                                                 <div class="collapse" id="collapseExample<?= $ticket->id ?>">

@@ -140,7 +140,7 @@ class CustomersController extends AppController
             if ($this->Customers->save($customer)) {
                 $this->Flash->success(__('{0} {1} has been added to the system!', $customer->f_name, $customer->l_name));
 
-                return $this->redirect(['action' => 'index']);
+                return $this->redirect($this->referer());
             }
             $this->Flash->error(__('{0} {1} could not be added to the system, please try again', $customer->f_name, $customer->l_name));
         }

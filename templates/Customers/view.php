@@ -247,7 +247,8 @@ $checkConnection = function (string $name) {
                         <ul style="padding: 0; margin: 0; list-style: none;">
                             <h4>Actions:</h4>
                             <li><?= $this->Html->link(__('> Edit Customer'), ['action' => 'edit', $customer->id], ['style' => 'display: block; padding: 10px 0; text-decoration: none; color: #333; border: 1px solid transparent; transition: border-color 0.3s ease;']) ?></li>
-                            <li><?= $this->Form->postLink(__('> Delete Customer'), ['action' => 'delete', $customer->id], ['confirm' => __('Are you sure you want to delete # {0}?', $customer->id), 'style' => 'display: block; padding: 10px 0; text-decoration: none; color: #333; border: 1px solid transparent; transition: border-color 0.3s ease;']) ?></li>
+<!--                            <li>--><?php //= $this->Form->postLink(__('> Delete'), [ 'action' => 'delete', $customer->id], ['style' => 'display: block; padding: 10px 0; text-decoration: none; color: #333; border: 1px solid transparent; transition: border-color 0.3s ease;', 'confirm' => __('Are you sure you want to delete customer: {0} {1} ?', $customer->f_name, $customer->l_name)]); ?><!-- </li>-->
+<!--                            <li>--><?php //= $this->Form->postLink(__('> Delete Customer'), ['action' => 'delete', $customer->id], ['confirm' => __('Are you sure you want to delete # {0}?', $customer->id), 'style' => 'display: block; padding: 10px 0; text-decoration: none; color: #333; border: 1px solid transparent; transition: border-color 0.3s ease;']) ?><!--</li>-->
                         </ul>
                     </div>
 

@@ -38,8 +38,8 @@
                                 </tr>
                                 </tbody>
                             </table>
-                            <p>or use the following link: <br>
-                                <?= $this->Html->link($this->Url->build(['controller' => 'Auth', 'action' => 'resetPassword', $nonce], ['fullBase' => true]), ['controller' => 'Users', 'action' => 'resetPassword', $nonce], ['fullBase' => true, 'style' => 'word-break:break-all']) ?></p>
+<!--                            <p>or use the following link: <br>-->
+<!--                                --><?php //= $this->Html->link($this->Url->build(['controller' => 'Auth', 'action' => 'resetPassword', $nonce], ['fullBase' => true]), ['controller' => 'Users', 'action' => 'resetPassword', $nonce], ['fullBase' => true, 'style' => 'word-break:break-all']) ?><!--</p>-->
                         </td>
                     </tr>
                 </table>

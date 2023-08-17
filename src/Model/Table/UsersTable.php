@@ -62,13 +62,25 @@ class UsersTable extends Table
             ->scalar('f_name')
             ->maxLength('f_name', 32)
             ->requirePresence('f_name', 'create')
-            ->notEmptyString('f_name');
+            ->notEmptyString('f_name')
+            ->add('f_name', [
+                'validCharacters' => [
+                    'rule' => ['custom', '/^[a-zA-Z]+(?:[-\'\s]{1}[a-zA-Z]+)*$/'],
+                    'message' => 'Please enter a valid name. Names cannot have multiple "-", or apostrophes in a row. Names cannot have numbers. '
+                ]
+            ]);
 
         $validator
             ->scalar('l_name')
             ->maxLength('l_name', 32)
             ->requirePresence('l_name', 'create')
-            ->notEmptyString('l_name');
+            ->notEmptyString('l_name')
+            ->add('l_name', [
+                'validCharacters' => [
+                    'rule' => ['custom', '/^[a-zA-Z]+(?:[-\'\s]{1}[a-zA-Z]+)*$/'],
+                    'message' => 'Please enter a valid name. Names cannot have multiple "-", or apostrophes in a row. Names cannot have numbers. '
+                ]
+            ]);
 
 //        $validator
 //            ->integer('age')
@@ -76,9 +88,28 @@ class UsersTable extends Table
 //            ->notEmptyString('age');
 
         $validator
-            ->email('email')
-            ->requirePresence('email', 'create')
-            ->notEmptyString('email');
+            ->scalar('cust_email')
+            ->maxLength('cust_email', 320)
+            ->requirePresence('cust_email', 'create')
+            ->notEmptyString('cust_email')
+            ->add('cust_email', [
+                'validEmail' => [
+                    'rule' => 'email',
+                    'message' => 'Please enter a valid email address. Eg. test@holistichealings.com'
+                ],
+                'emailContainsAt' => [
+                    'rule' => ['custom', '/@/'],
+                    'message' => 'Your e-mail must contain the @ symbol.'
+                ],
+                'noConsecutiveDelimiters' => [
+                    'rule' => ['custom', '/^(?!.*(\.\.|\@\@)).*$/'],
+                    'message' => 'Your e-mail address cannot contain consecutive delimiters (e.g. ".." or "@@").'
+                ],
+                'noSpecialCharacters' => [
+                    'rule' => ['custom', '/^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/'],
+                    'message' => 'Your e-mail address can only contain letters, digits, hyphens, underscores, dots, and at symbols.'
+                ]
+            ]);
 
         $validator
             ->scalar('password')

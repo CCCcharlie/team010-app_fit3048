@@ -29,7 +29,7 @@ class AuthController extends AppController {
 
         // By default, CakePHP will (sensibly) default to preventing users from accessing any actions on a controller.
         // These actions, however, are typically required for users who have not yet logged in.
-        $this->Authentication->allowUnauthenticated(['login', 'register', 'forgetPassword', 'resetPassword']);
+        $this->Authentication->allowUnauthenticated(['login', 'forgetPassword', 'resetPassword']);
 
         $this->Users = $this->fetchTable('Users');
     }
@@ -185,7 +185,7 @@ class AuthController extends AppController {
         // if user passes authentication, grant access to the system
         if ($result && $result->isValid()) {
             // set a fallback location in case user logged in without triggering 'unauthenticatedRedirect'
-            $fallbackLocation = ['controller' => 'Users', 'action' => 'index'];
+            $fallbackLocation = ['controller' => 'Customers', 'action' => 'index'];
 
             // and redirect user to the location they're trying to access
             return $this->redirect($this->Authentication->getLoginRedirect() ?? $fallbackLocation);

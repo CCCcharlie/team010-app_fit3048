@@ -66,7 +66,7 @@ class UsersController extends AppController
         if ($this->request->is('post')) {
             $user = $this->Users->patchEntity($user, $this->request->getData());
             if ($this->Users->save($user)) {
-                $this->Flash->success(__('You have successfully deleted the following account: {0} {1}', $user->f_name, $user->l_name));
+                $this->Flash->success(__('You have successfully added the following account: {0} {1}', $user->f_name, $user->l_name));
 
 
                 return $this->redirect(['action' => 'index']);

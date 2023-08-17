@@ -54,15 +54,15 @@ $this->disableAutoLayout();
 
 
                     <!--                    <li class="nav-item dropdown nav-user">-->
-<!--                        <a class="nav-link nav-user-file" href="#" id="navbarDropdownMenuLink2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="../assets/images/avatar-1.jpg" alt="" class="user-avatar-md rounded-circle"></a>-->
-<!--                        <div class="dropdown-menu dropdown-menu-right nav-user-dropdown" aria-labelledby="navbarDropdownMenuLink2">-->
-<!--                            <div class="nav-user-info">-->
-<!--                                <h5 class="mb-0 text-white nav-user-name">-->
-<!--                                    Example User</h5>-->
-<!--                            </div>-->
-<!--                            <a class="dropdown-item" href="#"><i class="fas fa-power-off mr-2"></i> --><?php //echo $this->Html->link(__('Logout'), ['controller' => 'Auth', 'action' => 'logout']); ?><!--</a>-->
-<!--                        </div>-->
-<!--                    </li>-->
+                    <!--                        <a class="nav-link nav-user-file" href="#" id="navbarDropdownMenuLink2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="../assets/images/avatar-1.jpg" alt="" class="user-avatar-md rounded-circle"></a>-->
+                    <!--                        <div class="dropdown-menu dropdown-menu-right nav-user-dropdown" aria-labelledby="navbarDropdownMenuLink2">-->
+                    <!--                            <div class="nav-user-info">-->
+                    <!--                                <h5 class="mb-0 text-white nav-user-name">-->
+                    <!--                                    Example User</h5>-->
+                    <!--                            </div>-->
+                    <!--                            <a class="dropdown-item" href="#"><i class="fas fa-power-off mr-2"></i> --><?php //echo $this->Html->link(__('Logout'), ['controller' => 'Auth', 'action' => 'logout']); ?><!--</a>-->
+                    <!--                        </div>-->
+                    <!--                    </li>-->
                 </ul>
             </div>
         </nav>
@@ -102,19 +102,19 @@ $this->disableAutoLayout();
                                 </ul>
                             </div>
                         </li>
-<!--                        <li class="nav-item">-->
-<!--                            <a class="nav-link" href="#" data-toggle="collapse" aria-expanded="false" data-target="#submenu-2" aria-controls="submenu-2"><i class="fa-solid fa-user-tag"></i>Tag Management</a>-->
-<!--                            <div id="submenu-2" class="collapse submenu" style="">-->
-<!--                                <ul class="nav flex-column">-->
-<!--                                    <li class="nav-item">-->
-<!--                                        <a class="nav-link" href="/Tags/index">View All Tags<span class="badge badge-secondary">New</span></a>-->
-<!--                                    </li>-->
-<!--                                    <li class="nav-item">-->
-<!--                                        <a class="nav-link" href="/Tags/add">Add some Tags<span class="badge badge-secondary">New</span></a>-->
-<!--                                    </li>-->
-<!--                                </ul>-->
-<!--                            </div>-->
-<!--                        </li>-->
+                        <!--                        <li class="nav-item">-->
+                        <!--                            <a class="nav-link" href="#" data-toggle="collapse" aria-expanded="false" data-target="#submenu-2" aria-controls="submenu-2"><i class="fa-solid fa-user-tag"></i>Tag Management</a>-->
+                        <!--                            <div id="submenu-2" class="collapse submenu" style="">-->
+                        <!--                                <ul class="nav flex-column">-->
+                        <!--                                    <li class="nav-item">-->
+                        <!--                                        <a class="nav-link" href="/Tags/index">View All Tags<span class="badge badge-secondary">New</span></a>-->
+                        <!--                                    </li>-->
+                        <!--                                    <li class="nav-item">-->
+                        <!--                                        <a class="nav-link" href="/Tags/add">Add some Tags<span class="badge badge-secondary">New</span></a>-->
+                        <!--                                    </li>-->
+                        <!--                                </ul>-->
+                        <!--                            </div>-->
+                        <!--                        </li>-->
                         <li class="nav-divider">
                             Admin Features
                             <!--                            Change to me admin only visable.-->
@@ -171,7 +171,7 @@ $this->disableAutoLayout();
                                 <div class="tickets form content">
                                     <?= $this->Form->create($ticket) ?>
                                     <fieldset>
-                                    <p> You have the ability to make multiple tickets in a row here. Hit 'Return to Customer' when done.</p>
+                                        <p> You have the ability to make multiple tickets in a row here. Hit 'Return to Customer' when done.</p>
                                         <div class="form-group">
                                             <?= $this->Form->label('title', 'Title', ['class' => 'col-form-label']) ?>
                                             <?= $this->Form->input('title', [
@@ -255,5 +255,5 @@ $this->disableAutoLayout();
     <!-- end footer -->
     <!-- ============================================================== -->
 
-        </div>
-    </div>
+</div>
+</div>

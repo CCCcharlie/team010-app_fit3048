@@ -744,7 +744,7 @@ $checkConnection = function (string $name) {
                                                         ],
                                                     ], ['class' => 'btn btn-primary']);
 
-                                                    echo $this->Html->link(__('Delete'), ['controller' => 'Commdetails', 'action' => 'delete', $commdetail->id], ['class' => 'btn btn-danger']);
+                                                    echo $this->Form->postLink(__('Delete'), ['controller' => 'Commdetails', 'action' => 'delete', $commdetail  ->id], ['class' => 'btn btn-danger', 'confirm' => __('Are you sure you want to delete this device?')]);
 
 
                                                     echo '</li>';

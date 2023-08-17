@@ -82,18 +82,23 @@ $this->disableAutoLayout();
                             Menu
                         </li>
                         <li class="nav-item ">
-                            <a class="nav-link active" href="#" data-toggle="collapse" aria-expanded="false" data-target="#submenu-1" aria-controls="submenu-1"><i class="fa fa-fw fa-user-circle"></i>Customer Management <span class="badge badge-success">6</span></a>
+                            <a class="nav-link active" href="#" data-toggle="collapse" aria-expanded="false"
+                               data-target="#submenu-1" aria-controls="submenu-1"><i
+                                    class="fa fa-fw fa-user-circle"></i>Customer Management <span
+                                    class="badge badge-success">6</span></a>
                             <div id="submenu-1" class="collapse submenu" style="">
                                 <ul class="nav flex-column">
                                     <li class="nav-item">
-                                        <a class="nav-link" href="/">Assigned to me</a>
+                                        <a class="nav-link" href="/customers?filter=assigned">Assigned Customers</a>
+
                                         <!--                                        Change my link to assigned to me page when done.-->
                                     </li>
                                     <li class="nav-item">
                                         <a class="nav-link" href="/customers">View All</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link" href="/customers/add">Add a Customer Profile</a>
+                                        <a class="nav-link" href="/customers/add">Add a Customer
+                                            Profile</a>
                                     </li>
                                 </ul>
                             </div>
@@ -134,6 +139,7 @@ $this->disableAutoLayout();
     </div>
     <!-- ============================================================== -->
     <!-- end left sidebar -->
+    <!-- ============================================================== -->
 
 
     <!-- ============================================================== -->

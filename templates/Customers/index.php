@@ -237,11 +237,14 @@ $checkConnection = function (string $name) {
     `
 
                             <?= $this->Form->end() ?>
+<!--     button for changing view    -->
 
                             <div class="view-options">
                                 <button id="list-view-btn" class="btn btn-primary">List View</button>
                                 <button id="table-view-btn" class="btn btn-primary">Table View</button>
                             </div>
+
+<!--                            -->
                             <br>
                             <h4>Sort by: </h4>
                             <br>
@@ -332,7 +335,7 @@ $checkConnection = function (string $name) {
 
 
                         </div>
-                        <!--                        button  for switching viewing method -->
+
 
 
 
@@ -357,7 +360,7 @@ $checkConnection = function (string $name) {
 
                     <div class="row" id="customers-list">
                         <?php foreach ($customers as $customer): ?>
-                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12" >
+                            <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12" >
                                 <div class="card"   >
                                     <div class="card-header d-flex">
                                         <h4 class="card-header-title"><?= h($customer->f_name) ?> <?= h($customer->l_name) ?></h4>
@@ -571,10 +574,10 @@ $checkConnection = function (string $name) {
         const customersTable = document.getElementById('customers-table');
 
         listViewBtn.addEventListener('click', function() {
-            customersList.style.display = 'block';
+            customersList.style.display = 'flex';
             customersTable.style.display = 'none';
         });
-
+        // the styple display of the customer
         tableViewBtn.addEventListener('click', function() {
             customersList.style.display = 'none';
             customersTable.style.display = 'table';

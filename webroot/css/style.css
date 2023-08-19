@@ -6997,7 +6997,15 @@ Media Query
 
 
 /* Time-Zone Selector*/
-
+.dt-buttons .btn {
+    padding: 6px 12px;
+    font-size: 14px;
+    line-height: 1.42857143;
+    border-radius: 4px;
+    color: #fff;
+    background-color: #007bff;
+    border-color: #007bff;
+}
 
 
 

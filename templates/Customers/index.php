@@ -63,7 +63,12 @@ $checkConnection = function (string $name) {
     <!-- Bootstrap CSS -->
     <!-- In-built CSS -->
     <?= $this->Html->css(['style', 'bootstrap.min', 'returntoparrow']) ?>
+
+<!--    Relies on cdn and netdna, add to dependencies.-->
     <link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.css">
+    <link href="https://cdn.datatables.net/v/bs4/fh-3.4.0/r-2.5.0/datatables.min.css" rel="stylesheet">
+
 
 
 
@@ -229,98 +234,10 @@ $checkConnection = function (string $name) {
                     </div>
                     <div class="row">
                         <div class="col-md-12">
-                            <?= $this->Form->create(null, ['url' => ['controller' => 'Customers', 'action' => 'index'], 'type' => 'get', 'class' => 'form-inline']) ?>
-                            <div class="form-group mr-2">
-                                <?= $this->Form->input('search', ['type' => 'text', 'class' => 'form-control', 'placeholder' => 'Search by name']) ?>
-                            </div>
-                            <?= $this->Form->button(__('Search'), ['class' => 'btn btn-primary']) ?>
-    `
 
                             <?= $this->Form->end() ?>
 
 
-                            <br>
-                            <h4>Sort by: </h4>
-                            <br>
-
-
-
-                            <tr>
-                                <th>
-                                    <?php
-                                    $sortField = 'f_name';
-                                    $sortDir = 'asc';
-                                    if ($this->Paginator->sortKey() === $sortField) {
-                                        $sortDir = ($this->Paginator->sortDir() === 'asc') ? 'desc' : 'asc';
-                                    }
-                                    ?>
-                                    <?= $this->Paginator->sort('f_name', 'First Name', ['direction' => $sortDir]) ?>
-                                    <?php if ($this->Paginator->sortKey() === 'f_name') : ?>
-                                        <?php if ($sortDir === 'asc') : ?>
-                                            <img src="<?= $this->Url->image('arrow-down.png', ['fullBase' => true, 'webroot' => 'img/', 'width' => 10]) ?>" alt="Down Arrow">
-                                        <?php else : ?>
-                                            <img src="<?= $this->Url->image('arrow-up.png', ['fullBase' => true, 'webroot' => 'img/', 'width' => 10]) ?>" alt="Up Arrow">
-                                        <?php endif; ?>
-                                    <?php endif; ?>
-                                    |
-                                </th>
-
-                                <th>
-                                    <?php
-                                    $sortField = 'l_name';
-                                    $sortDir = 'asc';
-                                    if ($this->Paginator->sortKey() === $sortField) {
-                                        $sortDir = ($this->Paginator->sortDir() === 'asc') ? 'desc' : 'asc';
-                                    }
-                                    ?>
-                                    <?= $this->Paginator->sort('l_name', 'Last Name', ['direction' => $sortDir]) ?>
-                                    <?php if ($this->Paginator->sortKey() === 'l_name') : ?>
-                                        <?php if ($sortDir === 'asc') : ?>
-                                            <img src="<?= $this->Url->image('arrow-down.png', ['fullBase' => true, 'webroot' => 'img/', 'width' => 10]) ?>" alt="Down Arrow">
-                                        <?php else : ?>
-                                            <img src="<?= $this->Url->image('arrow-up.png', ['fullBase' => true, 'webroot' => 'img/', 'width' => 10]) ?>" alt="Up Arrow">
-                                        <?php endif; ?>
-                                    <?php endif; ?>
-                                    |
-                                </th>
-
-<!--                                <th>-->
-<!--                                    --><?php
-//                                    $sortField = 'age';
-//                                    $sortDir = 'asc';
-//                                    if ($this->Paginator->sortKey() === $sortField) {
-//                                        $sortDir = ($this->Paginator->sortDir() === 'asc') ? 'desc' : 'asc';
-//                                    }
-//                                    ?>
-<!--                                    --><?php //= $this->Paginator->sort('age', 'Age', ['direction' => $sortDir]) ?>
-<!--                                    --><?php //if ($this->Paginator->sortKey() === 'age') : ?>
-<!--                                        --><?php //if ($sortDir === 'asc') : ?>
-<!--                                            <img src="--><?php //= $this->Url->image('arrow-down.png', ['fullBase' => true, 'webroot' => 'img/', 'width' => 10]) ?><!--" alt="Down Arrow">-->
-<!--                                        --><?php //else : ?>
-<!--                                            <img src="--><?php //= $this->Url->image('arrow-up.png', ['fullBase' => true, 'webroot' => 'img/', 'width' => 10]) ?><!--" alt="Up Arrow">-->
-<!--                                        --><?php //endif; ?>
-<!--                                    --><?php //endif; ?>
-<!--                                    |-->
-<!--                                </th>-->
-
-                                <th>
-                                    <?php
-                                    $sortField = 'email';
-                                    $sortDir = 'asc';
-                                    if ($this->Paginator->sortKey() === $sortField) {
-                                        $sortDir = ($this->Paginator->sortDir() === 'asc') ? 'desc' : 'asc';
-                                    }
-                                    ?>
-                                    <?= $this->Paginator->sort('email', 'Email', ['direction' => $sortDir]) ?>
-                                    <?php if ($this->Paginator->sortKey() === 'email') : ?>
-                                        <?php if ($sortDir === 'asc') : ?>
-                                            <img src="<?= $this->Url->image('arrow-down.png', ['fullBase' => true, 'webroot' => 'img/', 'width' => 10]) ?>" alt="Down Arrow">
-                                        <?php else : ?>
-                                            <img src="<?= $this->Url->image('arrow-up.png', ['fullBase' => true, 'webroot' => 'img/', 'width' => 10]) ?>" alt="Up Arrow">
-                                        <?php endif; ?>
-                                    <?php endif; ?>
-                                </th>
-                            </tr>
                             <?= $this->Html->link(__('New Customer'), ['action' => 'add'], ['class' => 'btn btn-primary float-right']) ?>
 
                             <br>
@@ -346,137 +263,85 @@ $checkConnection = function (string $name) {
                         <div id="filtered-content">
                             <!-- content show for assign to me -->
                         </div>
-                    <div class="row">
-                        <?php foreach ($customers as $customer): ?>
-                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
-                                <div class="card">
-                                    <div class="card-header d-flex">
-                                        <h4 class="card-header-title"><?= h($customer->f_name) ?> <?= h($customer->l_name) ?></h4>
-                                        <div class="toolbar card-toolbar-tabs ml-auto">
-                                            <ul class="nav nav-pills" role="tablist">
-                                                <li class="nav-item">
-                                                    <a class="nav-link active" id="pills-home-tab-<?= $customer->id ?>" data-toggle="pill" href="#pills-home-<?= $customer->id ?>" role="tab" aria-controls="pills-home" aria-selected="true">Home</a>
-                                                </li>
-                                                <li class="nav-item">
-                                                    <a class="nav-link" id="pills-profile-tab-<?= $customer->id ?>" data-toggle="pill" href="#pills-profile-<?= $customer->id ?>" role="tab" aria-controls="pills-profile" aria-selected="false">Technical Details</a>
-                                                </li>
-                                                <li class="nav-item">
-                                                    <a class="nav-link" id="pills-contact-tab-<?= $customer->id ?>" data-toggle="pill" href="#pills-contact-<?= $customer->id ?>" role="tab" aria-controls="pills-contact" aria-selected="false">Contact Methods</a>
-                                                </li>
-                                            </ul>
-                                        </div>
+                        <div class="row">
+                            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12  d-flex justify-content-right">
+                                <div class="card mx-auto">
+                                    <div class="card-header">
+                                        <h5 class="mb-0">Customer View - All Customers</h5>
                                     </div>
                                     <div class="card-body">
-                                        <div class="tab-content mb-3" id="pills-tabContent-<?= $customer->id ?>">
-                                            <div class="tab-pane fade show active" id="pills-home-<?= $customer->id ?>" role="tabpanel" aria-labelledby="pills-home-tab-<?= $customer->id ?>">
-                                                <br> Status: <?= h($customer->status) ?>
-                                                <br> Notes: <?= h($customer->notes) ?>
+                                        <div class="table-responsive">
+                                            <table id="customers" class="table table-striped table-bordered second" style="width:100%">
+                                                <thead>
+                                                <tr>
+                                                    <th>Name</th>
+                                                    <th>E-Mail</th>
+                                                    <th>Notes</th>
+                                                    <th>Device Model</th>
+                                                    <th>Technical Details</th>
+                                                    <th>Actions</th>
+                                                </tr>
+                                                </thead>
+                                                <tbody>
+                                                <?php foreach ($customers as $customer): ?>
+                                                    <tr>
+                                                        <td><?= h($customer->f_name) ?> <?= h($customer->l_name) ?></td>
+                                                        <td><?= h($customer->email) ?></td>
+                                                        <td><?= h($customer->notes) ?></td>
+                                                        <td>
+                                                            <?php if (!empty($customer->devices)) : ?>
+                                                                <ul class="device-list">
+                                                                    <?php foreach ($customer->devices as $index => $device) : ?>
+                                                                        <li>
+                                                                            <strong>Device <?= $index + 1 ?>:</strong>
+                                                                            <div><?= h($device->device_model) ?></div>
+                                                                            <div><?= h($device->technical_details) ?></div>
+                                                                        </li>
+                                                                    <?php endforeach; ?>
+                                                                </ul>
+                                                            <?php else: ?>
+                                                                <div>No Device Models have been recorded for this customer.</div>
+                                                            <?php endif; ?>
+                                                        </td>
+                                                        <td>
+                                                            <!-- No need for a separate check for devices here since it's the same structure as above -->
+                                                            <?php if (!empty($customer->devices)) : ?>
+                                                                <ul class="device-list">
+                                                                    <?php foreach ($customer->devices as $index => $device) : ?>
+                                                                        <li>
+                                                                            <strong>Device <?= $index + 1 ?>:</strong>
+                                                                            <div><?= h($device->technical_details) ?></div>
+                                                                        </li>
+                                                                    <?php endforeach; ?>
+                                                                </ul>
+                                                            <?php else: ?>
+                                                                <div>No Technical Details have been recorded for this customer.</div>
+                                                            <?php endif; ?>
+                                                        </td>
 
-                                            </div>
-                                                <div class="tab-pane fade" id="pills-profile-<?= $customer->id ?>" role="tabpanel" aria-labelledby="pills-profile-tab-<?= $customer->id ?>">
-                                                    <!-- Add stuff like technical details and devices. -->
-                                                    <?php
-                                                    if (!empty($customer->devices)) {
-                                                        foreach ($customer->devices as $device) {
-                                                            echo '<p>Device Model: ' . h($device->device_model) . '</p>';
-                                                            echo '<p>Technical Details: ' . h($device->technical_details) . '</p>';
-                                                            echo '<p>Session ID: ' . h($device->session_id) . '</p>';
-                                                            echo '<p>Transaction ID: ' . h($device->transaction_id) . '</p>';
-
-                                                        }
-                                                    } else {
-                                                        echo '<p>No devices associated with this customer.</p>';
-                                                    }
-                                                    ?>
-                                                </div>
-
-                                            <div class="tab-pane fade" id="pills-contact-<?= $customer->id ?>" role="tabpanel" aria-labelledby="pills-contact-tab-<?= $customer->id ?>">
-                                                <br>Primary E-mail: <?= h($customer->email) ?>
-                                                <?php
-                                                if (!empty($customer->commdetails)) {
-                                                    foreach ($customer->commdetails as $commdetail) {
-                                                        echo '<p>Alternate Contact: ' . h($commdetail->link) . '</p>';
-                                                    }
-                                                } else {
-                                                    echo '<p>No other contact methods were found</p>';
-                                                }
-                                                ?>
-                                            </div>
+                                                        <td>
+                                                            <?= $this->Html->link(__('View Full Profile'), ['action' => 'view', $customer->id], ['class' => 'btn btn-primary']) ?>
                                         </div>
-                                        <?= $this->Html->link(__('View Full Profile'), ['action' => 'view', $customer->id], ['class' => 'btn btn-primary']) ?>
+                                    </div>
+
+                                    </td>
+                                                    </tr>
+                                                <?php endforeach; ?>
+                                                </tbody>
+                                            </table>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        <?php endforeach; ?>
-
-                        <?php if ($this->Paginator->counter(__('Page {{page}} of {{pages}}, showing {{current}} record(s) out of {{count}} total')) === 'Page 1 of 0, showing 0 record(s) out of 0 total'): ?>
-                            <p>No results found.</p>
-                        <?php endif; ?>
-
-
-                    </div>
-
-<!--                        <a href="javascript: " id="return-to-top"><i class="icon-chevron-up"></i></a>-->
-                        <div class = "card-footer-item" >
-
-
-
-                            <div class="pagination-controls">
-                                <p class="pagination-counter">
-                                <form class="pagination-goto">
-                                    <label for="goto-page">Go to page:</label>
-
-                                    <input type="text" id="goto-page" name="page">
-                                    <button class="btn btn-primary" type="submit">Go</button>
-
-                                </form>
-                            </div>
-                            <p class="pagination-counter"><?= $this->Paginator->counter(__('Page {{page}} of {{pages}}, showing {{current}} record(s) out of {{count}} total')) ?></p>
                         </div>
 
 
+<!--                        <a href="javascript: " id="return-to-top"><i class="icon-chevron-up"></i></a>-->
+
+
 
 
                     </div>
-                    <style>
-                        .paginator {
-                            display: flex;
-                            flex-direction: column;
-                            align-items: center;
-                            justify-content: center;
-                            margin-top: 20px;
-                        }
-
-                        .pagination-container {
-                            display: flex;
-                            justify-content: center;
-                            align-items: center;
-                            margin-top: 10px;
-                        }
-
-                        .pagination {
-                            list-style: none;
-                            display: flex;
-                            align-items: center;
-                            padding: 0;
-                        }
-
-                        .pagination-item {
-                            margin: 0 5px;
-                            cursor: pointer;
-                            transition: background-color 0.3s, color 0.3s;
-                        }
-
-                        .pagination-item:hover {
-                            background-color: #007bff;
-                            color: white;
-                        }
-
-                        .pagination-counter {
-                            margin-top: 10px;
-                        }
-                    </style>
-
 
 
 
@@ -512,6 +377,8 @@ $checkConnection = function (string $name) {
                     <!--Concept - Template-->
                     <!--SlimScroll - JS Plugin. Allows for any div to be scrollable.-->
                     <!--Jquery  - Essential Javascript library-->
+<!--                    FontAwesome Icons-->
+<!--Data Tables, Cool tables that'll replace the cards!-->
                     <!--Add any explinations here for any scripts you add. - Alex-->
 
 
@@ -519,8 +386,109 @@ $checkConnection = function (string $name) {
 
                     <?= $this->Html->script('https://kit.fontawesome.com/b5c616a120.js', ['crossorigin' => 'anonymous']) ?>
                     <?= $this->Html->script(['jquery-3.3.1.min.js', 'bootstrap.bundle.js', 'main-js', 'jquery.slimscroll.js', 'gototoparrow.js']) ?>
+                    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.js"></script>
+                    <?= $this->Html->script('https://cdn.datatables.net/1.13.6/js/jquery.dataTables.js'), ['crossorigin' => 'anonymous']?>
+<!--             Download it all into things.-->
+                    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+                    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/pdfmake.min.js"></script>
+                    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/vfs_fonts.js"></script>
+<!--                    This one adds responsive + fixed headers-->
+                    <script src="https://cdn.datatables.net/v/bs4/fh-3.4.0/r-2.5.0/datatables.min.js"></script>
+<!--                    Buttons + everything else.-->
+                    <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+                    <script src="https://cdn.datatables.net/buttons/2.0.1/js/dataTables.buttons.min.js"></script>
+                    <script src="https://cdn.datatables.net/buttons/2.0.1/js/buttons.html5.min.js"></script>
+                    <script>
+                        $(document).ready(function () {
+                            var table = $('#customers').DataTable({
+                                responsive: true,
+                                fixedHeader: true,
+                                dom: 'Bfrtip',
+                                buttons: [
+                                    {
+                                        extend: 'copy',
+                                        text: 'Copy',
+                                        className: 'btn btn-primary',
+                                        exportOptions: {
+                                            columns: ':visible'
+                                        }
+                                    },
+                                    {
+                                        extend: 'excel',
+                                        text: 'Excel',
+                                        className: 'btn btn-primary',
+                                        exportOptions: {
+                                            columns: ':visible'
+                                        }
+                                    },
+                                    {
+                                        extend: 'pdf',
+                                        text: 'PDF',
+                                        className: 'btn btn-primary',
+                                        exportOptions: {
+                                            columns: ':visible'
+                                        }
+                                    }
+                                ]
+                            });
+
+                            $('#customers tbody').on('click', 'td', function () {
+                                var tr = $(this).closest('tr');
+                                var row = table.row(tr);
+
+                                if (row.child.isShown()) {
+                                    row.child.hide();
+                                    tr.removeClass('shown');
+                                } else {
+                                    var rowData = JSON.parse(tr.data('child-value'));
+                                    var devicesHtml = '';
+                                    if (rowData) {
+                                        rowData.forEach(function (device) {
+                                            devicesHtml += '<div>' + device.device_model + '</div>';
+                                            devicesHtml += '<div>' + device.technical_details + '</div>';
+                                        });
+                                    }
+                                    row.child(devicesHtml).show();
+                                    tr.addClass('shown');
+                                }
+                            });
+                        });
+                    </script>
 
 
+                    <style>
+                        .device-list {
+                            list-style-type: none;
+                            padding-left: 0;
+                        }
+
+                        .device-list li {
+                            margin-bottom: 10px;
+                        }
+
+                        .device-list li strong {
+                            font-weight: bold;
+                        }
+                        /* I hate in-line styling but nothing else works >:*/
+                        .dataTables_paginate .pagination {
+                            display: flex;
+                            justify-content: center;
+                            gap: 0.5rem;
+                            padding-top: 1rem;
+                        }
+
+                        .dataTables_paginate .paginate_button {
+                            padding: 0.25rem 0.5rem;
+                            border-radius: 0.25rem;
+                            border: 1px solid #dee2e6;
+                        }
+
+                        .dataTables_paginate .paginate_button.active {
+                            background-color: #007bff;
+                            color: #fff;
+                            border-color: #007bff;
+                        }
+                    </style>
 
 
 

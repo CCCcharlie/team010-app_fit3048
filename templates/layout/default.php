@@ -87,7 +87,7 @@ $cakeDescription = 'CakePHP: The rapid development PHP framework';
                             <nav aria-label="breadcrumb">
                                 <ol class="breadcrumb">
                                     <li class="breadcrumb-item"><a href="/" class="breadcrumb-link">Home</a></li>
-                                    <li class="breadcrumb-item"><a href="#" class="breadcrumb-link">Pages</a></li>
+
                                     <li class="breadcrumb-item active" aria-current="page">Currencly action</li>
                                 </ol>
                             </nav>
@@ -144,7 +144,7 @@ $cakeDescription = 'CakePHP: The rapid development PHP framework';
                                     <!--                                        Change my link to assigned to me page when done.-->
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="/customers">View All</a>
+                                    <a class="nav-link" href="../customers">View All</a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link" href="/customers/add">Add a Customer

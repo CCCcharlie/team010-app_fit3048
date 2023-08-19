@@ -188,7 +188,10 @@ class AuthController extends AppController {
             $fallbackLocation = ['controller' => 'Customers', 'action' => 'index'];
 
             // and redirect user to the location they're trying to access
-            return $this->redirect($this->Authentication->getLoginRedirect() ?? $fallbackLocation);
+//            return $this->redirect($this->Authentication->getLoginRedirect() ?? $fallbackLocation);
+            //Instead of redirecting to homepage, redirect to customer view page regardless of what page they are trying to access
+
+            return $this->redirect(['controller' => 'Customers', 'action' => 'index']);
         }
 
         // display error if user submitted their credentials but authentication failed

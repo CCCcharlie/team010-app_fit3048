@@ -229,111 +229,128 @@ $checkConnection = function (string $name) {
                     </div>
                     <div class="row">
                         <div class="col-md-12">
-                            <?= $this->Form->create(null, ['url' => ['controller' => 'Customers', 'action' => 'index'], 'type' => 'get', 'class' => 'form-inline']) ?>
-                            <div class="form-group mr-2">
-                                <?= $this->Form->input('search', ['type' => 'text', 'class' => 'form-control', 'placeholder' => 'Search by name']) ?>
-                            </div>
-                            <?= $this->Form->button(__('Search'), ['class' => 'btn btn-primary']) ?>
-    `
-
-                            <?= $this->Form->end() ?>
+                            <div>
+<!--                            --><?php //= $this->Form->create(null, ['url' => ['controller' => 'Customers', 'action' => 'index'], 'type' => 'get', 'class' => 'form-inline']) ?>
+<!--                            <div class="form-group mr-2">-->
+<!--                                --><?php //= $this->Form->input('search', ['type' => 'text', 'class' => 'form-control', 'placeholder' => 'Search by name']) ?>
+<!--                            </div>-->
+<!--                            --><?php //= $this->Form->button(__('Search'), ['class' => 'btn btn-primary']) ?>
+<!--    `-->
+<!---->
+<!--                            --><?php //= $this->Form->end() ?>
 <!--     button for changing view    -->
 
                             <div class="view-options">
                                 <button id="list-view-btn" class="btn btn-primary">List View</button>
                                 <button id="table-view-btn" class="btn btn-primary">Table View</button>
                             </div>
+                            </div>
 
 <!--                            -->
                             <br>
-                            <h4>Sort by: </h4>
-                            <br>
+                            <div>
+                                <h4>Filter: </h4>
+                                <?= $this->Form->create(null, ['url' => ['controller' => 'Customers', 'action' => 'index'], 'type' => 'get', 'class' => 'form-inline']) ?>
+                                <div class="form-group mr-2">
+                                    <?= $this->Form->input('search', ['type' => 'text', 'class' => 'form-control', 'placeholder' => 'Search by name']) ?>
+                                </div>
+                                <?= $this->Form->button(__('Search'), ['class' => 'btn btn-primary', 'style' => 'margin-top: 0px']) ?>
+                                <?= $this->Form->end() ?>
 
-
-
-                            <tr>
-                                <th>
-                                    <?php
-                                    $sortField = 'f_name';
-                                    $sortDir = 'asc';
-                                    if ($this->Paginator->sortKey() === $sortField) {
-                                        $sortDir = ($this->Paginator->sortDir() === 'asc') ? 'desc' : 'asc';
-                                    }
-                                    ?>
-                                    <?= $this->Paginator->sort('f_name', 'First Name', ['direction' => $sortDir]) ?>
-                                    <?php if ($this->Paginator->sortKey() === 'f_name') : ?>
-                                        <?php if ($sortDir === 'asc') : ?>
-                                            <img src="<?= $this->Url->image('arrow-down.png', ['fullBase' => true, 'webroot' => 'img/', 'width' => 10]) ?>" alt="Down Arrow">
-                                        <?php else : ?>
-                                            <img src="<?= $this->Url->image('arrow-up.png', ['fullBase' => true, 'webroot' => 'img/', 'width' => 10]) ?>" alt="Up Arrow">
+                                <tr>
+                                    <th>
+                                        <?php
+                                        $sortField = 'f_name';
+                                        $sortDir = 'asc';
+                                        if ($this->Paginator->sortKey() === $sortField) {
+                                            $sortDir = ($this->Paginator->sortDir() === 'asc') ? 'desc' : 'asc';
+                                        }
+                                        ?>
+                                        <?= $this->Paginator->sort('f_name', 'First Name', ['direction' => $sortDir]) ?>
+                                        <?php if ($this->Paginator->sortKey() === 'f_name') : ?>
+                                            <?php if ($sortDir === 'asc') : ?>
+                                                <img
+                                                    src="<?= $this->Url->image('arrow-down.png', ['fullBase' => true, 'webroot' => 'img/', 'width' => 10]) ?>"
+                                                    alt="Down Arrow">
+                                            <?php else : ?>
+                                                <img
+                                                    src="<?= $this->Url->image('arrow-up.png', ['fullBase' => true, 'webroot' => 'img/', 'width' => 10]) ?>"
+                                                    alt="Up Arrow">
+                                            <?php endif; ?>
                                         <?php endif; ?>
-                                    <?php endif; ?>
-                                    |
-                                </th>
+                                        |
+                                    </th>
 
-                                <th>
-                                    <?php
-                                    $sortField = 'l_name';
-                                    $sortDir = 'asc';
-                                    if ($this->Paginator->sortKey() === $sortField) {
-                                        $sortDir = ($this->Paginator->sortDir() === 'asc') ? 'desc' : 'asc';
-                                    }
-                                    ?>
-                                    <?= $this->Paginator->sort('l_name', 'Last Name', ['direction' => $sortDir]) ?>
-                                    <?php if ($this->Paginator->sortKey() === 'l_name') : ?>
-                                        <?php if ($sortDir === 'asc') : ?>
-                                            <img src="<?= $this->Url->image('arrow-down.png', ['fullBase' => true, 'webroot' => 'img/', 'width' => 10]) ?>" alt="Down Arrow">
-                                        <?php else : ?>
-                                            <img src="<?= $this->Url->image('arrow-up.png', ['fullBase' => true, 'webroot' => 'img/', 'width' => 10]) ?>" alt="Up Arrow">
+                                    <th>
+                                        <?php
+                                        $sortField = 'l_name';
+                                        $sortDir = 'asc';
+                                        if ($this->Paginator->sortKey() === $sortField) {
+                                            $sortDir = ($this->Paginator->sortDir() === 'asc') ? 'desc' : 'asc';
+                                        }
+                                        ?>
+                                        <?= $this->Paginator->sort('l_name', 'Last Name', ['direction' => $sortDir]) ?>
+                                        <?php if ($this->Paginator->sortKey() === 'l_name') : ?>
+                                            <?php if ($sortDir === 'asc') : ?>
+                                                <img
+                                                    src="<?= $this->Url->image('arrow-down.png', ['fullBase' => true, 'webroot' => 'img/', 'width' => 10]) ?>"
+                                                    alt="Down Arrow">
+                                            <?php else : ?>
+                                                <img
+                                                    src="<?= $this->Url->image('arrow-up.png', ['fullBase' => true, 'webroot' => 'img/', 'width' => 10]) ?>"
+                                                    alt="Up Arrow">
+                                            <?php endif; ?>
                                         <?php endif; ?>
-                                    <?php endif; ?>
-                                    |
-                                </th>
+                                        |
+                                    </th>
 
-<!--                                <th>-->
-<!--                                    --><?php
-//                                    $sortField = 'age';
-//                                    $sortDir = 'asc';
-//                                    if ($this->Paginator->sortKey() === $sortField) {
-//                                        $sortDir = ($this->Paginator->sortDir() === 'asc') ? 'desc' : 'asc';
-//                                    }
-//                                    ?>
-<!--                                    --><?php //= $this->Paginator->sort('age', 'Age', ['direction' => $sortDir]) ?>
-<!--                                    --><?php //if ($this->Paginator->sortKey() === 'age') : ?>
-<!--                                        --><?php //if ($sortDir === 'asc') : ?>
-<!--                                            <img src="--><?php //= $this->Url->image('arrow-down.png', ['fullBase' => true, 'webroot' => 'img/', 'width' => 10]) ?><!--" alt="Down Arrow">-->
-<!--                                        --><?php //else : ?>
-<!--                                            <img src="--><?php //= $this->Url->image('arrow-up.png', ['fullBase' => true, 'webroot' => 'img/', 'width' => 10]) ?><!--" alt="Up Arrow">-->
-<!--                                        --><?php //endif; ?>
-<!--                                    --><?php //endif; ?>
-<!--                                    |-->
-<!--                                </th>-->
+                                    <!--                                <th>-->
+                                    <!--                                    --><?php
+                                    //                                    $sortField = 'age';
+                                    //                                    $sortDir = 'asc';
+                                    //                                    if ($this->Paginator->sortKey() === $sortField) {
+                                    //                                        $sortDir = ($this->Paginator->sortDir() === 'asc') ? 'desc' : 'asc';
+                                    //                                    }
+                                    //                                    ?>
+                                    <!--                                    --><?php //= $this->Paginator->sort('age', 'Age', ['direction' => $sortDir]) ?>
+                                    <!--                                    --><?php //if ($this->Paginator->sortKey() === 'age') : ?>
+                                    <!--                                        --><?php //if ($sortDir === 'asc') : ?>
+                                    <!--                                            <img src="-->
+                                    <?php //= $this->Url->image('arrow-down.png', ['fullBase' => true, 'webroot' => 'img/', 'width' => 10]) ?><!--" alt="Down Arrow">-->
+                                    <!--                                        --><?php //else : ?>
+                                    <!--                                            <img src="-->
+                                    <?php //= $this->Url->image('arrow-up.png', ['fullBase' => true, 'webroot' => 'img/', 'width' => 10]) ?><!--" alt="Up Arrow">-->
+                                    <!--                                        --><?php //endif; ?>
+                                    <!--                                    --><?php //endif; ?>
+                                    <!--                                    |-->
+                                    <!--                                </th>-->
 
-                                <th>
-                                    <?php
-                                    $sortField = 'email';
-                                    $sortDir = 'asc';
-                                    if ($this->Paginator->sortKey() === $sortField) {
-                                        $sortDir = ($this->Paginator->sortDir() === 'asc') ? 'desc' : 'asc';
-                                    }
-                                    ?>
-                                    <?= $this->Paginator->sort('email', 'Email', ['direction' => $sortDir]) ?>
-                                    <?php if ($this->Paginator->sortKey() === 'email') : ?>
-                                        <?php if ($sortDir === 'asc') : ?>
-                                            <img src="<?= $this->Url->image('arrow-down.png', ['fullBase' => true, 'webroot' => 'img/', 'width' => 10]) ?>" alt="Down Arrow">
-                                        <?php else : ?>
-                                            <img src="<?= $this->Url->image('arrow-up.png', ['fullBase' => true, 'webroot' => 'img/', 'width' => 10]) ?>" alt="Up Arrow">
+                                    <th>
+                                        <?php
+                                        $sortField = 'email';
+                                        $sortDir = 'asc';
+                                        if ($this->Paginator->sortKey() === $sortField) {
+                                            $sortDir = ($this->Paginator->sortDir() === 'asc') ? 'desc' : 'asc';
+                                        }
+                                        ?>
+                                        <?= $this->Paginator->sort('email', 'Email', ['direction' => $sortDir]) ?>
+                                        <?php if ($this->Paginator->sortKey() === 'email') : ?>
+                                            <?php if ($sortDir === 'asc') : ?>
+                                                <img
+                                                    src="<?= $this->Url->image('arrow-down.png', ['fullBase' => true, 'webroot' => 'img/', 'width' => 10]) ?>"
+                                                    alt="Down Arrow">
+                                            <?php else : ?>
+                                                <img
+                                                    src="<?= $this->Url->image('arrow-up.png', ['fullBase' => true, 'webroot' => 'img/', 'width' => 10]) ?>"
+                                                    alt="Up Arrow">
+                                            <?php endif; ?>
                                         <?php endif; ?>
-                                    <?php endif; ?>
-                                </th>
-                            </tr>
-                            <?= $this->Html->link(__('New Customer'), ['action' => 'add'], ['class' => 'btn btn-primary float-right']) ?>
-
-                            <br>
-                            <br>
-
-
-
+                                    </th>
+                                </tr>
+                                <?= $this->Html->link(__('New Customer'), ['action' => 'add'], ['class' => 'btn btn-primary float-right']) ?>
+                                <br>
+                                <br>
+                            </div>
                         </div>
 
 

@@ -238,7 +238,10 @@ $checkConnection = function (string $name) {
 
                             <?= $this->Form->end() ?>
 
-
+                            <div class="view-options">
+                                <button id="list-view-btn" class="btn btn-primary">List View</button>
+                                <button id="table-view-btn" class="btn btn-primary">Table View</button>
+                            </div>
                             <br>
                             <h4>Sort by: </h4>
                             <br>
@@ -329,6 +332,10 @@ $checkConnection = function (string $name) {
 
 
                         </div>
+                        <!--                        button  for switching viewing method -->
+
+
+
 
                     <br>
 
@@ -346,10 +353,12 @@ $checkConnection = function (string $name) {
                         <div id="filtered-content">
                             <!-- content show for assign to me -->
                         </div>
-                    <div class="row">
+
+
+                    <div class="row" id="customers-list">
                         <?php foreach ($customers as $customer): ?>
-                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
-                                <div class="card">
+                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12" >
+                                <div class="card"   >
                                     <div class="card-header d-flex">
                                         <h4 class="card-header-title"><?= h($customer->f_name) ?> <?= h($customer->l_name) ?></h4>
                                         <div class="toolbar card-toolbar-tabs ml-auto">
@@ -406,6 +415,7 @@ $checkConnection = function (string $name) {
                                         <?= $this->Html->link(__('View Full Profile'), ['action' => 'view', $customer->id], ['class' => 'btn btn-primary']) ?>
                                     </div>
                                 </div>
+
                             </div>
                         <?php endforeach; ?>
 
@@ -415,6 +425,37 @@ $checkConnection = function (string $name) {
 
 
                     </div>
+                        <div id="customers-table"  style="display: none;">
+                            <!-- table code -->
+                            <table class="table table-bordered">
+                                <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Status</th>
+                                    <th>Notes</th>
+                                    <th>Actions</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <?php foreach ($customers as $customer): ?>
+                                    <tr>
+                                        <td><?= h($customer->f_name) ?> <?= h($customer->l_name) ?></td>
+                                        <td><?= h($customer->status) ?></td>
+                                        <td><?= h($customer->notes) ?></td>
+                                        <td>
+                                            <?= $this->Html->link(__('View Full Profile'), ['action' => 'view', $customer->id], ['class' => 'btn btn-primary']) ?>
+                                        </td>
+                                    </tr>
+                                <?php endforeach; ?>
+
+                                <?php if ($this->Paginator->counter(__('Page {{page}} of {{pages}}, showing {{current}} record(s) out of {{count}} total')) === 'Page 1 of 0, showing 0 record(s) out of 0 total'): ?>
+                                    <tr>
+                                        <td colspan="4">No results found.</td>
+                                    </tr>
+                                <?php endif; ?>
+                                </tbody>
+                            </table>
+                        </div>
 
 <!--                        <a href="javascript: " id="return-to-top"><i class="icon-chevron-up"></i></a>-->
                         <div class = "card-footer-item" >
@@ -520,8 +561,26 @@ $checkConnection = function (string $name) {
                     <?= $this->Html->script('https://kit.fontawesome.com/b5c616a120.js', ['crossorigin' => 'anonymous']) ?>
                     <?= $this->Html->script(['jquery-3.3.1.min.js', 'bootstrap.bundle.js', 'main-js', 'jquery.slimscroll.js', 'gototoparrow.js']) ?>
 
+<!--script for switching view method-->
 
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const listViewBtn = document.getElementById('list-view-btn');
+        const tableViewBtn = document.getElementById('table-view-btn');
+        const customersList = document.getElementById('customers-list');
+        const customersTable = document.getElementById('customers-table');
 
+        listViewBtn.addEventListener('click', function() {
+            customersList.style.display = 'block';
+            customersTable.style.display = 'none';
+        });
+
+        tableViewBtn.addEventListener('click', function() {
+            customersList.style.display = 'none';
+            customersTable.style.display = 'table';
+        });
+    });
+</script>
 
 
 </body>

@@ -68,7 +68,7 @@ class TicketsController extends AppController
             if ($this->Tickets->save($ticket)) {
                 $this->Flash->success(__('The ticket for ' . $fullName . ' Is successfully created'));
 
-                return $this->redirect($this->referer());
+                return $this->redirect(['controller' => 'Customers', 'action' => 'view', $custId]);
             }
             $this->Flash->error(__('The ticket for ' . $fullName . ' could not be created'));
         }

@@ -217,7 +217,7 @@ class ContentsController extends AppController
 
                 // Instead of redirect to index page, redirect to where the user came from
                 // Remember the function is being called from both index listing and view page sidebar
-                return $this->redirect($this->referer());
+                return $this->redirect(['controller' => 'Customers', 'action' => 'view', $custId]);
             }
             $this->Flash->error(__('The content could not be saved. Please, try again.'));
         }

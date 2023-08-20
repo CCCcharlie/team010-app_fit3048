@@ -119,25 +119,25 @@ $checkConnection = function (string $name) {
         <div class="menu-list">
             <nav class="navbar navbar-expand-lg navbar-light">
                 <a class="d-xl-none d-lg-none" href="#">Customer View</a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
-                        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                <div class="collapse navbar-collapse" id="navbarNav">
+                <div class="navbar-collapse" id="navbarNav">
                     <ul class="navbar-nav flex-column">
                         <li class="nav-divider">
                             Menu
                         </li>
                         <li class="nav-item ">
-                            <a class="nav-link active" href="#" data-toggle="collapse" aria-expanded="false"
+                            <a class="nav-link active" href="#" data-toggle="collapse" aria-expanded="true"
                                data-target="#submenu-1" aria-controls="submenu-1"><i
                                     class="fa fa-fw fa-user-circle"></i>Customer Management <span
                                     class="badge badge-success">6</span></a>
-                            <div id="submenu-1" class="collapse submenu" style="">
+                            <div id="submenu-1" class="submenu show" style="">
                                 <ul class="nav flex-column">
                                     <li class="nav-item">
-                                        <a class="nav-link" href="/customers/">Assigned to me</a>
-                                        <!--                                        Change my link to assigned to me page when done.-->
+                                        <a class="nav-link" href="/customers?filter=assigned">Assigned Customers</a>
+
+                                        <!-- Change my link to assigned to me page when done. -->
                                     </li>
                                     <li class="nav-item">
                                         <a class="nav-link" href="/customers">View All</a>
@@ -149,47 +149,26 @@ $checkConnection = function (string $name) {
                                 </ul>
                             </div>
                         </li>
-                        <!--                        <li class="nav-item">-->
-                        <!--                            <a class="nav-link" href="#" data-toggle="collapse" aria-expanded="false"-->
-                        <!--                               data-target="#submenu-2" aria-controls="submenu-2"><i class="fa-solid fa-user-tie"></i>Tag-->
-                        <!--                                Management</a>-->
-                        <!--                            <div id="submenu-2" class="collapse submenu" style="">-->
-                        <!--                                <ul class="nav flex-column">-->
-                        <!--                                    <li class="nav-item">-->
-                        <!--                                        <a class="nav-link" href="/Tags/index">View All Tags<span-->
-                        <!--                                                class="badge badge-secondary">New</span></a>-->
-                        <!--                                    </li>-->
-                        <!--                                    <li class="nav-item">-->
-                        <!--                                        <a class="nav-link" href="/Tags/add">Add some Tags<span-->
-                        <!--                                                class="badge badge-secondary">New</span></a>-->
-                        <!--                                    </li>-->
-                        <!--                                </ul>-->
-                        <!--                            </div>-->
-                        <!--                        </li>-->
                         <li class="nav-divider">
                             Admin Features
-                            <!--                            Change to me admin only visable.-->
+                            <!-- Change to me admin only visible. -->
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#" data-toggle="collapse" aria-expanded="false"
-                               data-target="#submenu-6" aria-controls="submenu-6"><i class="fa-solid fa-user-tie"></i>Staff
-                                Management</a>
-                            <div id="submenu-6" class="collapse submenu" style="">
+                            <a class="nav-link" href="#" data-toggle="collapse" aria-expanded="true" data-target="#submenu-6" aria-controls="submenu-6"><i class="fa-solid fa-user-tie"></i>Staff Management</a>
+                            <div id="submenu-6" class="submenu show" style="">
                                 <ul class="nav flex-column">
                                     <li class="nav-item">
-                                        <a class="nav-link" href="/Users">View All Staff
-                                            Accounts </a>
+                                        <a class="nav-link" href="/Users/">View All Staff Accounts</a>
                                     </li>
-
                                 </ul>
                             </div>
-
-
+                        </li>
                     </ul>
                 </div>
             </nav>
         </div>
     </div>
+
     <!-- ============================================================== -->
     <!-- end left sidebar -->
     <!-- ============================================================== -->

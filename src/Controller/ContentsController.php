@@ -212,7 +212,7 @@ class ContentsController extends AppController
             $content->ticket_id = $ticketId;
 
             if ($this->Contents->save($content)) {
-                $message = "The attachment for Ticket" . $content->ticket_id .  "Saved successfully";
+                $message = "The attachment for Ticket " . $content->ticket_id .  " Saved successfully";
                 $this->Flash->success(__($message));
 
                 // Instead of redirect to index page, redirect to where the user came from

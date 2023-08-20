@@ -374,7 +374,15 @@ $checkConnection = function (string $name) {
                                                                 <?php elseif($ticket->closed == false) : ?>
                                                                 <div class="card-header d-flex" style="background-color: lightgreen">
                                                                     <?php endif; ?>
-                                                                    <h4 class="card-header-title">Title:  <?= h($ticket->title) ?> | Type: <?= h($ticket->type) ?></h4>
+                                                                    <div>
+                                                                    <h4 class="card-header-title">Title:  <?= h($ticket->title) ?></h4>
+                                                                    <h5> Type: <?= h($ticket->type) ?> </h5>
+                                                                        <?php if($ticket->closed == true) : ?>
+                                                                    <h6> Status: Closed </h6>
+                                                                        <?php elseif($ticket->closed == false) : ?>
+                                                                    <h6> Status: Open </h6>
+                                                                        <?php endif; ?>
+                                                                    </div>
                                                                     <div class="toolbar ml-auto">
                                                                         <?php
                                                                         //if true means it is closed. Allow option to open ticket
@@ -502,7 +510,15 @@ $checkConnection = function (string $name) {
                                                                 <?php if($ticket->closed == true) : ?>
                                                                     <div class="card">
                                                                         <div class="card-header d-flex" style="background-color: lightcoral">
-                                                                            <h4 class="card-header-title">Title:  <?= h($ticket->title) ?> | Type: <?= h($ticket->type) ?></h4>
+                                                                            <div>
+                                                                                <h4 class="card-header-title">Title:  <?= h($ticket->title) ?></h4>
+                                                                                <h5> Type: <?= h($ticket->type) ?> </h5>
+                                                                                <?php if($ticket->closed == true) : ?>
+                                                                                    <h6> Status: Closed </h6>
+                                                                                <?php elseif($ticket->closed == false) : ?>
+                                                                                    <h6> Status: Open </h6>
+                                                                                <?php endif; ?>
+                                                                            </div>
                                                                             <div class="toolbar ml-auto">
                                                                                 <?php
                                                                                 //if true means it is closed. Allow option to open ticket
@@ -609,7 +625,15 @@ $checkConnection = function (string $name) {
                                                                 <?php if($ticket->closed == false) : ?>
                                                                     <div class="card">
                                                                         <div class="card-header d-flex" style="background-color: lightgreen">
-                                                                            <h4 class="card-header-title">Title:  <?= h($ticket->title) ?> | Type: <?= h($ticket->type) ?></h4>
+                                                                            <div>
+                                                                                <h4 class="card-header-title">Title:  <?= h($ticket->title) ?></h4>
+                                                                                <h5> Type: <?= h($ticket->type) ?> </h5>
+                                                                                <?php if($ticket->closed == true) : ?>
+                                                                                    <h6> Status: Closed </h6>
+                                                                                <?php elseif($ticket->closed == false) : ?>
+                                                                                    <h6> Status: Open </h6>
+                                                                                <?php endif; ?>
+                                                                            </div>
                                                                             <div class="toolbar ml-auto">
                                                                                 <?php
                                                                                 //if true means it is closed. Allow option to open ticket

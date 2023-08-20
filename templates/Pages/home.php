@@ -193,13 +193,23 @@ $checkConnection = function (string $name) {
             <div class="row">
                 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                     <div class="page-header">
-                            <h2 class="pageheader-title">Welcome!</h2>
-<!--
-                        <p class="pageheader-text">Proin placerat ante duiullam scelerisque a velit ac porta, fusce sit amet vestibulum mi. Morbi lobortis pulvinar quam.</p>
-                    </div>
-                </div>
-            </div>
-            <!- ============================================================== -->
+                        <!-- To obtain the identity, use $identity = $this->request->getAttribute('authentication')->getIdentity(); to find the currently logged in entity
+to get the name or any value in the staff table, use the get and then the name of the attribute $identity->get('staff_fname')-->
+                        <?php $identity = $this->request->getAttribute('authentication')->getIdentity();
+                        //                        debug($identity->get('f_name'));
+                        //                        exit();
+                        ?>
+                        <h2 class="pageheader-title">Welcome, <?= $identity->get('f_name'); ?></h2>
+
+                        <!-- Can you add login user to name here if you get chance Bryan?  -->
+                        <!-- Sure Alex-->
+
+                        <!--
+                                                <p class="pageheader-text">Proin placerat ante duiullam scelerisque a velit ac porta, fusce sit amet vestibulum mi. Morbi lobortis pulvinar quam.</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!- ============================================================== -->
             <!-- end pageheader -->
             <!-- ============================================================== -->
             <div class="row">

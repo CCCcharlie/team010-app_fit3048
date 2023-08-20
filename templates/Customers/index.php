@@ -437,7 +437,7 @@ $checkConnection = function (string $name) {
                                                 <div class="device-details">
                                                     <h5>Model: <?= h($device->device_model) ?></h5>
                                                     <div>
-                                                        <strong>ver:</strong> <?= h($device->gamblock_ver) ?> | <strong>session id:</strong> <?= h($device->session id) ?>
+                                                        <strong>ver:</strong> <?= h($device->gamblock_ver) ?> | <strong>session id:</strong> <?= h($device->sessionid) ?>
                                                     </div>
                                                     <div>
                                                         <strong>(Technical Details):</strong> <?= h($device->technical_details) ?>

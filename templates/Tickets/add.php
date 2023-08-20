@@ -25,7 +25,7 @@ $this->disableAutoLayout();
     <!-- In-built CSS -->
     <?= $this->Html->css(['style', 'bootstrap.min',]) ?>
     <?= $this->Html->css(['fontawesome-all'], ['block' => true]) ?>
-
+    <link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
 
 
 
@@ -162,7 +162,6 @@ $this->disableAutoLayout();
                                 <div class="tickets form content">
                                     <?= $this->Form->create($ticket) ?>
                                     <fieldset>
-                                        <p> You have the ability to make multiple tickets in a row here. Hit 'Return to Customer' when done.</p>
                                         <div class="form-group">
                                             <?= $this->Form->label('title', 'Title', ['class' => 'col-form-label']) ?>
                                             <?= $this->Form->input('title', [
@@ -208,16 +207,34 @@ $this->disableAutoLayout();
                                         </div>
                                     </fieldset>
                                     <div class="form-group d-flex justify-content-between align-items-center">
+                                        <?= $this->Form->create(null, ['url' => ['controller' => 'Customers', 'action' => 'view', $custId]]) ?>
                                         <?= $this->Html->link(__('Return to Customer'), ['controller' => 'Customers', 'action' => 'view', $custId], ['class' => 'btn btn-rounded btn-secondary']) ?>
                                         <?= $this->Form->button(__('Submit'), ['class' => 'btn btn-primary']) ?>
+                                        <?= $this->Form->end() ?>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
 
+                <div class="footer">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12">
+                                Copyright ©  GamBlock®. All rights reserved. This site is for access by GamBlock® Staff Only. Template by <a href="https://colorlib.com/wp/">Colorlib</a>.
+                            </div>
+                            <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12">
+                                <!--                                        <div class="text-md-right footer-links d-none d-sm-block">-->
+                                <!--                                            <a href="javascript: void(0);">Documentation</a>-->
+                                <!--                                            <a href="javascript: void(0);">Contact Points</a>-->
+                                <!--                                        </div>-->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
         </div>
     </div>
@@ -225,20 +242,7 @@ $this->disableAutoLayout();
     <!-- ============================================================== -->
     <!-- footer -->
     <!-- ============================================================== -->
-    <div class="footer">
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12">
-                    Copyright ©  GamBlock®. All rights reserved. This site is for access by GamBlock® Staff Only. Template by <a href="https://colorlib.com/wp/">Colorlib</a>.
-                </div>
-                <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12">
-                    <!--                                        <div class="text-md-right footer-links d-none d-sm-block">-->
-                    <!--                                            <a href="javascript: void(0);">Documentation</a>-->
-                    <!--                                            <a href="javascript: void(0);">Contact Points</a>-->
-                    <!--                                        </div>-->
-                </div>
-            </div>
-        </div>
+
 
 
     </div>
@@ -247,6 +251,4 @@ $this->disableAutoLayout();
     <!-- ============================================================== -->
 
 </div>
-</div>
 
-</body>

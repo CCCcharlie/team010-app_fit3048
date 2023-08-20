@@ -240,7 +240,7 @@ $checkConnection = function (string $name) {
                             <!-- ============================================================== -->
                             <!-- card profile -->
                             <!-- ============================================================== -->
-                            <div class="card">
+                            <div class="card" style="min-height: 500px">
                                 <div class="card-body">
                                     <div class="user-avatar text-center d-block">
                                         <img src="/img/avatar-1.png" alt="User Avatar">

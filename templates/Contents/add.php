@@ -22,6 +22,7 @@ $this->disableAutoLayout();
     <!-- Bootstrap CSS -->
     <!-- In-built CSS -->
     <?= $this->Html->css(['style', 'bootstrap.min',]) ?>
+    <?= $this->Html->css(['style', 'error',]) ?>
     <?= $this->Html->css(['fontawesome-all'], ['block' => true]) ?>
 
 

@@ -15,7 +15,6 @@ $this->disableAutoLayout();
 
 <head>
     <?= $this->Html->meta('icon', 'favicon.ico', ['type' => 'icon']) ?>
-
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -23,14 +22,9 @@ $this->disableAutoLayout();
     <!-- Bootstrap CSS -->
     <!-- In-built CSS -->
     <?= $this->Html->css(['style', 'bootstrap.min',]) ?>
+    <?= $this->Html->css(['style', 'error',]) ?>
     <?= $this->Html->css(['fontawesome-all'], ['block' => true]) ?>
-
-
-
-
-
 </head>
-
 <body>
 <!-- ============================================================== -->
 <!-- main wrapper -->
@@ -175,6 +169,9 @@ $this->disableAutoLayout();
                                             'title' => 'Please enter your first name using letters and hyphens only',
                                             'pattern' => '^[A-Za-z-]+$'
                                         ]) ?>
+                                        <!-- Display validation error for the 'f_name' field -->
+                                        <?= $this->Form->error('f_name'); ?>
+
                                         <small class="form-text text-muted">Letters and hyphens only.</small>
                                     </div>
                                     <div class="form-group">
@@ -186,6 +183,9 @@ $this->disableAutoLayout();
                                             'title' => 'Please enter your last name using letters and hyphens only',
                                             'pattern' => '^[A-Za-z-]+$'
                                         ]) ?>
+                                        <!-- Display validation error for the 'f_name' field -->
+                                        <?= $this->Form->error('l_name'); ?>
+
                                         <small class="form-text text-muted">Letters and hyphens only.</small>
                                     </div>
                                     <div class="form-group">
@@ -199,6 +199,9 @@ $this->disableAutoLayout();
                                             'title' => 'Please enter a valid email address with a domain (e.g., name@mail.com)',
                                             'maxlength' => 320 // Maximum of 320 characters
                                         ]) ?>
+                                        <!-- Display validation error for the 'f_name' field -->
+                                        <?= $this->Form->error('email'); ?>
+
                                         <small class="form-text text-muted">Please enter a valid email address.</small>
                                     </div>
                                     <div class="form-group">
@@ -210,6 +213,9 @@ $this->disableAutoLayout();
                                             'maxlength' => 124, // Maximum of 124 characters
                                             'pattern' => '(?=.*\d).{6,}', // At least 6 characters with at least one number
                                         ]) ?>
+                                        <!-- Display validation error for the 'f_name' field -->
+                                        <?= $this->Form->error('password'); ?>
+
                                         <small class="form-text text-muted">At least 6 characters with at least one number.</small>
                                     </div>
 

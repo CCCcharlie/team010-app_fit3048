@@ -22,9 +22,9 @@ $this->disableAutoLayout();
     <!-- Bootstrap CSS -->
     <!-- In-built CSS -->
     <?= $this->Html->css(['style', 'bootstrap.min',]) ?>
+    <?= $this->Html->css(['style', 'error',]) ?>
     <?= $this->Html->css(['fontawesome-all'], ['block' => true]) ?>
     <link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
-
 
 
 
@@ -181,6 +181,8 @@ $this->disableAutoLayout();
                                     'title' => 'Please enter your first name using letters, hyphens and apostrophes only',
                                     'pattern' => '^[A-Za-z-]+$'
                                 ]) ?>
+                                <!-- Display validation error for the 'f_name' field -->
+                                <?= $this->Form->error('f_name'); ?>
                                 <small class="form-text text-muted">Letters, hyphens and apostrophes only.</small>
                             </div>
                             <div class="form-group">
@@ -192,6 +194,8 @@ $this->disableAutoLayout();
                                     'title' => 'Please enter your last name using letters and hyphens only',
                                     'pattern' => '^[A-Za-z-]+$'
                                 ]) ?>
+                                <!-- Display validation error for the 'f_name' field -->
+                                <?= $this->Form->error('l_name'); ?>
                                 <small class="form-text text-muted">Letters, hyphens and apostrophes only.</small>
                             </div>
                             <div class="form-group">
@@ -205,6 +209,8 @@ $this->disableAutoLayout();
                                     'title' => 'Please enter a valid email address with a domain (e.g., name@mail.com)',
                                     'maxlength' => 320 // Maximum of 320 characters
                                 ]) ?>
+                                <!-- Display validation error for the 'f_name' field -->
+                                <?= $this->Form->error('email'); ?>
                                 <small class="form-text text-muted">Please enter a valid email address.</small>
                             </div>
                             <div class="form-group">
@@ -215,10 +221,14 @@ $this->disableAutoLayout();
                                     'placeholder' => 'eg. Friendly Customer',
                                     'maxlength' => 50
                                 ]) ?>
+                                <!-- Display validation error for the 'f_name' field -->
+                                <?= $this->Form->error('status'); ?>
                                 <small class="form-text text-muted">Not Required</small>
                             </div>
                             <div class="form-group">
                                 <?= $this->Form->label('notes', 'Status') ?>
+                                <!-- Display validation error for the 'f_name' field -->
+                                <?= $this->Form->error('notes'); ?>
                                 <textarea name="data[status]" id="status" class="form-control" title="Enter notes" placeholder="Notes go here.." maxlength="500" style="height: 150px;"></textarea>
                                 <small class="form-text text-muted">500 Character limit. Not Required</small>
                             </div>

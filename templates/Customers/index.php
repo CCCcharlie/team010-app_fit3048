@@ -313,7 +313,7 @@ $checkConnection = function (string $name) {
                                     <?php endif; ?>
                                 </th>
                             </tr>
-                            <?= $this->Html->link(__('New Customer'), ['action' => 'add'], ['class' => 'btn btn-primary float-right']) ?>
+                            <?= $this->Html->link(__('New Customer'), ['action' => 'add'], ['class' => 'btn btn-success float-right', 'style'=>'padding-bottom : 5px']) ?>
 
                             <br>
                             <br>

@@ -213,7 +213,7 @@ to get the name or any value in the staff table, use the get and then the name o
                     <td><?= h($user->f_name) ?></td>
                     <td><?= h($user->l_name) ?></td>
                     <td><?= h($user->email) ?></td>
-                    <td><?= h($user->admin_status ? '✅' : '❌') ?></td>
+                    <td><?= h($user->admin_status ? 'Yes' : 'No') ?></td>
                     <td class="actions">
                         <?php if ($this->Identity->get('admin_status') == 1): ?>
                             <?= $this->Html->link(__('Edit'), ['action' => 'edit', $user->id], ['class' => 'btn btn-primary']) ?>

@@ -22,6 +22,7 @@ $this->disableAutoLayout();
     <!-- Bootstrap CSS -->
     <!-- In-built CSS -->
     <?= $this->Html->css(['style', 'bootstrap.min',]) ?>
+    <?= $this->Html->css(['style', 'error',]) ?>
     <?= $this->Html->css(['fontawesome-all'], ['block' => true]) ?>
 
 
@@ -170,6 +171,9 @@ $this->disableAutoLayout();
                                                 'required' => true,
                                                 'title' => 'Please enter a title (maximum 50 characters)'
                                             ]) ?>
+                                            <!-- Display validation error for the 'f_name' field -->
+                                            <?= $this->Form->error('title'); ?>
+
                                         </div>
                                         <div class="form-group">
                                             <?= $this->Form->label('type', 'Type', ['class' => 'col-form-label']) ?>
@@ -180,6 +184,9 @@ $this->disableAutoLayout();
                                                 'required' => true,
                                                 'title' => 'Please enter a type (maximum 30 characters)'
                                             ]) ?>
+                                            <!-- Display validation error for the 'f_name' field -->
+                                            <?= $this->Form->error('type'); ?>
+
                                         </div>
                                         <!-- Uncomment and style the following controls as needed -->
                                         <!--

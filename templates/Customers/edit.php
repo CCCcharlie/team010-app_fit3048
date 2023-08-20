@@ -190,7 +190,7 @@ $this->disableAutoLayout();
                         <!-- ============================================================== -->
                         <!-- profile -->
                         <!-- ============================================================== -->
-                        <div class="col-xl-3 col-lg-3 col-md-5 col-sm-12 col-12">
+                        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                             <!-- ============================================================== -->
                             <!-- card profile -->
                             <!-- ============================================================== -->
@@ -202,7 +202,11 @@ $this->disableAutoLayout();
                                     <?= $this->Form->create($customer) ?>
                                     <div class="text-center">
                                         <h2 class="font-24 mb-0"><?= $this->Form->control('f_name', ['class' => 'form-control', 'label' => false]) ?> <?= $this->Form->control('l_name', ['class' => 'form-control', 'label' => false]) ?></h2>
+                                        <!-- Display validation error for the 'f_name' field -->
+                                        <?= $this->Form->error('f_name'); ?>
                                         <p>Status: <?= $this->Form->control('status', ['class' => 'form-control', 'label' => false]) ?></p>
+                                        <!-- Display validation error for the 'f_name' field -->
+                                        <?= $this->Form->error('status'); ?>
                                     </div>
                                 </div>
                                 <div class="card-body border-top">
@@ -210,12 +214,16 @@ $this->disableAutoLayout();
                                     <div class="">
                                         <ul class="list-unstyled mb-0">
                                             <li class="mb-2"><?= $this->Form->control('email', ['class' => 'form-control', 'label' => false]) ?></li>
+                                            <!-- Display validation error for the 'f_name' field -->
+                                            <?= $this->Form->error('email'); ?>
                                         </ul>
                                     </div>
                                 </div>
                                 <div class="card-body border-top">
                                     <h3 class="font-16">Notes:</h3>
                                     <p class="mb-0"><?= $this->Form->control('notes', ['class' => 'form-control', 'label' => false]) ?></p>
+                                    <!-- Display validation error for the 'f_name' field -->
+                                    <?= $this->Form->error('notes'); ?>
                                 </div>
                                 <?= $this->Html->link(__('Return to Customer'), ['controller' => 'Customers', 'action' => 'view', $customer -> id], ['class' => 'btn btn-rounded btn-secondary']) ?>
 

@@ -242,7 +242,7 @@ $checkConnection = function (string $name) {
                             <!-- ============================================================== -->
                             <!-- card profile -->
                             <!-- ============================================================== -->
-                            <div class="card">
+                            <div class="card" style="min-height: 500px">
                                 <div class="card-body">
                                     <div class="user-avatar text-center d-block">
                                         <img src="/img/avatar-1.png" alt="User Avatar">
@@ -360,7 +360,7 @@ $checkConnection = function (string $name) {
                                                                 'l_name' => $customer->l_name,
                                                                 'cust_id' => $customer->id
                                                             ],
-                                                        ], ['class' => 'btn btn-rounded btn-primary']); ?>
+                                                        ], ['class' => 'btn btn-success mt-3']); ?>
                                                     </div>
                                                 </div>
                                             </div>
@@ -451,7 +451,7 @@ $checkConnection = function (string $name) {
                                                                                 'l_name' => $customer->l_name,
                                                                                 'cust_id' => $customer->id
                                                                             ],
-                                                                        ], ['class' => 'btn btn-rounded btn-primary', 'style' => 'margin: 10px']); ?>
+                                                                        ], ['class' => 'btn btn-success mt-3', 'style' => 'margin: 10px']); ?>
 
                                                                         <?php if($ticket->contents) : ?>
                                                                             <?php foreach ($ticket->contents as $content): ?>
@@ -476,7 +476,7 @@ $checkConnection = function (string $name) {
                                                                                     'l_name' => $customer->l_name,
                                                                                     'cust_id' => $customer->id
                                                                                 ],
-                                                                            ], ['class' => 'btn btn-rounded btn-primary', 'style' => 'margin: 10px']); ?>
+                                                                            ], ['class' => 'btn btn-success mt-3', 'style' => 'margin: 10px']); ?>
                                                                         <?php else: ?>
                                                                             <div class="card">
                                                                                 <div class="card-body">
@@ -566,7 +566,7 @@ $checkConnection = function (string $name) {
                                                                                         'l_name' => $customer->l_name,
                                                                                         'cust_id' => $customer->id
                                                                                     ],
-                                                                                ], ['class' => 'btn btn-rounded btn-primary', 'style' => 'margin: 10px']); ?>
+                                                                                ], ['class' => 'btn btn-success mt-3', 'style' => 'margin: 10px']); ?>
 
                                                                                 <?php if($ticket->contents) : ?>
                                                                                     <?php foreach ($ticket->contents as $content): ?>
@@ -591,7 +591,7 @@ $checkConnection = function (string $name) {
                                                                                             'l_name' => $customer->l_name,
                                                                                             'cust_id' => $customer->id
                                                                                         ],
-                                                                                    ], ['class' => 'btn btn-rounded btn-primary', 'style' => 'margin: 10px']); ?>
+                                                                                    ], ['class' => 'btn btn-success mt-3', 'style' => 'margin: 10px']); ?>
                                                                                 <?php else: ?>
                                                                                     <div class="card">
                                                                                         <div class="card-body">
@@ -680,7 +680,7 @@ $checkConnection = function (string $name) {
                                                                                         'l_name' => $customer->l_name,
                                                                                         'cust_id' => $customer->id
                                                                                     ],
-                                                                                ], ['class' => 'btn btn-rounded btn-primary', 'style' => 'margin: 10px']); ?>
+                                                                                ], ['class' => 'btn btn-success mt-3', 'style' => 'margin: 10px']); ?>
 
                                                                                 <?php if($ticket->contents) : ?>
                                                                                     <?php foreach ($ticket->contents as $content): ?>
@@ -705,7 +705,7 @@ $checkConnection = function (string $name) {
                                                                                             'l_name' => $customer->l_name,
                                                                                             'cust_id' => $customer->id
                                                                                         ],
-                                                                                    ], ['class' => 'btn btn-rounded btn-primary', 'style' => 'margin: 10px']); ?>
+                                                                                    ], ['class' => 'btn btn-success mt-3', 'style' => 'margin: 10px']); ?>
                                                                                 <?php else: ?>
                                                                                     <div class="card">
                                                                                         <div class="card-body">

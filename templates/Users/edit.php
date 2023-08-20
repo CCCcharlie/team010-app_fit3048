@@ -22,6 +22,7 @@ $this->disableAutoLayout();
     <!-- Bootstrap CSS -->
     <!-- In-built CSS -->
     <?= $this->Html->css(['style', 'bootstrap.min',]) ?>
+    <?= $this->Html->css(['style', 'error',]) ?>
     <?= $this->Html->css(['fontawesome-all'], ['block' => true]) ?>
 
 
@@ -154,6 +155,9 @@ $this->disableAutoLayout();
                                         'title' => 'Please enter the first name using letters apostrophes and hyphens only',
                                         'pattern' => '^[A-Za-z-]+$'
                                     ]) ?>
+                                    <!-- Display validation error for the 'f_name' field -->
+                                    <?= $this->Form->error('f_name'); ?>
+
                                     <small class="form-text text-muted">Letters and hyphens only.</small>
                                 </div>
                                 <div class="form-group">
@@ -165,6 +169,9 @@ $this->disableAutoLayout();
                                         'title' => 'Please enter the last name using letters, apostrophes and hyphens only',
                                         'pattern' => '^[A-Za-z-]+$'
                                     ]) ?>
+                                    <!-- Display validation error for the 'f_name' field -->
+                                    <?= $this->Form->error('l_name'); ?>
+
                                     <small class="form-text text-muted">Letters and hyphens only.</small>
                                 </div>
                                 <div class="form-group">
@@ -177,6 +184,9 @@ $this->disableAutoLayout();
                                         'title' => 'Please enter a valid email address',
                                         'maxlength' => 320
                                     ]) ?>
+                                    <!-- Display validation error for the 'f_name' field -->
+                                    <?= $this->Form->error('email'); ?>
+
                                     <small class="form-text text-muted">Please enter a valid email address.</small>
                                 </div>
                                 <div class="form-group">

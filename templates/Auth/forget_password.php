@@ -7,12 +7,14 @@ $this->layout = 'login';
 $this->assign('title', 'Forget Password');
 ?>
 
-<div class="container login">
-    <div class="row">
+<div class="splash-container login">
+    <div class="card">
+        <div class="card-header text-center"><a href="../index.html"><img class="logo-img" src="/img/cake-logo.png" alt="logo"></a><span class="splash-description">Please enter your user information.</span></div>
+
         <div class="column column-50 column-offset-25">
 
-            <div class="users form content">
-
+            <div class="card-body">
+                <div class="form-group">
                 <?= $this->Form->create() ?>
 
                 <fieldset>
@@ -28,19 +30,21 @@ $this->assign('title', 'Forget Password');
                         'type' => 'email',
                         'required' => true,
                         'autofocus' => true,
-                        'label' => false
+                        'label' => false,
+                         'class' => 'form-control form-control-lg'
                     ]);
                     ?>
 
                 </fieldset>
 
-                <?= $this->Form->button('Send verification email') ?>
+                <?= $this->Form->button('Send verification email',['class' => 'btn btn-primary btn-lg btn-block']) ?>
                 <?= $this->Form->end() ?>
 
                 <hr class="hr-between-buttons">
 
                 <?= $this->Html->link('Back to login', ['controller' => 'Auth', 'action' => 'login'], ['class' => 'button button-outline']) ?>
 
+            </div>
             </div>
         </div>
     </div>

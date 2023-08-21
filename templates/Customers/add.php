@@ -226,7 +226,7 @@ $this->disableAutoLayout();
                                 <small class="form-text text-muted">Not Required</small>
                             </div>
                             <div class="form-group">
-                                <?= $this->Form->label('notes', 'Status') ?>
+                                <?= $this->Form->label('notes', 'Notes') ?>
                                 <!-- Display validation error for the 'f_name' field -->
                                 <?= $this->Form->error('notes'); ?>
                                 <textarea name="data[status]" id="status" class="form-control" title="Enter notes" placeholder="Notes go here.." maxlength="500" style="height: 150px;"></textarea>

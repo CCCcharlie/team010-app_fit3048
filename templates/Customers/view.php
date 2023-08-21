@@ -222,16 +222,16 @@ $checkConnection = function (string $name) {
             <!-- ============================================================== -->
             <div class="row">
                 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12" style="padding-bottom: 100px">
-                    <div style="position: sticky; top: 0px; float: right; background-color: #f5f5f5; padding: 10px; width: 200px;">
-                        <h4 style="margin-bottom: 5px; font-size: 14px;">Actions:</h4>
-                        <ul style="padding: 0; margin: 0; list-style: none; font-size: 12px;">
-                            <li style="margin-bottom: 3px;">
-                                <?= $this->Html->link(__('Edit Customer'), ['action' => 'edit', $customer->id], ['style' => 'display: block; text-decoration: none; color: #333;']) ?>
-                            </li>
+<!--                    <div style="position: sticky; top: 0px; float: right; background-color: #f5f5f5; padding: 10px; width: 200px;">-->
+<!--                        <h4 style="margin-bottom: 5px; font-size: 14px;">Actions:</h4>-->
+<!--                        <ul style="padding: 0; margin: 0; list-style: none; font-size: 12px;">-->
+<!--                            <li style="margin-bottom: 3px;">-->
+<!--                                --><?php //= $this->Html->link(__('Edit Customer'), ['action' => 'edit', $customer->id], ['style' => 'display: block; text-decoration: none; color: #333;']) ?>
+<!--                            </li>-->
 <!--                            <li>--><?php //= $this->Form->postLink(__('> Delete'), [ 'action' => 'delete', $customer->id], ['style' => 'display: block; padding: 10px 0; text-decoration: none; color: #333; border: 1px solid transparent; transition: border-color 0.3s ease;', 'confirm' => __('Are you sure you want to delete customer: {0} {1} ?', $customer->f_name, $customer->l_name)]); ?><!-- </li>-->
 <!--                            <li>--><?php //= $this->Form->postLink(__('> Delete Customer'), ['action' => 'delete', $customer->id], ['confirm' => __('Are you sure you want to delete # {0}?', $customer->id), 'style' => 'display: block; padding: 10px 0; text-decoration: none; color: #333; border: 1px solid transparent; transition: border-color 0.3s ease;']) ?><!--</li>-->
-                        </ul>
-                    </div>
+<!--                        </ul>-->
+<!--                    </div>-->
 
                     </aside>
                     <div class="row">
@@ -264,7 +264,11 @@ $checkConnection = function (string $name) {
                                     <h3 class="font-16">Notes:</h3>
                                     <p class="mb-0"><?= h($customer->notes) ?></>
                                 </div>
-                                <!--                                <div class="card-body border-top">-->
+
+                                <div>
+                                <?= $this->Html->link(__('Edit Customer'), ['action' => 'edit', $customer->id], ['class' => 'btn btn-primary', 'style' => 'justify-content: center; display: flex']) ?>
+                                </div>
+                                    <!--                                <div class="card-body border-top">-->
                                 <!--                                    <h3 class="font-16">Counsellor :</h3>-->
                                 <!--                                    <p class="mb-0">-->
                                 <!--                                    <table class="table table-bordered">-->

@@ -331,7 +331,8 @@ textarea:focus::-webkit-input-placeholder {
 }
 
 button.btn {
-    margin-top: 10px;
+    margin-top: 3vh;
+    margin-bottom: 3vh;
 }
 
 button.btn-default {}
@@ -1976,6 +1977,7 @@ Splash Container / Wrapper
 
 .splash-container .card-header {
     padding: 20px;
+    margin-bottom: 3vh;
 }
 
 .splash-description {

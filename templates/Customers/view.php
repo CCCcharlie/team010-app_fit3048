@@ -376,7 +376,7 @@ $checkConnection = function (string $name) {
                                                     <div class="col-xl-12 col-lg-12 col-md-12col-sm-12 col-12">
                                                         <div class="card">
                                                             <?php if($ticket->closed == true) : ?>
-                                                            <div class="card-header d-flex" style="background-color: lightcoral">
+                                                            <div class="card-header d-flex" style="background-color: lightgray">
                                                                 <?php elseif($ticket->closed == false) : ?>
                                                                 <div class="card-header d-flex" style="background-color: lightgreen">
                                                                     <?php endif; ?>
@@ -515,7 +515,7 @@ $checkConnection = function (string $name) {
                                                             <div class="col-xl-12 col-lg-12 col-md-12col-sm-12 col-12">
                                                                 <?php if($ticket->closed == true) : ?>
                                                                     <div class="card">
-                                                                        <div class="card-header d-flex" style="background-color: lightcoral">
+                                                                        <div class="card-header d-flex" style="background-color: lightgray">
                                                                             <div>
                                                                                 <h4 class="card-header-title">Title:  <?= h($ticket->title) ?></h4>
                                                                                 <h5> Type: <?= h($ticket->type) ?> </h5>
@@ -545,7 +545,7 @@ $checkConnection = function (string $name) {
                                                                                 <p><span class="card-info">Create time:</span> <?= h($ticket->createtime) ?></p>
                                                                                 <br>
                                                                             </div>
-                                                                            <a href="#" class="btn btn-primary card__button" id="showButton">Go somewhere</a>
+<!--                                                                            <a href="#" class="btn btn-primary card__button" id="showButton">Go somewhere</a>-->
                                                                             <a class="btn btn-primary" data-toggle="collapse" href="#collapseShowCloseTicket<?= $ticket->id ?>" role="button" aria-expanded="false" aria-controls="collapseExample">
                                                                                 Expand Attachments
                                                                             </a>
@@ -659,7 +659,7 @@ $checkConnection = function (string $name) {
                                                                                 <p><span class="card-info">Create time:</span> <?= h($ticket->createtime) ?></p>
                                                                                 <br>
                                                                             </div>
-                                                                            <a href="#" class="btn btn-primary card__button" id="showButton">Go somewhere</a>
+<!--                                                                            <a href="#" class="btn btn-primary card__button" id="showButton">Go somewhere</a>-->
                                                                             <a class="btn btn-primary" data-toggle="collapse" href="#collapseShowOpenTicket<?= $ticket->id ?>" role="button" aria-expanded="false" aria-controls="collapseExample">
                                                                                 Expand Attachments
                                                                             </a>

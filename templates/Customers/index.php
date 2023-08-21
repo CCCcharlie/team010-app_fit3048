@@ -197,7 +197,14 @@ $checkConnection = function (string $name) {
                     <div class="row">
                         <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                             <div class="page-header" id="top">
-                                <p class="pageheader-text"></p>
+                                <!-- To obtain the identity, use $identity = $this->request->getAttribute('authentication')->getIdentity(); to find the currently logged in entity
+to get the name or any value in the staff table, use the get and then the name of the attribute $identity->get('staff_fname')-->
+                                <?php $identity = $this->request->getAttribute('authentication')->getIdentity();
+                                //                        debug($identity->get('f_name'));
+                                //                        exit();
+                                ?>
+                                <h2 class="pageheader-title">Welcome, <?= $identity->get('f_name'); ?></h2>
+
                             </div>
                         </div>
                     </div>
@@ -215,14 +222,6 @@ $checkConnection = function (string $name) {
                     </div>
                     <div class="row">
                         <div class="col-md-12">
-                            <?= $this->Form->create(null, ['url' => ['controller' => 'Customers', 'action' => 'index'], 'type' => 'get', 'class' => 'form-inline']) ?>
-                            <div class="form-group mr-2">
-                                <?= $this->Form->input('search', ['type' => 'text', 'class' => 'form-control', 'placeholder' => 'Search by name']) ?>
-                            </div>
-                            <?= $this->Form->button(__('Search'), ['class' => 'btn btn-primary']) ?>
-                            `
-
-                            <?= $this->Form->end() ?>
                             <!--     button for changing view    -->
 
                             <div class="view-options">
@@ -232,11 +231,13 @@ $checkConnection = function (string $name) {
 
                             <!--                            -->
                             <br>
-                            <h4>Sort by: </h4>
-                            <br>
-
-
-
+                            <h4>Filter: </h4>
+                            <?= $this->Form->create(null, ['url' => ['controller' => 'Customers', 'action' => 'index'], 'type' => 'get', 'class' => 'form-inline']) ?>
+                            <div class="form-group mr-2">
+                                <?= $this->Form->input('search', ['type' => 'text', 'class' => 'form-control', 'placeholder' => 'Search by name']) ?>
+                            </div>
+                            <?= $this->Form->button(__('Search'), ['class' => 'btn btn-primary', 'style' => 'margin-top: 0px']) ?>
+                            <?= $this->Form->end() ?>
                             <tr>
                                 <th>
                                     <?php

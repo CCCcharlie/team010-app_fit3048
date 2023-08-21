@@ -89,7 +89,7 @@ $this->disableAutoLayout();
                             <div id="submenu-1" class="submenu show" style="">
                                 <ul class="nav flex-column">
                                     <li class="nav-item">
-                                        <a class="nav-link" href="/customers?filter=assigned">Assigned Customers</a>
+                                        <a class="nav-link" href="/customers/assigntome">Assigned Customers</a>
 
                                         <!-- Change my link to assigned to me page when done. -->
                                     </li>

@@ -12,7 +12,7 @@
             <?= $this->Form->postLink(
                 __('Delete'),
                 ['action' => 'delete', $content->id],
-                ['confirm' => __('Are you sure you want to delete # {0}?', $content->id), 'class' => 'side-nav-item']
+                ['confirm' => __('Are you sure you want to delete # {0}?', $content->content_type), 'class' => 'side-nav-item']
             ) ?>
             <?= $this->Html->link(__('List Contents'), ['action' => 'index'], ['class' => 'side-nav-item']) ?>
         </div>

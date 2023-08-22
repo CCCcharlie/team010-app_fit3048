@@ -368,6 +368,7 @@ $checkConnection = function (string $name) {
                                         <div class="card-body">
                                             <div class="tab-content mb-3" id="pills-tabContent-<?= $customer->id ?>">
                                                 <div class="tab-pane fade show active" id="pills-home-<?= $customer->id ?>" role="tabpanel" aria-labelledby="pills-home-tab-<?= $customer->id ?>">
+
                                                     <br> Status: <?= h($customer->status) ?>
                                                     <br> Notes: <?= h($customer->notes) ?>
 

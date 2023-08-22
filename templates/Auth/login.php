@@ -10,11 +10,18 @@ $debug = Configure::read('debug');
 $this->layout = 'login';
 $this->assign('title', 'Login');
 ?>
+
+<style>
+    /*<!-- This line of code is what is responsible for shrinking the image based on size -->*/
+    img {
+        max-width: 100%;
+        height: auto;
+        width: auto\9; /* ie8 */
+    }
+</style>
+
 <div class="splash-container login">
-
-
-
-    <div class="card ">
+    <div class="card" style="width: 100%; height: 100%">
         <div class="card-header text-center"><a href="../index.html"><img class="logo-img" src="/img/cake-logo.png" alt="logo"></a><span class="splash-description">Please enter your user information.</span></div>
         <title>GamBlock® - Customer Management</title>
 

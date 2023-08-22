@@ -76,19 +76,22 @@ $checkConnection = function (string $name) {
     <!-- navbar -->
     <!-- ============================================================== -->
     <div class="dashboard-header">
-        <nav class="navbar navbar-expand-lg bg-white fixed-top">
-            <a class="navbar-brand" href="/home.php">
-                <?= $this->Html->image('cake-logo.png', ['alt' => 'GamBlock Logo', 'class' => 'navbar-brand', 'style' => 'width: 225px; height: auto;']); ?>
-                -Staff Portal
+        <nav class="navbar navbar-expand-lg bg-white fixed-top" style="display: flex; justify-content: space-between;">
+            <a class="navbar-brand" href="/">
+                <?= $this->Html->image('cake-logo.png', ['alt' => 'GamBlock Logo', 'class' => 'navbar-b;and', 'style' => 'width: 225px; height: auto;']); ?>
             </a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-                    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
 
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav ml-auto navbar-right-top">
-                    <a href="#"><i class="fas fa-power-off mr-2"></i> <?php echo $this->Html->link(__('Logout'), ['controller' => 'Auth', 'action' => 'logout']); ?></a>
+            <div>
+            <a href="#"><i class="fas fa-power-off mr-2"></i> <?php echo $this->Html->link(__('Logout'), ['controller' => 'Auth', 'action' => 'logout'] ,['style' => 'padding-right: 40px']); ?></a>
+            </div>
+
+<!--            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"-->
+<!--                    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">-->
+<!--                <span class="navbar-toggler-icon"></span>-->
+<!--            </button>-->
+
+<!--            <div class="collapse navbar-collapse" id="navbarSupportedContent">-->
+<!--                <ul class="navbar-nav ml-auto navbar-right-top">-->
 <!---->
 <!--                    <li class="nav-item dropdown nav-user">-->
 <!--                        <a class="nav-link nav-user-file" href="#" id="navbarDropdownMenuLink2" data-toggle="dropdown"-->
@@ -105,8 +108,8 @@ $checkConnection = function (string $name) {
 <!--                            </a>-->
 <!--                        </div>-->
 <!--                    </li>-->
-                </ul>
-            </div>
+    <!--                </ul>-->
+    <!--            </div>-->
         </nav>
     </div>
     <!-- ============================================================== -->
@@ -222,16 +225,16 @@ $checkConnection = function (string $name) {
             <!-- ============================================================== -->
             <div class="row">
                 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12" style="padding-bottom: 100px">
-                    <div style="position: sticky; top: 0px; float: right; background-color: #f5f5f5; padding: 10px; width: 200px;">
-                        <h4 style="margin-bottom: 5px; font-size: 14px;">Actions:</h4>
-                        <ul style="padding: 0; margin: 0; list-style: none; font-size: 12px;">
-                            <li style="margin-bottom: 3px;">
-                                <?= $this->Html->link(__('Edit Customer'), ['action' => 'edit', $customer->id], ['style' => 'display: block; text-decoration: none; color: #333;']) ?>
-                            </li>
+<!--                    <div style="position: sticky; top: 0px; float: right; background-color: #f5f5f5; padding: 10px; width: 200px;">-->
+<!--                        <h4 style="margin-bottom: 5px; font-size: 14px;">Actions:</h4>-->
+<!--                        <ul style="padding: 0; margin: 0; list-style: none; font-size: 12px;">-->
+<!--                            <li style="margin-bottom: 3px;">-->
+<!--                                --><?php //= $this->Html->link(__('Edit Customer'), ['action' => 'edit', $customer->id], ['style' => 'display: block; text-decoration: none; color: #333;']) ?>
+<!--                            </li>-->
 <!--                            <li>--><?php //= $this->Form->postLink(__('> Delete'), [ 'action' => 'delete', $customer->id], ['style' => 'display: block; padding: 10px 0; text-decoration: none; color: #333; border: 1px solid transparent; transition: border-color 0.3s ease;', 'confirm' => __('Are you sure you want to delete customer: {0} {1} ?', $customer->f_name, $customer->l_name)]); ?><!-- </li>-->
 <!--                            <li>--><?php //= $this->Form->postLink(__('> Delete Customer'), ['action' => 'delete', $customer->id], ['confirm' => __('Are you sure you want to delete # {0}?', $customer->id), 'style' => 'display: block; padding: 10px 0; text-decoration: none; color: #333; border: 1px solid transparent; transition: border-color 0.3s ease;']) ?><!--</li>-->
-                        </ul>
-                    </div>
+<!--                        </ul>-->
+<!--                    </div>-->
 
                     </aside>
                     <div class="row">
@@ -264,7 +267,11 @@ $checkConnection = function (string $name) {
                                     <h3 class="font-16">Notes:</h3>
                                     <p class="mb-0"><?= h($customer->notes) ?></>
                                 </div>
-                                <!--                                <div class="card-body border-top">-->
+
+                                <div>
+                                <?= $this->Html->link(__('Edit Customer'), ['action' => 'edit', $customer->id], ['class' => 'btn btn-primary', 'style' => 'justify-content: center; display: flex']) ?>
+                                </div>
+                                    <!--                                <div class="card-body border-top">-->
                                 <!--                                    <h3 class="font-16">Counsellor :</h3>-->
                                 <!--                                    <p class="mb-0">-->
                                 <!--                                    <table class="table table-bordered">-->
@@ -372,7 +379,7 @@ $checkConnection = function (string $name) {
                                                     <div class="col-xl-12 col-lg-12 col-md-12col-sm-12 col-12">
                                                         <div class="card">
                                                             <?php if($ticket->closed == true) : ?>
-                                                            <div class="card-header d-flex" style="background-color: lightcoral">
+                                                            <div class="card-header d-flex" style="background-color: lightgray">
                                                                 <?php elseif($ticket->closed == false) : ?>
                                                                 <div class="card-header d-flex" style="background-color: lightgreen">
                                                                     <?php endif; ?>
@@ -511,7 +518,7 @@ $checkConnection = function (string $name) {
                                                             <div class="col-xl-12 col-lg-12 col-md-12col-sm-12 col-12">
                                                                 <?php if($ticket->closed == true) : ?>
                                                                     <div class="card">
-                                                                        <div class="card-header d-flex" style="background-color: lightcoral">
+                                                                        <div class="card-header d-flex" style="background-color: lightgray">
                                                                             <div>
                                                                                 <h4 class="card-header-title">Title:  <?= h($ticket->title) ?></h4>
                                                                                 <h5> Type: <?= h($ticket->type) ?> </h5>
@@ -541,7 +548,7 @@ $checkConnection = function (string $name) {
                                                                                 <p><span class="card-info">Create time:</span> <?= h($ticket->createtime) ?></p>
                                                                                 <br>
                                                                             </div>
-                                                                            <a href="#" class="btn btn-primary card__button" id="showButton">Go somewhere</a>
+<!--                                                                            <a href="#" class="btn btn-primary card__button" id="showButton">Go somewhere</a>-->
                                                                             <a class="btn btn-primary" data-toggle="collapse" href="#collapseShowCloseTicket<?= $ticket->id ?>" role="button" aria-expanded="false" aria-controls="collapseExample">
                                                                                 Expand Attachments
                                                                             </a>
@@ -655,7 +662,7 @@ $checkConnection = function (string $name) {
                                                                                 <p><span class="card-info">Create time:</span> <?= h($ticket->createtime) ?></p>
                                                                                 <br>
                                                                             </div>
-                                                                            <a href="#" class="btn btn-primary card__button" id="showButton">Go somewhere</a>
+<!--                                                                            <a href="#" class="btn btn-primary card__button" id="showButton">Go somewhere</a>-->
                                                                             <a class="btn btn-primary" data-toggle="collapse" href="#collapseShowOpenTicket<?= $ticket->id ?>" role="button" aria-expanded="false" aria-controls="collapseExample">
                                                                                 Expand Attachments
                                                                             </a>

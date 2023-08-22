@@ -173,7 +173,7 @@ $this->disableAutoLayout();
                                     <fieldset>
                                         <p> You have the ability to make multiple tickets in a row here. Hit 'Return to Customer' when done.</p>
                                         <div class="form-group">
-                                            <?= $this->Form->label('title', 'Title', ['class' => 'col-form-label']) ?>
+<!--                                            --><?php //= $this->Form->label('title', 'Title', ['class' => 'col-form-label']) ?>
                                             <?= $this->Form->control('title', [
                                                 'class' => 'form-control',
                                                 'maxlength' => 50, // Maximum of 50 characters
@@ -186,7 +186,7 @@ $this->disableAutoLayout();
 
                                         </div>
                                         <div class="form-group">
-                                            <?= $this->Form->label('type', 'Type', ['class' => 'col-form-label']) ?>
+<!--                                            --><?php //= $this->Form->label('type', 'Type', ['class' => 'col-form-label']) ?>
                                             <?= $this->Form->control('type', [
                                                 'class' => 'form-control',
                                                 'maxlength' => 30, // Maximum of 30 characters
@@ -261,6 +261,6 @@ $this->disableAutoLayout();
     <!-- ============================================================== -->
     <!-- end footer -->
     <!-- ============================================================== -->
-
+</div>
 </div>
 </div>

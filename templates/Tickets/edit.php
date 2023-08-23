@@ -173,30 +173,30 @@ $this->disableAutoLayout();
                                     <fieldset>
 
                                         <div class="form-group">
-<!--                                            --><?php //= $this->Form->label('title', 'Title', ['class' => 'col-form-label']) ?>
+                                            <?= $this->Form->label('title', 'Title', ['class' => 'col-form-label']) ?>
                                             <?= $this->Form->control('title', [
+                                                'label' => false, // Prevent default label from appearing again
                                                 'class' => 'form-control',
                                                 'maxlength' => 50, // Maximum of 50 characters
                                                 'placeholder' => 'e.g. MacOS Update issue',
                                                 'required' => true,
                                                 'title' => 'Please enter a title (maximum 50 characters)'
                                             ]) ?>
-                                            <!-- Display validation error for the 'f_name' field -->
+                                            <!-- Display validation error for the 'title' field -->
                                             <?= $this->Form->error('title'); ?>
-
                                         </div>
                                         <div class="form-group">
-<!--                                            --><?php //= $this->Form->label('type', 'Type', ['class' => 'col-form-label']) ?>
+                                            <?= $this->Form->label('type', 'Type', ['class' => 'col-form-label']) ?>
                                             <?= $this->Form->control('type', [
+                                                'label' => false, // Prevent default label from appearing again
                                                 'class' => 'form-control',
                                                 'maxlength' => 30, // Maximum of 30 characters
                                                 'placeholder' => 'e.g. Update Issues',
                                                 'required' => true,
                                                 'title' => 'Please enter a type (maximum 30 characters)'
                                             ]) ?>
-                                            <!-- Display validation error for the 'f_name' field -->
+                                            <!-- Display validation error for the 'type' field -->
                                             <?= $this->Form->error('type'); ?>
-
                                         </div>
                                         <!-- Uncomment and style the following controls as needed -->
                                         <!--

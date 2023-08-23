@@ -186,7 +186,7 @@ to get the name or any value in the staff table, use the get and then the name o
                                 //                        debug($identity->get('f_name'));
                                 //                        exit();
                                 ?>
-                                <h2 class="pageheader-title">Welcome, <?= $identity->get('f_name'); ?></h2>
+
 
                                 <!-- Can you add login user to name here if you get chance Bryan?  -->
                                 <!-- Sure Alex-->

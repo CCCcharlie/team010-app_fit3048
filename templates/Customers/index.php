@@ -255,9 +255,6 @@ to get the name or any value in the staff table, use the get and then the name o
                                             .custom-button {
                                                 margin-right: 2px;
                                             }
-                                            custom-search-button{
-                                            margin-right: px;
-                                            }
                                         </style>
 
                                     </div>
@@ -392,7 +389,6 @@ to get the name or any value in the staff table, use the get and then the name o
 
                                                 </div>
                                                 <div class="tab-pane fade" id="pills-profile-<?= $customer->id ?>" role="tabpanel" aria-labelledby="pills-profile-tab-<?= $customer->id ?>">
-                                                     Add stuff like technical details and devices.
                                                     <?php
                                                     if (!empty($customer->devices)) {
                                                         foreach ($customer->devices as $device) {
@@ -438,7 +434,7 @@ to get the name or any value in the staff table, use the get and then the name o
 <!--table view option-->
                         <table class="table table-hover table-striped" id="customers-table">
                             <thead><tr>
-                                <th class="col-md-2">
+                                <th class="col-md-1">
                                     <div class="sorting-header">
                                         <?= $this->Paginator->sort(
                                             'f_name',
@@ -474,7 +470,7 @@ to get the name or any value in the staff table, use the get and then the name o
                                         <?php endif; ?>
                                     </div>
                                 </th>
-                                <th class="col-md-2">
+                                <th class="col-md-1">
                                     <div class="sorting-header">
                                         <?= $this->Paginator->sort(
                                             'status',
@@ -492,14 +488,14 @@ to get the name or any value in the staff table, use the get and then the name o
                                         <?php endif; ?>
                                     </div>
                                 </th>
-                                <th class="col-md-2">
+                                <th class="col-md-5">
                                     <div class="sorting-header">
-                                        <?= $this->Paginator->sort('devices', 'Devices') ?>
+                                        Device Information
                                     </div>
                                 </th>
-                                <th class="col-md-2">
+                                <th class="col-md-5">
                                     <div class="sorting-header">
-                                        <?= $this->Paginator->sort('notes', 'Notes') ?>
+                                        Notes
                                     </div>
                                 </th>
                                 <th class="col-md-2 actions">
@@ -517,12 +513,9 @@ to get the name or any value in the staff table, use the get and then the name o
                                         <?php if (!empty($customer->devices)): ?>
                                             <?php foreach ($customer->devices as $device): ?>
                                                 <div class="device-details">
-                                                    <h5>Model: <?= h($device->device_model) ?></h5>
+                                                    <p><strong>Platform: </strong><?= h($device->platform) ?></p>
                                                     <div>
-                                                        <strong>ver:</strong> <?= h($device->gamblock_ver) ?> | <strong>session id:</strong> <?= h($device->sessionid) ?>
-                                                    </div>
-                                                    <div>
-                                                        <strong>(Technical Details):</strong> <?= h($device->technical_details) ?>
+                                                        <strong>transaction id:</strong> <?= h($device->transaction_id) ?> | <strong>session id:</strong> <?= h($device->sessionid) ?>
                                                     </div>
                                                 </div>
                                             <?php endforeach; ?>

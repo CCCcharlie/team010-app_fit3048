@@ -65,6 +65,10 @@ class UsersController extends AppController
         $user = $this->Users->newEmptyEntity();
         if ($this->request->is('post')) {
             $user = $this->Users->patchEntity($user, $this->request->getData());
+
+//            debug($user);
+//            exit;
+
             if ($this->Users->save($user)) {
                 $this->Flash->success(__('You have successfully added the following account: {0} {1}', $user->f_name, $user->l_name));
 

@@ -3,7 +3,6 @@ declare(strict_types=1);
 
 namespace App\Model\Entity;
 
-use Authentication\PasswordHasher\DefaultPasswordHasher;
 use Cake\ORM\Entity;
 
 /**
@@ -12,13 +11,14 @@ use Cake\ORM\Entity;
  * @property int $id
  * @property string $f_name
  * @property string $l_name
-// * @property int $age
  * @property string $email
  * @property string $password
  * @property string|null $timezone
  * @property bool $admin_status
  * @property string|null $nonce
  * @property \Cake\I18n\FrozenTime $nonce_expiry
+ *
+ * @property \App\Model\Entity\Ticket[] $tickets
  */
 class User extends Entity
 {
@@ -34,13 +34,13 @@ class User extends Entity
     protected $_accessible = [
         'f_name' => true,
         'l_name' => true,
-//        'age' => true,
         'email' => true,
         'password' => true,
         'timezone' => true,
         'admin_status' => true,
         'nonce' => true,
         'nonce_expiry' => true,
+        'tickets' => true,
     ];
 
     /**
@@ -51,17 +51,4 @@ class User extends Entity
     protected $_hidden = [
         'password',
     ];
-
-    /**
-     * Hashing password for User entity
-     * @param string $password Password field
-     * @return string|null hashed password
-     */
-    protected function _setPassword(string $password): ?string {
-        if (strlen($password) > 0) {
-            return (new DefaultPasswordHasher())->hash($password);
-        }
-        return $password;
-    }
-
 }

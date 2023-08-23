@@ -88,11 +88,11 @@ class UsersTable extends Table
 //            ->notEmptyString('age');
 
         $validator
-            ->scalar('cust_email')
-            ->maxLength('cust_email', 320)
-            ->requirePresence('cust_email', 'create')
-            ->notEmptyString('cust_email')
-            ->add('cust_email', [
+            ->scalar('email')
+            ->maxLength('email', 320)
+            ->requirePresence('email', 'create')
+            ->notEmptyString('email')
+            ->add('email', [
                 'validEmail' => [
                     'rule' => 'email',
                     'message' => 'Please enter a valid email address. Eg. test@holistichealings.com'

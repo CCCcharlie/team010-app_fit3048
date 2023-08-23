@@ -509,21 +509,27 @@ to get the name or any value in the staff table, use the get and then the name o
                                     <td><?= h($customer->f_name) ?> </td>
                                     <td><?= h($customer->l_name) ?></td>
                                     <td><?= h($customer->status) ?></td>
-                                    <td>
-                                        <?php if (!empty($customer->devices)): ?>
-                                            <?php foreach ($customer->devices as $device): ?>
-                                                <div class="device-details">
-                                                    <p><strong>Platform: </strong><?= h($device->platform) ?></p>
-                                                    <div>
-                                                        <strong>transaction id:</strong> <?= h($device->transaction_id) ?> | <strong>session id:</strong> <?= h($device->sessionid) ?>
-                                                    </div>
+                                    < <?php if (!empty($customer->devices)) : ?>
+                                        <?php foreach ($customer->devices as $device) : ?>
+                                            <div class="device-details">
+                                                <p><strong>Platform: </strong><?= !empty($device->platform) ? h($device->platform) : 'None Found' ?></p>
+                                                <div>
+                                                    <strong>Transaction ID:</strong> <?= !empty($device->transaction_id) ? h($device->transaction_id) : 'None Found' ?> |
+                                                    <strong>Session ID:</strong> <?= !empty($device->sessionid) ? h($device->sessionid) : 'None Found' ?>
                                                 </div>
-                                            <?php endforeach; ?>
-                                        <?php else: ?>
-                                            <p>No device details found for this user. Please add some via clicking <a href="<?= $this->Url->build(['action' => 'view', $customer->id]) ?>">View Full Profile</a> on the right.</p>
+                                            </div>
+                                        <?php endforeach; ?>
+                                    <?php else : ?>
+                                        <p>No device details found for this user. Please add some via clicking <a href="<?= $this->Url->build(['action' => 'view', $customer->id]) ?>">View Full Profile</a> on the right.</p>
+                                    <?php endif; ?>
+                                    </td>
+                                    <td>
+                                        <?php if (!empty($customer->notes)) : ?>
+                                            <?= h($customer->notes) ?>
+                                        <?php else : ?>
+                                            No notes have been provided about the customer.
                                         <?php endif; ?>
                                     </td>
-                                    <td><?= h($customer->notes) ?></td>
                                     <td>
                                         <?= $this->Html->link(__('View Full Profile'), ['action' => 'view', $customer->id], ['class' => 'btn btn-primary']) ?>
                                     </td>

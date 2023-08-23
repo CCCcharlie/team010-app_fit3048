@@ -29,7 +29,10 @@ class CustomersController extends AppController
                     'CONCAT(f_name, " ", l_name) LIKE' => '%' . $search . '%',
                     'email LIKE' => '%' . $search . '%',
                     'status LIKE' => '%' . $search . '%',
-                    'notes LIKE' => '%' . $search . '%'
+                    'notes LIKE' => '%' . $search . '%',
+                    // Devices
+                    'Devices.transactionid LIKE' => '%' . $search . '%', // BROKEN
+                    'Devices.sessionid LIKE' => '%' . $search . '%' // BROKEN
                 ]
             ];
             $query->where($searchConditions);
@@ -39,15 +42,11 @@ class CustomersController extends AppController
 
         $this->paginate = [
             'limit' => $totalRecords, // Set the limit to the total number of records
-            'contain' => ['Tickets', 'Devices', 'Commdetails', 'Counsellors'], // We want to include devices as well, not just the tickets. So add '
+            'contain' => ['Tickets', 'Devices', 'Commdetails', 'Counsellors'],
         ];
         $customers = $this->paginate($query);
 
         $this->set(compact('customers'));
-
-
-
-
     }
     /**
  * Fillter option

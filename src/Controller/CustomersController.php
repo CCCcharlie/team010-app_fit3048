@@ -30,13 +30,14 @@ class CustomersController extends AppController
                     'email LIKE' => '%' . $search . '%',
                     'status LIKE' => '%' . $search . '%',
                     'notes LIKE' => '%' . $search . '%',
-                    // Devices
-                    'Devices.transactionid LIKE' => '%' . $search . '%', // BROKEN
-                    'Devices.sessionid LIKE' => '%' . $search . '%' // BROKEN
+                    'Devices.transactionid LIKE' => '%' . $search . '%',
+                    'Devices.sessionid LIKE' => '%' . $search . '%'
                 ]
             ];
-            $query->where($searchConditions);
+            $query->leftJoinWith('Devices')
+                ->where($searchConditions);
         }
+
 
         $totalRecords = $query->count(); // Get the total number of records
 

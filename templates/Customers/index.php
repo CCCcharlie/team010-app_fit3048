@@ -245,58 +245,69 @@ to get the name or any value in the staff table, use the get and then the name o
                         <div class="col-md-12">
                             <!--     button for changing view    -->
 
-                            <div class="view-options">
-                                <button id="list-view-btn" class="btn btn-primary">List View</button>
-                                <button id="table-view-btn" class="btn btn-primary">Table View</button>
-                            </div>
 
                             <!--                            -->
                             <br>
-                            <h4>Filter: </h4>
-                            <?= $this->Form->create(null, ['url' => ['controller' => 'Customers', 'action' => 'index'], 'type' => 'get', 'class' => 'form-inline']) ?>
-                            <div class="form-group mr-2">
-                                <?= $this->Form->input('search', ['type' => 'text', 'class' => 'form-control', 'placeholder' => 'Search by name']) ?>
-                            </div>
-                            <?= $this->Form->button(__('Search'), ['class' => 'btn btn-primary', 'style' => 'margin-top: 0px']) ?>
-                            <?= $this->Form->end() ?>
-                            <tr>
-                                <th>
-                                    <?php
-                                    $sortField = 'f_name';
-                                    $sortDir = 'asc';
-                                    if ($this->Paginator->sortKey() === $sortField) {
-                                        $sortDir = ($this->Paginator->sortDir() === 'asc') ? 'desc' : 'asc';
-                                    }
-                                    ?>
-                                    <?= $this->Paginator->sort('f_name', 'First Name', ['direction' => $sortDir]) ?>
-                                    <?php if ($this->Paginator->sortKey() === 'f_name') : ?>
-                                        <?php if ($sortDir === 'asc') : ?>
-                                            <img src="<?= $this->Url->image('arrow-down.png', ['fullBase' => true, 'webroot' => 'img/', 'width' => 10]) ?>" alt="Down Arrow">
-                                        <?php else : ?>
-                                            <img src="<?= $this->Url->image('arrow-up.png', ['fullBase' => true, 'webroot' => 'img/', 'width' => 10]) ?>" alt="Up Arrow">
-                                        <?php endif; ?>
-                                    <?php endif; ?>
-                                    |
-                                </th>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <h4>Filter: </h4>
+                                    <?= $this->Form->create(null, ['url' => ['controller' => 'Customers', 'action' => 'index'], 'type' => 'get', 'class' => 'form-inline']) ?>
+                                    <div class="form-group mr-2">
+                                        <?= $this->Form->input('search', ['type' => 'text', 'class' => 'form-control', 'placeholder' => 'Search by name']) ?>
+                                    </div>
+                                    <div class="btn-group ml-2">
+                                    <?= $this->Form->button(__('Search'), ['class' => 'btn btn-primary custom-button']) ?>
+                                    <?= $this->Form->end() ?>
 
-                                <th>
-                                    <?php
-                                    $sortField = 'l_name';
-                                    $sortDir = 'asc';
-                                    if ($this->Paginator->sortKey() === $sortField) {
-                                        $sortDir = ($this->Paginator->sortDir() === 'asc') ? 'desc' : 'asc';
-                                    }
-                                    ?>
-                                    <?= $this->Paginator->sort('l_name', 'Last Name', ['direction' => $sortDir]) ?>
-                                    <?php if ($this->Paginator->sortKey() === 'l_name') : ?>
-                                        <?php if ($sortDir === 'asc') : ?>
-                                            <img src="<?= $this->Url->image('arrow-down.png', ['fullBase' => true, 'webroot' => 'img/', 'width' => 10]) ?>" alt="Down Arrow">
-                                        <?php else : ?>
-                                            <img src="<?= $this->Url->image('arrow-up.png', ['fullBase' => true, 'webroot' => 'img/', 'width' => 10]) ?>" alt="Up Arrow">
-                                        <?php endif; ?>
-                                    <?php endif; ?>
-                                    |
-                                </th>
+                                        <button id="table-view-btn" class="btn btn-primary custom-button">Table View</button>
+                                        <button id="list-view-btn" class="btn btn-primary custom-button">List View</button>
+                                        <style>
+                                            .custom-button {
+                                                margin-right: 2px;
+                                            }
+                                        </style>
+
+                                    </div>
+                                </div>
+                            </div>
+<!--                            <tr>-->
+<!--                                <th>-->
+<!--                                    --><?php
+//                                    $sortField = 'f_name';
+//                                    $sortDir = 'asc';
+//                                    if ($this->Paginator->sortKey() === $sortField) {
+//                                        $sortDir = ($this->Paginator->sortDir() === 'asc') ? 'desc' : 'asc';
+//                                    }
+//                                    ?>
+<!--                                    --><?php //= $this->Paginator->sort('f_name', 'First Name', ['direction' => $sortDir]) ?>
+<!--                                    --><?php //if ($this->Paginator->sortKey() === 'f_name') : ?>
+<!--                                        --><?php //if ($sortDir === 'asc') : ?>
+<!--                                            <img src="--><?php //= $this->Url->image('arrow-down.png', ['fullBase' => true, 'webroot' => 'img/', 'width' => 10]) ?><!--" alt="Down Arrow">-->
+<!--                                        --><?php //else : ?>
+<!--                                            <img src="--><?php //= $this->Url->image('arrow-up.png', ['fullBase' => true, 'webroot' => 'img/', 'width' => 10]) ?><!--" alt="Up Arrow">-->
+<!--                                        --><?php //endif; ?>
+<!--                                    --><?php //endif; ?>
+<!--                                    |-->
+<!--                                </th>-->
+<!---->
+<!--                                <th>-->
+<!--                                    --><?php
+//                                    $sortField = 'l_name';
+//                                    $sortDir = 'asc';
+//                                    if ($this->Paginator->sortKey() === $sortField) {
+//                                        $sortDir = ($this->Paginator->sortDir() === 'asc') ? 'desc' : 'asc';
+//                                    }
+//                                    ?>
+<!--                                    --><?php //= $this->Paginator->sort('l_name', 'Last Name', ['direction' => $sortDir]) ?>
+<!--                                    --><?php //if ($this->Paginator->sortKey() === 'l_name') : ?>
+<!--                                        --><?php //if ($sortDir === 'asc') : ?>
+<!--                                            <img src="--><?php //= $this->Url->image('arrow-down.png', ['fullBase' => true, 'webroot' => 'img/', 'width' => 10]) ?><!--" alt="Down Arrow">-->
+<!--                                        --><?php //else : ?>
+<!--                                            <img src="--><?php //= $this->Url->image('arrow-up.png', ['fullBase' => true, 'webroot' => 'img/', 'width' => 10]) ?><!--" alt="Up Arrow">-->
+<!--                                        --><?php //endif; ?>
+<!--                                    --><?php //endif; ?>
+<!--                                    |-->
+<!--                                </th>-->
 
                                 <!--                                <th>-->
                                 <!--                                    --><?php
@@ -317,23 +328,23 @@ to get the name or any value in the staff table, use the get and then the name o
                                 <!--                                    |-->
                                 <!--                                </th>-->
 
-                                <th>
-                                    <?php
-                                    $sortField = 'email';
-                                    $sortDir = 'asc';
-                                    if ($this->Paginator->sortKey() === $sortField) {
-                                        $sortDir = ($this->Paginator->sortDir() === 'asc') ? 'desc' : 'asc';
-                                    }
-                                    ?>
-                                    <?= $this->Paginator->sort('email', 'Email', ['direction' => $sortDir]) ?>
-                                    <?php if ($this->Paginator->sortKey() === 'email') : ?>
-                                        <?php if ($sortDir === 'asc') : ?>
-                                            <img src="<?= $this->Url->image('arrow-down.png', ['fullBase' => true, 'webroot' => 'img/', 'width' => 10]) ?>" alt="Down Arrow">
-                                        <?php else : ?>
-                                            <img src="<?= $this->Url->image('arrow-up.png', ['fullBase' => true, 'webroot' => 'img/', 'width' => 10]) ?>" alt="Up Arrow">
-                                        <?php endif; ?>
-                                    <?php endif; ?>
-                                </th>
+<!--                                <th>-->
+<!--                                    --><?php
+//                                    $sortField = 'email';
+//                                    $sortDir = 'asc';
+//                                    if ($this->Paginator->sortKey() === $sortField) {
+//                                        $sortDir = ($this->Paginator->sortDir() === 'asc') ? 'desc' : 'asc';
+//                                    }
+//                                    ?>
+<!--                                    --><?php //= $this->Paginator->sort('email', 'Email', ['direction' => $sortDir]) ?>
+<!--                                    --><?php //if ($this->Paginator->sortKey() === 'email') : ?>
+<!--                                        --><?php //if ($sortDir === 'asc') : ?>
+<!--                                            <img src="--><?php //= $this->Url->image('arrow-down.png', ['fullBase' => true, 'webroot' => 'img/', 'width' => 10]) ?><!--" alt="Down Arrow">-->
+<!--                                        --><?php //else : ?>
+<!--                                            <img src="--><?php //= $this->Url->image('arrow-up.png', ['fullBase' => true, 'webroot' => 'img/', 'width' => 10]) ?><!--" alt="Up Arrow">-->
+<!--                                        --><?php //endif; ?>
+<!--                                    --><?php //endif; ?>
+<!--                                </th>-->
                             </tr>
                             <?= $this->Html->link(__('New Customer'), ['action' => 'add'], ['class' => 'btn btn-success float-right', 'style'=>'padding-bottom : 5px']) ?>
 
@@ -341,14 +352,6 @@ to get the name or any value in the staff table, use the get and then the name o
                             <br>
 
 
-
-                        </div>
-
-
-
-
-
-                        <br>
 
 
                         <style>
@@ -396,7 +399,6 @@ to get the name or any value in the staff table, use the get and then the name o
 
                                                 </div>
                                                 <div class="tab-pane fade" id="pills-profile-<?= $customer->id ?>" role="tabpanel" aria-labelledby="pills-profile-tab-<?= $customer->id ?>">
-                                                     Add stuff like technical details and devices.
                                                     <?php
                                                     if (!empty($customer->devices)) {
                                                         foreach ($customer->devices as $device) {
@@ -441,38 +443,103 @@ to get the name or any value in the staff table, use the get and then the name o
 
 <!--table view option-->
                         <table class="table table-hover table-striped" id="customers-table">
-                            <thead>
-                            <tr>
-                                <th>Name</th>
-                                <th>Status</th>
-                                <th>Devices</th>
-                                <th>Notes</th>
-                                <th>Actions</th>
+                            <thead><tr>
+                                <th class="col-md-1">
+                                    <div class="sorting-header">
+                                        <?= $this->Paginator->sort(
+                                            'f_name',
+                                            'First Name',
+                                            ['escape' => false]
+                                        ) ?>
+                                        <?php if ($this->Paginator->sortKey() === 'f_name') : ?>
+                                            <div class="sorting-icon">
+                                                <?php if ($this->Paginator->sortDir() === 'asc') : ?>
+                                                    <img src="<?= $this->Url->image('arrow-down.png', ['fullBase' => true, 'webroot' => 'img/', 'width' => 10]) ?>" alt="Down Arrow">
+                                                <?php else : ?>
+                                                    <img src="<?= $this->Url->image('arrow-up.png', ['fullBase' => true, 'webroot' => 'img/', 'width' => 10]) ?>" alt="Up Arrow">
+                                                <?php endif; ?>
+                                            </div>
+                                        <?php endif; ?>
+                                    </div>
+                                </th>
+                                <th class="col-md-2">
+                                    <div class="sorting-header">
+                                        <?= $this->Paginator->sort(
+                                            'l_name',
+                                            'Last Name',
+                                            ['escape' => false]
+                                        ) ?>
+                                        <?php if ($this->Paginator->sortKey() === 'l_name') : ?>
+                                            <div class="sorting-icon">
+                                                <?php if ($this->Paginator->sortDir() === 'asc') : ?>
+                                                    <img src="<?= $this->Url->image('arrow-down.png', ['fullBase' => true, 'webroot' => 'img/', 'width' => 10]) ?>" alt="Down Arrow">
+                                                <?php else : ?>
+                                                    <img src="<?= $this->Url->image('arrow-up.png', ['fullBase' => true, 'webroot' => 'img/', 'width' => 10]) ?>" alt="Up Arrow">
+                                                <?php endif; ?>
+                                            </div>
+                                        <?php endif; ?>
+                                    </div>
+                                </th>
+                                <th class="col-md-1">
+                                    <div class="sorting-header">
+                                        <?= $this->Paginator->sort(
+                                            'status',
+                                            'Status',
+                                            ['escape' => false]
+                                        ) ?>
+                                        <?php if ($this->Paginator->sortKey() === 'status') : ?>
+                                            <div class="sorting-icon">
+                                                <?php if ($this->Paginator->sortDir() === 'asc') : ?>
+                                                    <img src="<?= $this->Url->image('arrow-down.png', ['fullBase' => true, 'webroot' => 'img/', 'width' => 10]) ?>" alt="Down Arrow">
+                                                <?php else : ?>
+                                                    <img src="<?= $this->Url->image('arrow-up.png', ['fullBase' => true, 'webroot' => 'img/', 'width' => 10]) ?>" alt="Up Arrow">
+                                                <?php endif; ?>
+                                            </div>
+                                        <?php endif; ?>
+                                    </div>
+                                </th>
+                                <th class="col-md-5">
+                                    <div class="sorting-header">
+                                        Device Information
+                                    </div>
+                                </th>
+                                <th class="col-md-5">
+                                    <div class="sorting-header">
+                                        Notes
+                                    </div>
+                                </th>
+                                <th class="col-md-2 actions">
+                                    <?= __('Actions') ?>
+                                </th>
                             </tr>
                             </thead>
                             <tbody>
                             <?php foreach ($customers as $customer): ?>
                                 <tr>
-                                    <td><?= h($customer->f_name) ?> <?= h($customer->l_name) ?></td>
+                                    <td><?= h($customer->f_name) ?> </td>
+                                    <td><?= h($customer->l_name) ?></td>
                                     <td><?= h($customer->status) ?></td>
-                                    <td>
-                                        <?php if (!empty($customer->devices)): ?>
-                                            <?php foreach ($customer->devices as $device): ?>
-                                                <div class="device-details">
-                                                    <h5>Model: <?= h($device->device_model) ?></h5>
-                                                    <div>
-                                                        <strong>ver:</strong> <?= h($device->gamblock_ver) ?> | <strong>session id:</strong> <?= h($device->sessionid) ?>
-                                                    </div>
-                                                    <div>
-                                                        <strong>(Technical Details):</strong> <?= h($device->technical_details) ?>
-                                                    </div>
+                                    < <?php if (!empty($customer->devices)) : ?>
+                                        <?php foreach ($customer->devices as $device) : ?>
+                                            <div class="device-details">
+                                                <p><strong>Platform: </strong><?= !empty($device->platform) ? h($device->platform) : 'None Found' ?></p>
+                                                <div>
+                                                    <strong>Transaction ID:</strong> <?= !empty($device->transaction_id) ? h($device->transaction_id) : 'None Found' ?> |
+                                                    <strong>Session ID:</strong> <?= !empty($device->sessionid) ? h($device->sessionid) : 'None Found' ?>
                                                 </div>
-                                            <?php endforeach; ?>
-                                        <?php else: ?>
-                                            <p>No device details found for this user. Please add some via clicking <a href="<?= $this->Url->build(['action' => 'view', $customer->id]) ?>">View Full Profile</a> on the right.</p>
+                                            </div>
+                                        <?php endforeach; ?>
+                                    <?php else : ?>
+                                        <p>No device details found for this user. Please add some via clicking <a href="<?= $this->Url->build(['action' => 'view', $customer->id]) ?>">View Full Profile</a> on the right.</p>
+                                    <?php endif; ?>
+                                    </td>
+                                    <td>
+                                        <?php if (!empty($customer->notes)) : ?>
+                                            <?= h($customer->notes) ?>
+                                        <?php else : ?>
+                                            No notes have been provided about the customer.
                                         <?php endif; ?>
                                     </td>
-                                    <td><?= h($customer->notes) ?></td>
                                     <td>
                                         <?= $this->Html->link(__('View Full Profile'), ['action' => 'view', $customer->id], ['class' => 'btn btn-primary']) ?>
                                     </td>

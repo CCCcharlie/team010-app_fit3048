@@ -509,19 +509,26 @@ to get the name or any value in the staff table, use the get and then the name o
                                     <td><?= h($customer->f_name) ?> </td>
                                     <td><?= h($customer->l_name) ?></td>
                                     <td><?= h($customer->status) ?></td>
-                                    < <?php if (!empty($customer->devices)) : ?>
-                                        <?php foreach ($customer->devices as $device) : ?>
-                                            <div class="device-details">
-                                                <p><strong>Platform: </strong><?= !empty($device->platform) ? h($device->platform) : 'None Found' ?></p>
-                                                <div>
-                                                    <strong>Transaction ID:</strong> <?= !empty($device->transaction_id) ? h($device->transaction_id) : 'None Found' ?> |
-                                                    <strong>Session ID:</strong> <?= !empty($device->sessionid) ? h($device->sessionid) : 'None Found' ?>
+                                    <td>
+                                        <?php if (!empty($customer->devices)) : ?>
+                                            <?php $deviceCount = count($customer->devices); ?>
+                                            <?php foreach ($customer->devices as $key => $device) : ?>
+                                                <div class="device-details">
+                                                    <div>
+                                                        <strong>Platform: </strong><?= !empty($device->platform) ? h($device->platform) : 'No information found' ?>
+                                                    </div>
+                                                    <strong>Transaction ID:</strong> <?= !empty($device->transactionid) ? h($device->transactionid) : 'No information found' ?>
+                                                    <div>
+                                                        <strong>Session ID:</strong> <?= !empty($device->sessionid) ? h($device->sessionid) : 'No information found' ?>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                        <?php endforeach; ?>
-                                    <?php else : ?>
-                                        <p>No device details found for this user. Please add some via clicking <a href="<?= $this->Url->build(['action' => 'view', $customer->id]) ?>">View Full Profile</a> on the right.</p>
-                                    <?php endif; ?>
+                                                <?php if ($deviceCount > 1 && $key < ($deviceCount - 1)) : ?>
+                                                    <div class="separator"></div>
+                                                <?php endif; ?>
+                                            <?php endforeach; ?>
+                                        <?php else : ?>
+                                            <p>No device details found for this user. Please add some via clicking <a href="<?= $this->Url->build(['action' => 'view', $customer->id]) ?>">View Full Profile</a> on the right.</p>
+                                        <?php endif; ?>
                                     </td>
                                     <td>
                                         <?php if (!empty($customer->notes)) : ?>
@@ -572,38 +579,11 @@ to get the name or any value in the staff table, use the get and then the name o
                         .device-details {
                             margin-bottom: 10px;
                         }
-                        .paginator {
-                            display: flex;
-                            flex-direction: column;
-                            align-items: center;
-                            justify-content: center;
-                            margin-top: 20px;
-                        }
-
-                        .pagination-container {
-                            display: flex;
-                            justify-content: center;
-                            align-items: center;
-                            margin-top: 10px;
-                        }
-
-                        .pagination {
-                            list-style: none;
-                            display: flex;
-                            align-items: center;
-                            padding: 0;
-                        }
-
-                        .pagination-item {
-                            margin: 0 5px;
-                            cursor: pointer;
-                            transition: background-color 0.3s, color 0.3s;
-                        }
-
-                        .pagination-item:hover {
-                            background-color: #007bff;
-                            color: white;
-                        }
+                        .separator {
+                             height: 3px;
+                             background-color: #ccc; /* Change this to your preferred color */
+                             margin: 10px 0; /* Adjust the margin as needed for spacing */
+                         }
 
                         .pagination-counter {
                             margin-top: 10px;

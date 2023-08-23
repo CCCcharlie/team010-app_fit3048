@@ -185,8 +185,6 @@
                             <?= $this->Form->create($commdetail) ?>
                                 <div class="card-body">
                             <fieldset>
-                                <p> You have the ability to make multiple Communication Details in a row here. Hit 'Return to Customer' when done.</p>
-
 
                                 <div class="form-group">
                                     <?= $this->Form->label('type', 'Type', ['class' => 'col-form-label']) ?>

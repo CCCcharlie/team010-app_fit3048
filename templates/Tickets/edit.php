@@ -9,6 +9,7 @@
 $this->disableAutoLayout();
 // Test.
 ?><!doctype html>
+
 <html lang="en">
 
 
@@ -31,7 +32,6 @@ $this->disableAutoLayout();
 
 </head>
 
-<body>
 <!-- ============================================================== -->
 <!-- main wrapper -->
 <!-- ============================================================== -->
@@ -171,7 +171,7 @@ $this->disableAutoLayout();
                                 <div class="tickets form content">
                                     <?= $this->Form->create($ticket) ?>
                                     <fieldset>
-                                        <p> You have the ability to make multiple tickets in a row here. Hit 'Return to Customer' when done.</p>
+
                                         <div class="form-group">
 <!--                                            --><?php //= $this->Form->label('title', 'Title', ['class' => 'col-form-label']) ?>
                                             <?= $this->Form->control('title', [
@@ -264,3 +264,4 @@ $this->disableAutoLayout();
 </div>
 </div>
 </div>
+</html>

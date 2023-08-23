@@ -67,7 +67,7 @@ class CommdetailsController extends AppController
             if ($this->Commdetails->save($commdetail)) {
                 $this->Flash->success(__('The communication details for: ' . $fullName . ' has been saved'));
 
-                return $this->redirect($this->referer());
+                return $this->redirect(['controller' => 'Customers', 'action' => 'view', $custId]);
             }
             $this->Flash->error(__('The communication details for: ' . $fullName . ' could not be saved, please try again'));
         }

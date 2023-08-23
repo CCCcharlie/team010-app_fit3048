@@ -67,7 +67,7 @@ class DevicesController extends AppController
             if ($this->Devices->save($device)) {
                 $this->Flash->success(__('The device has been saved.'));
                 //Return back to the referer of this function
-                return $this->redirect($this->referer());
+                return $this->redirect(['controller' => 'Customers', 'action' => 'view', $custId]);
             }
             $this->Flash->error(__('The device could not be saved. Please, try again.'));
         }

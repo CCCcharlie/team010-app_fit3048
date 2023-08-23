@@ -70,6 +70,7 @@ class CustomersController extends AppController
                     'Tickets.closetime IS NULL'
                 ]);
             })
+            ->distinct(['Customers.id'])// Add this line to ensure distinct customers
             ->all();
 
 

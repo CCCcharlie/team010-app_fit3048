@@ -2016,7 +2016,9 @@ Pageheader
 
 .page-breadcrumb .breadcrumb {}
 
-.page-breadcrumb .breadcrumb-item {}
+.page-breadcrumb .breadcrumb-item {
+    margin-bottom: 3vh;
+}
 
 .page-breadcrumb .breadcrumb-link {
     color: #a6a6b7;
@@ -2038,6 +2040,7 @@ Pageheader
     border-top: 1px solid #e0e4ef;
     padding-top: 10px;
     font-size: 12px;
+
 }
 
 .page-breadcrumb .breadcrumb .breadcrumb-item+.breadcrumb-item::before {

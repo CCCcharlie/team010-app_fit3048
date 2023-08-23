@@ -168,8 +168,6 @@ $this->disableAutoLayout();
                         //                        debug($identity->get('f_name'));
                         //                        exit();
                         ?>
-                        <h2 class="pageheader-title">Welcome, <?= $identity->get('f_name'); ?></h2>
-
                         <!-- Can you add login user to name here if you get chance Bryan?  -->
                         <!-- Sure Alex-->
 

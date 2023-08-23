@@ -50,7 +50,20 @@ $this->disableAutoLayout();
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav ml-auto navbar-right-top">
 
-                    <a href="#"><i class="fas fa-power-off mr-2"></i> <?php echo $this->Html->link(__('Logout'), ['controller' => 'Auth', 'action' => 'logout']); ?></a>
+                    <?php
+                    $identity = $this->request->getAttribute('authentication')->getIdentity();
+                    ?>
+
+                    <div class="row" style="padding: 10px;">
+                        <div class="col-md-6 text-right">
+                            <p style="margin-right: 10px;">Welcome, <?= $identity->get('f_name'); ?></p>
+                        </div>
+                        <div class="col-md-6">
+                            <a href="#" class="text-right">
+                                <i class="fas fa-power-off" style="margin-right: 2px;"></i>
+                                <?php echo $this->Html->link(__('Logout'), ['controller' => 'Auth', 'action' => 'logout'], ['style' => 'padding-right: 40px;']); ?>
+                            </a>
+                        </div>
 <!---->
 <!--                    <li class="nav-item dropdown nav-user">-->
 <!--                        <a class="nav-link nav-user-file" href="#" id="navbarDropdownMenuLink2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="../assets/images/avatar-1.jpg" alt="" class="user-avatar-md rounded-circle"></a>-->

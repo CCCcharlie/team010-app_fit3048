@@ -572,24 +572,48 @@ to get the name or any value in the staff table, use the get and then the name o
                         <div class = "card-footer-item" >
 
 
-
                             <div class="pagination-controls">
-                                <p class="pagination-counter">
-                                <form class="pagination-goto">
-                                    <label for="goto-page">Go to page:</label>
+                                <div class="row align-items-center">
+                                    <div class="col-md-3 text-md-right text-center">
+                                        <?php if ($this->Paginator->hasPrev()): ?>
+                                            <span style="list-style: none; display: inline-block; margin: 0; padding: 0;">
+                    <?= $this->Paginator->prev('< ' . __('previous')) ?>
+                </span>
+                                        <?php endif; ?>
+                                    </div>
 
-                                    <input type="text" id="goto-page" name="page">
-                                    <button class="btn btn-primary" type="submit">Go</button>
+                                    <div class="col-md-6 text-center">
+                                        <div class="pagination-counter">
+                <span>
+                    Displaying <?= $this->Paginator->counter('{{start}}-{{end}}') ?> of <?= $this->Paginator->counter('{{count}}') ?> records in total
+                </span>
+                                            <form class="pagination-goto form-inline justify-content-center">
+                                                <label class="mr-2" for="goto-page">Go to page:</label>
+                                                <input class="form-control" type="text" id="goto-page" name="page">
+                                                <button class="btn btn-primary ml-2" type="submit">Go</button>
+                                            </form>
+                                        </div>
+                                    </div>
 
-                                </form>
+                                    <div class="col-md-3 text-md-left text-center">
+                                        <?php if ($this->Paginator->hasNext()): ?>
+                                            <span style="list-style: none; display: inline-block; margin: 0; padding: 0;">
+                    <?= $this->Paginator->next(__('next') . ' >') ?>
+                </span>
+                                        <?php endif; ?>
+                                    </div>
+                                </div>
                             </div>
-                            <p class="pagination-counter"><?= $this->Paginator->counter(__('Page {{page}} of {{pages}}, showing {{current}} record(s) out of {{count}} total')) ?></p>
+
+
+
+
+
+
+
+
+
                         </div>
-
-
-
-
-                    </div>
                     <style>
 
                         .device-details {

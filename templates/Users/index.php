@@ -44,9 +44,20 @@ $this->disableAutoLayout();
                 <?= $this->Html->image('cake-logo.png', ['alt' => 'GamBlock Logo', 'class' => 'navbar-b;and', 'style' => 'width: 225px; height: auto;']); ?>
             </a>
 
-            <div>
-            <a href="#"><i class="fas fa-power-off mr-2"></i> <?php echo $this->Html->link(__('Logout'), ['controller' => 'Auth', 'action' => 'logout'] ,['style' => 'padding-right: 40px']); ?></a>
-            </div>
+            <?php
+            $identity = $this->request->getAttribute('authentication')->getIdentity();
+            ?>
+
+            <div class="row" style="padding: 10px;">
+                <div class="col-md-6 text-right">
+                    <p style="margin-right: 10px;">Welcome, <?= $identity->get('f_name'); ?></p>
+                </div>
+                <div class="col-md-6">
+                    <a href="#" class="text-right">
+                        <i class="fas fa-power-off" style="margin-right: 2px;"></i>
+                        <?php echo $this->Html->link(__('Logout'), ['controller' => 'Auth', 'action' => 'logout'], ['style' => 'padding-right: 40px;']); ?>
+                    </a>
+                </div>
 
 <!--            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"-->
 <!--                    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">-->

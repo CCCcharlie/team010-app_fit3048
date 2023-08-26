@@ -168,7 +168,7 @@ $this->disableAutoLayout();
                                         <ol class="breadcrumb">
                                             <li class="breadcrumb-item"><a href="/" class="breadcrumb-link">Home</a></li>
                                             <li class="breadcrumb-item"><a href="/customers" class="breadcrumb-link">View all customer</a></li>
-                                            <li class="breadcrumb-item active" aria-current="page">assigned to me</li>
+                                            <li class="breadcrumb-item active" aria-current="page">Assigned to me</li>
                                         </ol>
                                     </nav>
                                 </div>
@@ -293,7 +293,7 @@ to get the name or any value in the staff table, use the get and then the name o
                                     <?php endif; ?>
                                 </th>
                             </tr>
-                            <?= $this->Html->link(__('New Customer'), ['action' => 'add'], ['class' => 'btn btn-primary float-right']) ?>
+                            <?= $this->Html->link(__('New Customer'), ['action' => 'add'], ['class' => 'btn btn-success float-right']) ?>
 
                             <br>
                             <br>

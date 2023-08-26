@@ -175,7 +175,10 @@ to get the name or any value in the staff table, use the get and then the name o
                                 //                        debug($identity->get('f_name'));
                                 //                        exit();
                                 ?>
-                                <h2 class="pageheader-title">Welcome, <?= $identity->get('f_name'); ?></h2>
+                                <?php
+                                /*
+                                <h2 class="pageheader-title">Welcome, <?= $identity->get('f_name'); ?></h2> */
+                                ?>
 
                                 <!-- Can you add login user to name here if you get chance Bryan?  -->
                                 <!-- Sure Alex-->
@@ -204,19 +207,19 @@ to get the name or any value in the staff table, use the get and then the name o
         }
         ?>
         <!-- ============================================================== -->
-        <?= $this->Html->link(__('Add a Staff Member'), ['action' => 'add'], ['class' => 'float-right btn btn-success']) ?>
+        <?= $this->Html->link(__('Add a Staff Member'), ['action' => 'add'], ['class' => 'float-right btn btn-success', 'style' => 'margin-top: -20px; margin-right: 10px;']) ?>
     <?php endif; ?>
 
-    <h3><?= __('Users') ?></h3>
+    <h4><?= __('Staff Accounts') ?></h4>
     <div class="table-responsive">
-        <table class="table table-hover">
+        <table class="table table-hover custom-table">
             <thead>
             <tr>
-                <th><?= $this->Paginator->sort('f_name', 'First Name') ?></th>
-                <th><?= $this->Paginator->sort('l_name', 'Last Name') ?></th>
-                <th><?= $this->Paginator->sort('email', 'E-mail') ?></th>
-                <th><?= $this->Paginator->sort('admin_status', 'Is user an admin?') ?></th>
-                <th class="actions"><?= __('Actions') ?></th>
+                <th style="font-family: 'Arial'; font-weight: normal;"><?= $this->Paginator->sort('f_name', 'First Name') ?></th>
+                <th style="font-family: 'Arial'; font-weight: normal;"><?= $this->Paginator->sort('l_name', 'Last Name') ?></th>
+                <th style="font-family: 'Arial'; font-weight: normal;"><?= $this->Paginator->sort('email', 'E-mail') ?></th>
+                <th style="font-family: 'Arial'; font-weight: normal;"><?= $this->Paginator->sort('admin_status', 'Role') ?></th>
+                <th class="actions" style="font-family: 'Arial'; font-weight: normal;"><?= __('Actions') ?></th>
             </tr>
             </thead>
             <tbody>

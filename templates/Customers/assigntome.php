@@ -178,7 +178,7 @@ to get the name or any value in the staff table, use the get and then the name o
                                 //                        debug($identity->get('f_name'));
                                 //                        exit();
                                 ?>
-                                <h2 class="pageheader-title">Welcome, <?= $identity->get('f_name'); ?></h2>
+                                <h2 class="pageheader-title" style="color: lightslategrey">Welcome, <?= $identity->get('f_name'); ?></h2>
 
                                 <!-- Can you add login user to name here if you get chance Bryan?  -->
                                 <!-- Sure Alex-->
@@ -194,8 +194,8 @@ to get the name or any value in the staff table, use the get and then the name o
                     <div class="row">
                         <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                             <div class="section-block" id="cardaction">
-                                <h3 class="section-title">Customer View</h3>
-                                <p>List of customers with tickets assigned to you.</p>
+                                <h3 class="section-title" style="color: midnightblue">Assigned Customers</h3>
+                                <p style ="color: midnightblue"> List of customers with tickets assigned to you.</p>
                             </div>
                         </div>
                     </div>
@@ -212,7 +212,7 @@ to get the name or any value in the staff table, use the get and then the name o
 
 
                             <br>
-                            <h4>Sort by: </h4>
+                            <h4 style ="color: midnightblue"> Sort by: </h4>
                             <br>
 
 

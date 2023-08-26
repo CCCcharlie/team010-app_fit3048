@@ -166,11 +166,11 @@ $this->disableAutoLayout();
                     <div class="section-block" id="basicform">
                     </div>
                     <div class="card">
-                        <h5 class="card-header">Add a New Customer</h5>
+                        <h5 class="card-header" style="color: midnightblue">Add a New Customer</h5>
                         <div class="card-body">
                             <?= $this->Form->create($customer, ['onsubmit' => 'return validateEmail();']) ?>
                             <div class="form-group">
-                                <?= $this->Form->label('f_name', 'First Name', ['class' => 'col-form-label']) ?>
+                                <?= $this->Form->label('f_name', 'First Name*', ['class' => 'col-form-label blue-label-text']) ?>
                                 <?= $this->Form->input('f_name', [
                                     'class' => 'form-control',
                                     'maxlength' => 32, // Maximum of 32 characters
@@ -183,7 +183,7 @@ $this->disableAutoLayout();
                                 <small class="form-text text-muted">Letters, hyphens and apostrophes only.</small>
                             </div>
                             <div class="form-group">
-                                <?= $this->Form->label('l_name', 'Last Name', ['class' => 'col-form-label']) ?>
+                                <?= $this->Form->label('l_name', 'Last Name*', ['class' => 'col-form-label blue-label-text']) ?>
                                 <?= $this->Form->input('l_name', [
                                     'class' => 'form-control',
                                     'maxlength' => 32, // Maximum of 32 characters
@@ -196,7 +196,7 @@ $this->disableAutoLayout();
                                 <small class="form-text text-muted">Letters, hyphens and apostrophes only.</small>
                             </div>
                             <div class="form-group">
-                                <?= $this->Form->label('email', 'Email Address') ?>
+                                <?= $this->Form->label('email', 'Email Address*', ['class' => 'blue-label-text']) ?>
                                 <?= $this->Form->input('email', [
                                     'class' => 'form-control',
                                     'placeholder' => 'name@mail.com',
@@ -211,7 +211,7 @@ $this->disableAutoLayout();
                                 <small class="form-text text-muted">Please enter a valid email address.</small>
                             </div>
                             <div class="form-group">
-                                <?= $this->Form->label('status', 'Status') ?>
+                                <?= $this->Form->label('status', 'Status', ['class' => 'blue-label-text']) ?>
                                 <?= $this->Form->input('status', [
                                     'class' => 'form-control',
                                     'title' => 'Please enter a customer status',
@@ -223,7 +223,7 @@ $this->disableAutoLayout();
                                 <small class="form-text text-muted">Not Required</small>
                             </div>
                             <div class="form-group">
-                                <?= $this->Form->label('notes', 'Notes') ?>
+                                <?= $this->Form->label('notes', 'Notes', ['class' => 'blue-label-text']) ?>
                                 <!-- Display validation error for the 'f_name' field -->
                                 <?= $this->Form->error('notes'); ?>
                                 <textarea name="data[status]" id="status" class="form-control" title="Enter notes" placeholder="Notes go here.." maxlength="500" style="height: 150px;"></textarea>

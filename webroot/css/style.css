@@ -4039,6 +4039,10 @@ Pills vertical
     color: #2e2f39;
 }
 
+.blue-label-text {
+    color: midnightblue;
+}
+
 .badge-brand[href]:focus,
 .badge-brand[href]:hover {
     color: #2e2f39;

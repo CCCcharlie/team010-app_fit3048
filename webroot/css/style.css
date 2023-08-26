@@ -2669,6 +2669,11 @@ clip-path: polygon(10% 25%, 10% 0, 35% 0%, 65% 0%, 90% 0, 90% 25%, 90% 50%, 91% 
 
 
 /*--- btn primary --*/
+.btn-close {
+    color:#fff;
+    background-color: #ef5753;
+    border-color: #ef5753;
+}
 
 .btn-primary {
     color: #fff;

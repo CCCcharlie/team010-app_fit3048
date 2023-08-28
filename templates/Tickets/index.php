@@ -4,10 +4,11 @@
  * @var iterable<\App\Model\Entity\Ticket> $tickets
  */
 ?>
+
 <div class="tickets index content">
     <?= $this->Html->link(__('New Ticket'), ['action' => 'add'], ['class' => 'button float-right']) ?>
     <h3><?= __('Tickets') ?></h3>
-    <div class="table-responsive">
+    <div class="table-responsive table table-hover table-striped">
         <table>
             <thead>
                 <tr>
@@ -52,3 +53,4 @@
         <p><?= $this->Paginator->counter(__('Page {{page}} of {{pages}}, showing {{current}} record(s) out of {{count}} total')) ?></p>
     </div>
 </div>
+    </div>

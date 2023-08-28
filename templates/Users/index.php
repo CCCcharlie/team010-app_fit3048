@@ -190,24 +190,7 @@ to get the name or any value in the staff table, use the get and then the name o
                     <!-- end pageheader  -->
                     <!-- ============================================================== -->
 <div class="users index content"><?php if ($this->Identity->get('admin_status') == 1): ?>
-
-        <!-- ============================================================== -->
-        <!-- Flash rendering -->
-        <!-- ============================================================== -->
-        <?php
-        // Check if the flash message exists and has content
-        $flashMessage = $this->Flash->render();
-        if (!empty($flashMessage)) {
-            ?>
-            <!-- Flash message, ONLY shows up if ticket is successfully opened/closed -->
-            <div class="alert alert-success" role="alert">
-                <?= $flashMessage; ?>
-            </div>
-            <?php
-        }
-        ?>
-        <!-- ============================================================== -->
-        <?= $this->Html->link(__('Add a Staff Member'), ['action' => 'add'], ['class' => 'float-right btn btn-success', 'style' => 'margin-top: -20px; margin-right: 10px;']) ?>
+    <?= $this->Html->link(__('Add a Staff Member'), ['action' => 'add'], ['class' => 'float-right btn btn-success', 'style' => 'margin-top: -20px; margin-right: 10px;']) ?>
     <?php endif; ?>
 
     <h4><?= __('Staff Accounts') ?></h4>

@@ -28,7 +28,8 @@
                     <td><?= $this->Number->format($ticket->id) ?></td>
                     <td><?= h($ticket->type) ?></td>
                     <td><?= h($ticket->createtime) ?></td>
-                    <td><?= h($ticket->closetime) ?></td>
+                    <td><?= !empty($ticket->closetime) ? h($ticket->closetime) : 'Not close' ?></td>
+
                     <td><?= $ticket->closed ? "✅" : "❌" ?></td>
                     <td><?= $ticket->has('customer') ? $this->Html->link($ticket->customer->id, ['controller' => 'Customers', 'action' => 'view', $ticket->customer->id]) : '' ?></td>
                     <td><?= $ticket->has('user') ? $this->Html->link($ticket->user->id, ['controller' => 'Users', 'action' => 'view', $ticket->user->id]) : '' ?></td>

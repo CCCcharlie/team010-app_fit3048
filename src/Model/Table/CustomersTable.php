@@ -76,7 +76,7 @@ class CustomersTable extends Table
             ->add('f_name', [
                 'validCharacters' => [
                     'rule' => ['custom', '/^[a-zA-Z]+(?:[-\'\s]{1}[a-zA-Z]+)*$/'],
-                    'message' => 'Please enter a valid name. Names cannot have multiple "-", or apostrophes in a row. Names cannot have numbers. '
+                    'message' => 'Please enter a valid first name. Names cannot have multiple "-", or apostrophes in a row. Names cannot have numbers. '
                 ]
             ]);
 
@@ -88,7 +88,7 @@ class CustomersTable extends Table
                 ->add('l_name', [
                     'validCharacters' => [
                         'rule' => ['custom', '/^[a-zA-Z]+(?:[-\'\s]{1}[a-zA-Z]+)*$/'],
-                        'message' => 'Please enter a valid name. Names cannot have multiple "-", or apostrophes in a row. Names cannot have numbers. '
+                        'message' => 'Please enter a valid last name. Names cannot have multiple "-", or apostrophes in a row. Names cannot have numbers. '
                     ]
                 ]);
 

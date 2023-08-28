@@ -318,7 +318,9 @@ to get the name or any value in the staff table, use the get and then the name o
                         <div id="filtered-content">
                             <!-- content show for assign to me -->
                         </div>
-    <?php foreach ($assignedCustomers as $customer): ?>
+
+
+                            <?php foreach ($assignedCustomers as $customer): ?>
         <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
             <div class="card">
                 <div class="card-header d-flex">
@@ -379,6 +381,11 @@ to get the name or any value in the staff table, use the get and then the name o
             </div>
         </div>
     <?php endforeach; ?>
+                        <?php if (count($assignedCustomers)==0): ?>
+                        <p class="body">No assigned customers found.</p>
+
+                        <?php endif; ?>
+
                     </div>
 
                     <!--                        <a href="javascript: " id="return-to-top"><i class="icon-chevron-up"></i></a>-->

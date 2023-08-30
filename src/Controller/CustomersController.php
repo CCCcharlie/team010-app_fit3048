@@ -35,7 +35,8 @@ class CustomersController extends AppController
                     'Devices.sessionid LIKE' => '%' . $search . '%' // BROKEN
                 ]
             ];
-            $query->where($searchConditions);
+            $query->leftJoinWith('Devices')
+                ->where($searchConditions);
         }
 
         $totalRecords = $query->count(); // Get the total number of records

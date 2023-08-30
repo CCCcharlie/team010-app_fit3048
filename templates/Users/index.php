@@ -189,11 +189,15 @@ to get the name or any value in the staff table, use the get and then the name o
                     <!-- ============================================================== -->
                     <!-- end pageheader  -->
                     <!-- ============================================================== -->
-<div class="users index content"><?php if ($this->Identity->get('admin_status') == 1): ?>
-    <?= $this->Html->link(__('Add a Staff Member'), ['action' => 'add'], ['class' => 'float-right btn btn-success', 'style' => 'margin-top: -20px; margin-right: 10px;']) ?>
-    <?php endif; ?>
+<div class="users index content">
+    <div class="section-block" id="cardaction">
+        <h3 class="section-title"><?= __('Staff Accounts') ?></h3>
 
-    <h4><?= __('Staff Accounts') ?></h4>
+        <?php if ($this->Identity->get('admin_status') == 1): ?>
+            <?= $this->Html->link(__('Add a Staff Member'), ['action' => 'add'], ['class' => 'float-right btn btn-success' , 'style' => 'margin-top: -20px; margin-right: 10px; margin-bottom: 5px;' ]) ?>
+        <?php endif; ?>
+    </div>
+
     <div class="table-responsive">
         <table class="table table-hover custom-table">
             <thead>

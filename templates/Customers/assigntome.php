@@ -212,7 +212,7 @@ to get the name or any value in the staff table, use the get and then the name o
 
 
                             <br>
-                            <h4 style ="color: midnightblue"> Sort by: </h4>
+                            <h3 style ="color: midnightblue" class="section-title"> Sort by: </h3>
                             <br>
 
 
@@ -382,7 +382,10 @@ to get the name or any value in the staff table, use the get and then the name o
         </div>
     <?php endforeach; ?>
                         <?php if (count($assignedCustomers)==0): ?>
-                        <p class="body">No assigned customers found.</p>
+                            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12" >
+                                <p>No assigned customers found.</p>
+                            </div>
+
 
                         <?php endif; ?>
 

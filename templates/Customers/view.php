@@ -419,7 +419,7 @@ $checkConnection = function (string $name) {
                                                                         <p><span class="card-info">Ticket ID:</span> <?= h($ticket->id) ?></p>
                                                                         <p><span class="card-info">Customer:</span> <?= h($customer->f_name) ?></p>
                                                                         <p><span class="card-info">Assigned staff:</span> <?= $this->Html->link(__($ticket->user->f_name), ['controller' => 'Users', 'action' => 'view', $ticket->staff_id]) ?></p>
-                                                                        <p><span class="card-info">Create time:</span> <?= h($ticket->createtime) ?></p>
+                                                                        <p><span class="card-info">Create time:</span> <?= $ticket->createtime->i18nFormat('yyyy-MM-dd HH:mm:ss', 'Australia/Sydney') ?></p>
                                                                         <br>
                                                                     </div>
                                                                     <div style="display: flex; justify-content: space-between">

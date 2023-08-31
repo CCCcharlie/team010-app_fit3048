@@ -45,7 +45,7 @@ $this->assign('title', 'Login');
 <!--        <div class="column column-50 column-offset-25">-->
             <div class=" form-group">
 
-                <?= $this->Form->create() ?>
+                <?= $this->Form->create(null, ['id' => 'login']); ?>
 
                 <fieldset>
 
@@ -63,7 +63,7 @@ $this->assign('title', 'Login');
                         echo "<p class='text-danger'>Too many unsuccessful attempts. Please wait for {$remainingTime} seconds before trying again.</p>";
                     } else {
                         // Display the login form
-                        echo $this->Form->create();
+                        echo $this->Form->create(null, ['id' => 'login']);
                         echo $this->Form->control('email', [
                             'type' => 'email',
                             'required' => true,
@@ -79,7 +79,8 @@ $this->assign('title', 'Login');
                             'value' => $debug ? 'password' : '',
                             'maxlength' => 124,
                         ]);
-                        echo $this->Form->button('Login',['class' => 'btn btn-primary btn-lg btn-block']);
+
+                        echo $this->Form->button('Login',['class' => 'btn btn-primary btn-lg btn-block g-recaptcha', 'data-sitekey' => '6LcY690nAAAAAI-KdpmOX7CKkwjXw-8Eg5pvNmlN', 'data-callback' => 'onSubmit', 'data-action'=> 'submit']);
                         $this->Html->link('Forgot password?', ['controller' => 'Auth', 'action' => 'forgetPassword'], ['class' => 'button button-outline']);
                           $this->Form->end();
 
@@ -105,9 +106,10 @@ $this->assign('title', 'Login');
 <script src="https://www.google.com/recaptcha/api.js"></script>
 <script>
     function onSubmit(token) {
-        document.getElementById("demo-form").submit();
+        document.getElementById('login').submit();
     }
 </script>
+
 
 <?php $this->end(); ?>
 

@@ -223,7 +223,7 @@ $checkConnection = function (string $name) {
                         //                        debug($identity->get('f_name'));
                         //                        exit();
                         ?>
-                        <h2 class="pageheader-title">Welcome, <?= $identity->get('f_name'); ?></h2>
+                        <h2 class="pageheader-title" style="color:lightslategrey">Welcome, <?= $identity->get('f_name'); ?></h2>
 
                         <!-- Can you add login user to name here if you get chance Bryan?  -->
                         <!-- Sure Alex-->
@@ -363,7 +363,7 @@ $checkConnection = function (string $name) {
                                                     <div style="display: flex; justify-content: space-between; margin: 10px">
                                                         <div class="btn-group btn-group-toggle" data-toggle="buttons" style="padding-right: 10px">
                                                             <label class="btn btn-primary active">
-                                                                <input type="radio" name="options" id="showallticket" checked>All
+                                                                <input type="radio" name="options" id="showallticket" checked>  All
                                                             </label>
                                                             <label class="btn btn-primary">
                                                                 <input type="radio" name="options" id="showcloseticket"> Closed
@@ -419,7 +419,7 @@ $checkConnection = function (string $name) {
                                                                         <p><span class="card-info">Ticket ID:</span> <?= h($ticket->id) ?></p>
                                                                         <p><span class="card-info">Customer:</span> <?= h($customer->f_name) ?></p>
                                                                         <p><span class="card-info">Assigned staff:</span> <?= $this->Html->link(__($ticket->user->f_name), ['controller' => 'Users', 'action' => 'view', $ticket->staff_id]) ?></p>
-                                                                        <p><span class="card-info">Create time:</span> <?= h($ticket->createtime) ?></p>
+                                                                        <p><span class="card-info">Create time:</span> <?= $ticket->createtime->i18nFormat('yyyy-MM-dd HH:mm:ss', 'Australia/Sydney') ?></p>
                                                                         <br>
                                                                     </div>
                                                                     <div style="display: flex; justify-content: space-between">

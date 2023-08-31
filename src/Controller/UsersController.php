@@ -23,6 +23,7 @@ class UsersController extends AppController
 
         if (($this->request->getParam('action') === 'edit' || $this->request->getParam('action') === 'delete') && $adminStatus != 1) {
             return $this->redirect(['action' => 'index']);
+
         }
     }
 

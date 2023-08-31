@@ -19,6 +19,9 @@ $this->disableAutoLayout();
     <!-- Bootstrap CSS -->
     <!-- In-built CSS -->
     <?= $this->Html->css(['style', 'bootstrap.min',]) ?>
+    <?= $this->Html->css(['style', 'error',]) ?>
+    <?= $this->Html->css(['fontawesome-all'], ['block' => true]) ?>
+    <link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
 
 
 </head>
@@ -146,7 +149,7 @@ $this->disableAutoLayout();
             if (!empty($flashMessage)) {
                 ?>
                 <!-- Flash message, ONLY shows up if ticket is successfully opened/closed -->
-                <div class="alert alert-success" role="alert">
+                <div class="alert alert-danger" role="alert">
                     <?= $flashMessage; ?>
                 </div>
                 <?php
@@ -202,12 +205,15 @@ $this->disableAutoLayout();
                                     </div>
                                     <?= $this->Form->create($customer) ?>
                                     <div class="text-center">
-                                        <h2 class="font-24 mb-0"><?= $this->Form->control('f_name', ['class' => 'form-control', 'label' => false]) ?> <?= $this->Form->control('l_name', ['class' => 'form-control', 'label' => false]) ?></h2>
-                                        <!-- Display validation error for the 'f_name' field -->
-                                        <?= $this->Form->error('f_name'); ?>
+                                        <h2 class="font-24 mb-0">
+                                            <?= $this->Form->control('f_name', ['class' => 'form-control', 'label' => false]) ?>
+<!--                                            --><?php //= $this->Form->error('f_name'); ?>
+                                            <?= $this->Form->control('l_name', ['class' => 'form-control', 'label' => false]) ?>
+                                            <!-- Display validation error for the 'f_name' field -->
+<!--                                            --><?php //= $this->Form->error('l_name'); ?><!--</h2>-->
                                         <p>Status: <?= $this->Form->control('status', ['class' => 'form-control', 'label' => false]) ?></p>
                                         <!-- Display validation error for the 'f_name' field -->
-                                        <?= $this->Form->error('status'); ?>
+<!--                                        --><?php //= $this->Form->error('status'); ?>
                                     </div>
                                 </div>
                                 <div class="card-body border-top">
@@ -216,7 +222,7 @@ $this->disableAutoLayout();
                                         <ul class="list-unstyled mb-0">
                                             <li class="mb-2"><?= $this->Form->control('email', ['class' => 'form-control', 'label' => false]) ?></li>
                                             <!-- Display validation error for the 'f_name' field -->
-                                            <?= $this->Form->error('email'); ?>
+<!--                                            --><?php //= $this->Form->error('email'); ?>
                                         </ul>
                                     </div>
                                 </div>

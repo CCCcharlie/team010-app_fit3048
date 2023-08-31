@@ -44,20 +44,9 @@ $this->disableAutoLayout();
                 <?= $this->Html->image('cake-logo.png', ['alt' => 'GamBlock Logo', 'class' => 'navbar-b;and', 'style' => 'width: 225px; height: auto;']); ?>
             </a>
 
-            <?php
-            $identity = $this->request->getAttribute('authentication')->getIdentity();
-            ?>
-
-            <div class="row" style="padding: 10px;">
-                <div class="col-md-6 text-right">
-                    <p style="margin-right: 10px;">Welcome, <?= $identity->get('f_name'); ?></p>
-                </div>
-                <div class="col-md-6">
-                    <a href="#" class="text-right">
-                        <i class="fas fa-power-off" style="margin-right: 2px;"></i>
-                        <?php echo $this->Html->link(__('Logout'), ['controller' => 'Auth', 'action' => 'logout'], ['style' => 'padding-right: 40px;']); ?>
-                    </a>
-                </div>
+            <div>
+            <a href="#"><i class="fas fa-power-off mr-2"></i> <?php echo $this->Html->link(__('Logout'), ['controller' => 'Auth', 'action' => 'logout'] ,['style' => 'padding-right: 40px']); ?></a>
+            </div>
 
 <!--            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"-->
 <!--                    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">-->
@@ -186,7 +175,10 @@ to get the name or any value in the staff table, use the get and then the name o
                                 //                        debug($identity->get('f_name'));
                                 //                        exit();
                                 ?>
-                                <h2 class="pageheader-title">Welcome, <?= $identity->get('f_name'); ?></h2>
+                                <?php
+                                /*
+                                <h2 class="pageheader-title">Welcome, <?= $identity->get('f_name'); ?></h2> */
+                                ?>
 
                                 <!-- Can you add login user to name here if you get chance Bryan?  -->
                                 <!-- Sure Alex-->
@@ -197,37 +189,24 @@ to get the name or any value in the staff table, use the get and then the name o
                     <!-- ============================================================== -->
                     <!-- end pageheader  -->
                     <!-- ============================================================== -->
-<div class="users index content"><?php if ($this->Identity->get('admin_status') == 1): ?>
+<div class="users index content">
+    <div class="section-block" id="cardaction">
+        <h3 class="section-title"><?= __('Staff Accounts') ?></h3>
 
-        <!-- ============================================================== -->
-        <!-- Flash rendering -->
-        <!-- ============================================================== -->
-        <?php
-        // Check if the flash message exists and has content
-        $flashMessage = $this->Flash->render();
-        if (!empty($flashMessage)) {
-            ?>
-            <!-- Flash message, ONLY shows up if ticket is successfully opened/closed -->
-            <div class="alert alert-success" role="alert">
-                <?= $flashMessage; ?>
-            </div>
-            <?php
-        }
-        ?>
-        <!-- ============================================================== -->
-        <?= $this->Html->link(__('Add a Staff Member'), ['action' => 'add'], ['class' => 'float-right btn btn-success']) ?>
-    <?php endif; ?>
+        <?php if ($this->Identity->get('admin_status') == 1): ?>
+            <?= $this->Html->link(__('Add a Staff Member'), ['action' => 'add'], ['class' => 'float-right btn btn-success' , 'style' => 'margin-top: -20px; margin-right: 10px; margin-bottom: 5px;' ]) ?>
+        <?php endif; ?>
+    </div>
 
-    <h3><?= __('Users') ?></h3>
     <div class="table-responsive">
-        <table class="table table-hover">
+        <table class="table table-hover custom-table">
             <thead>
             <tr>
-                <th><?= $this->Paginator->sort('f_name', 'First Name') ?></th>
-                <th><?= $this->Paginator->sort('l_name', 'Last Name') ?></th>
-                <th><?= $this->Paginator->sort('email', 'E-mail') ?></th>
-                <th><?= $this->Paginator->sort('admin_status', 'Is user an admin?') ?></th>
-                <th class="actions"><?= __('Actions') ?></th>
+                <th style="font-family: 'Arial'; font-weight: normal;"><?= $this->Paginator->sort('f_name', 'First Name') ?></th>
+                <th style="font-family: 'Arial'; font-weight: normal;"><?= $this->Paginator->sort('l_name', 'Last Name') ?></th>
+                <th style="font-family: 'Arial'; font-weight: normal;"><?= $this->Paginator->sort('email', 'E-mail') ?></th>
+                <th style="font-family: 'Arial'; font-weight: normal;"><?= $this->Paginator->sort('admin_status', 'Role') ?></th>
+                <th class="actions" style="font-family: 'Arial'; font-weight: normal;"><?= __('Actions') ?></th>
             </tr>
             </thead>
             <tbody>
@@ -236,7 +215,7 @@ to get the name or any value in the staff table, use the get and then the name o
                     <td><?= h($user->f_name) ?></td>
                     <td><?= h($user->l_name) ?></td>
                     <td><?= h($user->email) ?></td>
-                    <td><?= h($user->admin_status ? 'Yes' : 'No') ?></td>
+                    <td><?= h($user->admin_status ? 'Admin' : 'Staff') ?></td>
                     <td class="actions">
                         <?php if ($this->Identity->get('admin_status') == 1): ?>
                             <?= $this->Html->link(__('Edit'), ['action' => 'edit', $user->id], ['class' => 'btn btn-primary']) ?>

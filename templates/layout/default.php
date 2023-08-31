@@ -83,8 +83,7 @@ $cakeDescription = 'CakePHP: The rapid development PHP framework';
                         <div class="page-breadcrumb">
                             <nav aria-label="breadcrumb">
                                 <ol class="breadcrumb">
-                                    <li class="breadcrumb-item"><a href="#" class="breadcrumb-link">Dashboard</a></li>
-                                    <li class="breadcrumb-item"><a href="#" class="breadcrumb-link">Pages</a></li>
+                                    <li class="breadcrumb-item"><a href="/" class="breadcrumb-link">Dashboard</a></li>
                                     <li class="breadcrumb-item active" aria-current="page">Blank Page header</li>
                                 </ol>
                             </nav>
@@ -187,6 +186,20 @@ $cakeDescription = 'CakePHP: The rapid development PHP framework';
 <!-- ============================================================== -->
 <!-- end left sidebar -->
 <!-- ============================================================== -->
+<!--script-->
+<script>
+    // obtain the currently tile
+    var pageTitle = document.title;
+
+    // split the title
+    var words = pageTitle.split(' ');
+
+    // get the last word
+    var lastWord = words[words.length - 1];
+    // update the car
+    var activeBreadcrumb = document.querySelector(".breadcrumb-item.active");
+    activeBreadcrumb.textContent = lastWord;
+</script>
 </body>
 </html>
 

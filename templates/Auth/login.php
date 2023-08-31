@@ -22,7 +22,7 @@ $this->assign('title', 'Login');
 
 <div class="splash-container login">
     <div class="card" style="width: 100%; height: 100%">
-        <div class="card-header text-center"><a href="../index.html"><img class="logo-img" src="/img/cake-logo.png" alt="logo"></a><span class="splash-description">Please enter your user information.</span></div>
+        <div class="card-header text-center"><img class="logo-img" src="/img/cake-logo.png" alt="logo"><span class="splash-description">Please enter your user information.</span></div>
         <title>GamBlock® - Customer Management</title>
 
         <!-- ============================================================== -->
@@ -45,7 +45,7 @@ $this->assign('title', 'Login');
 <!--        <div class="column column-50 column-offset-25">-->
             <div class=" form-group">
 
-                <?= $this->Form->create() ?>
+                <?= $this->Form->create(null, ['id' => 'login']); ?>
 
                 <fieldset>
 
@@ -54,35 +54,39 @@ $this->assign('title', 'Login');
                     <?= $this->Flash->render() ?>
 
                     <?php
-                    /*
-                     * NOTE: regarding 'value' config in the login page form controls
-                     * In this demo the email and password fields will be filled by demo account
-                     * credentials when debug mode is on. You should NOT do that in your production
-                     * systems. Also it's a good practice to clear (set password value to empty)
-                     * in the view so when an error occurred with form validation, the password
-                     * values are always cleared.
-                     */
-                    echo $this->Form->control('email', [
-                        'type' => 'email',
-                        'required' => true,
-                        'maxlength' => 320,
-                        'autofocus' => true,
-                        'value' => $debug ? "test@example.com" : "",
-                        'class' => 'form-control form-control-lg'
-                    ]);
-                    echo $this->Form->control('password', [
-                        'type' => 'password',
-                        'required' => true,
-                        'class' => 'form-control form-control-lg',
-                        'value' => $debug ? 'password' : '',
-                        'maxlength' => 124,
-                    ]);
+                    $loginAttempts = $this->request->getSession()->read('login_attempts') ?? ['count' => 0, 'last_attempt_time' => 0];
+                    $loginTimeoutDuration = $this->request->getSession()->read('login_timeout_duration') ?? 0;
+                    $currentTime = time();
+
+                    if ($loginTimeoutDuration && ($currentTime - $loginAttempts['last_attempt_time']) < $loginTimeoutDuration) {
+                        $remainingTime = $loginTimeoutDuration - ($currentTime - $loginAttempts['last_attempt_time']);
+                        echo "<p class='text-danger'>Too many unsuccessful attempts. Please wait for {$remainingTime} seconds before trying again.</p>";
+                    } else {
+                        // Display the login form
+                        echo $this->Form->create(null, ['id' => 'login']);
+                        echo $this->Form->control('email', [
+                            'type' => 'email',
+                            'required' => true,
+                            'maxlength' => 320,
+                            'autofocus' => true,
+                            'value' => $debug ? "test@example.com" : "",
+                            'class' => 'form-control form-control-lg'
+                        ]);
+                        echo $this->Form->control('password', [
+                            'type' => 'password',
+                            'required' => true,
+                            'class' => 'form-control form-control-lg',
+                            'value' => $debug ? 'password' : '',
+                            'maxlength' => 124,
+                        ]);
+
+                        echo $this->Form->button('Login',['class' => 'btn btn-primary btn-lg btn-block g-recaptcha', 'data-sitekey' => '6LcY690nAAAAAI-KdpmOX7CKkwjXw-8Eg5pvNmlN', 'data-callback' => 'onSubmit', 'data-action'=> 'submit']);
+                        $this->Html->link('Forgot password?', ['controller' => 'Auth', 'action' => 'forgetPassword'], ['class' => 'button button-outline']);
+                          $this->Form->end();
+
+                    }
                     ?>
                 </fieldset>
-
-                <?= $this->Form->button('Login',['class' => 'btn btn-primary btn-lg btn-block']) ?>
-                <?= $this->Html->link('Forgot password?', ['controller' => 'Auth', 'action' => 'forgetPassword'], ['class' => 'button button-outline']) ?>
-                <?= $this->Form->end() ?>
 
                 <hr class="hr-between-buttons">
 
@@ -99,5 +103,13 @@ $this->assign('title', 'Login');
             <script src="/webroot/js/jquery-3.3.1.min.js"></script>
         <script src="/webroot/js/bootstrap.bundle.js"></script>
         </script>
-        <?php $this->end(); ?>
+<script src="https://www.google.com/recaptcha/api.js"></script>
+<script>
+    function onSubmit(token) {
+        document.getElementById('login').submit();
+    }
+</script>
+
+
+<?php $this->end(); ?>
 

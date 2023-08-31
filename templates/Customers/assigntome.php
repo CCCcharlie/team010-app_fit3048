@@ -39,20 +39,9 @@ $this->disableAutoLayout();
                 <?= $this->Html->image('cake-logo.png', ['alt' => 'GamBlock Logo', 'class' => 'navbar-b;and', 'style' => 'width: 225px; height: auto;']); ?>
             </a>
 
-            <?php
-            $identity = $this->request->getAttribute('authentication')->getIdentity();
-            ?>
-
-            <div class="row" style="padding: 10px;">
-                <div class="col-md-6 text-right">
-                    <p style="margin-right: 10px;">Welcome, <?= $identity->get('f_name'); ?></p>
-                </div>
-                <div class="col-md-6">
-                    <a href="#" class="text-right">
-                        <i class="fas fa-power-off" style="margin-right: 2px;"></i>
-                        <?php echo $this->Html->link(__('Logout'), ['controller' => 'Auth', 'action' => 'logout'], ['style' => 'padding-right: 40px;']); ?>
-                    </a>
-                </div>
+            <div>
+            <a href="#"><i class="fas fa-power-off mr-2"></i> <?php echo $this->Html->link(__('Logout'), ['controller' => 'Auth', 'action' => 'logout'] ,['style' => 'padding-right: 40px']); ?></a>
+            </div>
 
 <!--            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"-->
 <!--                    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">-->
@@ -179,7 +168,7 @@ $this->disableAutoLayout();
                                         <ol class="breadcrumb">
                                             <li class="breadcrumb-item"><a href="/" class="breadcrumb-link">Home</a></li>
                                             <li class="breadcrumb-item"><a href="/customers" class="breadcrumb-link">View all customer</a></li>
-                                            <li class="breadcrumb-item active" aria-current="page">assigned to me</li>
+                                            <li class="breadcrumb-item active" aria-current="page">Assigned to me</li>
                                         </ol>
                                     </nav>
                                 </div>
@@ -189,7 +178,7 @@ to get the name or any value in the staff table, use the get and then the name o
                                 //                        debug($identity->get('f_name'));
                                 //                        exit();
                                 ?>
-
+                                <h2 class="pageheader-title" style="color: lightslategrey">Welcome, <?= $identity->get('f_name'); ?></h2>
 
                                 <!-- Can you add login user to name here if you get chance Bryan?  -->
                                 <!-- Sure Alex-->
@@ -205,8 +194,8 @@ to get the name or any value in the staff table, use the get and then the name o
                     <div class="row">
                         <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                             <div class="section-block" id="cardaction">
-                                <h3 class="section-title">Customer View</h3>
-                                <p>List of customers with tickets assigned to you.</p>
+                                <h3 class="section-title" style="color: midnightblue">Assigned Customers</h3>
+                                <p style ="color: midnightblue"> List of customers with tickets assigned to you.</p>
                             </div>
                         </div>
                     </div>
@@ -223,7 +212,7 @@ to get the name or any value in the staff table, use the get and then the name o
 
 
                             <br>
-                            <h4>Sort by: </h4>
+                            <h3 style ="color: midnightblue" class="section-title"> Sort by: </h3>
                             <br>
 
 
@@ -304,7 +293,7 @@ to get the name or any value in the staff table, use the get and then the name o
                                     <?php endif; ?>
                                 </th>
                             </tr>
-                            <?= $this->Html->link(__('New Customer'), ['action' => 'add'], ['class' => 'btn btn-primary float-right']) ?>
+                            <?= $this->Html->link(__('New Customer'), ['action' => 'add'], ['class' => 'btn btn-success float-right']) ?>
 
                             <br>
                             <br>
@@ -329,7 +318,9 @@ to get the name or any value in the staff table, use the get and then the name o
                         <div id="filtered-content">
                             <!-- content show for assign to me -->
                         </div>
-    <?php foreach ($assignedCustomers as $customer): ?>
+
+
+                            <?php foreach ($assignedCustomers as $customer): ?>
         <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
             <div class="card">
                 <div class="card-header d-flex">
@@ -390,6 +381,14 @@ to get the name or any value in the staff table, use the get and then the name o
             </div>
         </div>
     <?php endforeach; ?>
+                        <?php if (count($assignedCustomers)==0): ?>
+                            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12" >
+                                <p>No assigned customers found.</p>
+                            </div>
+
+
+                        <?php endif; ?>
+
                     </div>
 
                     <!--                        <a href="javascript: " id="return-to-top"><i class="icon-chevron-up"></i></a>-->

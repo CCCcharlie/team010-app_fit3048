@@ -68,6 +68,14 @@ $checkConnection = function (string $name) {
 
 
 
+<style>
+    td
+    {
+        max-width: 200px;
+        /*width: 200px;*/
+        overflow-wrap: break-word;
+    }
+</style>
 
 </head>
 
@@ -85,20 +93,10 @@ $checkConnection = function (string $name) {
                 <?= $this->Html->image('cake-logo.png', ['alt' => 'GamBlock Logo', 'class' => 'navbar-b;and', 'style' => 'width: 225px; height: auto;']); ?>
             </a>
 
-            <?php
-            $identity = $this->request->getAttribute('authentication')->getIdentity();
-            ?>
+            <div>
+            <a href="#"><i class="fas fa-power-off mr-2"></i> <?php echo $this->Html->link(__('Logout'), ['controller' => 'Auth', 'action' => 'logout'] ,['style' => 'padding-right: 40px']); ?></a>
+            </div>
 
-            <div class="row" style="padding: 10px;">
-                <div class="col-md-6 text-right">
-                    <p style="margin-right: 10px;">Welcome, <?= $identity->get('f_name'); ?></p>
-                </div>
-                <div class="col-md-6">
-                    <a href="#" class="text-right">
-                        <i class="fas fa-power-off" style="margin-right: 2px;"></i>
-                        <?php echo $this->Html->link(__('Logout'), ['controller' => 'Auth', 'action' => 'logout'], ['style' => 'padding-right: 40px;']); ?>
-                    </a>
-                </div>
 <!--            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"-->
 <!--                    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">-->
 <!--                <span class="navbar-toggler-icon"></span>-->
@@ -211,7 +209,7 @@ $checkConnection = function (string $name) {
             <!-- ============================================================== -->
 
             <div class="row">
-                <div class="col-xl-10">
+                <div class="col-xl-11">
                     <!-- ============================================================== -->
                     <!-- pageheader  -->
                     <!-- ============================================================== -->
@@ -230,7 +228,11 @@ $checkConnection = function (string $name) {
                                 </div>
                                 <!-- To obtain the identity, use $identity = $this->request->getAttribute('authentication')->getIdentity(); to find the currently logged in entity
 to get the name or any value in the staff table, use the get and then the name of the attribute $identity->get('staff_fname')-->
-
+                                <?php $identity = $this->request->getAttribute('authentication')->getIdentity();
+                                //                        debug($identity->get('f_name'));
+                                //                        exit();
+                                ?>
+                                <h2 class="pageheader-title" style="color: lightslategrey">Welcome, <?= $identity->get('f_name'); ?></h2>
 
                             </div>
                         </div>
@@ -242,8 +244,8 @@ to get the name or any value in the staff table, use the get and then the name o
                     <div class="row">
                         <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                             <div class="section-block" id="cardaction">
-                                <h3 class="section-title">Customer View</h3>
-                                <p>Complete list of customers below.</p>
+                                <h3 class="section-title" style="color: midnightblue">Customer View</h3>
+                                <p style="color: midnightblue"> Complete list of customers below.</p>
                             </div>
                         </div>
                     </div>
@@ -255,18 +257,18 @@ to get the name or any value in the staff table, use the get and then the name o
                             <!--                            -->
                             <br>
                             <div class="row">
-                                <div class="col-md-6">
-                                    <h4>Filter: </h4>
+                                <div class="col-md-6 ">
+                                    <h3 style="color: midnightblue"> Filter: </h3>
                                     <?= $this->Form->create(null, ['url' => ['controller' => 'Customers', 'action' => 'index'], 'type' => 'get', 'class' => 'form-inline']) ?>
                                     <div class="form-group mr-2">
-                                        <?= $this->Form->input('search', ['type' => 'text', 'class' => 'form-control', 'placeholder' => 'Search by name, e-mail, sessionid...']) ?>
+                                        <?= $this->Form->input('search', ['type' => 'text', 'class' => 'form-control', 'placeholder' => 'Search by name']) ?>
                                     </div>
                                     <div class="btn-group ml-2">
                                     <?= $this->Form->button(__('Search'), ['class' => 'btn btn-primary custom-button']) ?>
                                     <?= $this->Form->end() ?>
 
-                                        <button id="table-view-btn" class="btn btn-primary custom-button">Table View</button>
-                                        <button id="list-view-btn" class="btn btn-primary custom-button">List View</button>
+                                        <button id="table-view-btn" type="button" class="btn btn-primary custom-button">Table View</button>
+                                        <button id="list-view-btn" type="button" class="btn btn-primary custom-button">List View</button>
                                         <style>
                                             .custom-button {
                                                 margin-right: 2px;
@@ -548,12 +550,12 @@ to get the name or any value in the staff table, use the get and then the name o
                                     </td>
                                     <td>
                                         <?php if (!empty($customer->notes)) : ?>
-                                            <?= h($customer->notes) ?>
+                                            <p> <?= h($customer->notes) ?> </p>
                                         <?php else : ?>
                                             No notes have been provided about the customer.
                                         <?php endif; ?>
                                     </td>
-                                    <td>
+                                    <td style="width: 200px">
                                         <?= $this->Html->link(__('View Full Profile'), ['action' => 'view', $customer->id], ['class' => 'btn btn-primary']) ?>
                                     </td>
                                 </tr>
@@ -572,48 +574,24 @@ to get the name or any value in the staff table, use the get and then the name o
                         <div class = "card-footer-item" >
 
 
+
                             <div class="pagination-controls">
-                                <div class="row align-items-center">
-                                    <div class="col-md-3 text-md-right text-center">
-                                        <?php if ($this->Paginator->hasPrev()): ?>
-                                            <span style="list-style: none; display: inline-block; margin: 0; padding: 0;">
-                    <?= $this->Paginator->prev('< ' . __('previous')) ?>
-                </span>
-                                        <?php endif; ?>
-                                    </div>
+                                <p class="pagination-counter">
+                                <form class="pagination-goto">
+                                    <label for="goto-page">Go to page:</label>
 
-                                    <div class="col-md-6 text-center">
-                                        <div class="pagination-counter">
-                <span>
-                    Displaying <?= $this->Paginator->counter('{{start}}-{{end}}') ?> of <?= $this->Paginator->counter('{{count}}') ?> records in total
-                </span>
-                                            <form class="pagination-goto form-inline justify-content-center">
-                                                <label class="mr-2" for="goto-page">Go to page:</label>
-                                                <input class="form-control" type="text" id="goto-page" name="page">
-                                                <button class="btn btn-primary ml-2" type="submit">Go</button>
-                                            </form>
-                                        </div>
-                                    </div>
+                                    <input type="text" id="goto-page" name="page">
+                                    <button class="btn btn-primary" type="submit">Go</button>
 
-                                    <div class="col-md-3 text-md-left text-center">
-                                        <?php if ($this->Paginator->hasNext()): ?>
-                                            <span style="list-style: none; display: inline-block; margin: 0; padding: 0;">
-                    <?= $this->Paginator->next(__('next') . ' >') ?>
-                </span>
-                                        <?php endif; ?>
-                                    </div>
-                                </div>
+                                </form>
                             </div>
-
-
-
-
-
-
-
-
-
+                            <p class="pagination-counter"><?= $this->Paginator->counter(__('Page {{page}} of {{pages}}, showing {{current}} record(s) out of {{count}} total')) ?></p>
                         </div>
+
+
+
+
+                    </div>
                     <style>
 
                         .device-details {

@@ -109,7 +109,7 @@ class AuthController extends AppController {
              * because it may be used by someone with malicious intent. We only need to tell
              * the user that they'll get an email.
              */
-            $this->Flash->success('Please check your inbox (or spam folder) for an email regarding how to reset your account password. ');
+            $this->Flash->success('If your e-mail has been found in the database, an e-mail will be sent. Please check your inbox (or spam folder) for an email regarding how to reset your account password. ');
             return $this->redirect(['action' => 'login']);
 
         }
@@ -182,21 +182,69 @@ class AuthController extends AppController {
         $this->request->allowMethod(['get', 'post']);
         $result = $this->Authentication->getResult();
 
-        // if user passes authentication, grant access to the system
-        if ($result && $result->isValid()) {
-            // set a fallback location in case user logged in without triggering 'unauthenticatedRedirect'
-            $fallbackLocation = ['controller' => 'Customers', 'action' => 'index'];
+        // Define maximum number of consecutive unsuccessful attempts before imposing timeouts
+        $maxAttemptsBeforeTimeout = 5;
 
-            // and redirect user to the location they're trying to access
-//            return $this->redirect($this->Authentication->getLoginRedirect() ?? $fallbackLocation);
-            //Instead of redirecting to homepage, redirect to customer view page regardless of what page they are trying to access
+        // Define initial timeout duration (in seconds) and doubling factor
+        $initialTimeout = 30;
+        $timeoutDoublingFactor = 2;
 
-            return $this->redirect(['controller' => 'Customers', 'action' => 'index']);
+        // Get stored attempt count and timestamp from session
+        $loginAttempts = $this->request->getSession()->read('login_attempts') ?? ['count' => 0, 'last_attempt_time' => 0];
+        $lastAttemptTime = $loginAttempts['last_attempt_time'];
+
+        // Get current timestamp
+        $currentTime = time();
+
+        // Check if enough time has passed since the last attempt to reset the attempt count
+        if ($lastAttemptTime && ($currentTime - $lastAttemptTime) > $initialTimeout) {
+            $loginAttempts = ['count' => 0, 'last_attempt_time' => 0];
         }
 
-        // display error if user submitted their credentials but authentication failed
+        // if user passes authentication, grant access to the system
+        if ($result && $result->isValid()) {
+            // Reset the login attempts on successful login
+            $this->request->getSession()->delete('login_attempts');
+
+            // Set a fallback location in case user logged in without triggering 'unauthenticatedRedirect'
+            $fallbackLocation = ['controller' => 'Customers', 'action' => 'index'];
+
+            // Redirect user to the location they're trying to access
+            return $this->redirect($this->Authentication->getLoginRedirect() ?? $fallbackLocation);
+        }
+
+        // Display error if user submitted their credentials but authentication failed
         if ($this->request->is('post') && !$result->isValid()) {
-            $this->Flash->error('Email address and/or Password is incorrect. Please try again. ');
+            // Increment the login attempts
+            $loginAttempts['count']++;
+
+            // Update the last attempt time
+            $loginAttempts['last_attempt_time'] = $currentTime;
+
+            // Calculate timeout duration based on the number of consecutive unsuccessful attempts
+            $attemptsSinceLastTimeout = $loginAttempts['count'] % $maxAttemptsBeforeTimeout;
+
+            if ($attemptsSinceLastTimeout === 0) {
+                // User has reached the maximum attempts before timeout, double the timeout duration
+                $initialTimeout *= $timeoutDoublingFactor;
+            }
+
+            // Check if timeout duration exceeds a maximum limit (optional)
+            $maxTimeout = 86400; // Maximum timeout duration (24 hours). Let it be changeable
+            if ($initialTimeout > $maxTimeout) {
+                $initialTimeout = $maxTimeout;
+            }
+
+            // Set the calculated timeout duration in the session
+            $this->request->getSession()->write('login_attempts', $loginAttempts);
+            $this->request->getSession()->write('login_timeout_duration', $initialTimeout);
+
+            // Display the appropriate error message
+            if ($attemptsSinceLastTimeout === 0) {
+                $this->Flash->error("Too many unsuccessful attempts. Please wait for {$initialTimeout} seconds before trying again.");
+            } else {
+                $this->Flash->error('Email address and/or Password is incorrect. Please try again.');
+            }
         }
     }
 

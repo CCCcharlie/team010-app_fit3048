@@ -68,6 +68,14 @@ $checkConnection = function (string $name) {
 
 
 
+<style>
+    td
+    {
+        max-width: 200px;
+        /*width: 200px;*/
+        overflow-wrap: break-word;
+    }
+</style>
 
 </head>
 
@@ -201,7 +209,7 @@ $checkConnection = function (string $name) {
             <!-- ============================================================== -->
 
             <div class="row">
-                <div class="col-xl-10">
+                <div class="col-xl-11">
                     <!-- ============================================================== -->
                     <!-- pageheader  -->
                     <!-- ============================================================== -->
@@ -542,12 +550,12 @@ to get the name or any value in the staff table, use the get and then the name o
                                     </td>
                                     <td>
                                         <?php if (!empty($customer->notes)) : ?>
-                                            <?= h($customer->notes) ?>
+                                            <p> <?= h($customer->notes) ?> </p>
                                         <?php else : ?>
                                             No notes have been provided about the customer.
                                         <?php endif; ?>
                                     </td>
-                                    <td>
+                                    <td style="width: 200px">
                                         <?= $this->Html->link(__('View Full Profile'), ['action' => 'view', $customer->id], ['class' => 'btn btn-primary']) ?>
                                     </td>
                                 </tr>

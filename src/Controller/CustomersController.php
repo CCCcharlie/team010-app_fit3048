@@ -138,6 +138,10 @@ class CustomersController extends AppController
         $customer = $this->Customers->newEmptyEntity();
         if ($this->request->is('post')) {
             $customer = $this->Customers->patchEntity($customer, $this->request->getData());
+
+//            debug($customer);
+//            exit;
+
             if ($this->Customers->save($customer)) {
                 $this->Flash->success(__('{0} {1} has been added to the system!', $customer->f_name, $customer->l_name));
 

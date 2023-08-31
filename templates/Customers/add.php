@@ -227,7 +227,7 @@ $this->disableAutoLayout();
                                 <?= $this->Form->label('notes', 'Notes', ['class' => 'blue-label-text']) ?>
                                 <!-- Display validation error for the 'f_name' field -->
                                 <?= $this->Form->error('notes'); ?>
-                                <textarea name="data[status]" id="status" class="form-control" title="Enter notes" placeholder="Notes go here.." maxlength="500" style="height: 150px;"></textarea>
+                                <textarea name="notes" id="notes" class="form-control" title="Enter notes" placeholder="Notes go here.." maxlength="500" style="height: 150px;"></textarea>
                                 <small class="form-text text-muted">500 Character limit. Not Required</small>
                             </div>
 

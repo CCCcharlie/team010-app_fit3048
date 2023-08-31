@@ -352,7 +352,7 @@ $checkConnection = function (string $name) {
                                                     <div style="display: flex; justify-content: space-between; margin: 10px">
                                                         <div class="btn-group btn-group-toggle" data-toggle="buttons" style="padding-right: 10px">
                                                             <label class="btn btn-primary active">
-                                                                <input type="radio" name="options" id="showallticket" checked>All
+                                                                <input type="radio" name="options" id="showallticket" checked>  All
                                                             </label>
                                                             <label class="btn btn-primary">
                                                                 <input type="radio" name="options" id="showcloseticket"> Closed

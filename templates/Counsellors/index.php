@@ -4,10 +4,11 @@
  * @var iterable<\App\Model\Entity\Counsellor> $counsellors
  */
 ?>
+
 <div class="counsellors index content">
     <?= $this->Html->link(__('New Counsellor'), ['action' => 'add'], ['class' => 'button float-right']) ?>
     <h3><?= __('Counsellors') ?></h3>
-    <div class="table-responsive">
+    <div class="table table-hover table-striped">
         <table>
             <thead>
                 <tr>

@@ -164,7 +164,7 @@ $this->disableAutoLayout();
             if (!empty($flashMessage)) {
                 ?>
                 <!-- Flash message, ONLY shows up if ticket is successfully opened/closed -->
-                <div class="alert alert-success" role="alert">
+                <div class="alert alert-danger" role="alert">
                     <?= $flashMessage; ?>
                 </div>
                 <?php

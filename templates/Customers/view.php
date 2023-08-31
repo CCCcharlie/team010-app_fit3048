@@ -223,7 +223,7 @@ $checkConnection = function (string $name) {
                         //                        debug($identity->get('f_name'));
                         //                        exit();
                         ?>
-                        <h2 class="pageheader-title">Welcome, <?= $identity->get('f_name'); ?></h2>
+                        <h2 class="pageheader-title" style="color:lightslategrey">Welcome, <?= $identity->get('f_name'); ?></h2>
 
                         <!-- Can you add login user to name here if you get chance Bryan?  -->
                         <!-- Sure Alex-->
@@ -363,7 +363,7 @@ $checkConnection = function (string $name) {
                                                     <div style="display: flex; justify-content: space-between; margin: 10px">
                                                         <div class="btn-group btn-group-toggle" data-toggle="buttons" style="padding-right: 10px">
                                                             <label class="btn btn-primary active">
-                                                                <input type="radio" name="options" id="showallticket" checked>All
+                                                                <input type="radio" name="options" id="showallticket" checked>  All
                                                             </label>
                                                             <label class="btn btn-primary">
                                                                 <input type="radio" name="options" id="showcloseticket"> Closed
@@ -392,7 +392,7 @@ $checkConnection = function (string $name) {
                                                             <?php if($ticket->closed == true) : ?>
                                                             <div class="card-header d-flex" style="background-color: lightgray">
                                                                 <?php elseif($ticket->closed == false) : ?>
-                                                                <div class="card-header d-flex" style="background-color: lightgreen">
+                                                                <div class="card-header d-flex" style="background-color: #50C878">
                                                                     <?php endif; ?>
                                                                     <div>
                                                                     <h4 class="card-header-title">Title:  <?= h($ticket->title) ?></h4>
@@ -409,7 +409,7 @@ $checkConnection = function (string $name) {
                                                                         if ($ticket->closed) {
                                                                             echo $this->Form->postLink(__('Open ticket'), ['controller' => 'Tickets', 'action' => 'update_ticket', $ticket->id], ['class' => 'btn btn-primary', 'confirm' => __("Are you sure you want to Reopen ticket ID: {0} \n Customer: {1} {2} ", $ticket->id, $customer->f_name, $customer->l_name)]);
                                                                         } else {
-                                                                            echo $this->Form->postLink(__('Close ticket'), ['controller' => 'Tickets', 'action' => 'update_ticket', $ticket->id], ['class' => 'btn btn-primary', 'confirm' => __("Are you sure you want to Close ticket ID: {0} \n Customer: {1} {2} ", $ticket->id, $customer->f_name, $customer->l_name)]);
+                                                                            echo $this->Form->postLink(__('Close ticket'), ['controller' => 'Tickets', 'action' => 'update_ticket', $ticket->id], ['class' => 'btn btn-close', 'confirm' => __("Are you sure you want to Close ticket ID: {0} \n Customer: {1} {2} ", $ticket->id, $customer->f_name, $customer->l_name)]);
                                                                         }
                                                                         ?>
                                                                     </div>
@@ -545,7 +545,7 @@ $checkConnection = function (string $name) {
                                                                                 if ($ticket->closed) {
                                                                                     echo $this->Form->postLink(__('Open ticket'), ['controller' => 'Tickets', 'action' => 'update_ticket', $ticket->id], ['class' => 'btn btn-primary', 'confirm' => __("Are you sure you want to Reopen ticket ID: {0} \n Customer: {1} {2} ", $ticket->id, $customer->f_name, $customer->l_name)]);
                                                                                 } else {
-                                                                                    echo $this->Form->postLink(__('Close ticket'), ['controller' => 'Tickets', 'action' => 'update_ticket', $ticket->id], ['class' => 'btn btn-primary', 'confirm' => __("Are you sure you want to Close ticket ID: {0} \n Customer: {1} {2} ", $ticket->id, $customer->f_name, $customer->l_name)]);
+                                                                                    echo $this->Form->postLink(__('Close ticket'), ['controller' => 'Tickets', 'action' => 'update_ticket', $ticket->id], ['class' => 'btn btn-primary', 'confirm' => __("Are you sure you want to Close ticket ID: {0} \n Customer: {1} {2} ", $ticket->id, $customer->f_name, $customer->l_name), 'style' => 'background-color: #E3242B; color: #FFFFFF;']);
                                                                                 }
                                                                                 ?>
 
@@ -644,7 +644,7 @@ $checkConnection = function (string $name) {
                                                             <div class="col-xl-12 col-lg-12 col-md-12col-sm-12 col-12">
                                                                 <?php if($ticket->closed == false) : ?>
                                                                     <div class="card">
-                                                                        <div class="card-header d-flex" style="background-color: lightgreen">
+                                                                        <div class="card-header d-flex" style="background-color: #50C878">
                                                                             <div>
                                                                                 <h4 class="card-header-title">Title:  <?= h($ticket->title) ?></h4>
                                                                                 <h5> Type: <?= h($ticket->type) ?> </h5>
@@ -660,7 +660,7 @@ $checkConnection = function (string $name) {
                                                                                 if ($ticket->closed) {
                                                                                     echo $this->Form->postLink(__('Open ticket'), ['controller' => 'Tickets', 'action' => 'update_ticket', $ticket->id], ['class' => 'btn btn-primary', 'confirm' => __("Are you sure you want to Reopen ticket ID: {0} \n Customer: {1} {2} ", $ticket->id, $customer->f_name, $customer->l_name)]);
                                                                                 } else {
-                                                                                    echo $this->Form->postLink(__('Close ticket'), ['controller' => 'Tickets', 'action' => 'update_ticket', $ticket->id], ['class' => 'btn btn-primary', 'confirm' => __("Are you sure you want to Close ticket ID: {0} \n Customer: {1} {2} ", $ticket->id, $customer->f_name, $customer->l_name)]);
+                                                                                    echo $this->Form->postLink(__('Close ticket'), ['controller' => 'Tickets', 'action' => 'update_ticket', $ticket->id], ['class' => 'btn btn-close', 'confirm' => __("Are you sure you want to Close ticket ID: {0} \n Customer: {1} {2} ", $ticket->id, $customer->f_name, $customer->l_name)]);
                                                                                 }
                                                                                 ?>
                                                                             </div>

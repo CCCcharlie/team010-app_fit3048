@@ -2057,7 +2057,7 @@ Pageheader
 }
 
 .pageheader-title {
-    font-size: 24px;
+    font-size: 1.75rem;
     margin-bottom: 8px;
 }
 
@@ -2081,6 +2081,8 @@ Pageheader
     background-color: #fff;
     width: 100%;
     /*position: absolute; bottom: 0;*/
+    position: fixed;
+    bottom: 0;
 }
 
 .footer-links {}
@@ -2669,6 +2671,11 @@ clip-path: polygon(10% 25%, 10% 0, 35% 0%, 65% 0%, 90% 0, 90% 25%, 90% 50%, 91% 
 
 
 /*--- btn primary --*/
+.btn-close {
+    color:#fff;
+    background-color: #ef5753;
+    border-color: #ef5753;
+}
 
 .btn-primary {
     color: #fff;
@@ -4034,6 +4041,10 @@ Pills vertical
     color: #2e2f39;
 }
 
+.blue-label-text {
+    color: midnightblue;
+}
+
 .badge-brand[href]:focus,
 .badge-brand[href]:hover {
     color: #2e2f39;
@@ -4518,6 +4529,7 @@ Pills vertical
     margin-bottom: 0px;
 }
 
+
 .table td,
 .table th {
     padding: 10px;
@@ -4534,7 +4546,6 @@ Pills vertical
 .table thead th,
 .table th {
     color: #3d405c;
-    font-family: 'Circular Std Medium';
 }
 
 .table-bordered {

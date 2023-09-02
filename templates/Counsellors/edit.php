@@ -21,7 +21,7 @@
         <div class="counsellors form content">
             <?= $this->Form->create($counsellor) ?>
             <fieldset>
-                <legend><?= __('Edit Counsellor') ?></legend>
+                <legend><?= __('Edit Counsellor',['class' => 'pageheader-title']) ?></legend>
                 <?php
                     echo $this->Form->control('f_name', ['class' => 'card form-control form-control-lg']);
                     echo $this->Form->control('l_name',['class' => 'card form-control form-control-lg']);

@@ -19,13 +19,31 @@ class UsersController extends AppController
         parent::beforeFilter($event);
 
         // Check if user is not an admin and redirect to index
-        $adminStatus = $this->Authentication->getIdentity()->admin_status;
+        $adminRole = $this->Authentication->getIdentity()->role;
 
-        if (($this->request->getParam('action') === 'edit' || $this->request->getParam('action') === 'delete') && $adminStatus != 1) {
+//        debug($adminRole);
+//        debug($adminRole !== 'root');
+//        debug($adminRole !== 'admin');
+
+        if (($this->request->getParam('action') === 'edit' || $this->request->getParam('action') === 'delete') && ($adminRole === 'staff' || $adminRole === 'user')) {
+            $this->Flash->error(__('WARNING, ATTEMPTING TO ACCESS EDIT/DELETE WITHOUT PRIVILEGES IS STRICTLY PROHIBITED'));
             return $this->redirect(['action' => 'index']);
 
         }
     }
+
+
+    public function initialize(): void {
+        parent::initialize();
+
+        $this->set('role_choice', [
+            'root' => 'Root',
+            'admin' => 'Admin',
+            'staff' => 'Staff',
+            'user' => 'User',
+        ]);
+    }
+
 
 
     public function index()
@@ -90,8 +108,6 @@ class UsersController extends AppController
      */
     public function edit($id = null)
     {
-
-
         $user = $this->Users->get($id, [
             'contain' => [],
         ]);

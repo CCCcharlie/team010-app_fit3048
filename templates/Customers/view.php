@@ -223,7 +223,7 @@ $checkConnection = function (string $name) {
                         //                        debug($identity->get('f_name'));
                         //                        exit();
                         ?>
-                        <h2 class="pageheader-title" style="color:lightslategrey">Welcome, <?= $identity->get('f_name'); ?></h2>
+<!--                        <h2 class="pageheader-title" style="color:lightslategrey">Welcome, --><?php //= $identity->get('f_name'); ?><!--</h2>-->
 
                         <!-- Can you add login user to name here if you get chance Bryan?  -->
                         <!-- Sure Alex-->
@@ -427,7 +427,7 @@ $checkConnection = function (string $name) {
                                                                         Expand Attachments
                                                                     </a>
                                                                         <span>
-                                                                    <?php if ($this->Identity->get('admin_status') == 1): ?>
+                                                                    <?php if ($this->Identity->get('role') == 'root' || $this->Identity->get('role') == 'admin'): ?>
                                                                         <?php echo $this->Html->link(__('Edit'), ['controller' => 'Tickets', 'action' => 'edit', $ticket->id,
                                                                             '?' => [
                                                                                 'f_name' => $customer->f_name,

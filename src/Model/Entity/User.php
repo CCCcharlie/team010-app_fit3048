@@ -15,7 +15,8 @@ use Cake\ORM\Entity;
  * @property string $email
  * @property string $password
  * @property string|null $timezone
- * @property bool $admin_status
+// * @property bool $admin_status
+ * @property string $role
  * @property string|null $nonce
  * @property \Cake\I18n\FrozenTime $nonce_expiry
  *
@@ -38,7 +39,8 @@ class User extends Entity
         'email' => true,
         'password' => true,
         'timezone' => true,
-        'admin_status' => true,
+//        'admin_status' => true,
+        'role' => true,
         'nonce' => true,
         'nonce_expiry' => true,
         'tickets' => true,

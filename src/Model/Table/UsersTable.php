@@ -112,6 +112,15 @@ class UsersTable extends Table
             ]);
 
         $validator
+            ->scalar('role')
+            ->requirePresence('role', 'create')
+            ->notEmptyString('role')
+            ->add('role', 'inList', [
+                'rule' => ['inList', ['root', 'admin', 'staff', 'user']],
+                'message' => 'Please select a valid role.'
+            ]);
+
+        $validator
             ->scalar('password')
             ->maxLength('password', 124)
             ->requirePresence('password', 'create')
@@ -122,10 +131,10 @@ class UsersTable extends Table
             ->maxLength('timezone', 50)
             ->allowEmptyString('timezone');
 
-        $validator
-            ->boolean('admin_status')
-            ->requirePresence('admin_status', 'create')
-            ->notEmptyString('admin_status');
+//        $validator
+//            ->boolean('admin_status')
+//            ->requirePresence('admin_status', 'create')
+//            ->notEmptyString('admin_status');
 
         $validator
             ->scalar('nonce')

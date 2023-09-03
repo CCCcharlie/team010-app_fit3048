@@ -5,8 +5,8 @@
  */
 ?>
 <div class="row">
-    <aside class="column">
-        <div class="side-nav">
+    <aside class="column action-bar">
+        <div class=" side-nav">
             <h4 class="heading"><?= __('Actions') ?></h4>
             <?= $this->Html->link(__('Edit Counsellor'), ['action' => 'edit', $counsellor->id], ['class' => 'side-nav-item']) ?>
             <?= $this->Form->postLink(__('Delete Counsellor'), ['action' => 'delete', $counsellor->id], ['confirm' => __('Are you sure you want to delete # {0}?', $counsellor->id), 'class' => 'side-nav-item']) ?>
@@ -14,7 +14,7 @@
             <?= $this->Html->link(__('New Counsellor'), ['action' => 'add'], ['class' => 'side-nav-item']) ?>
         </div>
     </aside>
-    <div class="column-responsive column-80">
+    <div class="splash-container table table-hover table-striped">
         <div class="counsellors view content">
             <h3><?= h($counsellor->id) ?></h3>
             <table>

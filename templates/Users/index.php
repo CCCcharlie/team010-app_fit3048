@@ -12,17 +12,19 @@ $this->disableAutoLayout();
 <!doctype html>
 <html lang="en">
 
+
 <head>
     <?= $this->Html->meta('icon', 'favicon.ico', ['type' => 'icon']) ?>
 
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>GamBlock® - Customer Management: Users</title>
+    <title>GamBlock® - Customer Management: Customers</title>
     <!-- Bootstrap CSS -->
     <!-- In-built CSS -->
-    <?= $this->Html->css(['style', 'bootstrap.min', 'returntoparrow']) ?>
-    <link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
+    <?= $this->Html->css(['style', 'bootstrap.min',]) ?>
+    <?= $this->Html->css(['style', 'error',]) ?>
+    <?= $this->Html->css(['fontawesome-all'], ['block' => true]) ?>
 
 
 
@@ -39,40 +41,43 @@ $this->disableAutoLayout();
     <!-- navbar -->
     <!-- ============================================================== -->
     <div class="dashboard-header">
-        <nav class="navbar navbar-expand-lg bg-white fixed-top" style="display: flex; justify-content: space-between;">
+        <nav class="navbar navbar-expand-lg bg-white fixed-top">
             <a class="navbar-brand" href="/">
-                <?= $this->Html->image('cake-logo.png', ['alt' => 'GamBlock Logo', 'class' => 'navbar-b;and', 'style' => 'width: 225px; height: auto;']); ?>
+                <?= $this->Html->image('cake-logo.png', ['alt' => 'GamBlock Logo', 'class' => 'navbar-brand', 'style' => 'width: 225px; height: auto;']); ?>
             </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav ml-auto navbar-right-top">
 
-            <div>
-            <a href="#"><i class="fas fa-power-off mr-2"></i> <?php echo $this->Html->link(__('Logout'), ['controller' => 'Auth', 'action' => 'logout'] ,['style' => 'padding-right: 40px']); ?></a>
+                    <?php
+                    $identity = $this->request->getAttribute('authentication')->getIdentity();
+                    ?>
+
+                    <div class="row" style="padding: 10px;">
+                        <div class="col-md-6 text-right">
+                            <p style="margin-right: 10px;">Welcome, <?= $identity->get('f_name'); ?></p>
+                        </div>
+                        <div class="col-md-6">
+                            <a href="#" class="text-right">
+                                <i class="fas fa-power-off" style="margin-right: 2px;"></i>
+                                <?php echo $this->Html->link(__('Logout'), ['controller' => 'Auth', 'action' => 'logout'], ['style' => 'padding-right: 40px;']); ?>
+                            </a>
+                        </div>
+                        <!---->
+                        <!--                    <li class="nav-item dropdown nav-user">-->
+                        <!--                        <a class="nav-link nav-user-file" href="#" id="navbarDropdownMenuLink2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="../assets/images/avatar-1.jpg" alt="" class="user-avatar-md rounded-circle"></a>-->
+                        <!--                        <div class="dropdown-menu dropdown-menu-right nav-user-dropdown" aria-labelledby="navbarDropdownMenuLink2">-->
+                        <!--                            <div class="nav-user-info">-->
+                        <!--                                <h5 class="mb-0 text-white nav-user-name">-->
+                        <!--                                    Example User</h5>-->
+                        <!--                            </div>-->
+                        <!--                            <a class="dropdown-item" href="#"><i class="fas fa-power-off mr-2"></i> --><?php //echo $this->Html->link(__('Logout'), ['controller' => 'Auth', 'action' => 'logout']); ?><!--</a>-->
+                        <!--                        </div>-->
+                        <!--                    </li>-->
+                </ul>
             </div>
-
-<!--            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"-->
-<!--                    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">-->
-<!--                <span class="navbar-toggler-icon"></span>-->
-<!--            </button>-->
-
-<!--            <div class="collapse navbar-collapse" id="navbarSupportedContent">-->
-<!--                <ul class="navbar-nav ml-auto navbar-right-top">-->
-<!---->
-<!--                    <li class="nav-item dropdown nav-user">-->
-<!--                        <a class="nav-link nav-user-file" href="#" id="navbarDropdownMenuLink2" data-toggle="dropdown"-->
-<!--                           aria-haspopup="true" aria-expanded="false"><img src="../assets/images/avatar-1.jpg" alt=""-->
-<!--                                                                           class="user-avatar-md rounded-circle"></a>-->
-<!--                        <div class="dropdown-menu dropdown-menu-right nav-user-dropdown"-->
-<!--                             aria-labelledby="navbarDropdownMenuLink2">-->
-<!--                            <div class="nav-user-info">-->
-<!--                                <h5 class="mb-0 text-white nav-user-name">-->
-<!--                                    Example User</h5>-->
-<!--                            </div>-->
-<!--                            <a class="dropdown-item" href="#"><i-->
-<!--                                    class="fas fa-power-off mr-2"></i> --><?php //echo $this->Html->link(__('Logout'), ['controller' => 'Auth', 'action' => 'logout']); ?>
-<!--                            </a>-->
-<!--                        </div>-->
-<!--                    </li>-->
-    <!--                </ul>-->
-    <!--            </div>-->
         </nav>
     </div>
     <!-- ============================================================== -->
@@ -150,7 +155,7 @@ $this->disableAutoLayout();
             if (!empty($flashMessage)) {
                 ?>
                 <!-- Flash message, ONLY shows up if ticket is successfully opened/closed -->
-                <div class="alert alert-success" role="alert">
+                <div class="alert alert-info" role="alert">
                     <?= $flashMessage; ?>
                 </div>
                 <?php
@@ -193,7 +198,7 @@ to get the name or any value in the staff table, use the get and then the name o
     <div class="section-block" id="cardaction">
         <h3 class="section-title"><?= __('Staff Accounts') ?></h3>
 
-        <?php if ($this->Identity->get('admin_status') == 1): ?>
+        <?php if ($this->Identity->get('role') == 'root' || $this->Identity->get('role') == 'admin'): ?>
             <?= $this->Html->link(__('Add a Staff Member'), ['action' => 'add'], ['class' => 'float-right btn btn-success' , 'style' => 'margin-top: -20px; margin-right: 10px; margin-bottom: 5px;' ]) ?>
         <?php endif; ?>
     </div>
@@ -205,19 +210,22 @@ to get the name or any value in the staff table, use the get and then the name o
                 <th style="font-family: 'Arial'; font-weight: normal;"><?= $this->Paginator->sort('f_name', 'First Name') ?></th>
                 <th style="font-family: 'Arial'; font-weight: normal;"><?= $this->Paginator->sort('l_name', 'Last Name') ?></th>
                 <th style="font-family: 'Arial'; font-weight: normal;"><?= $this->Paginator->sort('email', 'E-mail') ?></th>
-                <th style="font-family: 'Arial'; font-weight: normal;"><?= $this->Paginator->sort('admin_status', 'Role') ?></th>
+<!--                <th style="font-family: 'Arial'; font-weight: normal;">--><?php //= $this->Paginator->sort('admin_status', 'Is he an admin?') ?><!--</th>-->
+                <th style="font-family: 'Arial'; font-weight: normal;"><?= $this->Paginator->sort('role', 'Role') ?></th>
                 <th class="actions" style="font-family: 'Arial'; font-weight: normal;"><?= __('Actions') ?></th>
             </tr>
             </thead>
             <tbody>
             <?php foreach ($users as $user): ?>
+<!--            --><?php //= debug($user->admin_status) ?>
                 <tr>
                     <td><?= h($user->f_name) ?></td>
                     <td><?= h($user->l_name) ?></td>
                     <td><?= h($user->email) ?></td>
-                    <td><?= h($user->admin_status ? 'Admin' : 'Staff') ?></td>
+<!--                    <td>--><?php //= h($user->admin_status ? 'Admin' : 'Staff') ?><!--</td>-->
+                    <td><?= h($user->role) ?></td>
                     <td class="actions">
-                        <?php if ($this->Identity->get('admin_status') == 1): ?>
+                        <?php if ($this->Identity->get('role') == 'root' || $this->Identity->get('role') == 'admin'): ?>
                             <?= $this->Html->link(__('Edit'), ['action' => 'edit', $user->id], ['class' => 'btn btn-primary']) ?>
                             <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $user->id], [
                                 'class' => 'btn btn-danger',

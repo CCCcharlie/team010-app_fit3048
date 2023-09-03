@@ -42,7 +42,7 @@ $this->disableAutoLayout();
     <div class="dashboard-header">
         <nav class="navbar navbar-expand-lg bg-white fixed-top">
             <a class="navbar-brand" href="/">
-                <?= $this->Html->image('cake-logo.png', ['alt' => 'GamBlock Logo', 'class' => 'navbar-brand', 'style' => 'width: 225px; height: auto;']); ?> -Staff Portal
+                <?= $this->Html->image('cake-logo.png', ['alt' => 'GamBlock Logo', 'class' => 'navbar-brand', 'style' => 'width: 225px; height: auto;']); ?>
             </a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -141,8 +141,6 @@ $this->disableAutoLayout();
 
     <!-- ============================================================== -->
     <!-- end left sidebar -->
-
-
     <!-- ============================================================== -->
 
 
@@ -205,10 +203,22 @@ $this->disableAutoLayout();
                                 <div class="form-group">
                                     <?= $this->Html->link(__('Send forget password e-mail'), ['controller' => 'Auth', 'action' => 'forget_Password'], ['class' => 'btn btn-primary']) ?>
                                 </div>
+
+<!--                                <div class="form-group" style="display: flex; align-items: center;">-->
+<!--                                    --><?php //= $this->Form->label('Set User As Admin?', null, ['class' => 'col-form-label', 'style' => 'margin-right: 10px;']) ?>
+<!--                                    --><?php //= $this->Form->control('admin_status', ['label' => false, 'class' => 'form-control']) ?>
+<!--                                </div>-->
+
                                 <div class="form-group" style="display: flex; align-items: center;">
-                                    <?= $this->Form->label('Set User As Admin?', null, ['class' => 'col-form-label', 'style' => 'margin-right: 10px;']) ?>
-                                    <?= $this->Form->control('admin_status', ['label' => false, 'class' => 'form-control']) ?>
+                                    <?= $this->Form->label('Staff Role Privileges', null, ['class' => 'col-form-label', 'style' => 'margin-right: 10px;']) ?>
+                                    <?=
+                                    $this->Form->control('role', [
+                                        'type' => 'select',
+                                        'options' => $role_choice,
+                                        'label' => false,
+                                    ]); ?>
                                 </div>
+
                             </fieldset>
                             <?= $this->Form->button(__('Submit'), ['class' => 'btn btn-primary']) ?>
                             <?= $this->Form->end() ?>

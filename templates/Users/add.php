@@ -236,10 +236,22 @@ $this->disableAutoLayout();
                                     </div>
 
                                     <small class="text-muted" style="font-style: italic;">Please note: Setting a user to Admin will give them control over ALL other accounts. Including this one. Use this sparingly.</small>
+<!--                                    <div class="form-group" style="display: flex; align-items: center;">-->
+<!--                                        --><?php //= $this->Form->label('Set User As Admin?', null, ['class' => 'col-form-label', 'style' => 'margin-right: 10px;']) ?>
+<!--                                        --><?php //= $this->Form->control('admin_status', ['label' => false, 'class' => 'form-control']) ?>
+<!--                                    </div>-->
+
                                     <div class="form-group" style="display: flex; align-items: center;">
-                                        <?= $this->Form->label('Set User As Admin?', null, ['class' => 'col-form-label', 'style' => 'margin-right: 10px;']) ?>
-                                        <?= $this->Form->control('admin_status', ['label' => false, 'class' => 'form-control']) ?>
+                                        <?= $this->Form->label('Staff Role Privileges', null, ['class' => 'col-form-label', 'style' => 'margin-right: 10px;']) ?>
+                                        <?=
+                                        $this->Form->control('role', [
+                                            'type' => 'select',
+                                            'options' => $role_choice,
+                                            'label' => false,
+                                        ]); ?>
                                     </div>
+
+                                    <h1> REMOVE ROOT OPTION FROM USERS (staff member) CONTROLLER WHEN WE ABOUT TO DEPLOY THIS, ALSO REMOVE THIS TEXT</h1>
 
                                     <br>
                                     <div class="form-group d-flex justify-content-between align-items-center">

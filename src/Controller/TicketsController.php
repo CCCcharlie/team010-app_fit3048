@@ -27,6 +27,27 @@ class TicketsController extends AppController
     }
 
     /**
+     * Fillter option
+     * @param string|null $id Tickets id.
+     * @return \Cake\Http\Response|null|void Renders view
+     * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
+
+     */
+    public function unassigned()
+    {
+
+        $unassignedTickets = $this->Tickets->find()
+            ->where(['staff_id IS NULL'])
+            ->contain(['Customers', 'Users'])
+            ->all();
+
+
+        $this->set(compact('unassignedTickets'));
+        debug($unassignedTickets);
+        exit();
+    }
+
+    /**
      * View method
      *
      * @param string|null $id Ticket id.

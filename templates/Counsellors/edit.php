@@ -17,19 +17,20 @@
             <?= $this->Html->link(__('List Counsellors'), ['action' => 'index'], ['class' => 'side-nav-item']) ?>
         </div>
     </aside>
-    <div class="column-responsive column-80">
+    <div class="splash-container column-responsive column-80">
         <div class="counsellors form content">
             <?= $this->Form->create($counsellor) ?>
             <fieldset>
-                <legend><?= __('Edit Counsellor') ?></legend>
+                <legend><?= __('Edit Counsellor',['class' => 'pageheader-title']) ?></legend>
                 <?php
-                    echo $this->Form->control('f_name');
-                    echo $this->Form->control('l_name');
-                    echo $this->Form->control('notes');
-                    echo $this->Form->control('cust_id', ['options' => $customers, 'empty' => true]);
+                    echo $this->Form->control('f_name', ['class' => 'card form-control form-control-lg']);
+                    echo $this->Form->control('l_name',['class' => 'card form-control form-control-lg']);
+                    echo $this->Form->control('notes',['class' => 'card form-control form-control-lg']);
+                    echo $this->Form->control('cust_id', ['options' => $customers, 'empty' => true,'class' => 'card form-control form-control-lg']);
+
                 ?>
             </fieldset>
-            <?= $this->Form->button(__('Submit')) ?>
+            <?= $this->Form->button(__('Submit'),['class' => 'btn btn-primary btn-lg btn-block g-recaptcha']) ?>
             <?= $this->Form->end() ?>
         </div>
     </div>

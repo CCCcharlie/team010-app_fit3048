@@ -22,6 +22,7 @@
                     echo $this->Form->control('l_name');
                     echo $this->Form->control('notes');
                     echo $this->Form->control('cust_id', ['options' => $customers, 'empty' => true]);
+                echo $this->Form->control('contact');
                 ?>
             </fieldset>
             <?= $this->Form->button(__('Submit')) ?>

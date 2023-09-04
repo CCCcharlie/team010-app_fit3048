@@ -17,6 +17,7 @@
                     <th><?= $this->Paginator->sort('l_name') ?></th>
                     <th><?= $this->Paginator->sort('notes') ?></th>
                     <th><?= $this->Paginator->sort('cust_id') ?></th>
+                    <th><?= $this->Paginator->sort('contact') ?></th>
                     <th class="actions"><?= __('Actions') ?></th>
                 </tr>
             </thead>
@@ -27,7 +28,9 @@
                     <td><?= h($counsellor->f_name) ?></td>
                     <td><?= h($counsellor->l_name) ?></td>
                     <td><?= h($counsellor->notes) ?></td>
+
                     <td><?= $counsellor->has('customer') ? $this->Html->link($counsellor->customer->id, ['controller' => 'Customers', 'action' => 'view', $counsellor->customer->id]) : '' ?></td>
+                    <td><?= h($counsellor->contact) ?></td>
                     <td class="actions">
                         <?= $this->Html->link(__('View'), ['action' => 'view', $counsellor->id]) ?>
                         <?= $this->Html->link(__('Edit'), ['action' => 'edit', $counsellor->id]) ?>

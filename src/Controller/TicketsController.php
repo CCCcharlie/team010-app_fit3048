@@ -24,6 +24,8 @@ class TicketsController extends AppController
         $tickets = $this->paginate($this->Tickets);
 
         $this->set(compact('tickets'));
+//        debug($tickets);
+//        exit();
     }
 
     /**
@@ -43,8 +45,7 @@ class TicketsController extends AppController
 
 
         $this->set(compact('unassignedTickets'));
-        debug($unassignedTickets);
-        exit();
+
     }
 
     /**

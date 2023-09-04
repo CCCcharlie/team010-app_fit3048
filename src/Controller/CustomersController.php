@@ -18,6 +18,7 @@ class CustomersController extends AppController
      */
     public function index()
     {
+
         $query = $this->Customers->find();
 
         $search = $this->request->getQuery('search');
@@ -48,6 +49,8 @@ class CustomersController extends AppController
         $customers = $this->paginate($query);
 
         $this->set(compact('customers'));
+
+
     }
     /**
  * Fillter option

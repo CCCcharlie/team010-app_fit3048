@@ -414,11 +414,24 @@ $checkConnection = function (string $name) {
                                                                         ?>
                                                                     </div>
                                                                 </div>
+
+
                                                                 <div class="card-body">
+
                                                                     <div class="card-text">
                                                                         <p><span class="card-info">Ticket ID:</span> <?= h($ticket->id) ?></p>
                                                                         <p><span class="card-info">Customer:</span> <?= h($customer->f_name) ?></p>
-                                                                        <p><span class="card-info">Assigned staff:</span> <?= $this->Html->link(__($ticket->user->f_name), ['controller' => 'Users', 'action' => 'view', $ticket->staff_id]) ?></p>
+                                                                        <p><span class="card-info">Assigned staff:</span>
+
+                                                                            <?php
+                                                                            if ($ticket->staff_id !== null)
+                                                                            {
+                                                                                echo $this->Html->link(__($ticket->user->f_name), ['controller' => 'Users', 'action' => 'view', $ticket->staff_id]);
+                                                                            } else {
+                                                                                echo 'No staff assigned';
+                                                                            }
+                                                                            ?>
+                                                                        </p>
                                                                         <p><span class="card-info">Create time:</span> <?= $ticket->createtime->i18nFormat('yyyy-MM-dd HH:mm:ss', 'Australia/Sydney') ?></p>
                                                                         <br>
                                                                     </div>
@@ -669,7 +682,17 @@ $checkConnection = function (string $name) {
                                                                             <div class="card-text">
                                                                                 <p><span class="card-info">Ticket ID:</span> <?= h($ticket->id) ?></p>
                                                                                 <p><span class="card-info">Customer:</span> <?= h($customer->f_name) ?></p>
-                                                                                <p><span class="card-info">Assigned staff:</span> <?= $this->Html->link(__($ticket->user->f_name), ['controller' => 'Users', 'action' => 'view', $ticket->staff_id]) ?></p>
+                                                                                <p><span class="card-info">Assigned staff:</span>
+
+                                                                                    <?php
+                                                                                    if ($ticket->staff_id !== null)
+                                                                                    {
+                                                                                        echo $this->Html->link(__($ticket->user->f_name), ['controller' => 'Users', 'action' => 'view', $ticket->staff_id]);
+                                                                                    } else {
+                                                                                        echo 'No staff assigned';
+                                                                                    }
+                                                                                    ?>
+                                                                                </p>                                                                        <p><span class="card-info">Create time:</span> <?= $ticket->createtime->i18nFormat('yyyy-MM-dd HH:mm:ss', 'Australia/Sydney') ?></p>
                                                                                 <p><span class="card-info">Create time:</span> <?= h($ticket->createtime) ?></p>
                                                                                 <br>
                                                                             </div>

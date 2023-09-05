@@ -8,7 +8,7 @@ use Cake\ORM\Entity;
 /**
  * Ticket Entity
  *
- * @property int $id
+ * @property string $id
  * @property string $title
  * @property string $type
  * @property \Cake\I18n\FrozenTime $createtime

@@ -8,7 +8,7 @@ use Cake\ORM\Entity;
 /**
  * Commdetail Entity
  *
- * @property int $id
+ * @property string $id
  * @property string|null $type
  * @property string|null $link
  * @property int $cust_id

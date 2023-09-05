@@ -9,7 +9,7 @@ use Cake\ORM\Entity;
 /**
  * User Entity
  *
- * @property int $id
+ * @property string $id
  * @property string $f_name
  * @property string $l_name
  * @property string $email

@@ -211,6 +211,22 @@ class ContentsController extends AppController
             //Set ticket id here because we dont want them to use html to modify other tickets
             $content->ticket_id = $ticketId;
 
+
+            /////////////////////////////
+            // Generate the unique id  //
+            /////////////////////////////
+
+            // Call the generate id function in the AppController.php
+
+            $identifier = 'CONTNT';
+            $generateId = $this->generateId($identifier, $content->content, $content->content_type);
+
+            $content->id = $generateId;
+
+            ////////////////////////////////
+            // End Generate the unique id //
+            ////////////////////////////////
+
             if ($this->Contents->save($content)) {
                 $message = "The attachment for Ticket " . $content->ticket_id .  " Saved successfully";
                 $this->Flash->success(__($message));

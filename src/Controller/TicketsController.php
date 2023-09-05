@@ -87,6 +87,21 @@ class TicketsController extends AppController
             $ticket->closed = false;
             $ticket->cust_id = $custId;
 
+            /////////////////////////////
+            // Generate the unique id  //
+            /////////////////////////////
+
+            // Call the generate id function in the AppController.php
+
+            $identifier = 'TCKT';
+            $generateId = $this->generateId($identifier, $ticket->title, $ticket->type);
+
+            $ticket->id = $generateId;
+
+            ////////////////////////////////
+            // End Generate the unique id //
+            ////////////////////////////////
+
             if ($this->Tickets->save($ticket)) {
                 $this->Flash->success(__('The ticket for ' . $fullName . ' Is successfully created'));
 

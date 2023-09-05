@@ -64,6 +64,22 @@ class DevicesController extends AppController
             //Set the custId here instead of the form
             $device->cust_id = $custId;
 
+
+            /////////////////////////////
+            // Generate the unique id  //
+            /////////////////////////////
+
+            // Call the generate id function in the AppController.php
+
+            $identifier = 'CUSDEV';
+            $generateId = $this->generateId($identifier, $device->device_model, $device->platform);
+
+            $device->id = $generateId;
+
+            ////////////////////////////////
+            // End Generate the unique id //
+            ////////////////////////////////
+
             if ($this->Devices->save($device)) {
                 $this->Flash->success(__('The device has been saved.'));
                 //Return back to the referer of this function

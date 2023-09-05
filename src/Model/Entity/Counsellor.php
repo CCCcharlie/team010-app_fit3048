@@ -8,7 +8,7 @@ use Cake\ORM\Entity;
 /**
  * Counsellor Entity
  *
- * @property int $id
+ * @property string $id
  * @property string $f_name
  * @property string $l_name
  * @property string|null $notes

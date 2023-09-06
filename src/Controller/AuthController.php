@@ -183,7 +183,7 @@ class AuthController extends AppController {
         $result = $this->Authentication->getResult();
 
         // Define maximum number of consecutive unsuccessful attempts before imposing timeouts
-        $maxAttemptsBeforeTimeout = 5;
+        $maxAttemptsBeforeTimeout = 2;
 
         // Define initial timeout duration (in seconds) and doubling factor
         $initialTimeout = 30;
@@ -196,37 +196,35 @@ class AuthController extends AppController {
         // Get current timestamp
         $currentTime = time();
 
+        // Calculate the total number of consecutive unsuccessful attempts
+        $totalAttempts = $loginAttempts['count'];
+
         // Check if enough time has passed since the last attempt to reset the attempt count
         if ($lastAttemptTime && ($currentTime - $lastAttemptTime) > $initialTimeout) {
-            $loginAttempts = ['count' => 0, 'last_attempt_time' => 0];
+            $totalAttempts = 0;
+            // Set the lockout end time in the session to 0
+            $this->request->getSession()->write('login_timeout_end', 0);
         }
 
-        // if user passes authentication, grant access to the system
+        // if the user passes authentication, grant access to the system
         if ($result && $result->isValid()) {
             // Reset the login attempts on successful login
             $this->request->getSession()->delete('login_attempts');
-
-            // Set a fallback location in case user logged in without triggering 'unauthenticatedRedirect'
+            // Set a fallback location in case the user logged in without triggering 'unauthenticatedRedirect'
             $fallbackLocation = ['controller' => 'Customers', 'action' => 'index'];
-
-            // Redirect user to the location they're trying to access
+            // Redirect the user to the location they're trying to access
             return $this->redirect($this->Authentication->getLoginRedirect() ?? $fallbackLocation);
         }
 
-        // Display error if user submitted their credentials but authentication failed
+        // Display an error if the user submitted their credentials but authentication failed
         if ($this->request->is('post') && !$result->isValid()) {
-            // Increment the login attempts
-            $loginAttempts['count']++;
+            $totalAttempts++;
 
-            // Update the last attempt time
-            $loginAttempts['last_attempt_time'] = $currentTime;
-
-            // Calculate timeout duration based on the number of consecutive unsuccessful attempts
-            $attemptsSinceLastTimeout = $loginAttempts['count'] % $maxAttemptsBeforeTimeout;
-
-            if ($attemptsSinceLastTimeout === 0) {
-                // User has reached the maximum attempts before timeout, double the timeout duration
+            if ($totalAttempts >= $maxAttemptsBeforeTimeout) {
+                // User has reached the maximum attempts before timeout, lock them out
                 $initialTimeout *= $timeoutDoublingFactor;
+                // Set the lockout end time in the session
+                $this->request->getSession()->write('login_timeout_end', $currentTime + $initialTimeout);
             }
 
             // Check if timeout duration exceeds a maximum limit (optional)
@@ -235,13 +233,13 @@ class AuthController extends AppController {
                 $initialTimeout = $maxTimeout;
             }
 
-            // Set the calculated timeout duration in the session
-            $this->request->getSession()->write('login_attempts', $loginAttempts);
+            // Update session data with the new attempt count and timestamp
+            $this->request->getSession()->write('login_attempts', ['count' => $totalAttempts, 'last_attempt_time' => $currentTime]);
             $this->request->getSession()->write('login_timeout_duration', $initialTimeout);
 
             // Display the appropriate error message
-            if ($attemptsSinceLastTimeout === 0) {
-                $this->Flash->error("Too many unsuccessful attempts. Please wait for {$initialTimeout} seconds before trying again.");
+            if ($totalAttempts >= $maxAttemptsBeforeTimeout) {
+                $this->Flash->error("Too many unsuccessful attempts. You are locked out.");
             } else {
                 $this->Flash->error('Email address and/or Password is incorrect. Please try again.');
             }

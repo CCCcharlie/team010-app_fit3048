@@ -48,22 +48,23 @@ $this->assign('title', 'Login');
                 <?= $this->Form->create(null, ['id' => 'login']); ?>
 
                 <fieldset>
-
                     <legend>GamBlock® Login</legend>
 
                     <?= $this->Flash->render() ?>
 
                     <?php
-                    $loginAttempts = $this->request->getSession()->read('login_attempts') ?? ['count' => 0, 'last_attempt_time' => 0];
-                    $loginTimeoutDuration = $this->request->getSession()->read('login_timeout_duration') ?? 0;
+                    // Display the login form
+                    echo $this->Form->create(null, ['id' => 'login']);
+                    $lockoutEndTime = $this->request->getSession()->read('login_timeout_end');
                     $currentTime = time();
 
-                    if ($loginTimeoutDuration && ($currentTime - $loginAttempts['last_attempt_time']) < $loginTimeoutDuration) {
-                        $remainingTime = $loginTimeoutDuration - ($currentTime - $loginAttempts['last_attempt_time']);
-                        echo "<p class='text-danger'>Too many unsuccessful attempts. Please wait for {$remainingTime} seconds before trying again.</p>";
+                    if ($lockoutEndTime && $lockoutEndTime > $currentTime) {
+                        // If the user is locked out, display a message and hide the form fields
+                        echo '<p>Too many unsuccessful attempts. You are locked out for a while.</p>';
+                        echo $this->Form->hidden('email', ['value' => '']); // Hide email input
+                        echo $this->Form->hidden('password', ['value' => '']); // Hide password input
                     } else {
-                        // Display the login form
-                        echo $this->Form->create(null, ['id' => 'login']);
+                        // If not locked out or lockout period has expired, display the form fields and the login button
                         echo $this->Form->control('email', [
                             'type' => 'email',
                             'required' => true,
@@ -80,12 +81,25 @@ $this->assign('title', 'Login');
                             'maxlength' => 124,
                         ]);
 
-                        echo $this->Form->button('Login',['class' => 'btn btn-primary btn-lg btn-block g-recaptcha', 'data-sitekey' => '6LcY690nAAAAAI-KdpmOX7CKkwjXw-8Eg5pvNmlN', 'data-callback' => 'onSubmit', 'data-action'=> 'submit']);
-                        $this->Html->link('Forgot password?', ['controller' => 'Auth', 'action' => 'forgetPassword'], ['class' => 'button button-outline']);
-                          $this->Form->end();
-
+                        if (!$lockoutEndTime || $lockoutEndTime <= $currentTime) {
+                            // Display the login button if not locked out or lockout period has expired
+                            echo $this->Form->button('Login', [
+                                'class' => 'btn btn-primary btn-lg btn-block g-recaptcha',
+                                'data-sitekey' => '6LcY690nAAAAAI-KdpmOX7CKkwjXw-8Eg5pvNmlN',
+                                'data-callback' => 'onSubmit',
+                                'data-action' => 'submit'
+                            ]);
+                        }
                     }
+
+                    if (!$lockoutEndTime || $lockoutEndTime <= $currentTime) {
+                        // Display the "Forgot password?" link if not locked out or lockout period has expired
+                        $this->Html->link('Forgot password?', ['controller' => 'Auth', 'action' => 'forgetPassword'], ['class' => 'button button-outline']);
+                    }
+
+                    echo $this->Form->end();
                     ?>
+
                 </fieldset>
 
                 <hr class="hr-between-buttons">

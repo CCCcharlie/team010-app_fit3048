@@ -183,10 +183,10 @@ class AuthController extends AppController {
         $result = $this->Authentication->getResult();
 
         // Define maximum number of consecutive unsuccessful attempts before imposing timeouts
-        $maxAttemptsBeforeTimeout = 2;
+        $maxAttemptsBeforeTimeout = 5;
 
         // Define initial timeout duration (in seconds) and doubling factor
-        $initialTimeout = 30;
+        $initialTimeout = 15;
         $timeoutDoublingFactor = 2;
 
         // Get stored attempt count and timestamp from session

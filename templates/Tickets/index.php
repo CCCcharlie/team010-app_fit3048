@@ -32,7 +32,11 @@
 
                     <td><?= $ticket->closed ? "✅" : "❌" ?></td>
                     <td><?= $ticket->has('customer') ? $this->Html->link($ticket->customer->id, ['controller' => 'Customers', 'action' => 'view', $ticket->customer->id]) : '' ?></td>
-                    <td><?= $ticket->has('user') ? $this->Html->link($ticket->user->id, ['controller' => 'Users', 'action' => 'view', $ticket->user->id]) : '' ?></td>
+                    <td>
+                        <?php
+                        echo !empty($ticket->user) ? $this->Html->link($ticket->user->id, ['controller' => 'Users', 'action' => 'view', $ticket->user->id]) : 'Not available';
+                        ?>
+                    </td>
                     <td class="actions">
                         <?= $this->Html->link(__('View'), ['action' => 'view', $ticket->id]) ?>
                         <?= $this->Html->link(__('Edit'), ['action' => 'edit', $ticket->id]) ?>

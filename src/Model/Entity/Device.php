@@ -8,7 +8,7 @@ use Cake\ORM\Entity;
 /**
  * Device Entity
  *
- * @property int $id
+ * @property string $id
  * @property string $transactionid
  * @property string|null $device_model
  * @property string|null $sessionid

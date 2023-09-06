@@ -88,6 +88,21 @@ class UsersController extends AppController
 //            debug($user);
 //            exit;
 
+            /////////////////////////////
+            // Generate the unique id  //
+            /////////////////////////////
+
+            // Call the generate id function in the AppController.php
+
+            $identifier = 'STF';
+            $generateId = $this->generateId($identifier, $user->f_name, $user->l_name);
+
+            $user->id = $generateId;
+
+            ////////////////////////////////
+            // End Generate the unique id //
+            ////////////////////////////////
+
             if ($this->Users->save($user)) {
                 $this->Flash->success(__('You have successfully added the following account: {0} {1}', $user->f_name, $user->l_name));
 

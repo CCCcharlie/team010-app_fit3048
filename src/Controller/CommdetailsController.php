@@ -64,6 +64,22 @@ class CommdetailsController extends AppController
             //Server add into the customer id based on $custId query rather than the form
             $commdetail->cust_id = $custId;
 
+            /////////////////////////////
+            // Generate the unique id  //
+            /////////////////////////////
+
+            // Call the generate id function in the AppController.php
+
+            $identifier = 'CCOMMS';
+            $generateId = $this->generateId($identifier, $commdetail->type, $commdetail->link);
+
+            $commdetail->id = $generateId;
+
+            ////////////////////////////////
+            // End Generate the unique id //
+            ////////////////////////////////
+
+
             if ($this->Commdetails->save($commdetail)) {
                 $this->Flash->success(__('The communication details for: ' . $fullName . ' has been saved'));
 

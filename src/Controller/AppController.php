@@ -27,7 +27,6 @@ use Cake\Event\EventInterface;
  * will inherit them.
  *
  * @link https://book.cakephp.org/4/en/controllers.html#the-app-controller
- *
  * @property \Authentication\Controller\Component\AuthenticationComponent Authentication
  */
 class AppController extends Controller
@@ -81,6 +80,51 @@ class AppController extends Controller
 //
 //        $this->set(compact('globalContentBlocks'));
 //    }
+    }
 
+    /**
+     * Generate ID method
+     *
+     * @param string $identifier Identifier for current table [ex: STF, CUS, etc]
+     * @param string $importantAttribute1 First important attribute used in making ID [ex: f_name = bryan]
+     * @param string $importantAttribute2 Second important attribute used in making ID [ex: f_name = bryan]
+     *
+     * @return string $formattedID Returns the uniquely generated Id [ex: STF-BRYBRA-123-456-789]
+     */
+    public function generateId(string $identifier, string $importantAttribute1, string $importantAttribute2): string
+    {
+        //////////////////////////////////////////
+        // Artificially craft a unique id here //
+        //////////////////////////////////////////
+
+        //In order to create 10 random unique numbers, we use uniqid() as seed (which seeds in microseconds)
+        // and CRC32 hash to add more variety.
+        // To generate the 10 random numbers, we use function mt_rand()
+        $seed = uniqid();
+        mt_srand(crc32($seed)); // Using CRC32 hash of the uniqid as the seed
+
+//            debug(mt_rand());
+//            debug($customer);
+//            debug($customer->id);
+
+        //Get first three letters of names
+        $threeCharAttribute1 = substr($importantAttribute1, 0, 3);
+        $threeCharAttribute2 = substr($importantAttribute2, 0, 3);
+
+        //Convert the 10 random numbers into string using strval
+        $randNumStrings = strval(mt_rand());
+
+        //Format the 10 random numbers to be like 123-456-789 via substr
+        $formattedRandNumStrings = substr($randNumStrings, 0, 3) . '-' . substr($randNumStrings, 3, 3) . '-' . substr($randNumStrings, 6);
+
+        $formattedId = $identifier . '-' . $threeCharAttribute1 . $threeCharAttribute2 . '-' . $formattedRandNumStrings;
+//            debug($formattedId);
+//            exit;
+
+        return $formattedId;
+
+        ////////////////////////////////////////////////
+        // End of Artificially craft a unique id here //
+        ////////////////////////////////////////////////
     }
 }

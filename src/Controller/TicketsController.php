@@ -24,6 +24,8 @@ class TicketsController extends AppController
         $tickets = $this->paginate($this->Tickets);
 
         $this->set(compact('tickets'));
+//        debug($tickets);
+//        exit();
     }
 
     /**
@@ -43,8 +45,7 @@ class TicketsController extends AppController
 
 
         $this->set(compact('unassignedTickets'));
-        debug($unassignedTickets);
-        exit();
+
     }
 
     /**
@@ -85,6 +86,21 @@ class TicketsController extends AppController
             //closed is a boolean variable where closed = 0 mean it is Open
             $ticket->closed = false;
             $ticket->cust_id = $custId;
+
+            /////////////////////////////
+            // Generate the unique id  //
+            /////////////////////////////
+
+            // Call the generate id function in the AppController.php
+
+            $identifier = 'TCKT';
+            $generateId = $this->generateId($identifier, $ticket->title, $ticket->type);
+
+            $ticket->id = $generateId;
+
+            ////////////////////////////////
+            // End Generate the unique id //
+            ////////////////////////////////
 
             if ($this->Tickets->save($ticket)) {
                 $this->Flash->success(__('The ticket for ' . $fullName . ' Is successfully created'));

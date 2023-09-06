@@ -234,7 +234,7 @@ $this->disableAutoLayout();
                                 </div>
                                 <?= $this->Html->link(__('Return to Customer'), ['controller' => 'Customers', 'action' => 'view', $customer -> id], ['class' => 'btn btn-rounded btn-secondary']) ?>
 
-                                <?= $this->Form->button(__('Submit' ),  ['class' => 'btn btn-rounded btn-primary']) ?>
+                                <?= $this->Form->button(__('Submit'), ['class' => 'btn btn-rounded btn-primary', 'id' => 'submit-button']) ?>
                                 <?= $this->Form->end() ?>
                             </div>
                             <!-- ============================================================== -->
@@ -353,6 +353,12 @@ $this->disableAutoLayout();
             }
         });
     });
+
+
+
+
+
+
 </script>
 
 </body>

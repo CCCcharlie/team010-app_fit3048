@@ -76,7 +76,8 @@ class CustomersController extends AppController
             ->distinct(['Customers.id'])// Add this line to ensure distinct customers
             ->all();
 
-
+//debug($assignedCustomers);
+//exit;
         // pass data
         $this->set('assignedCustomers', $assignedCustomers);
 

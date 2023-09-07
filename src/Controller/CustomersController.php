@@ -60,7 +60,31 @@ class CustomersController extends AppController
 
  */
     public function assigntome()
+
     {
+
+//        $customer = $this->Customers->get($id, [
+//            'contain' => ['Tickets', 'Devices', 'Commdetails', 'Counsellors'], // Include 'Devices' association
+//        ]);
+//
+//        $tickets = $this->Customers->Tickets->find('all')
+//            ->where(['cust_id' => $customer->id])
+//            ->contain(['Users', 'Contents'])
+//            ->toArray();
+//
+//        $devices = $this->Customers->Devices->find('all')
+//            ->where(['cust_id' => $customer->id])
+//            ->contain(['Customers'])
+//            ->toArray();
+//
+//        $counsellors = $this->Customers->Counsellors->find('all')
+//            ->where(['cust_id' => $customer->id])
+//            ->contain(['Customers'])
+//            ->toArray();
+//
+//
+//        $this->set(compact('customer', 'tickets', 'devices','counsellors'));
+
         // Get the current user id
         $identity = $this->request->getAttribute('authentication')->getIdentity();
         $currentStaffId = $identity->get('id');

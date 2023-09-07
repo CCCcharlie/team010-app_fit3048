@@ -377,7 +377,19 @@ to get the name or any value in the staff table, use the get and then the name o
                             }
                             ?>
                         </div>
-                        <button id="changeStaffButton" class="btn btn-primary">Escalate</button>
+
+<!--                        upgrade button-->
+<!--                        --><?php //echo $this->Html->link(__('upgrade'), ['controller' => 'Tickets', 'action' => 'editEscalate', $ticket->id,
+//                                                                            '?' => [
+//
+//                                                                                'cust_id' => 1
+////                                                                                'ticket_closed' => $ticket->closed
+//                                                                            ],
+//                                                                        ], ['class' => 'btn btn-primary']);?>
+
+<!--                        -->
+
+
 
                     </div>
                     <?= $this->Html->link(__('View Full Profile'), ['action' => 'view', $customer->id], ['class' => 'btn btn-primary']) ?>

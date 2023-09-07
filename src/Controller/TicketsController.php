@@ -206,4 +206,8 @@ class TicketsController extends AppController
         return $this->redirect($this->referer());
     }
 
+    public function editEscalate($id = null) {
+
+    }
+
 }

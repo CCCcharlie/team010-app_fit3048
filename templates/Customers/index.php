@@ -397,6 +397,9 @@ to get the name or any value in the staff table, use the get and then the name o
                                                     <li class="nav-item">
                                                         <a class="nav-link" id="pills-contact-tab-<?= $customer->id ?>" data-toggle="pill" href="#pills-contact-<?= $customer->id ?>" role="tab" aria-controls="pills-contact" aria-selected="false">Contact Methods</a>
                                                     </li>
+<!--                                                    <li class="nav-item">-->
+<!--                                                        <a class="nav-link" id="pills-contact-tab---><?php //= $customer->id ?><!--" data-toggle="pill" href="#pills-consellors---><?php //= $customer->id ?><!--" role="tab" aria-controls="pills-consellors-" aria-selected="false">Consellors-</a>-->
+<!--                                                    </li>-->
                                                 </ul>
                                             </div>
                                         </div>
@@ -423,6 +426,7 @@ to get the name or any value in the staff table, use the get and then the name o
                                                     }
                                                     ?>
                                                 </div>
+
 
                                                 <div class="tab-pane fade" id="pills-contact-<?= $customer->id ?>" role="tabpanel" aria-labelledby="pills-contact-tab-<?= $customer->id ?>">
                                                     <br>Primary E-mail: <?= h($customer->email) ?>

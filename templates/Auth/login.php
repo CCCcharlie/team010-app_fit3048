@@ -119,7 +119,7 @@ $this->assign('title', 'Login');
                                 countdownElement.innerHTML = 'Refreshing page...'; // Display a message
                                 clearInterval(countdownInterval); // Stop the countdown interval
                                 setTimeout(() => {
-                                    location.reload(); // Refresh the page after a delay
+                                    location.href = location.href; // Refresh the page after a delay
                                 }, 2000); // Adjust the delay (in milliseconds) as needed
                             }
                         }

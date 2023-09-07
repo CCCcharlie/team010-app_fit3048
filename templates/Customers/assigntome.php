@@ -377,10 +377,13 @@ to get the name or any value in the staff table, use the get and then the name o
                             }
                             ?>
                         </div>
+                        <button id="changeStaffButton" class="btn btn-primary">Escalate</button>
+
                     </div>
                     <?= $this->Html->link(__('View Full Profile'), ['action' => 'view', $customer->id], ['class' => 'btn btn-primary']) ?>
                 </div>
             </div>
+
         </div>
     <?php endforeach; ?>
                         <?php if (count($assignedCustomers)==0): ?>
@@ -502,6 +505,11 @@ to get the name or any value in the staff table, use the get and then the name o
                 <!--    --><?php //if ($this->Paginator->counter(__('Page {{page}} of {{pages}}, showing {{current}} record(s) out of {{count}} total')) === 'Page 1 of 0, showing 0 record(s) out of 0 total'): ?>
 <!--        <p>No results found.</p>-->
 <!--    --><?php //endif; ?>
+                <script>
+                    // JavaScript
+                    document.getElementById('changeStaffButton').addEventListener('click', function () {
 
+                    });
+                </script>
 
 </div>

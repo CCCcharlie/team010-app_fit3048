@@ -522,6 +522,11 @@ to get the name or any value in the staff table, use the get and then the name o
                                         Notes
                                     </div>
                                 </th>
+                                <th class="col-md-5"> <!--  "Counsellor"  -->
+                                    <div class="sorting-header">
+                                        Counsellor
+                                    </div>
+                                </th>
 
                                 <th class="col-md-2 actions">
                                     <?= __('Actions') ?>

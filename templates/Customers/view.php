@@ -174,6 +174,8 @@ $checkConnection = function (string $name) {
                                     <li class="nav-item">
                                         <a class="nav-link" href="/Users/">View All Staff Accounts</a>
                                         <a class="nav-link" href="/tickets/unassigned">View unassigned tickets</a>
+                                        <a class="nav-link" href="/counsellors">View counsellors</a>
+
 
                                     </li>
                                 </ul>

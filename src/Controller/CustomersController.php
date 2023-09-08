@@ -63,27 +63,7 @@ class CustomersController extends AppController
 
     {
 
-//        $customer = $this->Customers->get($id, [
-//            'contain' => ['Tickets', 'Devices', 'Commdetails', 'Counsellors'], // Include 'Devices' association
-//        ]);
-//
-//        $tickets = $this->Customers->Tickets->find('all')
-//            ->where(['cust_id' => $customer->id])
-//            ->contain(['Users', 'Contents'])
-//            ->toArray();
-//
-//        $devices = $this->Customers->Devices->find('all')
-//            ->where(['cust_id' => $customer->id])
-//            ->contain(['Customers'])
-//            ->toArray();
-//
-//        $counsellors = $this->Customers->Counsellors->find('all')
-//            ->where(['cust_id' => $customer->id])
-//            ->contain(['Customers'])
-//            ->toArray();
-//
-//
-//        $this->set(compact('customer', 'tickets', 'devices','counsellors'));
+
 
         // Get the current user id
         $identity = $this->request->getAttribute('authentication')->getIdentity();
@@ -104,6 +84,22 @@ class CustomersController extends AppController
 //exit;
         // pass data
         $this->set('assignedCustomers', $assignedCustomers);
+
+//
+// Get the related tickets for assigned customers
+        $assigntickets = $this->Customers->Tickets->find()
+            ->where([
+                'Tickets.staff_id' => $currentStaffId,
+                'Tickets.closetime IS NULL'
+            ])
+            ->contain(['Users', 'Contents', 'Customers'])
+            ->all();
+
+// Pass the tickets data to the view
+
+//        debug($assigntickets);
+//exit;
+        $this->set('assigntickets', $assigntickets);
 
     }
 

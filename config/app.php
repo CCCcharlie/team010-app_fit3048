@@ -78,6 +78,11 @@ return [
         'salt' => env('SECURITY_SALT'),
     ],
 
+    'recaptcha' => [
+        'siteKey' => '6LcY690nAAAAAI-KdpmOX7CKkwjXw-8Eg5pvNmlN',
+        'secretKey' => '6LcY690nAAAAAAgBR_vLBrAoKqH5XmYgfvJcYzwf',
+    ],
+
     /*
      * Apply timestamps with the last modified time to static assets (js, css, images).
      * Will append a querystring parameter containing the time the file was modified.

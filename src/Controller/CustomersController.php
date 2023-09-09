@@ -60,7 +60,11 @@ class CustomersController extends AppController
 
  */
     public function assigntome()
+
     {
+
+
+
         // Get the current user id
         $identity = $this->request->getAttribute('authentication')->getIdentity();
         $currentStaffId = $identity->get('id');
@@ -80,6 +84,22 @@ class CustomersController extends AppController
 //exit;
         // pass data
         $this->set('assignedCustomers', $assignedCustomers);
+
+//
+// Get the related tickets for assigned customers
+        $assigntickets = $this->Customers->Tickets->find()
+            ->where([
+                'Tickets.staff_id' => $currentStaffId,
+                'Tickets.closetime IS NULL'
+            ])
+            ->contain(['Users', 'Contents', 'Customers'])
+            ->all();
+
+// Pass the tickets data to the view
+
+//        debug($assigntickets);
+//exit;
+        $this->set('assigntickets', $assigntickets);
 
     }
 

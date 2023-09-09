@@ -159,6 +159,9 @@ $cakeDescription = 'CakePHP: The rapid development PHP framework';
                             <ul class="nav flex-column">
                                 <li class="nav-item">
                                     <a class="nav-link" href="/Users/">View All Staff Accounts</a>
+                                    <a class="nav-link" href="/counsellors">View counsellors</a>
+                                    <a class="nav-link" href="/tickets/unassigned">View unassigned tickets</a>
+
                                 </li>
                             </ul>
                         </div>

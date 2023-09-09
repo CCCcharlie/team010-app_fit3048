@@ -379,9 +379,9 @@ to get the name or any value in the staff table, use the get and then the name o
                         </div>
 
 <!--                        upgrade button-->
-
+                        <?php $newUserId = 1; ?>
                         <?php foreach ($assigntickets as $ticket): ?>
-                            <?php echo $this->Html->link(__('Escalate the customer'), ['controller' => 'Tickets', 'action' => 'edit', $ticket->id], ['class' => 'btn btn-primary']); ?>
+                            <?php echo $this->Html->link(__('Escalate the customer'), ['controller' => 'Tickets', 'action' => 'edit',  $ticket->id], ['class' => 'btn btn-primary']); ?>
                             <?php echo ' '; ?>
                         <?php endforeach; ?>
 

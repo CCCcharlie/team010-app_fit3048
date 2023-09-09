@@ -33,7 +33,6 @@ class TicketsController extends AppController
      * @param string|null $id Tickets id.
      * @return \Cake\Http\Response|null|void Renders view
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
-
      */
     public function unassigned()
     {
@@ -165,6 +164,9 @@ class TicketsController extends AppController
             'limit' => 200
         ])->all();
         $this->set(compact('ticket', 'customers', 'users'));
+
+
+
     }
 
     /**
@@ -187,7 +189,8 @@ class TicketsController extends AppController
         return $this->redirect($this->referer());
     }
 
-    public function updateTicket($id = null) {
+    public function updateTicket($id = null)
+    {
         $this->request->allowMethod(['post', 'delete']);
         $ticket = $this->Tickets->get($id);
 
@@ -206,8 +209,47 @@ class TicketsController extends AppController
         return $this->redirect($this->referer());
     }
 
-    public function editEscalate($id = null) {
+    // 在 TicketsController.php
+    public function assignUser($id = null)
+    {
+        //Obtain the query via key value pair [called from customer table view]
+        $firstName = $this->request->getQuery('f_name');
+        $lastName = $this->request->getQuery('l_name');
+        $custId = $this->request->getQuery('cust_id');
+        $fullName = $firstName . ' ' . $lastName;
+//        $ticketClosedStatus = $this->request->getQuery('ticket_closed');
+
+        $this->set(compact('fullName', 'custId'));
+
+        $ticket = $this->Tickets->get($id, [
+            'contain' => [],
+        ]);
+        if ($this->request->is(['patch', 'post', 'put'])) {
+            $ticket = $this->Tickets->patchEntity($ticket, $this->request->getData());
+
+//            debug($ticket);
+//            debug($id);
+//            exit;
+
+            if ($this->Tickets->save($ticket)) {
+                $this->Flash->success(__('The ticket has been saved.'));
+                return $this->redirect(['controller' => 'Customers', 'action' => 'view', $custId]);
+            }
+            $this->Flash->error(__('The ticket could not be saved. Please, try again.'));
+        }
+        $customers = $this->Tickets->Customers->find('list', ['limit' => 200])->all();
+        $users = $this->Tickets->Users->find('list', [
+            'keyField' => 'id',
+            'valueField' => 'f_name',
+            'limit' => 200
+        ])->all();
+        $this->set(compact('ticket', 'customers', 'users'));
+
+//        return to current address
+        $refererUrl = $this->referer();
+        return $this->redirect($refererUrl);
 
     }
-
 }
+
+

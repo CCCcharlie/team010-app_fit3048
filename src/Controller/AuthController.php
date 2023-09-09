@@ -6,6 +6,8 @@ namespace App\Controller;
 use Cake\I18n\FrozenTime;
 use Cake\Mailer\Mailer;
 use Cake\Utility\Security;
+use Cake\Http\Cookie\Cookie;
+
 
 /**
  * Auth Controller
@@ -186,7 +188,6 @@ class AuthController extends AppController {
         $maxAttemptsBeforeTimeout = 5;
 
         // Define initial timeout duration (in seconds) and doubling factor
-        $initialTimeout = 15;
         $timeoutDoublingFactor = 2;
 
         // Get stored attempt count and timestamp from session
@@ -195,6 +196,9 @@ class AuthController extends AppController {
 
         // Get current timestamp
         $currentTime = time();
+
+        // Retrieve the initialTimeout from the session
+        $initialTimeout = $this->request->getSession()->read('login_timeout_duration') ?? 15;
 
         // Calculate the total number of consecutive unsuccessful attempts
         $totalAttempts = $loginAttempts['count'];
@@ -206,12 +210,30 @@ class AuthController extends AppController {
             $this->request->getSession()->write('login_timeout_end', 0);
         }
 
+        // Double the timeout for each subsequent lockout
+        if ($totalAttempts > $maxAttemptsBeforeTimeout) {
+            // User has reached the maximum attempts before timeout, lock them out
+            $initialTimeout *= $timeoutDoublingFactor;
+
+            // Update the initialTimeout in the session for the current request
+            $this->request->getSession()->write('login_timeout_duration', $initialTimeout);
+
+            // Set the lockout end time in the session
+            $this->request->getSession()->write('login_timeout_end', $currentTime + $initialTimeout);
+        }
+
         // if the user passes authentication, grant access to the system
         if ($result && $result->isValid()) {
             // Reset the login attempts on successful login
             $this->request->getSession()->delete('login_attempts');
+            $this->request->getSession()->delete('login_timeout_duration');
+
+            // Remove the total lockout cookie on successful login
+            $this->setResponse($this->getResponse()->withExpiredCookie('total_lockout'));
+
             // Set a fallback location in case the user logged in without triggering 'unauthenticatedRedirect'
             $fallbackLocation = ['controller' => 'Customers', 'action' => 'index'];
+
             // Redirect the user to the location they're trying to access
             return $this->redirect($this->Authentication->getLoginRedirect() ?? $fallbackLocation);
         }
@@ -220,31 +242,27 @@ class AuthController extends AppController {
         if ($this->request->is('post') && !$result->isValid()) {
             $totalAttempts++;
 
-            if ($totalAttempts >= $maxAttemptsBeforeTimeout) {
-                // User has reached the maximum attempts before timeout, lock them out
-                $initialTimeout *= $timeoutDoublingFactor;
-                // Set the lockout end time in the session
-                $this->request->getSession()->write('login_timeout_end', $currentTime + $initialTimeout);
-            }
+            // Update the total lockout count in the cookie
+            $this->setResponse($this->getResponse()->withCookie(new Cookie('total_lockout', (string)($totalAttempts))));
 
             // Check if timeout duration exceeds a maximum limit (optional)
-            $maxTimeout = 86400; // Maximum timeout duration (24 hours). Let it be changeable
+            $maxTimeout = 86400; // Maximum timeout duration (24 hours). Let it be changeable. ie. CB Me
             if ($initialTimeout > $maxTimeout) {
                 $initialTimeout = $maxTimeout;
             }
 
             // Update session data with the new attempt count and timestamp
             $this->request->getSession()->write('login_attempts', ['count' => $totalAttempts, 'last_attempt_time' => $currentTime]);
-            $this->request->getSession()->write('login_timeout_duration', $initialTimeout);
 
             // Display the appropriate error message
-            if ($totalAttempts >= $maxAttemptsBeforeTimeout) {
+            if ($totalAttempts > $maxAttemptsBeforeTimeout) {
                 $this->Flash->error("Too many unsuccessful attempts. You are locked out.");
-            } else {
+            } elseif (!$result->isValid()) {
                 $this->Flash->error('Email address and/or Password is incorrect. Please try again.');
             }
         }
     }
+
 
     /**
      * Logout method

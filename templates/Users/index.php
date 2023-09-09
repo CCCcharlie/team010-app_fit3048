@@ -217,27 +217,62 @@ to get the name or any value in the staff table, use the get and then the name o
             </thead>
             <tbody>
             <?php foreach ($users as $user): ?>
-<!--            --><?php //= debug($user->admin_status) ?>
-                <tr>
-                    <td><?= h($user->f_name) ?></td>
-                    <td><?= h($user->l_name) ?></td>
-                    <td><?= h($user->email) ?></td>
-<!--                    <td>--><?php //= h($user->admin_status ? 'Admin' : 'Staff') ?><!--</td>-->
-                    <td><?= h($user->role) ?></td>
-                    <td class="actions">
-                        <?php if ($this->Identity->get('role') == 'root' || $this->Identity->get('role') == 'admin'): ?>
-                            <?= $this->Html->link(__('Edit'), ['action' => 'edit', $user->id], ['class' => 'btn btn-primary']) ?>
-                            <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $user->id], [
-                                'class' => 'btn btn-danger',
-                                'confirm' => __('Are you sure you want to delete {0} {1}?', $user->f_name, $user->l_name)
-                            ]) ?>
-                        <?php else: ?>
-                            <p>Please contact an Admin to edit me.</p>
+            <tr>
+                <td><?= h($user->f_name) ?></td>
+                <td><?= h($user->l_name) ?></td>
+                <td><?= h($user->email) ?></td>
+                <td><?= h($user->role) ?></td>
+                <td class="actions">
+                    <?php if ($this->Identity->get('role') == 'root' || $this->Identity->get('role') == 'admin'): ?>
+                        <!------------------->
+                        <!--Root role rules-->
+                        <!------------------->
+                        <?php if ($this->Identity->get('role') == 'root'): ?>
+
+                            <!-- Allow editing/delete of profiles: Admin, Staff & User -->
+                            <?php if ($user->role != 'root'): ?>
+                                <?= $this->Html->link(__('Edit'), ['action' => 'edit', $user->id, $user->role], ['class' => 'btn btn-primary']) ?>
+                                <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $user->id, $user->role], [
+                                    'class' => 'btn btn-danger',
+                                    'confirm' => __('Are you sure you want to delete {0} {1}?' . "\n\n" . 'WARNING: THIS PROCESS IS IRREVERSIBLE', $user->f_name, $user->l_name)
+                                ]) ?>
+                                <!-- Allow editing of own profile -->
+                            <?php elseif ($user->id === $this->Identity->get('id')): ?>
+                                <?= $this->Html->link(__('Edit'), ['action' => 'edit', $user->id, $user->role], ['class' => 'btn btn-primary']) ?>
+                            <?php else: ?>
+                                <p>Actions Unavailable</p>
+                            <?php endif; ?>
+                            <!----------------------->
+                            <!--End Root role rules-->
+                            <!----------------------->
+
+                            <!----------------------->
+                            <!-- Admin roles rules -->
+                            <!----------------------->
+                        <?php elseif ($this->Identity->get('role') == 'admin'): ?>
+                            <?php if ($user->role != 'root' && $user->role != 'admin'): ?>
+                                <!-- Allow editing/delete of profiles: Staff & User -->
+                                <?= $this->Html->link(__('Edit'), ['action' => 'edit', $user->id, $user->role], ['class' => 'btn btn-primary']) ?>
+                                <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $user->id, $user->role], [
+                                    'class' => 'btn btn-danger',
+                                    'confirm' => __('Are you sure you want to delete {0} {1}?' . "\n\n" . 'WARNING: THIS PROCESS IS IRREVERSIBLE', $user->f_name, $user->l_name)
+                                ]) ?>
+
+                            <!-- Allow editing of own profile -->
+                            <?php elseif ($user->id === $this->Identity->get('id')): ?>
+                                <?= $this->Html->link(__('Edit'), ['action' => 'edit', $user->id, $user->role], ['class' => 'btn btn-primary']) ?>
+                            <?php else: ?>
+                                <p>Actions Unavailable</p>
+                            <?php endif; ?>
+                            <!----------------------->
+                            <!--End Root role rules-->
+                            <!----------------------->
                         <?php endif; ?>
-
-
-                    </td>
-                </tr>
+                    <?php else: ?>
+                        <p>Please contact an Admin to edit me.</p>
+                    <?php endif; ?>
+                </td>
+            </tr>
             <?php endforeach; ?>
             </tbody>
         </table>

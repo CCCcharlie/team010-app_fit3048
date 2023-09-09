@@ -153,6 +153,7 @@ class TicketsController extends AppController
 
             if ($this->Tickets->save($ticket)) {
                 $this->Flash->success(__('The ticket has been saved.'));
+
                 return $this->redirect(['controller' => 'Customers', 'action' => 'view', $custId]);
             }
             $this->Flash->error(__('The ticket could not be saved. Please, try again.'));
@@ -164,6 +165,8 @@ class TicketsController extends AppController
             'limit' => 200
         ])->all();
         $this->set(compact('ticket', 'customers', 'users'));
+//        return to current address
+        $refererUrl = $this->referer();
 
 
 
@@ -245,11 +248,29 @@ class TicketsController extends AppController
         ])->all();
         $this->set(compact('ticket', 'customers', 'users'));
 
-//        return to current address
-        $refererUrl = $this->referer();
-        return $this->redirect($refererUrl);
+
+
 
     }
+
+
+    protected $_virtual = ['original_staff_id'];
+    public function undo($id = null)
+    {
+        $ticket = $this->Tickets->get($id);
+
+        // restore staff_id
+        $ticket->staff_id = $ticket->original_staff_id;
+
+        if ($this->Tickets->save($ticket)) {
+            $this->Flash->success(__('The ticket has been undone.'));
+        } else {
+            $this->Flash->error(__('The ticket could not be undone. Please, try again.'));
+        }
+
+        return $this->redirect(['action' => 'edit', $id]);
+    }
+
 }
 
 

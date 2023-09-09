@@ -379,14 +379,24 @@ to get the name or any value in the staff table, use the get and then the name o
                         </div>
 
 <!--                        upgrade button-->
-                        <?php $newUserId = 1; ?>
+
                         <?php foreach ($assigntickets as $ticket): ?>
-                            <?php echo $this->Html->link(__('Escalate the customer'), ['controller' => 'Tickets', 'action' => 'edit',  $ticket->id], ['class' => 'btn btn-primary']); ?>
+                            <?php echo $this->Html->link(
+                                __('Escalate the customer'),
+                                [
+                                    'controller' => 'Tickets',
+                                    'action' => 'edit',
+                                    $ticket->id,
+                                    '?' => ['cust_id' => $ticket->customer->id] // 添加 cust_id 到查询参数
+                                ],
+                                ['class' => 'btn btn-primary']
+                            ); ?>
                             <?php echo ' '; ?>
                         <?php endforeach; ?>
 
 
-<!--                        -->
+
+                        <!--                        -->
 
 
 
@@ -400,6 +410,7 @@ to get the name or any value in the staff table, use the get and then the name o
                         <?php if (count($assignedCustomers)==0): ?>
                             <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12" >
                                 <p>No assigned customers found.</p>
+
                             </div>
 
 

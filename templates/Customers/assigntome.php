@@ -387,7 +387,7 @@ to get the name or any value in the staff table, use the get and then the name o
                                     'controller' => 'Tickets',
                                     'action' => 'edit',
                                     $ticket->id,
-                                    '?' => ['cust_id' => $ticket->customer->id] // 添加 cust_id 到查询参数
+                                    '?' => ['cust_id' => $ticket->customer->id] // assign cust id to checking variable
                                 ],
                                 ['class' => 'btn btn-primary']
                             ); ?>

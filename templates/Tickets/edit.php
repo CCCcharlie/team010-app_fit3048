@@ -236,7 +236,10 @@ $this->disableAutoLayout();
                                     <div class="form-group d-flex justify-content-between align-items-center">
                                         <?= $this->Html->link(__('Return to Customer'), ['controller' => 'Customers', 'action' => 'view', $custId], ['class' => 'btn btn-rounded btn-secondary']) ?>
                                         <?= $this->Form->button(__('Submit'), ['class' => 'btn btn-primary']) ?>
-<!--              undo originalData not passing                      --><?php //=  $this->Html->link(__('Undo Changes'), ['action' => 'undo', $ticket->id, '?' => ['originalData' => $originalData]], ['class' => 'btn btn-warning']); ?>
+<!--              undo originalData not passing            debug($originalData);           -->
+<!--                                      --><?php //=  $this->getRequest()->getSession()->write('originalData', $originalData);?>
+
+                                        <?= $this->Html->link(__('Undo Changes'), ['action' => 'undo', $ticket->id, '?' => ['originalData' => $originalData]], ['class' => 'btn btn-warning']); ?>
 
 
                                     </div>

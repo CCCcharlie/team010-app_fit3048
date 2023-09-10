@@ -166,6 +166,9 @@ class TicketsController extends AppController
 //
             if ($this->Tickets->save($ticket)) {
                 $this->Flash->success(__('The ticket has been saved.'));
+                // Save the original data in the session
+                $this->getRequest()->getSession()->write('originalData', $originalData);
+
                 return $this->redirect($this->referer());
 //                return $this->redirect(['controller' => 'Customers', 'action' => 'view', $custId]);
             }
@@ -268,21 +271,29 @@ class TicketsController extends AppController
     }
 
 
-    public function undo($id = null,$originalData=null)
+    public function undo($id = null)
     {
 
-        $originalData = $this->request->getQuery('originalData');
+        $originalData = $this->getRequest()->getSession()->read('originalData');
 
-            debug($originalData);
-            exit;
-        // 将数据还原为原始状态
-        $this->Tickets->patchEntity($originalData, $originalData->toArray());
-        if ($this->Tickets->save($originalData)) {
+//            debug($originalData);
+//            exit;
+        // obtain the data being changed
+        $ticketToUndo = $this->Tickets->get($id);
+
+        // cover the change
+        $ticketToUndo = $this->Tickets->patchEntity($ticketToUndo, $originalData->toArray());
+
+        if ($this->Tickets->save($ticketToUndo)) {
             $this->Flash->success(__('Changes have been undone.'));
         } else {
             $this->Flash->error(__('Unable to undo changes.'));
         }
-        return $this->redirect($this->referer());
+
+
+//        return $this->redirect($this->referer());
+        return $this->redirect(['controller' => 'Customers', 'action' => 'view', $originalData['cust_id']]);
+
     }
 
 

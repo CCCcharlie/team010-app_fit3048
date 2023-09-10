@@ -144,6 +144,15 @@ class TicketsController extends AppController
         $ticket = $this->Tickets->get($id, [
             'contain' => [],
         ]);
+//
+        // Obtain the orginal data
+        $originalData = $this->Tickets->get($id, [
+            'contain' => [],
+        ]);
+        $this->set(compact('originalData', 'originalData'));
+
+
+//
         if ($this->request->is(['patch', 'post', 'put'])) {
             $ticket = $this->Tickets->patchEntity($ticket, $this->request->getData());
 
@@ -151,10 +160,14 @@ class TicketsController extends AppController
 //            debug($id);
 //            exit;
 
+
+
+//
+//
             if ($this->Tickets->save($ticket)) {
                 $this->Flash->success(__('The ticket has been saved.'));
-
-                return $this->redirect(['controller' => 'Customers', 'action' => 'view', $custId]);
+                return $this->redirect($this->referer());
+//                return $this->redirect(['controller' => 'Customers', 'action' => 'view', $custId]);
             }
             $this->Flash->error(__('The ticket could not be saved. Please, try again.'));
         }
@@ -167,6 +180,7 @@ class TicketsController extends AppController
         $this->set(compact('ticket', 'customers', 'users'));
 //        return to current address
         $refererUrl = $this->referer();
+//
 
 
 
@@ -254,22 +268,23 @@ class TicketsController extends AppController
     }
 
 
-    protected $_virtual = ['original_staff_id'];
-    public function undo($id = null)
+    public function undo($id = null,$originalData=null)
     {
-        $ticket = $this->Tickets->get($id);
 
-        // restore staff_id
-        $ticket->staff_id = $ticket->original_staff_id;
+        $originalData = $this->request->getQuery('originalData');
 
-        if ($this->Tickets->save($ticket)) {
-            $this->Flash->success(__('The ticket has been undone.'));
+            debug($originalData);
+            exit;
+        // 将数据还原为原始状态
+        $this->Tickets->patchEntity($originalData, $originalData->toArray());
+        if ($this->Tickets->save($originalData)) {
+            $this->Flash->success(__('Changes have been undone.'));
         } else {
-            $this->Flash->error(__('The ticket could not be undone. Please, try again.'));
+            $this->Flash->error(__('Unable to undo changes.'));
         }
-
-        return $this->redirect(['action' => 'edit', $id]);
+        return $this->redirect($this->referer());
     }
+
 
 }
 

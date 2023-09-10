@@ -387,6 +387,7 @@ $checkConnection = function (string $name) {
                                                                 'cust_id' => $customer->id
                                                             ],
                                                         ], ['class' => 'btn btn-success mt-3']); ?>
+
                                                     </div>
                                                 </div>
                                             </div>

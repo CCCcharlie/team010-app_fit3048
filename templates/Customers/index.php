@@ -174,6 +174,8 @@ $checkConnection = function (string $name) {
                                     <li class="nav-item">
                                         <a class="nav-link" href="/Users/">View All Staff Accounts</a>
                                         <a class="nav-link" href="/tickets/unassigned">View unassigned tickets</a>
+                                        <a class="nav-link" href="/counsellors">View counsellors</a>
+
 
                                     </li>
                                 </ul>
@@ -397,6 +399,9 @@ to get the name or any value in the staff table, use the get and then the name o
                                                     <li class="nav-item">
                                                         <a class="nav-link" id="pills-contact-tab-<?= $customer->id ?>" data-toggle="pill" href="#pills-contact-<?= $customer->id ?>" role="tab" aria-controls="pills-contact" aria-selected="false">Contact Methods</a>
                                                     </li>
+<!--                                                    <li class="nav-item">-->
+<!--                                                        <a class="nav-link" id="pills-contact-tab---><?php //= $customer->id ?><!--" data-toggle="pill" href="#pills-consellors---><?php //= $customer->id ?><!--" role="tab" aria-controls="pills-consellors-" aria-selected="false">Consellors-</a>-->
+<!--                                                    </li>-->
                                                 </ul>
                                             </div>
                                         </div>
@@ -423,6 +428,7 @@ to get the name or any value in the staff table, use the get and then the name o
                                                     }
                                                     ?>
                                                 </div>
+
 
                                                 <div class="tab-pane fade" id="pills-contact-<?= $customer->id ?>" role="tabpanel" aria-labelledby="pills-contact-tab-<?= $customer->id ?>">
                                                     <br>Primary E-mail: <?= h($customer->email) ?>
@@ -518,6 +524,12 @@ to get the name or any value in the staff table, use the get and then the name o
                                         Notes
                                     </div>
                                 </th>
+                                <th class="col-md-5"> <!--  "Counsellor"  -->
+                                    <div class="sorting-header">
+                                        Counsellor
+                                    </div>
+                                </th>
+
                                 <th class="col-md-2 actions">
                                     <?= __('Actions') ?>
                                 </th>
@@ -557,6 +569,29 @@ to get the name or any value in the staff table, use the get and then the name o
                                             No notes have been provided about the customer.
                                         <?php endif; ?>
                                     </td>
+<!--                                    consellor-->
+                                    <td>
+                                        <?php if (!empty($customer->counsellors)) : ?>
+                                            <?php $counsellorCount = count($customer->counsellors); ?>
+                                            <?php foreach ($customer->counsellors as $key => $counsellor) : ?>
+                                                <div class="counsellor-details">
+                                                    <div>
+                                                        <strong>First Name: </strong><?= !empty($counsellor->f_name) ? h($counsellor->f_name) : 'No information found' ?>
+                                                    </div>
+                                                    <div>
+                                                        <strong>Last Name: </strong><?= !empty($counsellor->l_name) ? h($counsellor->l_name) : 'No information found' ?>
+                                                    </div>
+                                                </div>
+                                                <?php if ($counsellorCount > 1 && $key < ($counsellorCount - 1)) : ?>
+                                                    <div class="separator"></div>
+                                                <?php endif; ?>
+                                            <?php endforeach; ?>
+                                        <?php else : ?>
+                                            <p>No counsellor details found for this user. Please add some via clicking <a href="<?= $this->Url->build(['action' => 'view', $customer->id]) ?>">View Full Profile</a> on the right.</p>
+                                        <?php endif; ?>
+                                    </td>
+
+
                                     <td style="width: 200px">
                                         <?= $this->Html->link(__('View Full Profile'), ['action' => 'view', $customer->id], ['class' => 'btn btn-primary']) ?>
                                     </td>

@@ -97,7 +97,7 @@ class TicketsTable extends Table
             ->notEmptyString('cust_id');
 
         $validator
-            ->integer('staff_id')
+            ->scalar('staff_id')
             ->notEmptyString('staff_id');
 
         return $validator;

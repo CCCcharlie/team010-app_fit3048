@@ -14,10 +14,10 @@
             <?= $this->Html->link(__('New Counsellor'), ['action' => 'add'], ['class' => 'side-nav-item']) ?>
         </div>
     </aside>
-    <div class="splash-container table table-hover table-striped">
-        <div class="counsellors view content">
+    <div class="splash-container">
+        <div class="counsellors view content table table-hover table-striped">
             <h3><?= h($counsellor->id) ?></h3>
-            <table>
+            <table class="table table-hover table-striped table-responsive">
                 <tr>
                     <th><?= __('F Name') ?></th>
                     <td><?= h($counsellor->f_name) ?></td>

@@ -174,6 +174,8 @@ $checkConnection = function (string $name) {
                                     <li class="nav-item">
                                         <a class="nav-link" href="/Users/">View All Staff Accounts</a>
                                         <a class="nav-link" href="/tickets/unassigned">View unassigned tickets</a>
+                                        <a class="nav-link" href="/counsellors">View counsellors</a>
+
 
                                     </li>
                                 </ul>
@@ -355,6 +357,10 @@ $checkConnection = function (string $name) {
                                     <li class="nav-item">
                                         <a class="nav-link" id="pills-review-tab" data-toggle="pill" href="#pills-review" role="tab" aria-controls="pills-review" aria-selected="false">Technical Details</a>
                                     </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" id="pills-consellor-tab" data-toggle="pill" href="#pills-consellor" role="tab" aria-controls="pills-consellor" aria-selected="false">Consellor</a>
+                                    </li>
+
                                 </ul>
                                 <div class="tab-content" id="pills-tabContent">
                                     <div class="tab-pane fade show active" id="pills-campaign" role="tabpanel" aria-labelledby="pills-campaign-tab">
@@ -381,6 +387,7 @@ $checkConnection = function (string $name) {
                                                                 'cust_id' => $customer->id
                                                             ],
                                                         ], ['class' => 'btn btn-success mt-3']); ?>
+
                                                     </div>
                                                 </div>
                                             </div>
@@ -866,7 +873,51 @@ $checkConnection = function (string $name) {
                                                 ],
                                             ], ['class' => 'btn btn-success mt-3']); ?>
 
-                                        </div
+                                        </div>
+                                        <div class="tab-pane fade" id="pills-consellor" role="tabpanel" aria-labelledby="pills-consellor-tab">
+                                            <?php
+                                            if (!empty($customer->counsellors)) {
+                                                echo '<table class="table table-bordered">';
+                                                echo '<thead><tr><th scope="col">First Name</th><th scope="col">Last Name</th><th scope="col">Notes</th><th scope="col">Contact</th><th scope="col">Actions</th></tr></thead>';
+                                                echo '<tbody>';
+
+                                                foreach ($customer->counsellors as $counsellor) {
+                                                    echo '<tr>';
+                                                    echo '<td>' . h($counsellor->f_name) . '</td>';
+                                                    echo '<td>' . h($counsellor->l_name) . '</td>';
+                                                    echo '<td>' . h($counsellor->notes) . '</td>';
+                                                    echo '<td>' . h($counsellor->contact) . '</td>';
+
+                                                    // Actions column with View, Edit, and Delete buttons
+                                                    echo '<td>';
+                                                    echo $this->Html->link(__('View'), ['controller' => 'Counsellors', 'action' => 'view', $counsellor->id], ['class' => 'btn btn-info']);
+                                                    echo ' ';
+                                                    echo $this->Html->link(__('Edit'), ['controller' => 'Counsellors', 'action' => 'edit', $counsellor->id], ['class' => 'btn btn-primary']);
+                                                    echo ' ';
+                                                    echo $this->Form->postLink(__('Delete'), ['controller' => 'Counsellors', 'action' => 'delete', $counsellor->id], ['class' => 'btn btn-danger', 'confirm' => __('Are you sure you want to delete this counsellor?')]);
+                                                    echo '</td>';
+
+                                                    echo '</tr>';
+                                                }
+
+                                                echo '</tbody>';
+                                                echo '</table>';
+                                            } else {
+                                                echo '<p>No counsellors associated with this customer.</p>';
+                                            }
+                                            ?>
+
+                                            <?php echo $this->Html->link(__('Add New Counsellor'), ['controller' => 'Counsellors', 'action' => 'add',
+                                                '?' => [
+                                                    'f_name' => $customer->f_name,
+                                                    'l_name' => $customer->l_name,
+                                                    'cust_id' => $customer->id
+                                                ],
+                                            ], ['class' => 'btn btn-success mt-3']); ?>
+
+
+
+                                        </div>
                                     </div>
                                 </div>
                                 <!-- ============================================================== -->

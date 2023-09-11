@@ -377,7 +377,28 @@ to get the name or any value in the staff table, use the get and then the name o
                             }
                             ?>
                         </div>
-                        <button id="changeStaffButton" class="btn btn-primary">Escalate</button>
+
+<!--                        upgrade button-->
+
+                        <?php foreach ($assigntickets as $ticket): ?>
+                            <?php echo $this->Html->link(
+                                __('Escalate the customer'),
+                                [
+                                    'controller' => 'Tickets',
+                                    'action' => 'edit',
+                                    $ticket->id,
+                                    '?' => ['cust_id' => $ticket->customer->id] // assign cust id to checking variable
+                                ],
+                                ['class' => 'btn btn-primary']
+                            ); ?>
+                            <?php echo ' '; ?>
+                        <?php endforeach; ?>
+
+
+
+                        <!--                        -->
+
+
 
                     </div>
                     <?= $this->Html->link(__('View Full Profile'), ['action' => 'view', $customer->id], ['class' => 'btn btn-primary']) ?>
@@ -389,6 +410,7 @@ to get the name or any value in the staff table, use the get and then the name o
                         <?php if (count($assignedCustomers)==0): ?>
                             <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12" >
                                 <p>No assigned customers found.</p>
+
                             </div>
 
 

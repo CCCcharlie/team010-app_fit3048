@@ -65,6 +65,15 @@ $checkConnection = function (string $name) {
     <?= $this->Html->css(['style', 'bootstrap.min',]) ?>
     <?= $this->Html->css(['fontawesome-all'], ['block' => true]) ?>
 
+    <style>
+        td
+        {
+            max-width: 80px;
+            /*width: 200px;*/
+            overflow-wrap: break-word;
+        }
+    </style>
+
 </head>
 
 <body>

@@ -120,7 +120,7 @@ class UsersController extends AppController
             // No action needed for 'index'
         } else {
             // Invalid action
-            $this->Flash->error(__('Invalid action, Nice try'));
+            $this->Flash->error(__('Invalid action, Please contact your system administrator'));
 
             return $this->redirect(['action' => 'index']);
         }

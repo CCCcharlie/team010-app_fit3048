@@ -116,11 +116,13 @@ class UsersController extends AppController
 
                 return $this->redirect(['action' => 'index']);
             }
-        } elseif ($action === 'index') {
-            // No action needed for 'index'
+        } elseif ($action === 'index' || ($action === 'add' && $adminRole === 'root')) {
+            // No action needed for 'index' or root attempting to add
         } else {
+
+
             // Invalid action
-            $this->Flash->error(__('Invalid action, Nice try'));
+            $this->Flash->error(__('Invalid action'));
 
             return $this->redirect(['action' => 'index']);
         }

@@ -213,10 +213,10 @@ class CustomersController extends AppController
 
             // Call the generate id function in the AppController.php
 
-            $identifier = 'CUS';
-            $generateId = $this->generateId($identifier, $customer->f_name, $customer->l_name);
-
-            $customer->id = $generateId;
+//            $identifier = 'CUS';
+//            $generateId = $this->generateId($identifier, $customer->f_name, $customer->l_name);
+//
+//            $customer->id = $generateId;
 
             ////////////////////////////////
             // End Generate the unique id //

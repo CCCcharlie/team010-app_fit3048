@@ -169,8 +169,8 @@ class TicketsController extends AppController
                 // Save the original data in the session
                 $this->getRequest()->getSession()->write('originalData', $originalData);
 
-                return $this->redirect($this->referer());
-//                return $this->redirect(['controller' => 'Customers', 'action' => 'view', $custId]);
+ //               return $this->redirect($this->referer());
+               return $this->redirect(['controller' => 'Customers', 'action' => 'view', $custId]);
             }
             $this->Flash->error(__('The ticket could not be saved. Please, try again.'));
         }

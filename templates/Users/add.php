@@ -227,14 +227,14 @@ $this->disableAutoLayout();
                                         <?= $this->Form->input('password', [
                                             'class' => 'form-control',
                                             'required' => true,
-                                            'title' => 'Please enter a password (at least 6 characters with at least one number)',
+                                            'title' => 'Please enter a password (at least 8 characters with at least one number)',
                                             'maxlength' => 124, // Maximum of 124 characters
-                                            'pattern' => '(?=.*\d).{6,}', // At least 6 characters with at least one number
+                                            'pattern' => '(?=.*\d).{8,}', // At least 8 characters with at least one number
                                         ]) ?>
                                         <!-- Display validation error for the 'f_name' field -->
                                         <?= $this->Form->error('password'); ?>
 
-                                        <small class="form-text text-muted">At least 6 characters with at least one number.</small>
+                                        <small class="form-text text-muted">At least 8 characters with at least one number.</small>
                                     </div>
 
                                     <small class="text-muted" style="font-style: italic;">Please note: Setting a user to Admin will give them control over ALL other accounts. Including this one. Use this sparingly.</small>

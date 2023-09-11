@@ -380,19 +380,39 @@ to get the name or any value in the staff table, use the get and then the name o
 
 <!--                        upgrade button-->
 
-                        <?php foreach ($assigntickets as $ticket): ?>
-                            <?php echo $this->Html->link(
-                                __('Escalate the customer'),
-                                [
-                                    'controller' => 'Tickets',
-                                    'action' => 'edit',
-                                    $ticket->id,
-                                    '?' => ['cust_id' => $ticket->customer->id] // assign cust id to checking variable
-                                ],
-                                ['class' => 'btn btn-primary']
-                            ); ?>
-                            <?php echo ' '; ?>
-                        <?php endforeach; ?>
+
+                        <div class="form-group">
+                            <?= $this->Form->label('selected_ticket', 'Select Ticket', ['class' => 'col-form-label']) ?>
+                            <?php
+                            $options = [];
+                            foreach ($assigntickets as $ticket) {
+                                $options[$ticket->id] = $ticket->title;
+                            }
+                            echo $this->Form->select('selected_ticket', $options, [
+                                'class' => 'form-control',
+                                'id' => 'select-ticket',
+                            ]);
+                            ?>
+                        </div>
+
+                        <button id="navigate-button" class="btn btn-primary">Escalate the customer</button>
+
+
+
+
+<!--                                                --><?php //foreach ($assigntickets as $ticket): ?>
+<!--                            --><?php //echo $this->Html->link(
+//                                __('Escalate the customer'),
+//                                [
+//                                    'controller' => 'Tickets',
+//                                    'action' => 'edit',
+//                                    $ticket->id,
+//                                    '?' => ['cust_id' => $ticket->customer->id] // assign cust id to checking variable
+//                                ],
+//                                ['class' => 'btn btn-primary']
+//                            ); ?>
+<!--                            --><?php //echo ' '; ?>
+<!--                        --><?php //endforeach; ?>
 
 
 
@@ -531,6 +551,15 @@ to get the name or any value in the staff table, use the get and then the name o
                     // JavaScript
                     document.getElementById('changeStaffButton').addEventListener('click', function () {
 
+                    });
+                </script>
+                <script>
+                    document.getElementById('navigate-button').addEventListener('click', function () {
+                        // get ticketID
+                        var selectedTicketId = document.getElementById('select-ticket').value;
+
+                        // nav to  edit pages
+                        window.location.href = '/tickets/edit/' + selectedTicketId;
                     });
                 </script>
 

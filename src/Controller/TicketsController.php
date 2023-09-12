@@ -293,6 +293,16 @@ class TicketsController extends AppController
     }
 
 
+    public function beforeDelete(EventInterface $event, EntityInterface $entity, ArrayObject $options)
+    {
+        // Find and delete associated Contents records
+        $contentsTable = TableRegistry::getTableLocator()->get('Contents');
+        $contents = $contentsTable->find()->where(['ticket_id' => $entity->id]);
+        foreach ($contents as $content) {
+            $contentsTable->delete($content);
+        }
+        return true;
+    }
 }
 
 

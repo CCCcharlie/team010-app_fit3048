@@ -241,7 +241,8 @@ class CustomersController extends AppController
      */
     public function delete($id = null)
     {
-        $this->request->allowMethod(['post', 'delete']);
+
+       $this->request->allowMethod(['post', 'delete']);
         $customer = $this->Customers->get($id);
         if ($this->Customers->delete($customer)) {
             $this->Flash->success(__('The customer has been deleted.'));
@@ -250,6 +251,64 @@ class CustomersController extends AppController
         }
 
         return $this->redirect(['action' => 'index']);
+    }
+
+    public function customDelete($id)
+    {
+        $this->request->allowMethod(['post', 'delete']);
+        $customer = $this->Customers->get($id);
+
+        // Find associated Tickets records for the customer
+        $ticketsTable = TableRegistry::getTableLocator()->get('Tickets');
+        $tickets = $ticketsTable->find()->where(['cust_id' => $customer->id]);
+
+        foreach ($tickets as $ticket) {
+            // Find and delete associated Contents records for each ticket
+            $contentsTable = TableRegistry::getTableLocator()->get('Contents');
+            $contents = $contentsTable->find()->where(['ticket_id' => $ticket->id]);
+
+            foreach ($contents as $content) {
+                $contentsTable->delete($content);
+            }
+
+            // Delete the ticket
+            $ticketsTable->delete($ticket);
+        }
+
+        if ($this->Customers->delete($customer)) {
+            $this->Flash->success(__('Customer profile has been deleted.'));
+        } else {
+            $this->Flash->error(__('Unable to delete the customer profile.'));
+        }
+
+        return $this->redirect(['action' => 'index']);
+    }
+
+
+    public function deleteWithContents($userId)
+    {
+        // Find and delete the contents associated with user's tickets
+        $ticketsTable = TableRegistry::getTableLocator()->get('Tickets');
+        $tickets = $ticketsTable->find()->where(['cust_id' => $userId]);
+
+        foreach ($tickets as $ticket) {
+            $contentsTable = TableRegistry::getTableLocator()->get('Contents');
+            $contents = $contentsTable->find()->where(['ticket_id' => $ticket->id]);
+
+            foreach ($contents as $content) {
+                $contentsTable->delete($content);
+            }
+        }
+
+        // Delete the customer profile
+        $customer = $this->Customers->get($userId);
+        if ($this->Customers->delete($customer)) {
+            $this->Flash->success(__('Customer profile and associated contents have been deleted.'));
+        } else {
+            $this->Flash->error(__('Unable to delete the customer profile.'));
+        }
+
+        return $this->redirect(['action' => 'index']); // Redirect to a suitable page
     }
 
 

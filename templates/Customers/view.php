@@ -180,13 +180,15 @@ $checkConnection = function (string $name) {
 
                                 <!-- Show the "Delete Customer Profile" button if archive is 1 -->
                                 <?= $this->Form->postLink(
-                                    __('Delete Customer Profile'),
-                                    ['action' => 'delete', $customer->id],
+                                    __('Delete Customer Profile and Contents'),
+                                    ['action' => 'deleteWithContents', $customer->id],
                                     [
                                         'class' => 'btn btn-danger',
-                                        'confirm' => __('Are you sure you want to delete this customer profile?'),
+                                        'confirm' => __('Are you sure you want to delete this customer profile and its associated contents?'),
                                     ]
                                 ) ?>
+
+
                             <?php endif; ?>
 
                         </div>

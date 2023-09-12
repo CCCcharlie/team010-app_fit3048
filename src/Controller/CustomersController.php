@@ -101,7 +101,49 @@ class CustomersController extends AppController
         $this->set('assigntickets', $assigntickets);
 
     }
+    public function escalatetome()
+    {
 
+
+
+        // Get the current user id
+        $identity = $this->request->getAttribute('authentication')->getIdentity();
+        $currentStaffId = $identity->get('id');
+
+        // get the relate cust
+        $assignedCustomers = $this->Customers->find()
+            ->innerJoinWith('Tickets', function ($query) use ($currentStaffId) {
+                return $query->where([
+                    'Tickets.staff_id' => $currentStaffId,
+                    'Tickets.closetime IS NULL',
+                    'Tickets.escalate IS TRUE'
+                ]);
+            })
+            ->distinct(['Customers.id'])// Add this line to ensure distinct customers
+            ->all();
+
+//debug($assignedCustomers);
+//exit;
+        // pass data
+        $this->set('assignedCustomers', $assignedCustomers);
+
+//
+// Get the related tickets for assigned customers
+        $assigntickets = $this->Customers->Tickets->find()
+            ->where([
+                'Tickets.staff_id' => $currentStaffId,
+                'Tickets.closetime IS NULL'
+            ])
+            ->contain(['Users', 'Contents', 'Customers'])
+            ->all();
+
+// Pass the tickets data to the view
+
+//        debug($assigntickets);
+//exit;
+        $this->set('assigntickets', $assigntickets);
+
+    }
     /**
      * View method
      *

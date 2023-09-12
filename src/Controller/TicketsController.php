@@ -24,7 +24,7 @@ class TicketsController extends AppController
         $tickets = $this->paginate($this->Tickets);
 
         $this->set(compact('tickets'));
-//        debug($tickets);
+    //        debug($tickets);
 //        exit();
     }
 
@@ -102,11 +102,11 @@ class TicketsController extends AppController
             ////////////////////////////////
 
             if ($this->Tickets->save($ticket)) {
-                $this->Flash->success(__('The ticket for ' . $fullName . ' Is successfully created'));
+                $this->Flash->success(__('The ticket titled: "'. $ticket->title . '" for ' . $fullName . ' Is successfully created'));
 
                 return $this->redirect(['controller' => 'Customers', 'action' => 'view', $custId]);
             }
-            $this->Flash->error(__('The ticket for ' . $fullName . ' could not be created'));
+            $this->Flash->error(__('The ticket for titled: "'. $ticket->title . '" for ' .   $fullName . ' could not be created'));
         }
         $customers = $this->Tickets->Customers->find('list', ['limit' => 200])->all();
 
@@ -159,20 +159,16 @@ class TicketsController extends AppController
 //            debug($ticket);
 //            debug($id);
 //            exit;
-
-
-
-//
 //
             if ($this->Tickets->save($ticket)) {
-                $this->Flash->success(__('The ticket has been saved.'));
+                $this->Flash->success(__('The Ticket now titled: "'. $ticket->title . '" is successfully edited'));
                 // Save the original data in the session
                 $this->getRequest()->getSession()->write('originalData', $originalData);
 
-                return $this->redirect($this->referer());
-//                return $this->redirect(['controller' => 'Customers', 'action' => 'view', $custId]);
+ //               return $this->redirect($this->referer());
+               return $this->redirect(['controller' => 'Customers', 'action' => 'view', $custId]);
             }
-            $this->Flash->error(__('The ticket could not be saved. Please, try again.'));
+            $this->Flash->error(__('This Ticket could not be saved. Please, try again.'));
         }
         $customers = $this->Tickets->Customers->find('list', ['limit' => 200])->all();
         $users = $this->Tickets->Users->find('list', [

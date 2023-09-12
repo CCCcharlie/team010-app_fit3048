@@ -124,7 +124,14 @@ class UsersTable extends Table
             ->scalar('password')
             ->maxLength('password', 124)
             ->requirePresence('password', 'create')
-            ->notEmptyString('password');
+            ->notEmptyString('password')
+            ->add('password', 'custom', [
+                'rule' => function ($value, $context) {
+                    // Check if the password has at least 8 characters and contains at least one number
+                    return (strlen($value) >= 8) && preg_match('/\d/', $value);
+                },
+                'message' => 'Password must be at least 8 characters long and contain at least one number'
+            ]);
 
         $validator
             ->scalar('timezone')

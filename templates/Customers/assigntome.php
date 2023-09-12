@@ -393,8 +393,8 @@ to get the name or any value in the staff table, use the get and then the name o
                         // get ticketID
                         var selectedTicketId = document.getElementById('select-ticket').value;
 
-                        // nav to  edit pages
-                        window.location.href = '/team010-app_fit3048/tickets/edit/' + selectedTicketId;
+                        // refer to the update
+                        // window.location.href = '/team010-app_fit3048/tickets/edit/' + selectedTicketId;
 
                         window.location.href = '/team010-app_fit3048/tickets/updateEscalate/' + selectedTicketId;
                     });

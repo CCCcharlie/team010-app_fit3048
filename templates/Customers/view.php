@@ -166,7 +166,7 @@ $checkConnection = function (string $name) {
                                         'confirm' => __('Are you sure you want to archive the status for: {0} {1}? Archiving a profile will close all tickets and make the profile no longer editable until it has been unarchived.', $customer->f_name, $customer->l_name)
                                     ]
                                 ) ?>
-                            <?php else: ?>
+                            <?php elseif ($customer->archive == 1): ?>
                                 <!-- Show the "Unarchive Profile" link if archive is 1 -->
                                 <?= $this->Html->link(
                                     __('Unarchive Profile'),
@@ -175,6 +175,16 @@ $checkConnection = function (string $name) {
                                         'class' => 'btn btn-success',
                                         'style' => 'justify-content: center; display: flex',
                                         'confirm' => __('Are you sure you want to unarchive the status for: {0} {1}? Unarchiving a profile will make it editable again.', $customer->f_name, $customer->l_name)
+                                    ]
+                                ) ?>
+
+                                <!-- Show the "Delete Customer Profile" button if archive is 1 -->
+                                <?= $this->Form->postLink(
+                                    __('Delete Customer Profile'),
+                                    ['action' => 'delete', $customer->id],
+                                    [
+                                        'class' => 'btn btn-danger',
+                                        'confirm' => __('Are you sure you want to delete this customer profile?'),
                                     ]
                                 ) ?>
                             <?php endif; ?>

@@ -229,7 +229,7 @@ class TicketsController extends AppController
         return $this->redirect($this->referer());
     }
 
-    // 在 TicketsController.php
+    // TicketsController.php
     public function assignUser($id = null)
     {
         //Obtain the query via key value pair [called from customer table view]

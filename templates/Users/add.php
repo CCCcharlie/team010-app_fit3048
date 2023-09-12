@@ -185,13 +185,14 @@ $this->disableAutoLayout();
                                             'maxlength' => 32, // Maximum of 32 characters
                                             'required' => true,
                                             'title' => 'Please enter your first name using letters and hyphens only',
-                                            'pattern' => '^[A-Za-z-]+$'
+                                            'pattern' => '^[A-Za-z-][A-Za-z-]*$'
                                         ]) ?>
                                         <!-- Display validation error for the 'f_name' field -->
                                         <?= $this->Form->error('f_name'); ?>
 
                                         <small class="form-text text-muted">Letters and hyphens only.</small>
                                     </div>
+
                                     <div class="form-group">
                                         <?= $this->Form->label('l_name', 'Last Name', ['class' => 'col-form-label']) ?>
                                         <?= $this->Form->input('l_name', [
@@ -199,7 +200,7 @@ $this->disableAutoLayout();
                                             'maxlength' => 32, // Maximum of 32 characters
                                             'required' => true,
                                             'title' => 'Please enter your last name using letters and hyphens only',
-                                            'pattern' => '^[A-Za-z-]+$'
+                                            'pattern' => '^[A-Za-z-][A-Za-z-]*$'
                                         ]) ?>
                                         <!-- Display validation error for the 'f_name' field -->
                                         <?= $this->Form->error('l_name'); ?>

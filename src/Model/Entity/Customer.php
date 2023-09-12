@@ -19,6 +19,10 @@ use Cake\ORM\Entity;
 class Customer extends Entity
 {
     /**
+     * @var mixed
+     */
+
+    /**
      * Fields that can be mass assigned using newEntity() or patchEntity().
      *
      * Note that when '*' is set to true, this allows all unspecified fields to
@@ -34,6 +38,8 @@ class Customer extends Entity
         'email' => true,
         'status' => true,
         'notes' => true,
+        'archive' => true,
+        'archived_time' => true,
         'devices' => true,
         'commdetails' => true,
         'counsellors' => true,

@@ -2,7 +2,7 @@
 declare(strict_types=1);
 
 namespace App\Controller;
-
+use Cake\ORM\TableRegistry;
 /**
  * Customers Controller
  *
@@ -251,6 +251,60 @@ class CustomersController extends AppController
 
         return $this->redirect(['action' => 'index']);
     }
+
+
+    /**
+     * Archive Method
+     *
+     * @param string|null $id Customer id.
+     * @return \Cake\Http\Response|null|void Redirects on successful edit, renders view otherwise.
+     * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
+     */
+
+    public function archive($id)
+    {
+        $customer = $this->Customers->get($id);
+        $currentArchiveValue = $customer->archive; // Store the current value
+
+        if ($currentArchiveValue == 0) {
+            // Change from 0 to 1
+            $customer->archive = 1;
+            $customer->archived_time = new \DateTime(); // Set archived_time to the current time
+            $customer->status = 'Archived'; // Set status to 'archived'
+
+            // Load the Tickets model
+            $ticketsTable = $this->getTableLocator()->get('Tickets');
+
+            // Close all tickets affiliated with this customer
+            $openTickets = $ticketsTable->find()
+                ->where(['cust_id' => $customer->id, 'closed' => 0])
+                ->all();
+
+            foreach ($openTickets as $ticket) {
+                $ticket->closed = 1;
+                $ticket->closetime = new \DateTime();
+                $ticketsTable->save($ticket);
+            }
+
+            $message = __('{0} {1} has been successfully archived', $customer->f_name, $customer->l_name);
+        } else {
+            // Change from 1 to 0
+            $customer->archive = 0;
+            $customer->archived_time = null; // Set archived_time to null
+            $customer->status = 'Recently Unarchived'; // Set status to 'recently unarchived'
+
+            $message = __('{0} {1} has been successfully unarchived', $customer->f_name, $customer->l_name);
+        }
+
+        if ($this->Customers->save($customer)) {
+            $this->Flash->success($message);
+        } else {
+            $this->Flash->error(__('Unable to update customer archive status for: {0} {1}', $customer->f_name, $customer->l_name));
+        }
+
+        return $this->redirect(['action' => 'view', $customer->id]);
+    }
+
 }
 
 

@@ -295,7 +295,34 @@ $checkConnection = function (string $name) {
                                 <div>
                                 <?= $this->Html->link(__('Edit Customer'), ['action' => 'edit', $customer->id], ['class' => 'btn btn-primary', 'style' => 'justify-content: center; display: flex']) ?>
                                 </div>
-                                    <!--                                <div class="card-body border-top">-->
+                                <?php if ($customer->archive == 0): ?>
+                                    <!-- Show the "Archive Profile" link if archive is 0 -->
+                                    <?= $this->Html->link(
+                                        __('Archive Profile'),
+                                        ['action' => 'archive', $customer->id],
+                                        [
+                                            'class' => 'btn btn-secondary',
+                                            'style' => 'justify-content: center; display: flex',
+                                            'confirm' => __('Are you sure you want to archive the status for: {0} {1}? Archiving a profile will close all tickets and make the profile no longer editable until it has been unarchived.', $customer->f_name, $customer->l_name)
+                                        ]
+                                    ) ?>
+                                <?php else: ?>
+                                    <!-- Show the "Unarchive Profile" link if archive is 1 -->
+                                    <?= $this->Html->link(
+                                        __('Unarchive Profile'),
+                                        ['action' => 'archive', $customer->id],
+                                        [
+                                            'class' => 'btn btn-success',
+                                            'style' => 'justify-content: center; display: flex',
+                                            'confirm' => __('Are you sure you want to unarchive the status for: {0} {1}? Unarchiving a profile will make it editable again. Please only do this if they have returned to GamBlock® Service.', $customer->f_name, $customer->l_name)
+                                        ]
+                                    ) ?>
+                                <?php endif; ?>
+
+
+
+
+                                <!--                                <div class="card-body border-top">-->
                                 <!--                                    <h3 class="font-16">Counsellor :</h3>-->
                                 <!--                                    <p class="mb-0">-->
                                 <!--                                    <table class="table table-bordered">-->

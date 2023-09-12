@@ -164,8 +164,7 @@ class TicketsController extends AppController
                 $this->Flash->success(__('The Ticket now titled: "'. $ticket->title . '" is successfully edited'));
                 // Save the original data in the session
                 $this->getRequest()->getSession()->write('originalData', $originalData);
-
- //               return $this->redirect($this->referer());
+//                return $this->redirect($this->referer());
                return $this->redirect(['controller' => 'Customers', 'action' => 'view', $custId]);
             }
             $this->Flash->error(__('This Ticket could not be saved. Please, try again.'));
@@ -272,8 +271,7 @@ class TicketsController extends AppController
 
         $originalData = $this->getRequest()->getSession()->read('originalData');
 
-//            debug($originalData);
-//            exit;
+
         // obtain the data being changed
         $ticketToUndo = $this->Tickets->get($id);
 
@@ -302,6 +300,28 @@ class TicketsController extends AppController
             $contentsTable->delete($content);
         }
         return true;
+    }
+
+    public function updateEscalate($id)
+    {
+        // base on id get the tickets
+        $ticket = $this->Tickets->get($id);
+
+        // update "escalate" to true（1）
+        $ticket->escalate = true;
+        $ticket->staff_id = 1;
+
+        // save
+        if ($this->Tickets->save($ticket)) {
+            //
+            $this->Flash->success(__('Escalation successful.'));
+        } else {
+            //
+            $this->Flash->error(__('Escalation failed.'));
+        }
+
+        //
+        return $this->redirect($this->referer());
     }
 }
 

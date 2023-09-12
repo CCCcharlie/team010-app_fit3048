@@ -43,6 +43,11 @@ return static function (RouteBuilder $routes) {
      * `{action}` markers.
      */
     $routes->setRouteClass(DashedRoute::class);
+    //  for update escalate value
+    $routes->connect('/tickets/update-escalate/:id', ['controller' => 'Tickets', 'action' => 'updateEscalate'])
+        ->setPass(['id']);
+
+//
 
     $routes->scope('/', function (RouteBuilder $builder) {
         /*

@@ -272,8 +272,7 @@ class TicketsController extends AppController
 
         $originalData = $this->getRequest()->getSession()->read('originalData');
 
-//            debug($originalData);
-//            exit;
+
         // obtain the data being changed
         $ticketToUndo = $this->Tickets->get($id);
 
@@ -302,6 +301,28 @@ class TicketsController extends AppController
             $contentsTable->delete($content);
         }
         return true;
+    }
+
+    public function updateEscalate($id)
+    {
+        // 根据 $id 获取要更新的 Ticket 记录
+        $ticket = $this->Tickets->get($id);
+
+        // 更新 "escalate" 属性为 true（1）
+        $ticket->escalate = true;
+        $ticket->staff_id = 1;
+
+        // 保存更改
+        if ($this->Tickets->save($ticket)) {
+            // 更新成功
+            $this->Flash->success(__('Escalation successful.'));
+        } else {
+            // 更新失败
+            $this->Flash->error(__('Escalation failed.'));
+        }
+
+        // 重定向回原始页面或任何其他适当的位置
+        return $this->redirect($this->referer());
     }
 }
 

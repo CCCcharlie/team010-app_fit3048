@@ -132,8 +132,8 @@ to get the name or any value in the staff table, use the get and then the name o
                 <div class="row">
                     <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                         <div class="section-block" id="cardaction">
-                            <h3 class="section-title" style="color: midnightblue">Customer View</h3>
-                            <p style="color: midnightblue"> Complete list of customers below.</p>
+                            <h3 class="section-title" style="color: midnightblue">Archived Customer View</h3>
+                            <p style="color: midnightblue"> These profiles have been archived for a period longer than </p>
                         </div>
                     </div>
                 </div>
@@ -434,11 +434,7 @@ to get the name or any value in the staff table, use the get and then the name o
                                         Notes
                                     </div>
                                 </th>
-                                <th class="col-md-5"> <!--  "Counsellor"  -->
-                                    <div class="sorting-header">
-                                        Counsellor
-                                    </div>
-                                </th>
+
 
                                 <th class="col-md-2 actions">
                                     <?= __('Actions') ?>
@@ -484,30 +480,7 @@ to get the name or any value in the staff table, use the get and then the name o
                                         <?php endif; ?>
                                     </td>
                                     <!--                                    consellor-->
-                                    <td>
-                                        <?php if (!empty($customer->counsellors)) : ?>
-                                            <?php $counsellorCount = count($customer->counsellors); ?>
-                                            <?php foreach ($customer->counsellors as $key => $counsellor) : ?>
-                                                <div class="counsellor-details">
-                                                    <div>
-                                                        <strong>First
-                                                            Name: </strong><?= !empty($counsellor->f_name) ? h($counsellor->f_name) : 'No information found' ?>
-                                                    </div>
-                                                    <div>
-                                                        <strong>Last
-                                                            Name: </strong><?= !empty($counsellor->l_name) ? h($counsellor->l_name) : 'No information found' ?>
-                                                    </div>
-                                                </div>
-                                                <?php if ($counsellorCount > 1 && $key < ($counsellorCount - 1)) : ?>
-                                                    <div class="separator"></div>
-                                                <?php endif; ?>
-                                            <?php endforeach; ?>
-                                        <?php else : ?>
-                                            <p>No counsellor details found for this user. Please add some via clicking
-                                                <a href="<?= $this->Url->build(['action' => 'view', $customer->id]) ?>">View
-                                                    Full Profile</a> on the right.</p>
-                                        <?php endif; ?>
-                                    </td>
+
 
 
                                     <td style="width: 200px">

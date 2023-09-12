@@ -52,6 +52,57 @@ class CustomersController extends AppController
 
 
     }
+
+
+    /**
+     * Index method
+     *
+     * @return \Cake\Http\Response|null|void Renders view
+     */
+    public function archivedprofiles()
+    {
+        // Define the time in seconds (e.g., 300 seconds for 5 minutes)
+        $archivedTimeInSeconds = 300;
+
+        $query = $this->Customers->find();
+
+        // Filter by the 'archive' flag set to 1
+        $query->where(['archive' => 1]);
+
+        $search = $this->request->getQuery('search');
+        if (!empty($search)) {
+            $searchConditions = [
+                'OR' => [
+                    'f_name LIKE' => '%' . $search . '%',
+                    'l_name LIKE' => '%' . $search . '%',
+                    'CONCAT(f_name, " ", l_name) LIKE' => '%' . $search . '%',
+                    'email LIKE' => '%' . $search . '%',
+                    'status LIKE' => '%' . $search . '%',
+                    'notes LIKE' => '%' . $search . '%',
+                    'Devices.transactionid LIKE' => '%' . $search . '%',
+                    'Devices.sessionid LIKE' => '%' . $search . '%'
+                ]
+            ];
+            $query->leftJoinWith('Devices')
+                ->where($searchConditions);
+        }
+
+        // Filter by 'archived_time' longer than $archivedTimeInSeconds
+        $currentTimestamp = time();
+        $archivedTimeAgo = $currentTimestamp - $archivedTimeInSeconds;
+        $query->where(['archived_time <' => date('Y-m-d H:i:s', $archivedTimeAgo)]);
+
+        $totalRecords = $query->count(); // Get the total number of records
+
+        $this->paginate = [
+            'limit' => $totalRecords, // Set the limit to the total number of records
+            'contain' => ['Tickets', 'Devices', 'Commdetails', 'Counsellors'],
+        ];
+        $customers = $this->paginate($query);
+
+        // Pass the $archivedTimeInSeconds variable to the view
+        $this->set(compact('customers', 'archivedTimeInSeconds'));
+    }
     /**
  * Fillter option
      * @param string|null $id Customer id.
@@ -151,6 +202,7 @@ class CustomersController extends AppController
     }
 
 
+
     /**
      * Add method
      *
@@ -248,37 +300,6 @@ class CustomersController extends AppController
             $this->Flash->success(__('The customer has been deleted.'));
         } else {
             $this->Flash->error(__('The customer could not be deleted. Please, try again.'));
-        }
-
-        return $this->redirect(['action' => 'index']);
-    }
-
-    public function customDelete($id)
-    {
-        $this->request->allowMethod(['post', 'delete']);
-        $customer = $this->Customers->get($id);
-
-        // Find associated Tickets records for the customer
-        $ticketsTable = TableRegistry::getTableLocator()->get('Tickets');
-        $tickets = $ticketsTable->find()->where(['cust_id' => $customer->id]);
-
-        foreach ($tickets as $ticket) {
-            // Find and delete associated Contents records for each ticket
-            $contentsTable = TableRegistry::getTableLocator()->get('Contents');
-            $contents = $contentsTable->find()->where(['ticket_id' => $ticket->id]);
-
-            foreach ($contents as $content) {
-                $contentsTable->delete($content);
-            }
-
-            // Delete the ticket
-            $ticketsTable->delete($ticket);
-        }
-
-        if ($this->Customers->delete($customer)) {
-            $this->Flash->success(__('Customer profile has been deleted.'));
-        } else {
-            $this->Flash->error(__('Unable to delete the customer profile.'));
         }
 
         return $this->redirect(['action' => 'index']);

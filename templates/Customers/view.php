@@ -152,6 +152,16 @@ $checkConnection = function (string $name) {
                         <div>
                             <?php if ($customer->archive == 0): ?>
                             <?= $this->Html->link(__('Edit Customer'), ['action' => 'edit', $customer->id], ['class' => 'btn btn-primary', 'style' => 'justify-content: center; display: flex']) ?>
+                            <?php elseif ($customer->archive == 1): ?>
+                                <?= $this->Form->postLink(
+                                    __('Delete The Customers Profile'),
+                                    ['action' => 'deleteWithContents', $customer->id],
+                                    [
+                                        'class' => 'btn btn-danger',
+                                        'style' => 'justify-content: center; display: flex',
+                                        'confirm' => __('Are you sure you want to delete this customer profile and its associated contents?'),
+                                    ]
+                                ) ?>
                             <?php endif; ?>
                         </div>
                         <div>
@@ -179,14 +189,7 @@ $checkConnection = function (string $name) {
                                 ) ?>
 
                                 <!-- Show the "Delete Customer Profile" button if archive is 1 -->
-                                <?= $this->Form->postLink(
-                                    __('Delete Customer Profile and Contents'),
-                                    ['action' => 'deleteWithContents', $customer->id],
-                                    [
-                                        'class' => 'btn btn-danger',
-                                        'confirm' => __('Are you sure you want to delete this customer profile and its associated contents?'),
-                                    ]
-                                ) ?>
+
 
 
                             <?php endif; ?>
@@ -829,7 +832,7 @@ $checkConnection = function (string $name) {
                                     ?>
 
 
-
+                                    <?php if ($customer->archive == 0): ?>
                                     <?php echo $this->Html->link(__('Add New Device'), ['controller' => 'Devices', 'action' => 'add',
                                         '?' => [
                                             'f_name' => $customer->f_name,
@@ -837,6 +840,7 @@ $checkConnection = function (string $name) {
                                             'cust_id' => $customer->id
                                         ],
                                     ], ['class' => 'btn btn-success mt-3']); ?>
+                                    <?php endif; ?>
 
                                 </div>
                                 <div class="tab-pane fade" id="pills-consellor" role="tabpanel"

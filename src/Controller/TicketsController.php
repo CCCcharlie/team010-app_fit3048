@@ -164,9 +164,9 @@ class TicketsController extends AppController
                 $this->Flash->success(__('The Ticket now titled: "'. $ticket->title . '" is successfully edited'));
                 // Save the original data in the session
                 $this->getRequest()->getSession()->write('originalData', $originalData);
-
- //               return $this->redirect($this->referer());
-               return $this->redirect(['controller' => 'Customers', 'action' => 'view', $custId]);
+//rediret to current page to allow user rollback
+                return $this->redirect($this->referer());
+//               return $this->redirect(['controller' => 'Customers', 'action' => 'view', $custId]);
             }
             $this->Flash->error(__('This Ticket could not be saved. Please, try again.'));
         }

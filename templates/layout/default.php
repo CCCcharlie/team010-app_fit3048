@@ -152,6 +152,8 @@
                                         <a class="nav-link" href="/Users/">View All Staff Accounts</a>
                                         <a class="nav-link" href="/tickets/unassigned">View unassigned tickets</a>
                                         <a class="nav-link" href="/counsellors">View counsellors</a>
+                                        <a class="nav-link" href="/customers/escalatetome"> View the escalated customer  </a>
+
 
 
                                     </li>

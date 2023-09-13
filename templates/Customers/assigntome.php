@@ -405,18 +405,25 @@ to get the name or any value in the staff table, use the get and then the name o
                 // refer to the update
                 // window.location.href = '/team010-app_fit3048/tickets/edit/' + selectedTicketId;
 
-                console.log(selectedTicketId); // check
+                // console.log(selectedTicketId); // check
 
                 window.location.href = '/team010-app_fit3048/tickets/updateEscalate/' + selectedTicketId;
 
-                // 设置 undobutton 的显示状态为 'block'
+                // undo button style
                 document.getElementById('undobutton').style.display = 'block';
             });
 
             document.getElementById('undobutton').addEventListener('click', function () {
-                // Redirect to undoEscalate with the selectedTicketId
+                // Get selectedTicketId and staffId
                 var selectedTicketId = document.getElementById('select-ticket').value;
-                window.location.href = '/team010-app_fit3048/tickets/undoEscalate/' + selectedTicketId;
+                var staffId =<?= $identity->get('id'); ?> /* current staffId */;
+                console.log(staffId); // check
+                console.log(selectedTicketId); // check
+                // Construct the URL with both selectedTicketId and staffId
+                var url = '/team010-app_fit3048/tickets/undoEscalate/' + selectedTicketId ;
+
+                // Redirect to undoEscalate with both parameters
+                window.location.href = url;
             });
         </script>
 

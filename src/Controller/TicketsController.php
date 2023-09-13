@@ -336,12 +336,13 @@ class TicketsController extends AppController
 
     public function undoEscalate($id)
     {
+        $identity = $this->request->getAttribute('authentication')->getIdentity();
         // base on id get the ticket
         $ticket = $this->Tickets->get($id);
 
         // update "escalate" to false (0)
         $ticket->escalate = false;
-        $ticket->staff_id = null; // Remove the staff assignment if necessary.
+        $ticket->staff_id = $identity->get('id');// Remove the staff assignment if necessary.
 
         // save
         if ($this->Tickets->save($ticket)) {

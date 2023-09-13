@@ -49,7 +49,7 @@ class CommdetailsController extends AppController
      */
     public function add()
     {
-        //Obtain the query via key value pair [called from customer table view]
+        // Obtain the query via key-value pair [called from customer table view]
         $firstName = $this->request->getQuery('f_name');
         $lastName = $this->request->getQuery('l_name');
         $custId = $this->request->getQuery('cust_id');
@@ -57,28 +57,25 @@ class CommdetailsController extends AppController
 
         $this->set(compact('fullName', 'custId'));
 
+        // Check if the customer is archived
+        $customer = $this->Commdetails->Customers->get($custId);
+        if ($customer->archive == 1) {
+            // Customer is archived, handle access denial here
+            $this->Flash->error('Adding communication details to archived customer profiles is not allowed.');
+            return $this->redirect(['controller' => 'Customers', 'action' => 'view', $custId]);
+        }
+
         $commdetail = $this->Commdetails->newEmptyEntity();
         if ($this->request->is('post')) {
             $commdetail = $this->Commdetails->patchEntity($commdetail, $this->request->getData());
 
-            //Server add into the customer id based on $custId query rather than the form
+            // Set the custId here instead of the form
             $commdetail->cust_id = $custId;
 
-            /////////////////////////////
-            // Generate the unique id  //
-            /////////////////////////////
-
-            // Call the generate id function in the AppController.php
-
+            // Generate the unique id
             $identifier = 'CCOMMS';
             $generateId = $this->generateId($identifier, $commdetail->type, $commdetail->link);
-
             $commdetail->id = $generateId;
-
-            ////////////////////////////////
-            // End Generate the unique id //
-            ////////////////////////////////
-
 
             if ($this->Commdetails->save($commdetail)) {
                 $this->Flash->success(__('The communication details for: ' . $fullName . ' has been saved'));
@@ -91,6 +88,7 @@ class CommdetailsController extends AppController
         $this->set(compact('commdetail', 'customers'));
     }
 
+
     /**
      * Edit method
      *
@@ -100,7 +98,7 @@ class CommdetailsController extends AppController
      */
     public function edit($id = null)
     {
-
+        // Obtain the query via key-value pair [called from customer table view]
         $firstName = $this->request->getQuery('f_name');
         $lastName = $this->request->getQuery('l_name');
         $custId = $this->request->getQuery('cust_id');
@@ -112,9 +110,15 @@ class CommdetailsController extends AppController
             'contain' => [],
         ]);
 
+        // Check if the customer is archived
+        $customer = $this->Commdetails->Customers->get($custId);
+        if ($customer->archive == 1) {
+            // Customer is archived, handle access denial here
+            $this->Flash->error('Editing communication details for archived customer profiles is not allowed.');
+            return $this->redirect(['controller' => 'Customers', 'action' => 'view', $custId]);
+        }
+
         if ($this->request->is(['patch', 'post', 'put'])) {
-
-
             $commdetail = $this->Commdetails->patchEntity($commdetail, $this->request->getData());
 
             $commdetail->cust_id = $custId;
@@ -122,7 +126,7 @@ class CommdetailsController extends AppController
             if ($this->Commdetails->save($commdetail)) {
                 $this->Flash->success(__('The communication details for: ' . $fullName . ' has been saved'));
 
-                return $this->redirect(['controller' => 'Customers', 'action' => 'view', $custId]);;
+                return $this->redirect(['controller' => 'Customers', 'action' => 'view', $custId]);
             }
             $this->Flash->error(__('The communication details for: ' . $fullName . ' could not be saved, please try again'));
         }

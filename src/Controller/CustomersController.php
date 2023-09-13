@@ -329,33 +329,25 @@ class CustomersController extends AppController
         $customer = $this->Customers->get($id, [
             'contain' => [],
         ]);
+
+        // Check if the profile is archived
+        if ($customer->archive == 1) {
+            // Profile is archived, handle access denial here
+            $this->Flash->error('Editing archived profiles is not allowed.');
+            return $this->redirect(['action' => 'view', $customer->id]); // Redirect to profile view page
+        }
+
         if ($this->request->is(['patch', 'post', 'put'])) {
             $customer = $this->Customers->patchEntity($customer, $this->request->getData());
 
-            // WARNING: Changing PK is NOT RECOMMENDED AT ALL AND IS A HASSLE UNLESS YOU KNOW WHAT YOU ARE DOING
-//            $previousId = $customer->id;
-            /////////////////////////////
-            // Generate the unique id  //
-            /////////////////////////////
-
-            // Call the generate id function in the AppController.php
-
-//            $identifier = 'CUS';
-//            $generateId = $this->generateId($identifier, $customer->f_name, $customer->l_name);
-//
-//            $customer->id = $generateId;
-
-            ////////////////////////////////
-            // End Generate the unique id //
-            ////////////////////////////////
-
             if ($this->Customers->save($customer)) {
-                $this->Flash->success(__('The profile edit has been saved!.'));
+                $this->Flash->success(__('The profile edit has been saved!'));
 
                 return $this->redirect(['action' => 'view', $customer->id]);
             }
             $this->Flash->error(__('The profile edit could not be saved. Please, try again.'));
         }
+
         $this->set(compact('customer'));
     }
 

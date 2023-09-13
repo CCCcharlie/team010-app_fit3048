@@ -267,7 +267,7 @@ class AuthController extends AppController {
 
             // Display the appropriate error message
             if ($totalAttempts > $maxAttemptsBeforeTimeout) {
-                $this->Flash->error("Too many unsuccessful attempts. You are locked out.");
+                $this->Flash->error("Email address and/or Password is incorrect. Please try again");
             } elseif (!$recaptchaResult['success']) {
                 $this->Flash->error('reCAPTCHA verification failed. Please try again.');
             } else {

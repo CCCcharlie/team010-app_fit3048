@@ -129,12 +129,16 @@
                                         <!-- Change my link to assigned to me page when done. -->
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link" href="/customers">View All</a>
+                                        <a class="nav-link" href="/customers">View All Customers</a>
                                     </li>
                                     <li class="nav-item">
                                         <a class="nav-link" href="/customers/add">Add a Customer
                                             Profile</a>
                                     </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="/customers/archiveindex">View Archived Profiles</a>
+                                    </li>
+
                                 </ul>
                             </div>
                         </li>
@@ -152,8 +156,8 @@
                                         <a class="nav-link" href="/Users/">View All Staff Accounts</a>
                                         <a class="nav-link" href="/tickets/unassigned">View unassigned tickets</a>
                                         <a class="nav-link" href="/counsellors">View counsellors</a>
-                                        <a class="nav-link" href="/customers/escalatetome"> View the escalated customer  </a>
-
+                                        <a class="nav-link" href="/customers/escalatetome"> View escalated customers  </a>
+                                        <a class="nav-link" href="/customers/archiveddelteprofiles"> View Outdated Profiles </a>
 
 
                                     </li>

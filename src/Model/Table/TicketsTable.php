@@ -100,6 +100,13 @@ class TicketsTable extends Table
             ->scalar('staff_id')
             ->notEmptyString('staff_id');
 
+
+
+        $validator
+            ->boolean('escalate')
+            ->requirePresence('escalate', 'create')
+            ->notEmptyString('escalate');
+
         return $validator;
     }
 

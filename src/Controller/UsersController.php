@@ -116,7 +116,7 @@ class UsersController extends AppController
 
                 return $this->redirect(['action' => 'index']);
             }
-        } elseif ($action === 'index' || ($action === 'add' && $adminRole === 'root')) {
+        } elseif ($action === 'index' || (($action === 'add' && $adminRole === 'root') || ($action === 'add' && $adminRole === 'admin'))) {
             // No action needed for 'index' or root attempting to add
         } else {
 

@@ -82,6 +82,8 @@ class TicketsController extends AppController
         if ($this->request->is('post')) {
             $ticket = $this->Tickets->patchEntity($ticket, $this->request->getData());
 
+    //            debug($ticket);
+    //            exit;
             //closed is a boolean variable where closed = 0 mean it is Open
             $ticket->closed = false;
             $ticket->cust_id = $custId;
@@ -100,6 +102,8 @@ class TicketsController extends AppController
             ////////////////////////////////
             // End Generate the unique id //
             ////////////////////////////////
+
+            $ticket->escalate = true;
 
             if ($this->Tickets->save($ticket)) {
                 $this->Flash->success(__('The ticket titled: "'. $ticket->title . '" for ' . $fullName . ' Is successfully created'));

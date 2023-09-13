@@ -200,6 +200,8 @@ to get the name or any value in the staff table, use the get and then the name o
                                 </th>
                             </tr>
                             <?= $this->Html->link(__('New Customer'), ['action' => 'add'], ['class' => 'btn btn-success float-right']) ?>
+                            <!--         Add the "Undo Changes" link with an ID -->
+                            <button id="undobutton" class="btn btn-primary">Unescalate the customer</button>
 
                             <br>
                             <br>
@@ -393,44 +395,40 @@ to get the name or any value in the staff table, use the get and then the name o
 
                     });
                 </script>
-                <script>
-                    document.getElementById('navigate-button').addEventListener('click', function () {
-                        // get ticketID
-                        var selectedTicketId = document.getElementById('select-ticket').value;
 
 
+        <script>
+            document.getElementById('navigate-button').addEventListener('click', function () {
+                // get ticketID
+                var selectedTicketId = document.getElementById('select-ticket').value;
 
-                        // refer to the update
-                        // window.location.href = '/team010-app_fit3048/tickets/edit/' + selectedTicketId;
+                // refer to the update
+                // window.location.href = '/team010-app_fit3048/tickets/edit/' + selectedTicketId;
 
-                        console.log(selectedTicketId); // 检查是否记录了正确的值
+                console.log(selectedTicketId); // check
 
-                        window.location.href = '/team010-app_fit3048/tickets/updateEscalate/' + selectedTicketId;
-                        //
-                        // undobutton.style.display = 'block‘
+                window.location.href = '/team010-app_fit3048/tickets/updateEscalate/' + selectedTicketId;
+
+                // 设置 undobutton 的显示状态为 'block'
+                document.getElementById('undobutton').style.display = 'block';
+            });
+
+            document.getElementById('undobutton').addEventListener('click', function () {
+                // Redirect to undoEscalate with the selectedTicketId
+                var selectedTicketId = document.getElementById('select-ticket').value;
+                window.location.href = '/team010-app_fit3048/tickets/undoEscalate/' + selectedTicketId;
+            });
+        </script>
 
 
-                    });
+        <!--        Add a style to hide the "Undo Changes" link by default -->
+<!--        <style>-->
+<!--            #undobutton {-->
+<!--                display: none;-->
+<!--            }-->
+<!--        </style>-->
+        <!---->
 
-                    // document.getElementById('undobutton').addEventListener('click', function () {
-                    //     // Redirect to undoEscalate with the selectedTicketId
-                    //     window.location.href = '/team010-app_fit3048/tickets/undoEscalate/' + selectedTicketId;
-                    // });
-
-
-
-
-                </script>
-
-<!--        Add a style to hide the "Undo Changes" link by default -->
-        <style>
-            #undobutton {
-                display: none;
-            }
-        </style>
-<!---->
-<!--         Add the "Undo Changes" link with an ID -->
-        <button id="undobutton" class="btn btn-primary">Unescalate the customer</button>
 
 
 

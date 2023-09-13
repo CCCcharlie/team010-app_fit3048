@@ -320,6 +320,10 @@ class TicketsController extends AppController
         if ($this->Tickets->save($ticket)) {
             //
             $this->Flash->success(__('Escalation successful.'));
+
+//
+            $this->getRequest()->getSession()->write('escalationCompleted', true);
+
         } else {
             //
             $this->Flash->error(__('Escalation failed.'));

@@ -5,6 +5,20 @@
  */
 ?>
 
+
+<?= $this->Html->meta('icon', 'favicon.ico', ['type' => 'icon']) ?>
+
+<!-- Required meta tags -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>GamBlock® - Customer Management: Unassigned Customers</title>
+<!-- Bootstrap CSS -->
+<!-- In-built CSS -->
+<?= $this->Html->css(['style', 'bootstrap.min',]) ?>
+<?= $this->Html->css(['style', 'error',]) ?>
+<?= $this->Html->css(['fontawesome-all'], ['block' => true]) ?>
+
+
 <div class="tickets index content">
     <?= $this->Html->link(__('New Ticket'), ['action' => 'add'], ['class' => 'button float-right']) ?>
     <h3><?= __('Tickets') ?></h3>
@@ -12,6 +26,8 @@
         <table>
             <thead>
             <tr>
+                <th><?= $this->Paginator->sort('title') ?></th>
+
                 <th><?= $this->Paginator->sort('id') ?></th>
                 <th><?= $this->Paginator->sort('type') ?></th>
                 <th><?= $this->Paginator->sort('createtime') ?></th>
@@ -25,12 +41,13 @@
             <tbody>
             <?php foreach ($unassignedTickets as $ticket): ?>
                 <tr>
+                    <td><?= h($ticket->title) ?></td>
                     <td><?= $this->Number->format($ticket->id) ?></td>
                     <td><?= h($ticket->type) ?></td>
                     <td><?= h($ticket->createtime) ?></td>
                     <td><?= !empty($ticket->closetime) ? h($ticket->closetime) : 'Not close' ?></td>
 
-                    <td><?= $ticket->closed ? "✅" : "❌" ?></td>
+                    <td><?= $ticket->closed ? "Yes" : "No" ?></td>
                     <td><?= $ticket->has('customer') ? $this->Html->link($ticket->customer->id, ['controller' => 'Customers', 'action' => 'view', $ticket->customer->id]) : '' ?></td>
                     <td>
                         <?php
@@ -65,3 +82,11 @@
 <!--    </div>-->
 </div>
 </div>
+
+
+<?= $this->Html->script('https://kit.fontawesome.com/b5c616a120.js', ['crossorigin' => 'anonymous']) ?>
+<?= $this->Html->script(['jquery-3.3.1.min.js', 'bootstrap.bundle.js', 'main-js', 'jquery.slimscroll.js', 'gototoparrow.js']) ?>
+
+<!--script for switching view method-->
+
+

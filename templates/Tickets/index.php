@@ -4,14 +4,22 @@
  * @var iterable<\App\Model\Entity\Ticket> $tickets
  */
 ?>
+<!-- Bootstrap CSS -->
+<!-- In-built CSS -->
+<?= $this->Html->css(['style', 'bootstrap.min',]) ?>
+<?= $this->Html->css(['style', 'error',]) ?>
+<?= $this->Html->css(['fontawesome-all'], ['block' => true]) ?>
 
 <div class="tickets index content">
     <?= $this->Html->link(__('New Ticket'), ['action' => 'add'], ['class' => 'button float-right']) ?>
+
     <h3><?= __('Tickets') ?></h3>
     <div class="table-responsive table table-hover table-striped">
         <table>
             <thead>
                 <tr>
+                    <th><?= $this->Paginator->sort('title') ?></th>
+
                     <th><?= $this->Paginator->sort('id') ?></th>
                     <th><?= $this->Paginator->sort('type') ?></th>
                     <th><?= $this->Paginator->sort('createtime') ?></th>
@@ -25,12 +33,14 @@
             <tbody>
                 <?php foreach ($tickets as $ticket): ?>
                 <tr>
+                    <td><?= h($ticket->title) ?></td>
+
                     <td><?= $this->Number->format($ticket->id) ?></td>
                     <td><?= h($ticket->type) ?></td>
                     <td><?= h($ticket->createtime) ?></td>
                     <td><?= !empty($ticket->closetime) ? h($ticket->closetime) : 'Not close' ?></td>
 
-                    <td><?= $ticket->closed ? "✅" : "❌" ?></td>
+                    <td><?= $ticket->closed ? "Yes" : "No" ?></td>
                     <td><?= $ticket->has('customer') ? $this->Html->link($ticket->customer->id, ['controller' => 'Customers', 'action' => 'view', $ticket->customer->id]) : '' ?></td>
                     <td>
                         <?php

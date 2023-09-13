@@ -305,26 +305,56 @@ class TicketsController extends AppController
     }
 
     public function updateEscalate($id)
+
     {
+
+
         // base on id get the tickets
         $ticket = $this->Tickets->get($id);
 
         // update "escalate" to true（1）
         $ticket->escalate = true;
-        $ticket->staff_id = 1;
+        $ticket->staff_id = 2;
+
 
         // save
         if ($this->Tickets->save($ticket)) {
             //
             $this->Flash->success(__('Escalation successful.'));
+
+
+
         } else {
-            //
-            $this->Flash->error(__('Escalation failed.'));
+            $this->Flash->error(__('Escalation failed. Errors: {0}', print_r($ticket->getErrors(), true)));
+
+//            $this->Flash->error(__('Escalation failed.'));
         }
 
         //
         return $this->redirect($this->referer());
     }
+
+    public function undoEscalate($id)
+    {
+        // base on id get the ticket
+        $ticket = $this->Tickets->get($id);
+
+        // update "escalate" to false (0)
+        $ticket->escalate = false;
+        $ticket->staff_id = null; // Remove the staff assignment if necessary.
+
+        // save
+        if ($this->Tickets->save($ticket)) {
+            $this->Flash->success(__('Deescalation successful.'));
+        } else {
+
+
+            $this->Flash->error(__('Deescalation failed.'));
+        }
+
+        return $this->redirect($this->referer());
+    }
+
 }
 
 

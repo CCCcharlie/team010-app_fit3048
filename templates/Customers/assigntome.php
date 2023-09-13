@@ -12,7 +12,7 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>GamBlock® - Customer Management: Customers</title>
+    <title>GamBlock® - Customer Management: Assigned Customers</title>
     <!-- Bootstrap CSS -->
     <!-- In-built CSS -->
     <?= $this->Html->css(['style', 'bootstrap.min',]) ?>
@@ -200,6 +200,8 @@ to get the name or any value in the staff table, use the get and then the name o
                                 </th>
                             </tr>
                             <?= $this->Html->link(__('New Customer'), ['action' => 'add'], ['class' => 'btn btn-success float-right']) ?>
+                            <!--         Add the "Undo Changes" link with an ID -->
+                            <button id="undobutton" class="btn btn-primary">Unescalate the customer</button>
 
                             <br>
                             <br>
@@ -303,8 +305,7 @@ to get the name or any value in the staff table, use the get and then the name o
 
 
 
-
-<!--                                                --><?php //foreach ($assigntickets as $ticket): ?>
+                        <!--                                                --><?php //foreach ($assigntickets as $ticket): ?>
 <!--                            --><?php //echo $this->Html->link(
 //                                __('Escalate the customer'),
 //                                [
@@ -340,9 +341,15 @@ to get the name or any value in the staff table, use the get and then the name o
 
                         <?php endif; ?>
 
+
+
+
                     </div>
 
-                    <!--                        <a href="javascript: " id="return-to-top"><i class="icon-chevron-up"></i></a>-->
+
+
+
+            <!--                        <a href="javascript: " id="return-to-top"><i class="icon-chevron-up"></i></a>-->
 <!--                    <div class = "card-footer-item" >-->
 <!---->
 <!---->
@@ -388,19 +395,43 @@ to get the name or any value in the staff table, use the get and then the name o
 
                     });
                 </script>
-                <script>
-                    document.getElementById('navigate-button').addEventListener('click', function () {
-                        // get ticketID
-                        var selectedTicketId = document.getElementById('select-ticket').value;
-
-                        // refer to the update
-                        // window.location.href = '/team010-app_fit3048/tickets/edit/' + selectedTicketId;
-
-                        window.location.href = '/team010-app_fit3048/tickets/updateEscalate/' + selectedTicketId;
-                    });
 
 
-                </script>
+        <script>
+            document.getElementById('navigate-button').addEventListener('click', function () {
+                // get ticketID
+                var selectedTicketId = document.getElementById('select-ticket').value;
+
+                // refer to the update
+                // window.location.href = '/team010-app_fit3048/tickets/edit/' + selectedTicketId;
+
+                console.log(selectedTicketId); // check
+
+                window.location.href = '/team010-app_fit3048/tickets/updateEscalate/' + selectedTicketId;
+
+                // 设置 undobutton 的显示状态为 'block'
+                document.getElementById('undobutton').style.display = 'block';
+            });
+
+            document.getElementById('undobutton').addEventListener('click', function () {
+                // Redirect to undoEscalate with the selectedTicketId
+                var selectedTicketId = document.getElementById('select-ticket').value;
+                window.location.href = '/team010-app_fit3048/tickets/undoEscalate/' + selectedTicketId;
+            });
+        </script>
+
+
+        <!--        Add a style to hide the "Undo Changes" link by default -->
+<!--        <style>-->
+<!--            #undobutton {-->
+<!--                display: none;-->
+<!--            }-->
+<!--        </style>-->
+        <!---->
+
+
+
+
 
 </body>
 </html>

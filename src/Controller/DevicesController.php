@@ -49,7 +49,7 @@ class DevicesController extends AppController
      */
     public function add()
     {
-        //Obtain the query via key value pair [called from customer table view]
+        // Obtain the query via key-value pair [called from customer table view]
         $firstName = $this->request->getQuery('f_name');
         $lastName = $this->request->getQuery('l_name');
         $custId = $this->request->getQuery('cust_id');
@@ -57,32 +57,29 @@ class DevicesController extends AppController
 
         $this->set(compact('fullName', 'custId'));
 
+        // Check if the customer is archived
+        $customer = $this->Devices->Customers->get($custId);
+        if ($customer->archive == 1) {
+            // Customer is archived, handle access denial here
+            $this->Flash->error('Adding devices to archived customer profiles is not allowed.');
+            return $this->redirect(['controller' => 'Customers', 'action' => 'view', $custId]);
+        }
+
         $device = $this->Devices->newEmptyEntity();
         if ($this->request->is('post')) {
             $device = $this->Devices->patchEntity($device, $this->request->getData());
 
-            //Set the custId here instead of the form
+            // Set the custId here instead of the form
             $device->cust_id = $custId;
 
-
-            /////////////////////////////
-            // Generate the unique id  //
-            /////////////////////////////
-
-            // Call the generate id function in the AppController.php
-
+            // Generate the unique id
             $identifier = 'CUSDEV';
             $generateId = $this->generateId($identifier, $device->device_model, $device->platform);
-
             $device->id = $generateId;
-
-            ////////////////////////////////
-            // End Generate the unique id //
-            ////////////////////////////////
 
             if ($this->Devices->save($device)) {
                 $this->Flash->success(__('The device has been saved.'));
-                //Return back to the referer of this function
+                // Return back to the referrer of this function
                 return $this->redirect(['controller' => 'Customers', 'action' => 'view', $custId]);
             }
             $this->Flash->error(__('The device could not be saved. Please, try again.'));
@@ -100,8 +97,7 @@ class DevicesController extends AppController
      */
     public function edit($id = null)
     {
-
-        //Obtain the query via key value pair [called from customer table view]
+        // Obtain the query via key-value pair [called from customer table view]
         $firstName = $this->request->getQuery('f_name');
         $lastName = $this->request->getQuery('l_name');
         $custId = $this->request->getQuery('cust_id');
@@ -112,15 +108,23 @@ class DevicesController extends AppController
         $device = $this->Devices->get($id, [
             'contain' => [],
         ]);
+
+        // Check if the customer is archived
+        $customer = $this->Devices->Customers->get($custId);
+        if ($customer->archive == 1) {
+            // Customer is archived, handle access denial here
+            $this->Flash->error('Editing devices for archived customer profiles is not allowed.');
+            return $this->redirect(['controller' => 'Customers', 'action' => 'view', $custId]);
+        }
+
         if ($this->request->is(['patch', 'post', 'put'])) {
             $device = $this->Devices->patchEntity($device, $this->request->getData());
 
-            //Set the custId here instead of the form
+            // Set the custId here instead of the form
             $device->cust_id = $custId;
 
             if ($this->Devices->save($device)) {
                 $this->Flash->success(__('The device has been saved.'));
-
                 return $this->redirect(['controller' => 'Customers', 'action' => 'view', $custId]);
             }
             $this->Flash->error(__('The device could not be saved. Please, try again.'));

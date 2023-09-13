@@ -12,7 +12,6 @@
  * @since         0.10.0
  * @license       https://opensource.org/licenses/mit-license.php MIT License
  * @var \App\View\AppView $this
- * @var string[] $contentBlocks
  */
 
 ?>
@@ -30,7 +29,6 @@
     <link href="https://fonts.googleapis.com/css?family=Raleway:400,700" rel="stylesheet">
 
     <?= $this->Html->css(['bootstrap.min.css', 'style.css', 'cake']) ?>
-    <?= $this->Html->css(['style', 'error',]) ?>
 
     <?= $this->fetch('meta') ?>
     <?= $this->fetch('css') ?>
@@ -40,13 +38,6 @@
     <link rel="stylesheet" href="/webroot/css/bootstrap.min.css">
     <link href="/webroot/css/style.css" rel="stylesheet">
     <link rel="stylesheet" href="/webroot/css/style.css">
-
-<!--    <style>-->
-<!--        .image-logo img {-->
-<!--            max-width: 100%; /* Set the maximum width to 100% of the parent element (td) */-->
-<!--            height: auto; /* Maintain the aspect ratio */-->
-<!--        }-->
-<!--    </style>-->
 
 </head>
 <body>
@@ -59,11 +50,7 @@
     <div class="dashboard-header">
         <nav class="navbar navbar-expand-lg bg-white fixed-top" style="display: flex; justify-content: space-between;">
             <a class="navbar-brand" href="/">
-                <?php $headerLogo = $contentBlocks['navigation_header_logo'];
-//                debug($headerLogo);?>
-                <div class="image-logo img">
-                <?= $this->Html->image($headerLogo, ['alt' => 'GamBlock Logo', 'class' => 'navbar-b;and', 'style' => 'width: auto; height: 50px;']); ?>
-                </div>
+                <?= $this->Html->image('cake-logo.png', ['alt' => 'GamBlock Logo', 'class' => 'navbar-b;and', 'style' => 'width: 225px; height: auto;']); ?>
             </a>
 
             <?php
@@ -72,8 +59,7 @@
 
             <div class="row" style="padding: 10px;">
                 <div class="col-md-6 text-right">
-                    <p style="margin-right: 30px;">Welcome: <br>
-                    <?= $identity->get('f_name'); ?> </p>
+                    <p style="margin-right: 10px;">Welcome, <?= $identity->get('f_name'); ?></p>
                 </div>
                 <div class="col-md-6">
                     <a href="#" class="text-right">
@@ -167,7 +153,7 @@
                                         <a class="nav-link" href="/tickets/unassigned">View unassigned tickets</a>
                                         <a class="nav-link" href="/counsellors">View counsellors</a>
                                         <a class="nav-link" href="/customers/escalatetome"> View the escalated customer  </a>
-                                        <a class="nav-link" href="/cb"> Edit Content   </a>
+
 
 
                                     </li>

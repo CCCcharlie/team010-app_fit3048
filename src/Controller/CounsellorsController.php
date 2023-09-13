@@ -49,7 +49,6 @@ class CounsellorsController extends AppController
      */
     public function add()
     {
-
         $firstName = $this->request->getQuery('f_name');
         $lastName = $this->request->getQuery('l_name');
         $custId = $this->request->getQuery('cust_id');
@@ -57,24 +56,22 @@ class CounsellorsController extends AppController
 
         $this->set(compact('fullName', 'custId'));
 
+        // Check if the customer is archived
+        $customer = $this->Counsellors->Customers->get($custId);
+        if ($customer->archive == 1) {
+            // Customer is archived, handle access denial here
+            $this->Flash->error('Adding counsellors to archived customer profiles is not allowed.');
+            return $this->redirect(['action' => 'index']);
+        }
+
         $counsellor = $this->Counsellors->newEmptyEntity();
         if ($this->request->is('post')) {
             $counsellor = $this->Counsellors->patchEntity($counsellor, $this->request->getData());
 
-            /////////////////////////////
-            // Generate the unique id  //
-            /////////////////////////////
-
-            // Call the generate id function in the AppController.php
-
+            // Generate the unique id
             $identifier = 'COUNS';
             $generateId = $this->generateId($identifier, $counsellor->f_name, $counsellor->l_name);
-
             $counsellor->id = $generateId;
-
-            ////////////////////////////////
-            // End Generate the unique id //
-            ////////////////////////////////
 
             $counsellor->cust_id = $custId;
 
@@ -101,6 +98,15 @@ class CounsellorsController extends AppController
         $counsellor = $this->Counsellors->get($id, [
             'contain' => [],
         ]);
+
+        // Check if the customer is archived
+        $customer = $this->Counsellors->Customers->get($counsellor->cust_id);
+        if ($customer->archive == 1) {
+            // Customer is archived, handle access denial here
+            $this->Flash->error('Editing counsellors for archived customer profiles is not allowed.');
+            return $this->redirect(['action' => 'index']);
+        }
+
         if ($this->request->is(['patch', 'post', 'put'])) {
             $counsellor = $this->Counsellors->patchEntity($counsellor, $this->request->getData());
             if ($this->Counsellors->save($counsellor)) {

@@ -4,6 +4,11 @@
  * @var iterable<\App\Model\Entity\Ticket> $tickets
  */
 ?>
+<!-- Bootstrap CSS -->
+<!-- In-built CSS -->
+<?= $this->Html->css(['style', 'bootstrap.min',]) ?>
+<?= $this->Html->css(['style', 'error',]) ?>
+<?= $this->Html->css(['fontawesome-all'], ['block' => true]) ?>
 
 <div class="tickets index content">
     <?= $this->Html->link(__('New Ticket'), ['action' => 'add'], ['class' => 'button float-right']) ?>

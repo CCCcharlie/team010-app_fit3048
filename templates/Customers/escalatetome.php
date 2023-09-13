@@ -12,7 +12,7 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>GamBlock® - Customer Management: Customers</title>
+    <title>GamBlock® - Customer Management: Escalated Customers</title>
     <!-- Bootstrap CSS -->
     <!-- In-built CSS -->
     <?= $this->Html->css(['style', 'bootstrap.min',]) ?>

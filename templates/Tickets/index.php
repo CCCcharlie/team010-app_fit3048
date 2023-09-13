@@ -12,6 +12,7 @@
 
 <div class="tickets index content">
     <?= $this->Html->link(__('New Ticket'), ['action' => 'add'], ['class' => 'button float-right']) ?>
+
     <h3><?= __('Tickets') ?></h3>
     <div class="table-responsive table table-hover table-striped">
         <table>

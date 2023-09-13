@@ -398,41 +398,39 @@ to get the name or any value in the staff table, use the get and then the name o
                         // get ticketID
                         var selectedTicketId = document.getElementById('select-ticket').value;
 
+
+
                         // refer to the update
                         // window.location.href = '/team010-app_fit3048/tickets/edit/' + selectedTicketId;
 
+                        console.log(selectedTicketId); // 检查是否记录了正确的值
+
                         window.location.href = '/team010-app_fit3048/tickets/updateEscalate/' + selectedTicketId;
                         //
+                        // undobutton.style.display = 'block‘
 
 
                     });
 
-                    document.getElementById('undo-button').addEventListener('click', function () {
-                        var selectedTicketId = document.getElementById('select-ticket').value;
-                        // 使用所选票证的ID更新链接的href属性
-                        window.location.href = '/team010-app_fit3048/tickets/undoEscalate/' + selectedTicketId;
+                    // document.getElementById('undobutton').addEventListener('click', function () {
+                    //     // Redirect to undoEscalate with the selectedTicketId
+                    //     window.location.href = '/team010-app_fit3048/tickets/undoEscalate/' + selectedTicketId;
+                    // });
 
-                    }
 
-                    //// 检查会话变量以确定是否显示 "Undo Escalation" 按钮
-                    //var escalationCompleted = <?php //= $this->getRequest()->getSession()->read('escalationCompleted') ? 'true' : 'false' ?>//;
-                    //if (escalationCompleted) {
-                    //    var undoLink = document.getElementById('undo-link');
-                    //    undoLink.style.display = 'inline-block'; // 或者 'block'
-                    //}
-                    //
+
 
                 </script>
 
-<!--        Add a style to hide the "Undo Changes" link by default -->-->
-<!--        <style>-->
-<!--            #undo-link {-->
-<!--                display: none;-->
-<!--            }-->
-<!--        </style>-->
-
-        <!-- Add the "Undo Changes" link with an ID -->
-        <button id="undo-button" class="btn btn-primary">Unescalate the customer</button>
+<!--        Add a style to hide the "Undo Changes" link by default -->
+        <style>
+            #undobutton {
+                display: none;
+            }
+        </style>
+<!---->
+<!--         Add the "Undo Changes" link with an ID -->
+        <button id="undobutton" class="btn btn-primary">Unescalate the customer</button>
 
 
 

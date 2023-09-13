@@ -97,8 +97,21 @@ class TicketsTable extends Table
             ->notEmptyString('cust_id');
 
         $validator
-            ->scalar('staff_id')
-            ->notEmptyString('staff_id');
+            ->integer('staff_id')
+            ->requirePresence('staff_id', 'create')
+            ->notEmptyString('staff_id')
+            ->add('staff_id', 'exists', [
+                'rule' => function ($value) {
+                    return $this->Users->exists(['id' => $value]);
+                },
+                'message' => 'This value does not exist in the Users table.'
+            ]);
+
+
+        $validator
+            ->boolean('escalate')
+            ->requirePresence('escalate', 'create')
+            ->notEmptyString('escalate');
 
         return $validator;
     }

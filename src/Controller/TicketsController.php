@@ -314,19 +314,20 @@ class TicketsController extends AppController
 
         // update "escalate" to true（1）
         $ticket->escalate = true;
-        $ticket->staff_id = 1;
+        $ticket->staff_id = 2;
+
 
         // save
         if ($this->Tickets->save($ticket)) {
             //
             $this->Flash->success(__('Escalation successful.'));
 
-//
-            $this->getRequest()->getSession()->write('escalationCompleted', true);
+
 
         } else {
-            //
-            $this->Flash->error(__('Escalation failed.'));
+            $this->Flash->error(__('Escalation failed. Errors: {0}', print_r($ticket->getErrors(), true)));
+
+//            $this->Flash->error(__('Escalation failed.'));
         }
 
         //
@@ -346,6 +347,8 @@ class TicketsController extends AppController
         if ($this->Tickets->save($ticket)) {
             $this->Flash->success(__('Deescalation successful.'));
         } else {
+
+
             $this->Flash->error(__('Deescalation failed.'));
         }
 

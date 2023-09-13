@@ -12,7 +12,7 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>GamBlock® - Customer Management: Customers</title>
+    <title>GamBlock® - Customer Management: Assigned Customers</title>
     <!-- Bootstrap CSS -->
     <!-- In-built CSS -->
     <?= $this->Html->css(['style', 'bootstrap.min',]) ?>
@@ -393,9 +393,13 @@ to get the name or any value in the staff table, use the get and then the name o
                         // get ticketID
                         var selectedTicketId = document.getElementById('select-ticket').value;
 
-                        // nav to  edit pages
-                        window.location.href = '/tickets/edit/' + selectedTicketId;
+                        // refer to the update
+                        // window.location.href = '/team010-app_fit3048/tickets/edit/' + selectedTicketId;
+
+                        window.location.href = '/team010-app_fit3048/tickets/updateEscalate/' + selectedTicketId;
                     });
+
+
                 </script>
 
 </body>

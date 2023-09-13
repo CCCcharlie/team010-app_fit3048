@@ -150,55 +150,51 @@ $checkConnection = function (string $name) {
                         </div>
 
                         <div>
+                            <?php if ($customer->archive == 0): ?>
                             <?= $this->Html->link(__('Edit Customer'), ['action' => 'edit', $customer->id], ['class' => 'btn btn-primary', 'style' => 'justify-content: center; display: flex']) ?>
+                            <?php elseif ($customer->archive == 1): ?>
+                                <?= $this->Form->postLink(
+                                    __('Delete The Customers Profile'),
+                                    ['action' => 'deleteWithContents', $customer->id],
+                                    [
+                                        'class' => 'btn btn-danger',
+                                        'style' => 'justify-content: center; display: flex',
+                                        'confirm' => __('Are you sure you want to delete this customer profile and its associated contents? This process is irreversible!'),
+                                    ]
+                                ) ?>
+                            <?php endif; ?>
                         </div>
-                        <!--                                <div class="card-body border-top">-->
-                        <!--                                    <h3 class="font-16">Counsellor :</h3>-->
-                        <!--                                    <p class="mb-0">-->
-                        <!--                                    <table class="table table-bordered">-->
-                        <!--                                        <thead>-->
-                        <!--                                        <tr>-->
-                        <!--                                            <th scope="col">Name</th>-->
-                        <!--                                            <th scope="col">Contact</th>-->
-                        <!--                                            <th scope="col">Notes</th>-->
-                        <!--                                            <th scope="col">Actions</th>-->
-                        <!--                                        </tr>-->
-                        <!--                                        </thead>-->
-                        <!--                                        <tbody>-->
-                        <!--                                        --><?php
-                        //                                        //Because the counsellors query is picked up in the view:
-                        //
-                        ////                                        $counsellors = $this->Customers->Counsellors->find('all')
-                        ////                                            ->where(['cust_id' => $customer->id])
-                        ////                                            ->contain(['Customers'])
-                        ////                                            ->toArray();
-                        ////
-                        //                                        //Means that $counsellors is how we access counsellors for a customer
-                        //                                        if (!empty($counsellors)) {
-                        //                                            foreach ($counsellors as $counsellor) {
-                        //                                                echo '<tr>';
-                        //                                                echo '<td>' . h($counsellor->f_name . ' ' . $counsellor->l_name) . '</td>';
-                        //                                                echo '<td>' . h($counsellor->contact) . '</td>';
-                        //                                                echo '<td>' . h($counsellor->notes) . '</td>';
-                        //
-                        //                                                // Actions column with Edit and Delete buttons
-                        //                                                echo '<td>';
-                        //                                                echo $this->Html->link(__('Edit'), ['controller' => 'Counsellors', 'action' => 'edit', $counsellor->id], ['class' => 'btn btn-primary']);
-                        //                                                echo ' ';
-                        //                                                echo $this->Form->postLink(__('Delete'), ['controller' => 'Counsellors', 'action' => 'delete', $counsellor->id], ['class' => 'btn btn-danger', 'confirm' => __('Are you sure you want to delete this counselor?')]);
-                        //                                                echo '</td>';
-                        //
-                        //                                                echo '</tr>';
-                        //                                            }
-                        //                                        } else {
-                        //                                            echo '<tr><td colspan="4">No Counsellors have been assigned to this customer.</td></tr>';
-                        //                                        }
-                        //                                        ?>
-                        <!--                                        </tbody>-->
-                        <!--                                    </table>-->
-                        <!--                                    --><?php //echo $this->Html->link(__('Add New Counsellor'), ['controller' => 'Counsellors', 'action' => 'add', 'customer_id' => $customer->id], ['class' => 'btn btn-success mt-3']); ?>
-                        <!--                                    </p>-->
-                        <!--                                </div>-->
+                        <div>
+                            <?php if ($customer->archive == 0): ?>
+                                <!-- Show the "Archive Profile" link if archive is 0 -->
+                                <?= $this->Html->link(
+                                    __('Archive Profile'),
+                                    ['action' => 'archive', $customer->id],
+                                    [
+                                        'class' => 'btn btn-secondary',
+                                        'style' => 'justify-content: center; display: flex',
+                                        'confirm' => __('Are you sure you want to archive the status for: {0} {1}? Archiving a profile will close all tickets and make the profile no longer editable until it has been unarchived.', $customer->f_name, $customer->l_name)
+                                    ]
+                                ) ?>
+                            <?php elseif ($customer->archive == 1): ?>
+                                <!-- Show the "Unarchive Profile" link if archive is 1 -->
+                                <?= $this->Html->link(
+                                    __('Unarchive Profile'),
+                                    ['action' => 'archive', $customer->id],
+                                    [
+                                        'class' => 'btn btn-success',
+                                        'style' => 'justify-content: center; display: flex',
+                                        'confirm' => __('Are you sure you want to unarchive the status for: {0} {1}? Unarchiving a profile will make it editable again.', $customer->f_name, $customer->l_name)
+                                    ]
+                                ) ?>
+
+                                <!-- Show the "Delete Customer Profile" button if archive is 1 -->
+
+
+
+                            <?php endif; ?>
+
+                        </div>
 
                     </div>
                     <!-- ============================================================== -->
@@ -260,13 +256,16 @@ $checkConnection = function (string $name) {
                                                                id="showopenticket"> Open
                                                     </label>
                                                 </div>
-                                                <?= $this->Html->link(__('Create Ticket +'), ['controller' => 'Tickets', 'action' => 'add',
-                                                    '?' => [
-                                                        'f_name' => $customer->f_name,
-                                                        'l_name' => $customer->l_name,
-                                                        'cust_id' => $customer->id
-                                                    ],
-                                                ], ['class' => 'btn btn-success mt-3']); ?>
+                                                <?php if ($customer->archive == 0): ?>
+                                                    <?= $this->Html->link(__('Create Ticket +'), ['controller' => 'Tickets', 'action' => 'add',
+                                                        '?' => [
+                                                            'f_name' => $customer->f_name,
+                                                            'l_name' => $customer->l_name,
+                                                            'cust_id' => $customer->id
+                                                        ],
+                                                    ], ['class' => 'btn btn-success mt-3']); ?>
+                                                <?php endif; ?>
+
 
                                             </div>
                                         </div>
@@ -297,16 +296,19 @@ $checkConnection = function (string $name) {
                                                                     <h6> Status: Open </h6>
                                                                 <?php endif; ?>
                                                             </div>
-                                                            <div class="toolbar ml-auto">
-                                                                <?php
-                                                                //if true means it is closed. Allow option to open ticket
-                                                                if ($ticket->closed) {
-                                                                    echo $this->Form->postLink(__('Open ticket'), ['controller' => 'Tickets', 'action' => 'update_ticket', $ticket->id], ['class' => 'btn btn-primary', 'confirm' => __("Are you sure you want to Reopen ticket ID: {0} \n Customer: {1} {2} ", $ticket->id, $customer->f_name, $customer->l_name)]);
-                                                                } else {
-                                                                    echo $this->Form->postLink(__('Close ticket'), ['controller' => 'Tickets', 'action' => 'update_ticket', $ticket->id], ['class' => 'btn btn-close', 'confirm' => __("Are you sure you want to Close ticket ID: {0} \n Customer: {1} {2} ", $ticket->id, $customer->f_name, $customer->l_name)]);
-                                                                }
-                                                                ?>
-                                                            </div>
+                                                            <?php if ($customer->archive == 0): ?>
+                                                                <div class="toolbar ml-auto">
+                                                                    <?php
+                                                                    //if true means it is closed. Allow option to open ticket
+                                                                    if ($ticket->closed) {
+                                                                        echo $this->Form->postLink(__('Open ticket'), ['controller' => 'Tickets', 'action' => 'update_ticket', $ticket->id], ['class' => 'btn btn-primary', 'confirm' => __("Are you sure you want to Reopen ticket ID: {0} \n Customer: {1} {2} ", $ticket->id, $customer->f_name, $customer->l_name)]);
+                                                                    } else {
+                                                                        echo $this->Form->postLink(__('Close ticket'), ['controller' => 'Tickets', 'action' => 'update_ticket', $ticket->id], ['class' => 'btn btn-close', 'confirm' => __("Are you sure you want to Close ticket ID: {0} \n Customer: {1} {2} ", $ticket->id, $customer->f_name, $customer->l_name)]);
+                                                                    }
+                                                                    ?>
+                                                                </div>
+                                                            <?php endif; ?>
+
                                                         </div>
 
 
@@ -346,6 +348,7 @@ $checkConnection = function (string $name) {
                                                                 </a>
                                                                 <span>
                                                         <?php if ($this->Identity->get('role') == 'root' || $this->Identity->get('role') == 'admin'): ?>
+                                                                    <?php if ($customer->archive == 0): ?>
                                                             <?php echo $this->Html->link(__('Edit'), ['controller' => 'Tickets', 'action' => 'edit', $ticket->id,
                                                                 '?' => [
                                                                     'f_name' => $customer->f_name,
@@ -358,6 +361,7 @@ $checkConnection = function (string $name) {
                                                             //Removed delete for now, it breaks if try to delete with an attachment present inside
 
                                                             ?>
+                                                            <?php endif; ?>
                                                             <!--                                                                        --><?php //= $this->Form->postLink(__('Delete'), ['controller' => 'Tickets', 'action' => 'delete', $ticket->id], [
 //                                                                            'class' => 'btn btn-danger',
 //                                                                            'confirm' => __('Are you sure you want to delete Ticket title:  {0} \n From customer {1} {2}?', $ticket->title , $customer->f_name, $customer->l_name)
@@ -382,13 +386,17 @@ $checkConnection = function (string $name) {
                                                                 -->
 
                                                                 <!-- In order to pass a query to a controller, must add the '?'. Can be obtained via key value pair in the controller -->
-                                                                <?= $this->Html->link(__('Add Attachments +'), ['controller' => 'Contents', 'action' => 'add',
-                                                                    '?' => ['ticket_id' => $ticket->id,
-                                                                        'f_name' => $customer->f_name,
-                                                                        'l_name' => $customer->l_name,
-                                                                        'cust_id' => $customer->id
-                                                                    ],
-                                                                ], ['class' => 'btn btn-success mt-3', 'style' => 'margin: 10px']); ?>
+                                                                <?php if ($customer->archive == 0): ?>
+                                                                    <?= $this->Html->link(__('Add Attachments +'), ['controller' => 'Contents', 'action' => 'add',
+                                                                        '?' => [
+                                                                            'ticket_id' => $ticket->id,
+                                                                            'f_name' => $customer->f_name,
+                                                                            'l_name' => $customer->l_name,
+                                                                            'cust_id' => $customer->id
+                                                                        ],
+                                                                    ], ['class' => 'btn btn-success mt-3', 'style' => 'margin: 10px']); ?>
+                                                                <?php endif; ?>
+
 
                                                                 <?php if ($ticket->contents) : ?>
                                                                     <?php foreach ($ticket->contents as $content): ?>
@@ -468,14 +476,17 @@ $checkConnection = function (string $name) {
                                                                         <?php endif; ?>
                                                                     </div>
                                                                     <div class="toolbar ml-auto">
-                                                                        <?php
-                                                                        //if true means it is closed. Allow option to open ticket
-                                                                        if ($ticket->closed) {
-                                                                            echo $this->Form->postLink(__('Open ticket'), ['controller' => 'Tickets', 'action' => 'update_ticket', $ticket->id], ['class' => 'btn btn-primary', 'confirm' => __("Are you sure you want to Reopen ticket ID: {0} \n Customer: {1} {2} ", $ticket->id, $customer->f_name, $customer->l_name)]);
-                                                                        } else {
-                                                                            echo $this->Form->postLink(__('Close ticket'), ['controller' => 'Tickets', 'action' => 'update_ticket', $ticket->id], ['class' => 'btn btn-primary', 'confirm' => __("Are you sure you want to Close ticket ID: {0} \n Customer: {1} {2} ", $ticket->id, $customer->f_name, $customer->l_name), 'style' => 'background-color: #E3242B; color: #FFFFFF;']);
-                                                                        }
-                                                                        ?>
+                                                                        <?php if ($customer->archive == 0): ?>
+                                                                            <?php
+                                                                            //if true means it is closed. Allow option to open ticket
+                                                                            if ($ticket->closed) {
+                                                                                echo $this->Form->postLink(__('Open ticket'), ['controller' => 'Tickets', 'action' => 'update_ticket', $ticket->id], ['class' => 'btn btn-primary', 'confirm' => __("Are you sure you want to Reopen ticket ID: {0} \n Customer: {1} {2} ", $ticket->id, $customer->f_name, $customer->l_name)]);
+                                                                            } else {
+                                                                                echo $this->Form->postLink(__('Close ticket'), ['controller' => 'Tickets', 'action' => 'update_ticket', $ticket->id], ['class' => 'btn btn-primary', 'confirm' => __("Are you sure you want to Close ticket ID: {0} \n Customer: {1} {2} ", $ticket->id, $customer->f_name, $customer->l_name), 'style' => 'background-color: #E3242B; color: #FFFFFF;']);
+                                                                            }
+                                                                            ?>
+                                                                        <?php endif; ?>
+
 
                                                                     </div>
                                                                 </div>
@@ -601,16 +612,19 @@ $checkConnection = function (string $name) {
                                                                             <h6> Status: Open </h6>
                                                                         <?php endif; ?>
                                                                     </div>
-                                                                    <div class="toolbar ml-auto">
-                                                                        <?php
-                                                                        //if true means it is closed. Allow option to open ticket
-                                                                        if ($ticket->closed) {
-                                                                            echo $this->Form->postLink(__('Open ticket'), ['controller' => 'Tickets', 'action' => 'update_ticket', $ticket->id], ['class' => 'btn btn-primary', 'confirm' => __("Are you sure you want to Reopen ticket ID: {0} \n Customer: {1} {2} ", $ticket->id, $customer->f_name, $customer->l_name)]);
-                                                                        } else {
-                                                                            echo $this->Form->postLink(__('Close ticket'), ['controller' => 'Tickets', 'action' => 'update_ticket', $ticket->id], ['class' => 'btn btn-close', 'confirm' => __("Are you sure you want to Close ticket ID: {0} \n Customer: {1} {2} ", $ticket->id, $customer->f_name, $customer->l_name)]);
-                                                                        }
-                                                                        ?>
-                                                                    </div>
+                                                                    <?php if ($customer->archive == 0): ?>
+                                                                        <div class="toolbar ml-auto">
+                                                                            <?php
+                                                                            //if true means it is closed. Allow option to open ticket
+                                                                            if ($ticket->closed) {
+                                                                                echo $this->Form->postLink(__('Open ticket'), ['controller' => 'Tickets', 'action' => 'update_ticket', $ticket->id], ['class' => 'btn btn-primary', 'confirm' => __("Are you sure you want to Reopen ticket ID: {0} \n Customer: {1} {2} ", $ticket->id, $customer->f_name, $customer->l_name)]);
+                                                                            } else {
+                                                                                echo $this->Form->postLink(__('Close ticket'), ['controller' => 'Tickets', 'action' => 'update_ticket', $ticket->id], ['class' => 'btn btn-close', 'confirm' => __("Are you sure you want to Close ticket ID: {0} \n Customer: {1} {2} ", $ticket->id, $customer->f_name, $customer->l_name)]);
+                                                                            }
+                                                                            ?>
+                                                                        </div>
+                                                                    <?php endif; ?>
+
                                                                 </div>
                                                                 <div class="card-body">
                                                                     <div class="card-text">
@@ -730,20 +744,23 @@ $checkConnection = function (string $name) {
                                             echo '<li class="list-group-item">';
                                             echo '<h5>' . h($commdetail->type) . ': ' . h($commdetail->link) . '</h5>';
 
-                                            // Add an Edit button with a link to the edit page
-                                            echo $this->Html->link(__('Edit'), ['controller' => 'Commdetails', 'action' => 'edit', $commdetail->id,
-                                                '?' => [
-                                                    'f_name' => $customer->f_name,
-                                                    'l_name' => $customer->l_name,
-                                                    'cust_id' => $customer->id
-                                                ],
-                                            ], ['class' => 'btn btn-primary']);
+                                            // Check if the user is archived (assuming $customer->archive indicates the archived status)
+                                            if ($customer->archive == 0) {
+                                                // User is not archived, so display the Edit and Delete buttons
+                                                echo $this->Html->link(__('Edit'), ['controller' => 'Commdetails', 'action' => 'edit', $commdetail->id,
+                                                    '?' => [
+                                                        'f_name' => $customer->f_name,
+                                                        'l_name' => $customer->l_name,
+                                                        'cust_id' => $customer->id
+                                                    ],
+                                                ], ['class' => 'btn btn-primary']);
 
-                                            echo $this->Form->postLink(__('Delete'), ['controller' => 'Commdetails', 'action' => 'delete', $commdetail->id], ['class' => 'btn btn-danger', 'confirm' => __('Are you sure you want to delete this device?')]);
-
+                                                echo $this->Form->postLink(__('Delete'), ['controller' => 'Commdetails', 'action' => 'delete', $commdetail->id], ['class' => 'btn btn-danger', 'confirm' => __('Are you sure you want to delete this device?')]);
+                                            }
 
                                             echo '</li>';
                                         }
+
 
                                         echo '</ul>';
                                         echo '</div>';
@@ -752,13 +769,15 @@ $checkConnection = function (string $name) {
                                         echo '<p>No other contact methods were found</p>';
                                     }
 
-                                    echo $this->Html->link(__('Add another communication detail'), ['controller' => 'Commdetails', 'action' => 'add',
-                                        '?' => [
-                                            'f_name' => $customer->f_name,
-                                            'l_name' => $customer->l_name,
-                                            'cust_id' => $customer->id
-                                        ],
-                                    ], ['class' => 'btn btn-success mt-3']);
+                                    if ($customer->archive == 0) {
+                                        echo $this->Html->link(__('Add another communication detail'), ['controller' => 'Commdetails', 'action' => 'add',
+                                            '?' => [
+                                                'f_name' => $customer->f_name,
+                                                'l_name' => $customer->l_name,
+                                                'cust_id' => $customer->id
+                                            ],
+                                        ], ['class' => 'btn btn-success mt-3']);
+                                    }
                                     ?>
 
 
@@ -784,15 +803,22 @@ $checkConnection = function (string $name) {
 
                                             // Actions column with Edit and Delete buttons
                                             echo '<td>';
-                                            echo $this->Html->link(__('Edit'), ['controller' => 'Devices', 'action' => 'edit', $device->id,
-                                                '?' => [
-                                                    'f_name' => $customer->f_name,
-                                                    'l_name' => $customer->l_name,
-                                                    'cust_id' => $customer->id
-                                                ],
-                                            ], ['class' => 'btn btn-primary']);
-                                            echo ' ';
-                                            echo $this->Form->postLink(__('Delete'), ['controller' => 'Devices', 'action' => 'delete', $device->id], ['class' => 'btn btn-danger', 'confirm' => __('Are you sure you want to delete this device?')]);
+                                            if ($customer->archive == 0) {
+                                                // Display "Edit" and "Delete" buttons if the customer is not archived
+                                                echo $this->Html->link(__('Edit'), ['controller' => 'Devices', 'action' => 'edit', $device->id,
+                                                    '?' => [
+                                                        'f_name' => $customer->f_name,
+                                                        'l_name' => $customer->l_name,
+                                                        'cust_id' => $customer->id
+                                                    ],
+                                                ], ['class' => 'btn btn-primary']);
+                                                echo ' ';
+                                                echo $this->Form->postLink(__('Delete'), ['controller' => 'Devices', 'action' => 'delete', $device->id], ['class' => 'btn btn-danger', 'confirm' => __('Are you sure you want to delete this device?')]);
+                                            } else {
+                                                // Display a message if the customer is archived
+                                                echo 'Actions are not available in archive mode.';
+                                            }
+
                                             echo '</td>';
 
                                             echo '</tr>';
@@ -806,7 +832,7 @@ $checkConnection = function (string $name) {
                                     ?>
 
 
-
+                                    <?php if ($customer->archive == 0): ?>
                                     <?php echo $this->Html->link(__('Add New Device'), ['controller' => 'Devices', 'action' => 'add',
                                         '?' => [
                                             'f_name' => $customer->f_name,
@@ -814,6 +840,7 @@ $checkConnection = function (string $name) {
                                             'cust_id' => $customer->id
                                         ],
                                     ], ['class' => 'btn btn-success mt-3']); ?>
+                                    <?php endif; ?>
 
                                 </div>
                                 <div class="tab-pane fade" id="pills-consellor" role="tabpanel"
@@ -833,11 +860,17 @@ $checkConnection = function (string $name) {
 
                                             // Actions column with View, Edit, and Delete buttons
                                             echo '<td>';
-                                            echo $this->Html->link(__('View'), ['controller' => 'Counsellors', 'action' => 'view', $counsellor->id], ['class' => 'btn btn-info']);
-                                            echo ' ';
-                                            echo $this->Html->link(__('Edit'), ['controller' => 'Counsellors', 'action' => 'edit', $counsellor->id], ['class' => 'btn btn-primary']);
-                                            echo ' ';
-                                            echo $this->Form->postLink(__('Delete'), ['controller' => 'Counsellors', 'action' => 'delete', $counsellor->id], ['class' => 'btn btn-danger', 'confirm' => __('Are you sure you want to delete this counsellor?')]);
+
+                                            if ($customer->archive == 0) {
+                                                // Display "Edit" and "Delete" buttons if the customer is not archived
+                                                echo $this->Html->link(__('Edit'), ['controller' => 'Counsellors', 'action' => 'edit', $counsellor->id], ['class' => 'btn btn-primary']);
+                                                echo ' ';
+                                                echo $this->Form->postLink(__('Delete'), ['controller' => 'Counsellors', 'action' => 'delete', $counsellor->id], ['class' => 'btn btn-danger', 'confirm' => __('Are you sure you want to delete this counsellor?')]);
+                                            } else {
+                                                // Display a message if the customer is archived
+                                                echo 'Actions are not available in archive mode.';
+                                            }
+
                                             echo '</td>';
 
                                             echo '</tr>';
@@ -850,13 +883,16 @@ $checkConnection = function (string $name) {
                                     }
                                     ?>
 
-                                    <?php echo $this->Html->link(__('Add New Counsellor'), ['controller' => 'Counsellors', 'action' => 'add',
-                                        '?' => [
-                                            'f_name' => $customer->f_name,
-                                            'l_name' => $customer->l_name,
-                                            'cust_id' => $customer->id
-                                        ],
-                                    ], ['class' => 'btn btn-success mt-3']); ?>
+                                    <?php if ($customer->archive == 0): ?>
+                                        <?php echo $this->Html->link(__('Add New Counsellor'), ['controller' => 'Counsellors', 'action' => 'add',
+                                            '?' => [
+                                                'f_name' => $customer->f_name,
+                                                'l_name' => $customer->l_name,
+                                                'cust_id' => $customer->id
+                                            ],
+                                        ], ['class' => 'btn btn-success mt-3']); ?>
+                                    <?php endif; ?>
+
 
 
                                 </div>

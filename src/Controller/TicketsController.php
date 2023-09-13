@@ -165,8 +165,9 @@ class TicketsController extends AppController
                 // Save the original data in the session
                 $this->getRequest()->getSession()->write('originalData', $originalData);
 
- //               return $this->redirect($this->referer());
-               return $this->redirect(['controller' => 'Customers', 'action' => 'view', $custId]);
+//                for undo action
+                return $this->redirect($this->referer());
+//               return $this->redirect(['controller' => 'Customers', 'action' => 'view', $custId]);
             }
             $this->Flash->error(__('This Ticket could not be saved. Please, try again.'));
         }
@@ -225,7 +226,7 @@ class TicketsController extends AppController
         return $this->redirect($this->referer());
     }
 
-    // 在 TicketsController.php
+    // TicketsController.php
     public function assignUser($id = null)
     {
         //Obtain the query via key value pair [called from customer table view]
@@ -272,8 +273,7 @@ class TicketsController extends AppController
 
         $originalData = $this->getRequest()->getSession()->read('originalData');
 
-//            debug($originalData);
-//            exit;
+
         // obtain the data being changed
         $ticketToUndo = $this->Tickets->get($id);
 
@@ -293,6 +293,38 @@ class TicketsController extends AppController
     }
 
 
+    public function beforeDelete(EventInterface $event, EntityInterface $entity, ArrayObject $options)
+    {
+        // Find and delete associated Contents records
+        $contentsTable = TableRegistry::getTableLocator()->get('Contents');
+        $contents = $contentsTable->find()->where(['ticket_id' => $entity->id]);
+        foreach ($contents as $content) {
+            $contentsTable->delete($content);
+        }
+        return true;
+    }
+
+    public function updateEscalate($id)
+    {
+        // base on id get the tickets
+        $ticket = $this->Tickets->get($id);
+
+        // update "escalate" to true（1）
+        $ticket->escalate = true;
+        $ticket->staff_id = 1;
+
+        // save
+        if ($this->Tickets->save($ticket)) {
+            //
+            $this->Flash->success(__('Escalation successful.'));
+        } else {
+            //
+            $this->Flash->error(__('Escalation failed.'));
+        }
+
+        //
+        return $this->redirect($this->referer());
+    }
 }
 
 

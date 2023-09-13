@@ -44,21 +44,27 @@ class CustomersTable extends Table
         //Added this cause it was lacking the association when baking it for the second time
         $this->hasMany('Tickets', [
             'foreignKey' => 'cust_id',
+            'dependent' => true
         ]);
 
         $this->hasMany('Devices', [ // Add this line for the devices association
             'foreignKey' => 'cust_id',
+            'dependent' => true
         ]);
 
         $this->hasMany('Commdetails', [ // Add this line for the commdetails association
             'foreignKey' => 'cust_id',
+            'dependent' => true
         ]);
 
         $this->hasMany('Counsellors', [ // Add this line for the commdetails association
             'foreignKey' => 'cust_id',
+            'dependent' => true
         ]);
 
     }
+
+
 
     /**
      * Default validation rules.
@@ -117,4 +123,5 @@ class CustomersTable extends Table
 
         return $validator;
     }
+
 }

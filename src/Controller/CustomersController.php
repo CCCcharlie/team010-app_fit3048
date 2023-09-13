@@ -2,7 +2,7 @@
 declare(strict_types=1);
 
 namespace App\Controller;
-
+use Cake\ORM\TableRegistry;
 /**
  * Customers Controller
  *
@@ -51,6 +51,90 @@ class CustomersController extends AppController
         $this->set(compact('customers'));
 
 
+    }
+
+    public function archiveindex()
+    {
+        $query = $this->Customers->find();
+
+        // Filter by the 'archive' flag set to 1
+        $query->where(['archive' => 1]);
+
+        $search = $this->request->getQuery('search');
+        if (!empty($search)) {
+            $searchConditions = [
+                'OR' => [
+                    'f_name LIKE' => '%' . $search . '%',
+                    'l_name LIKE' => '%' . $search . '%',
+                    'CONCAT(f_name, " ", l_name) LIKE' => '%' . $search . '%',
+                    'email LIKE' => '%' . $search . '%',
+                    'status LIKE' => '%' . $search . '%',
+                    'notes LIKE' => '%' . $search . '%',
+                    'Devices.transactionid LIKE' => '%' . $search . '%',
+                    'Devices.sessionid LIKE' => '%' . $search . '%'
+                ]
+            ];
+            $query->leftJoinWith('Devices')
+                ->where($searchConditions);
+        }
+
+        $this->paginate = [
+            'contain' => ['Tickets', 'Devices', 'Commdetails', 'Counsellors'],
+        ];
+        $customers = $this->paginate($query);
+
+        $this->set(compact('customers'));
+    }
+
+
+    /**
+     * Index method
+     *
+     * @return \Cake\Http\Response|null|void Renders view
+     */
+    public function archiveddeleteprofiles()
+    {
+        // Define the time in seconds for a five-year duration
+        $archivedTimeInSeconds = 5 * 365 * 24 * 60 * 60; // Five years in seconds
+
+        $query = $this->Customers->find();
+
+        // Filter by the 'archive' flag set to 1
+        $query->where(['archive' => 1]);
+
+        $search = $this->request->getQuery('search');
+        if (!empty($search)) {
+            $searchConditions = [
+                'OR' => [
+                    'f_name LIKE' => '%' . $search . '%',
+                    'l_name LIKE' => '%' . $search . '%',
+                    'CONCAT(f_name, " ", l_name) LIKE' => '%' . $search . '%',
+                    'email LIKE' => '%' . $search . '%',
+                    'status LIKE' => '%' . $search . '%',
+                    'notes LIKE' => '%' . $search . '%',
+                    'Devices.transactionid LIKE' => '%' . $search . '%',
+                    'Devices.sessionid LIKE' => '%' . $search . '%'
+                ]
+            ];
+            $query->leftJoinWith('Devices')
+                ->where($searchConditions);
+        }
+
+        // Filter by 'archived_time' longer than $archivedTimeInSeconds
+        $currentTimestamp = time();
+        $archivedTimeAgo = $currentTimestamp - $archivedTimeInSeconds;
+        $query->where(['archived_time <' => date('Y-m-d H:i:s', $archivedTimeAgo)]);
+
+        $totalRecords = $query->count(); // Get the total number of records
+
+        $this->paginate = [
+            'limit' => $totalRecords, // Set the limit to the total number of records
+            'contain' => ['Tickets', 'Devices', 'Commdetails', 'Counsellors'],
+        ];
+        $customers = $this->paginate($query);
+
+        // Pass the $archivedTimeInSeconds variable to the view
+        $this->set(compact('customers', 'archivedTimeInSeconds'));
     }
     /**
  * Fillter option
@@ -101,7 +185,49 @@ class CustomersController extends AppController
         $this->set('assigntickets', $assigntickets);
 
     }
+    public function escalatetome()
+    {
 
+
+
+        // Get the current user id
+        $identity = $this->request->getAttribute('authentication')->getIdentity();
+        $currentStaffId = $identity->get('id');
+
+        // get the relate cust
+        $assignedCustomers = $this->Customers->find()
+            ->innerJoinWith('Tickets', function ($query) use ($currentStaffId) {
+                return $query->where([
+                    'Tickets.staff_id' => $currentStaffId,
+                    'Tickets.closetime IS NULL',
+                    'Tickets.escalate IS TRUE'
+                ]);
+            })
+            ->distinct(['Customers.id'])// Add this line to ensure distinct customers
+            ->all();
+
+//debug($assignedCustomers);
+//exit;
+        // pass data
+        $this->set('assignedCustomers', $assignedCustomers);
+
+//
+// Get the related tickets for assigned customers
+        $assigntickets = $this->Customers->Tickets->find()
+            ->where([
+                'Tickets.staff_id' => $currentStaffId,
+                'Tickets.closetime IS NULL'
+            ])
+            ->contain(['Users', 'Contents', 'Customers'])
+            ->all();
+
+// Pass the tickets data to the view
+
+//        debug($assigntickets);
+//exit;
+        $this->set('assigntickets', $assigntickets);
+
+    }
     /**
      * View method
      *
@@ -149,6 +275,7 @@ class CustomersController extends AppController
 
 
     }
+
 
 
     /**
@@ -241,7 +368,8 @@ class CustomersController extends AppController
      */
     public function delete($id = null)
     {
-        $this->request->allowMethod(['post', 'delete']);
+
+       $this->request->allowMethod(['post', 'delete']);
         $customer = $this->Customers->get($id);
         if ($this->Customers->delete($customer)) {
             $this->Flash->success(__('The customer has been deleted.'));
@@ -251,6 +379,135 @@ class CustomersController extends AppController
 
         return $this->redirect(['action' => 'index']);
     }
+
+
+    public function deleteWithContents($userId)
+    {
+        // Find and delete the contents associated with user's tickets
+        $ticketsTable = TableRegistry::getTableLocator()->get('Tickets');
+        $tickets = $ticketsTable->find()->where(['cust_id' => $userId]);
+
+        foreach ($tickets as $ticket) {
+            $contentsTable = TableRegistry::getTableLocator()->get('Contents');
+            $contents = $contentsTable->find()->where(['ticket_id' => $ticket->id]);
+
+            foreach ($contents as $content) {
+                $contentsTable->delete($content);
+            }
+        }
+
+        // Delete the customer profile
+        $customer = $this->Customers->get($userId);
+        if ($this->Customers->delete($customer)) {
+            $this->Flash->success(__('Customer profile and associated contents have been deleted.'));
+        } else {
+            $this->Flash->error(__('Unable to delete the customer profile.'));
+        }
+
+        return $this->redirect(['action' => 'index']); // Redirect to a suitable page
+    }
+
+
+    public function deleteArchivedProfiles()
+    {
+        // Define the time in seconds (e.g., 300 seconds for 5 minutes)
+        $archivedTimeInSeconds = 300;
+
+        // Calculate the timestamp for the threshold
+        $currentTimestamp = time();
+        $archivedTimeAgo = $currentTimestamp - $archivedTimeInSeconds;
+        $thresholdDate = date('Y-m-d H:i:s', $archivedTimeAgo);
+
+        // Find and delete the archived customer profiles
+        $query = $this->Customers->find()
+            ->where([
+                'archive' => 1,
+                'archived_time <' => $thresholdDate,
+            ]);
+
+        foreach ($query as $customer) {
+            // Delete associated contents
+            $this->deleteContentsForCustomer($customer->id);
+
+            // Delete the customer profile
+            if ($this->Customers->delete($customer)) {
+                $this->Flash->success(__('Archived customer profiles that meet the criteria have been deleted.'));
+            } else {
+                $this->Flash->error(__('Unable to delete some archived customer profiles.'));
+            }
+        }
+
+        return $this->redirect(['action' => 'index']); // Redirect to a suitable page
+    }
+
+    private function deleteContentsForCustomer($customerId)
+    {
+        $ticketsTable = TableRegistry::getTableLocator()->get('Tickets');
+        $tickets = $ticketsTable->find()->where(['cust_id' => $customerId]);
+
+        foreach ($tickets as $ticket) {
+            $contentsTable = TableRegistry::getTableLocator()->get('Contents');
+            $contents = $contentsTable->find()->where(['ticket_id' => $ticket->id]);
+
+            foreach ($contents as $content) {
+                $contentsTable->delete($content);
+            }
+        }
+    }
+
+
+    /**
+     * Archive Method
+     *
+     * @param string|null $id Customer id.
+     * @return \Cake\Http\Response|null|void Redirects on successful edit, renders view otherwise.
+     * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
+     */
+
+    public function archive($id)
+    {
+        $customer = $this->Customers->get($id);
+        $currentArchiveValue = $customer->archive; // Store the current value
+
+        if ($currentArchiveValue == 0) {
+            // Change from 0 to 1
+            $customer->archive = 1;
+            $customer->archived_time = new \DateTime(); // Set archived_time to the current time
+            $customer->status = 'Archived'; // Set status to 'archived'
+
+            // Load the Tickets model
+            $ticketsTable = $this->getTableLocator()->get('Tickets');
+
+            // Close all tickets affiliated with this customer
+            $openTickets = $ticketsTable->find()
+                ->where(['cust_id' => $customer->id, 'closed' => 0])
+                ->all();
+
+            foreach ($openTickets as $ticket) {
+                $ticket->closed = 1;
+                $ticket->closetime = new \DateTime();
+                $ticketsTable->save($ticket);
+            }
+
+            $message = __('{0} {1} has been successfully archived', $customer->f_name, $customer->l_name);
+        } else {
+            // Change from 1 to 0
+            $customer->archive = 0;
+            $customer->archived_time = null; // Set archived_time to null
+            $customer->status = 'Recently Unarchived'; // Set status to 'recently unarchived'
+
+            $message = __('{0} {1} has been successfully unarchived', $customer->f_name, $customer->l_name);
+        }
+
+        if ($this->Customers->save($customer)) {
+            $this->Flash->success($message);
+        } else {
+            $this->Flash->error(__('Unable to update customer archive status for: {0} {1}', $customer->f_name, $customer->l_name));
+        }
+
+        return $this->redirect(['action' => 'view', $customer->id]);
+    }
+
 }
 
 

@@ -133,7 +133,8 @@ to get the name or any value in the staff table, use the get and then the name o
             <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                 <div class="section-block" id="cardaction">
                     <h3 class="section-title" style="color: midnightblue">Archived Customer View</h3>
-                    <p style="color: midnightblue"> These profiles have been archived for a period longer than <?php echo ($archivedTimeInSeconds / 60); ?> minutes. It is strongly recommended that you delete these profiles. </p>
+                    <p style="color: midnightblue"> These profiles have been archived for a period longer than around <?php echo floor((((($archivedTimeInSeconds / 60) / 60) / 24) / 365)); ?>~ Years [<?php echo floor($archivedTimeInSeconds / 60 / 60 / 24); ?>~ days or <?php echo floor($archivedTimeInSeconds / 60 / 60); ?>~ hours or <?php echo floor($archivedTimeInSeconds / 60); ?>~ minutes]. </p>
+                    <p style="color: midnightblue">It is strongly recommended that you delete these profiles. </p>
                 </div>
             </div>
         </di>

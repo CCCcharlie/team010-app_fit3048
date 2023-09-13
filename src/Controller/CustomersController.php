@@ -11,6 +11,22 @@ use Cake\ORM\TableRegistry;
  */
 class CustomersController extends AppController
 {
+
+    public function initialize(): void {
+        parent::initialize();
+
+        //Now I know duplicate code fragments is bad practice and makes it hard to maintain, but I have no Idea why contentBlocks was not being retrieved from
+        // AppController.php as login function seems to execute first before beforerender of AppController is called
+        // Load keys from ContentBlocks
+        $this->contentBlocks = $this
+            ->fetchTable('Cb')
+            ->find('list', [
+                'keyField' => 'hint',
+                'valueField' => 'content_value'
+            ])
+            ->toArray();
+    }
+
     /**
      * Index method
      *
@@ -18,7 +34,6 @@ class CustomersController extends AppController
      */
     public function index()
     {
-
         $query = $this->Customers->find();
 
         $search = $this->request->getQuery('search');
@@ -50,7 +65,6 @@ class CustomersController extends AppController
 
         $this->set(compact('customers'));
 
-
     }
 
 
@@ -61,8 +75,22 @@ class CustomersController extends AppController
      */
     public function archivedprofiles()
     {
+
+        // Access ContentBlocks from the initialize function
+        $contentBlocks = $this->contentBlocks; // Access it from viewVars
+
+        $getArchivedTime = (int)$contentBlocks['security_archived_time_ready_delete'];
+
+        //Set default conditions for CB values if they do not exist, preferably it should never be deleted at this moment
+        if($getArchivedTime === 0) {
+            // this is 5 years in seconds
+            $getArchivedTime = 157680000;
+        }
+//        debug($getArchivedTime);
+//        exit;
+
         // Define the time in seconds (e.g., 300 seconds for 5 minutes)
-        $archivedTimeInSeconds = 300;
+        $archivedTimeInSeconds = $getArchivedTime;
 
         $query = $this->Customers->find();
 

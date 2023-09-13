@@ -68,18 +68,28 @@ class AppController extends Controller
     {
         parent::beforeRender($event);
 
-        // Load global keys from ContentBlocks
-//        $globalContentBlocks = $this
-//            ->fetchTable('ContentBlocks')
-//            ->find('list', [
-//                'keyField' => 'hint',
-//                'valueField' => 'content_value'
-//            ])
-//            ->where(['parent' => 'global'])  // Limit the search to home page only by the parent field
-//            ->toArray();
-//
-//        $this->set(compact('globalContentBlocks'));
-//    }
+        // Load keys from ContentBlocks
+        $contentBlocks = $this
+            ->fetchTable('Cb')
+            ->find('list', [
+                'keyField' => 'hint',
+                'valueField' => 'content_value'
+            ])
+            ->toArray();
+
+        $this->set(compact('contentBlocks'));
+//        debug('AppController beforeRender method is being called'); // Add this lin
+    }
+
+    public function checkLoggedIn()
+    {
+//        debug($this->Authentication->getIdentity() === null);
+//        debug($this->redirect(['controller' => 'Auth', 'action' => 'login']));
+        if($this->Authentication->getIdentity() === null) {
+            return null;
+        } else {
+            return true;
+        }
     }
 
     /**

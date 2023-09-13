@@ -17,6 +17,13 @@ class UsersController extends AppController
     {
         parent::beforeFilter($event);
 
+        // Since theres a bug where doing before filter here does not redirect authentication properly to login, this is
+        // more or less a bandaid fix, this should be included in every beforeFilter code of controller where there is
+        // a need of user privileges, example below:
+        if($this->checkLoggedIn() === null){
+            return $this->redirect(['controller' => 'Auth', 'action' => 'login']);
+        }
+
         // Check if user is not an admin and redirect to index
         $adminRole = $this->Authentication->getIdentity()->role;
 

@@ -303,8 +303,7 @@ to get the name or any value in the staff table, use the get and then the name o
 
 
 
-
-<!--                                                --><?php //foreach ($assigntickets as $ticket): ?>
+                        <!--                                                --><?php //foreach ($assigntickets as $ticket): ?>
 <!--                            --><?php //echo $this->Html->link(
 //                                __('Escalate the customer'),
 //                                [
@@ -340,9 +339,15 @@ to get the name or any value in the staff table, use the get and then the name o
 
                         <?php endif; ?>
 
+
+
+
                     </div>
 
-                    <!--                        <a href="javascript: " id="return-to-top"><i class="icon-chevron-up"></i></a>-->
+
+
+
+            <!--                        <a href="javascript: " id="return-to-top"><i class="icon-chevron-up"></i></a>-->
 <!--                    <div class = "card-footer-item" >-->
 <!---->
 <!---->
@@ -397,10 +402,28 @@ to get the name or any value in the staff table, use the get and then the name o
                         // window.location.href = '/team010-app_fit3048/tickets/edit/' + selectedTicketId;
 
                         window.location.href = '/team010-app_fit3048/tickets/updateEscalate/' + selectedTicketId;
+                        //
+                        var undoLink = document.getElementById('undo-link');
+                        // 使用所选票证的ID更新链接的href属性
+                        undoLink.href = '/team010-app_fit3048/tickets/undoEscalate/' + selectedTicketId;
+
                     });
 
 
                 </script>
+
+        <!-- Add a style to hide the "Undo Changes" link by default -->
+        <style>
+            #undo-link {
+                display: none;
+            }
+        </style>
+
+        <!-- Add the "Undo Changes" link with an ID -->
+        <?= $this->Html->link(__('Undo Escalation'), '#', ['id' => 'undo-link', 'class' => 'btn btn-warning']); ?>
+
+
+
 
 </body>
 </html>

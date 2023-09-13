@@ -305,7 +305,10 @@ class TicketsController extends AppController
     }
 
     public function updateEscalate($id)
+
     {
+
+
         // base on id get the tickets
         $ticket = $this->Tickets->get($id);
 
@@ -325,6 +328,26 @@ class TicketsController extends AppController
         //
         return $this->redirect($this->referer());
     }
+
+    public function undoEscalate($id)
+    {
+        // base on id get the ticket
+        $ticket = $this->Tickets->get($id);
+
+        // update "escalate" to false (0)
+        $ticket->escalate = false;
+        $ticket->staff_id = null; // Remove the staff assignment if necessary.
+
+        // save
+        if ($this->Tickets->save($ticket)) {
+            $this->Flash->success(__('Deescalation successful.'));
+        } else {
+            $this->Flash->error(__('Deescalation failed.'));
+        }
+
+        return $this->redirect($this->referer());
+    }
+
 }
 
 

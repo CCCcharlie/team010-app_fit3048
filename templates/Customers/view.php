@@ -159,7 +159,7 @@ $checkConnection = function (string $name) {
                                     [
                                         'class' => 'btn btn-danger',
                                         'style' => 'justify-content: center; display: flex',
-                                        'confirm' => __('Are you sure you want to delete this customer profile and its associated contents?'),
+                                        'confirm' => __('Are you sure you want to delete this customer profile and its associated contents? This process is irreversible!'),
                                     ]
                                 ) ?>
                             <?php endif; ?>

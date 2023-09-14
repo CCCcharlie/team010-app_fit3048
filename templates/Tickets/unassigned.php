@@ -32,7 +32,7 @@
             <tr>
                 <th><?= $this->Paginator->sort('title') ?></th>
                 <th><?= $this->Paginator->sort('type') ?></th>
-                <th><?= $this->Paginator->sort('closed') ?></th>
+                <th><?= __('Closed?') ?></th>
                 <th><?= __('Customer') ?></th>
                 <th class="actions"><?= __('Actions') ?></th>
             </tr>
@@ -41,7 +41,6 @@
             <?php foreach ($unassignedTickets as $ticket): ?>
                 <tr>
                     <td><?= h($ticket->title) ?></td>
-                    <td><?= $this->Number->format($ticket->id) ?></td>
                     <td><?= h($ticket->type) ?></td>
                     <td><?= !empty($ticket->closetime) ? h($ticket->closetime) : 'Not close' ?></td>
                     <td><?= $ticket->closed ? "Yes" : "No" ?></td>

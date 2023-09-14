@@ -376,21 +376,20 @@ to get the name or any value in the staff table, use the get and then the name o
             </div>
 
             <!--                        <a href="javascript: " id="return-to-top"><i class="icon-chevron-up"></i></a>-->
-            <div class="card-footer-item">
-
-
-                <div class="pagination-controls">
-                    <p class="pagination-counter">
-                    <form class="pagination-goto">
-                        <label for="goto-page">Go to page:</label>
-
-                        <input type="text" id="goto-page" name="page">
-                        <button class="btn btn-primary" type="submit">Go</button>
-
-                    </form>
+            <?php if ($count > 0): ?>
+                <div class="card-footer-item">
+                    <div class="pagination-controls">
+                        <p class="pagination-counter">
+                        <form class="pagination-goto">
+                            <label for="goto-page">Go to page:</label>
+                            <input type="text" id="goto-page" name="page">
+                            <button class="btn btn-primary" type="submit">Go</button>
+                        </form>
+                        </p>
+                    </div>
+                    <p class="pagination-counter"><?= $this->Paginator->counter(__('Page {{page}} of {{pages}}, showing {{current}} record(s) out of {{count}} total')) ?></p>
                 </div>
-                <p class="pagination-counter"><?= $this->Paginator->counter(__('Page {{page}} of {{pages}}, showing {{current}} record(s) out of {{count}} total')) ?></p>
-            </div>
+            <?php endif; ?>
         </div>
     </div>
 </div>

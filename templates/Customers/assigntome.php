@@ -289,21 +289,21 @@ to get the name or any value in the staff table, use the get and then the name o
 <!--                        upgrade button-->
 
 
-                        <div class="form-group">
-                            <?= $this->Form->label('selected_ticket', 'Select Ticket', ['class' => 'col-form-label']) ?>
-                            <?php
-                            $options = [];
-                            foreach ($assigntickets as $ticket) {
-                                $options[$ticket->id] = $ticket->title;
-                            }
-                            echo $this->Form->select('selected_ticket', $options, [
-                                'class' => 'form-control',
-                                'id' => 'select-ticket',
-                            ]);
-                            ?>
-                        </div>
-
-                        <button id="navigate-button" class="btn btn-primary">Escalate the customer</button>
+<!--                        <div class="form-group">-->
+<!--                            --><?php //= $this->Form->label('selected_ticket', 'Select Ticket', ['class' => 'col-form-label']) ?>
+<!--                            --><?php
+//                            $options = [];
+//                            foreach ($assigntickets as $ticket) {
+//                                $options[$ticket->id] = $ticket->title;
+//                            }
+//                            echo $this->Form->select('selected_ticket', $options, [
+//                                'class' => 'form-control',
+//                                'id' => 'select-ticket',
+//                            ]);
+//                            ?>
+<!--                        </div>-->
+<!---->
+<!--                        <button id="navigate-button" class="btn btn-primary">Escalate the customer</button>-->
 
 
 

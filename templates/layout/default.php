@@ -207,9 +207,9 @@
                                         <li class="nav-item">
                                             <a class="nav-link" href="/tickets/unassigned">View unassigned tickets</a>
                                         </li>
-                                        <li class="nav-item">
-                                            <a class="nav-link" href="/customers/escalatetome"> View the escalated customer  </a>
-                                        </li>
+<!--                                        <li class="nav-item">-->
+<!--                                            <a class="nav-link" href="/customers/escalatetome"> View the escalated customer  </a>-->
+<!--                                        </li>-->
                                         <li class="nav-item">
                                             <a class="nav-link" href="/cb"> Edit Contents  </a>
                                         </li>
@@ -263,9 +263,9 @@
                                         <li class="nav-item">
                                             <a class="nav-link" href="/tickets/unassigned">View unassigned tickets</a>
                                         </li>
-                                        <li class="nav-item">
-                                            <a class="nav-link" href="/customers/escalatetome"> View the escalated customer  </a>
-                                        </li>
+<!--                                        <li class="nav-item">-->
+<!--                                            <a class="nav-link" href="/customers/escalatetome"> View the escalated customer  </a>-->
+<!--                                        </li>-->
                                         <li class="nav-item">
                                             <a class="nav-link" href="/cb"> Edit Contents  </a>
                                         </li>

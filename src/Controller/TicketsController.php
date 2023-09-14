@@ -173,7 +173,7 @@ class TicketsController extends AppController
                 return $this->redirect($this->referer());
 //               return $this->redirect(['controller' => 'Customers', 'action' => 'view', $custId]);
             }
-            $this->Flash->error(__('This Ticket could not be saved. Please, try again.'));
+            $this->Flash->error(__('This     Ticket could not be saved. Please, try again.'));
         }
         $customers = $this->Tickets->Customers->find('list', ['limit' => 200])->all();
         $users = $this->Tickets->Users->find('list', [

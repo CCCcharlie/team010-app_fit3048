@@ -149,7 +149,7 @@ to get the name or any value in the staff table, use the get and then the name o
                         <h3 style="color: midnightblue"> Filter: </h3>
                         <?= $this->Form->create(null, ['url' => ['controller' => 'Customers', 'action' => 'index'], 'type' => 'get', 'class' => 'form-inline']) ?>
                         <div class="form-group mr-2">
-                            <?= $this->Form->input('search', ['type' => 'text', 'class' => 'form-control', 'placeholder' => 'Search by name']) ?>
+                            <?= $this->Form->input('search', ['type' => 'text', 'class' => 'form-control', 'placeholder' => 'Search...']) ?>
                         </div>
                         <div class="btn-group ml-2">
                             <?= $this->Form->button(__('Search'), ['class' => 'btn btn-primary custom-button']) ?>

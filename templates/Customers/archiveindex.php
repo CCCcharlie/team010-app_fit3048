@@ -101,17 +101,6 @@ $checkConnection = function (string $name) {
         <!-- ============================================================== -->
         <div class="row">
             <div class="F">
-                <div class="page-header" id="top">
-
-                    <div class="page-breadcrumb">
-                        <nav aria-label="breadcrumb">
-                            <ol class="breadcrumb">
-                                <li class="breadcrumb-item"><a href="/" class="breadcrumb-link">Home</a></li>
-
-                                <li class="breadcrumb-item active" aria-current="page">View all customers</li>
-                            </ol>
-                        </nav>
-                    </div>
                     <!-- To obtain the identity, use $identity = $this->request->getAttribute('authentication')->getIdentity(); to find the currently logged in entity
     to get the name or any value in the staff table, use the get and then the name of the attribute $identity->get('staff_fname')-->
                     <?php $identity = $this->request->getAttribute('authentication')->getIdentity();
@@ -155,12 +144,6 @@ $checkConnection = function (string $name) {
                                     <?= $this->Form->button(__('Search'), ['class' => 'btn btn-primary custom-button']) ?>
                                     <?= $this->Form->end() ?>
 
-                                    <button id="table-view-btn" type="button" class="btn btn-primary custom-button">
-                                        Table View
-                                    </button>
-                                    <button id="list-view-btn" type="button" class="btn btn-primary custom-button">List
-                                        View
-                                    </button>
 
                                 </div>
                             </div>
@@ -335,11 +318,6 @@ $checkConnection = function (string $name) {
                                 </th>
                                 <th class="col-md-5">
                                     <div class="sorting-header">
-                                        Archive Duration
-                                    </div>
-                                </th>
-                                <th class="col-md-5">
-                                    <div class="sorting-header">
                                         Notes
                                     </div>
                                 </th>
@@ -357,40 +335,12 @@ $checkConnection = function (string $name) {
                                     <td><?= h($customer->l_name) ?></td>
                                     <td><?= h($customer->status) ?></td>
                                     <td>
-                                        <?php if (!empty($customer->devices)) : ?>
-                                            <?php $deviceCount = count($customer->devices); ?>
-                                            <?php foreach ($customer->devices as $key => $device) : ?>
-                                                <div class="device-details">
-                                                    <div>
-                                                        <strong>Platform: </strong><?= !empty($device->platform) ? h($device->platform) : 'No information found' ?>
-                                                    </div>
-                                                    <strong>Transaction
-                                                        ID:</strong> <?= !empty($device->transactionid) ? h($device->transactionid) : 'No information found' ?>
-                                                    <div>
-                                                        <strong>Session
-                                                            ID:</strong> <?= !empty($device->sessionid) ? h($device->sessionid) : 'No information found' ?>
-                                                    </div>
-                                                </div>
-                                                <?php if ($deviceCount > 1 && $key < ($deviceCount - 1)) : ?>
-                                                    <div class="separator"></div>
-                                                <?php endif; ?>
-                                            <?php endforeach; ?>
-                                        <?php else : ?>
-                                            <p>No device details found for this user. Please add some via clicking <a
-                                                    href="<?= $this->Url->build(['action' => 'view', $customer->id]) ?>">View
-                                                    Full Profile</a> on the right.</p>
-                                        <?php endif; ?>
-                                    </td>
-                                    <td>
                                         <?php if (!empty($customer->notes)) : ?>
-                                            <p> <?= h($customer->notes) ?> </p>
+                                            <p><?= h($customer->notes) ?></p>
                                         <?php else : ?>
                                             No notes have been provided about the customer.
                                         <?php endif; ?>
                                     </td>
-                                    <!--                                    consellor-->
-
-
                                     <td style="width: 200px">
                                         <?= $this->Form->postLink(
                                             __('Delete The Profile'),
@@ -402,8 +352,10 @@ $checkConnection = function (string $name) {
                                         ) ?>
                                         <?= $this->Html->link(__('View Full Profile'), ['action' => 'view', $customer->id], ['class' => 'btn btn-primary']) ?>
                                     </td>
+
                                 </tr>
                             <?php endforeach; ?>
+
 
                             <?php if ($this->Paginator->counter(__('Page {{page}} of {{pages}}, showing {{current}} record(s) out of {{count}} total')) === 'Page 1 of 0, showing 0 record(s) out of 0 total'): ?>
                                 <tr>
@@ -458,7 +410,7 @@ $checkConnection = function (string $name) {
                     customersList.style.display = 'flex';
                     customersTable.style.display = 'none';
                 });
-                // the styple display of the customer
+                // the style display of the customer
                 tableViewBtn.addEventListener('click', function () {
                     customersList.style.display = 'none';
                     customersTable.style.display = 'table';

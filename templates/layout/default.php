@@ -50,7 +50,8 @@
     <div class="dashboard-header">
         <nav class="navbar navbar-expand-lg bg-white fixed-top" style="display: flex; justify-content: space-between;">
             <a class="navbar-brand" href="/">
-                <?= $this->Html->image('cake-logo.png', ['alt' => 'GamBlock Logo', 'class' => 'navbar-b;and', 'style' => 'width: 225px; height: auto;']); ?>
+                <?php $logo = $contentBlocks['navigation_header_logo']?>
+                <?= $this->Html->image($logo, ['alt' => 'GamBlock Logo', 'class' => 'navbar-b;and', 'style' => 'width: auto; height: 70px;']); ?>
             </a>
 
             <?php
@@ -153,7 +154,7 @@
                                         <a class="nav-link" href="/tickets/unassigned">View unassigned tickets</a>
                                         <a class="nav-link" href="/counsellors">View counsellors</a>
                                         <a class="nav-link" href="/customers/escalatetome"> View the escalated customer  </a>
-
+                                        <a class="nav-link" href="/cb"> Edit Contents  </a>
 
 
                                     </li>

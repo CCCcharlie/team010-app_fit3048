@@ -141,11 +141,11 @@ class CbController extends AppController
 //            exit;
 
             if ($this->Cb->save($cb)) {
-                $this->Flash->success(__('The cb has been saved.'));
+                $this->Flash->success(__('The block: ' . $cb->hint . ' has been saved'));
 
                 return $this->redirect(['action' => 'index']);
             }
-            $this->Flash->error(__('The cb could not be saved. Please, try again.'));
+            $this->Flash->error(__('The block: ' . $cb->hint . ' could not be saved, please try again'));
         }
         $this->set(compact('cb'));
     }

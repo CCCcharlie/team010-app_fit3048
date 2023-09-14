@@ -53,6 +53,86 @@ class CustomersController extends AppController
 
     }
 
+    public function archiveindex()
+    {
+        $query = $this->Customers->find();
+
+        // Filter by the 'archive' flag set to 1
+        $query->where(['archive' => 1]);
+
+        $search = $this->request->getQuery('search');
+        if (!empty($search)) {
+            $searchConditions = [
+                'OR' => [
+                    'f_name LIKE' => '%' . $search . '%',
+                    'l_name LIKE' => '%' . $search . '%',
+                    'CONCAT(f_name, " ", l_name) LIKE' => '%' . $search . '%',
+                    'email LIKE' => '%' . $search . '%',
+                    'status LIKE' => '%' . $search . '%',
+                    'notes LIKE' => '%' . $search . '%',
+                    'Devices.transactionid LIKE' => '%' . $search . '%',
+                    'Devices.sessionid LIKE' => '%' . $search . '%'
+                ]
+            ];
+            $query->leftJoinWith('Devices')
+                ->where($searchConditions);
+        }
+
+        $this->paginate = [
+            'contain' => ['Tickets', 'Devices', 'Commdetails', 'Counsellors'],
+        ];
+        $customers = $this->paginate($query);
+
+        $this->set(compact('customers'));
+    }
+
+    public function archiveddeleteprofiles()
+    {
+        // Define the time in seconds for a five-year duration
+        $archivedTimeInSeconds = 5 * 365 * 24 * 60 * 60; // Five years in seconds
+
+        $query = $this->Customers->find();
+
+        // Filter by the 'archive' flag set to 1
+        $query->where(['archive' => 1]);
+
+        $search = $this->request->getQuery('search');
+        if (!empty($search)) {
+            $searchConditions = [
+                'OR' => [
+                    'f_name LIKE' => '%' . $search . '%',
+                    'l_name LIKE' => '%' . $search . '%',
+                    'CONCAT(f_name, " ", l_name) LIKE' => '%' . $search . '%',
+                    'email LIKE' => '%' . $search . '%',
+                    'status LIKE' => '%' . $search . '%',
+                    'notes LIKE' => '%' . $search . '%',
+                    'Devices.transactionid LIKE' => '%' . $search . '%',
+                    'Devices.sessionid LIKE' => '%' . $search . '%'
+                ]
+            ];
+            $query->leftJoinWith('Devices')
+                ->where($searchConditions);
+        }
+
+        // Filter by 'archived_time' longer than $archivedTimeInSeconds
+        $currentTimestamp = time();
+        $archivedTimeAgo = $currentTimestamp - $archivedTimeInSeconds;
+        $query->where(['archived_time <' => date('Y-m-d H:i:s', $archivedTimeAgo)]);
+
+        $totalRecords = $query->count(); // Get the total number of records
+
+        $this->paginate = [
+            'limit' => $totalRecords, // Set the limit to the total number of records
+            'contain' => ['Tickets', 'Devices', 'Commdetails', 'Counsellors'],
+        ];
+        $customers = $this->paginate($query);
+
+        // Pass the $archivedTimeInSeconds variable to the view
+        $this->set(compact('customers', 'archivedTimeInSeconds'));
+    }
+
+
+
 
     /**
      * Index method

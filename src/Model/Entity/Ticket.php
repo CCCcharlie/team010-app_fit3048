@@ -20,6 +20,8 @@ use Cake\ORM\Entity;
  * @property \App\Model\Entity\Customer $customer
  * @property \App\Model\Entity\User $user
  * @property \App\Model\Entity\Content[] $contents
+ *
+ * @property bool $escalate
  */
 class Ticket extends Entity
 {
@@ -43,5 +45,6 @@ class Ticket extends Entity
         'customer' => true,
         'user' => true,
         'contents' => true,
+        'escalate' => true,
     ];
 }

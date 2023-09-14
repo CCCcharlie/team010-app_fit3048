@@ -324,7 +324,7 @@ to get the name or any value in the staff table, use the get and then the name o
 
                         </div>
 
-                        <button id="navigate-button" class="btn btn-primary">Escalate the customer</button>
+                        <button id="navigate-button-<?= $customer->id ?>" class="btn btn-primary">Escalate the customer</button>
 
 
 
@@ -434,7 +434,7 @@ to get the name or any value in the staff table, use the get and then the name o
             //    window.location.href = url;
             //});
 
-            document.getElementById('navigate-button').addEventListener('click', function () {
+            document.getElementById("navigate-button-<?= $customer->id ?>").addEventListener('click', function () {
                 // get ticketID
                  selectedTicketId = document.getElementById('select-ticket').value;
 

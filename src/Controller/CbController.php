@@ -30,6 +30,7 @@ class CbController extends AppController
         //Fabulous logic for mostly admin access
         $action = $this->request->getParam('action');
 
+        // Whitelist "admin" and "root"
         //Prevent anyone not "admin" or "root" from entering
         if ($loggedRole !== 'admin' && $loggedRole !== 'root') {
             $this->Flash->error(__('You are not authorized to access this page.'));

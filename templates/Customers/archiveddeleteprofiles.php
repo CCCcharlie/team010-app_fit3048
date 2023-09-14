@@ -101,17 +101,6 @@ $checkConnection = function (string $name) {
     <!-- ============================================================== -->
     <div class="row">
         <div class="F">
-            <div class="page-header" id="top">
-
-                <div class="page-breadcrumb">
-                    <nav aria-label="breadcrumb">
-                        <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="/" class="breadcrumb-link">Home</a></li>
-
-                            <li class="breadcrumb-item active" aria-current="page">View all customers</li>
-                        </ol>
-                    </nav>
-                </div>
                 <!-- To obtain the identity, use $identity = $this->request->getAttribute('authentication')->getIdentity(); to find the currently logged in entity
 to get the name or any value in the staff table, use the get and then the name of the attribute $identity->get('staff_fname')-->
                 <?php $identity = $this->request->getAttribute('authentication')->getIdentity();
@@ -149,18 +138,12 @@ to get the name or any value in the staff table, use the get and then the name o
                         <h3 style="color: midnightblue"> Filter: </h3>
                         <?= $this->Form->create(null, ['url' => ['controller' => 'Customers', 'action' => 'index'], 'type' => 'get', 'class' => 'form-inline']) ?>
                         <div class="form-group mr-2">
-                            <?= $this->Form->input('search', ['type' => 'text', 'class' => 'form-control', 'placeholder' => 'Search by name']) ?>
+                            <?= $this->Form->input('search', ['type' => 'text', 'class' => 'form-control', 'placeholder' => 'Search...']) ?>
                         </div>
                         <div class="btn-group ml-2">
                             <?= $this->Form->button(__('Search'), ['class' => 'btn btn-primary custom-button']) ?>
                             <?= $this->Form->end() ?>
 
-                            <button id="table-view-btn" type="button" class="btn btn-primary custom-button">
-                                Table View
-                            </button>
-                            <button id="list-view-btn" type="button" class="btn btn-primary custom-button">List
-                                View
-                            </button>
 
                         </div>
                     </div>
@@ -249,7 +232,15 @@ to get the name or any value in the staff table, use the get and then the name o
                 <!--                                    --><?php //endif; ?>
                 <!--                                </th>-->
                 </tr>
-                <?= $this->Html->link(__('New Customer'), ['action' => 'add'], ['class' => 'btn btn-success float-right', 'style' => 'padding-bottom : 5px']) ?>
+                <?= $this->Form->postLink(
+                    __('Delete All Archived Customer Profiles'),
+                    ['action' => 'deleteArchivedProfiles'],
+                    [
+                        'class' => 'btn btn-danger',
+                        'style' => 'justify-content: center; display: flex',
+                        'confirm' => __('WARNING: This will delete every profile on this list. All Tickets, and any other details associated with these accounts will be deleted forever. Please look through this list and be certain you wish to delete everything here.'),
+                    ]
+                ) ?>
 
                 <br>
                 <br>
@@ -385,21 +376,19 @@ to get the name or any value in the staff table, use the get and then the name o
             </div>
 
             <!--                        <a href="javascript: " id="return-to-top"><i class="icon-chevron-up"></i></a>-->
-            <div class="card-footer-item">
 
-
-                <div class="pagination-controls">
-                    <p class="pagination-counter">
-                    <form class="pagination-goto">
-                        <label for="goto-page">Go to page:</label>
-
-                        <input type="text" id="goto-page" name="page">
-                        <button class="btn btn-primary" type="submit">Go</button>
-
-                    </form>
+                <div class="card-footer-item">
+                    <div class="pagination-controls">
+                        <p class="pagination-counter">
+                        <form class="pagination-goto">
+                            <label for="goto-page">Go to page:</label>
+                            <input type="text" id="goto-page" name="page">
+                            <button class="btn btn-primary" type="submit">Go</button>
+                        </form>
+                        </p>
+                    </div>
+                    <p class="pagination-counter"><?= $this->Paginator->counter(__('Page {{page}} of {{pages}}, showing {{current}} record(s) out of {{count}} total')) ?></p>
                 </div>
-                <p class="pagination-counter"><?= $this->Paginator->counter(__('Page {{page}} of {{pages}}, showing {{current}} record(s) out of {{count}} total')) ?></p>
-            </div>
         </div>
     </div>
 </div>

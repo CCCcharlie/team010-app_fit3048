@@ -319,7 +319,12 @@ class TicketsController extends AppController
         // update "escalate" to true（1）
         $ticket->escalate = true;
         $ticket->staff_id = 2;
+//        debug($id);
+//      debug($identity->get('id'));
+//        exit();
 
+
+        // Pass $id to the view as selectedTicketId
 
         // save
         if ($this->Tickets->save($ticket)) {
@@ -329,9 +334,9 @@ class TicketsController extends AppController
 
 
         } else {
-            $this->Flash->error(__('Escalation failed. Errors: {0}', print_r($ticket->getErrors(), true)));
+//            $this->Flash->error(__('Escalation failed. Errors: {0}', print_r($ticket->getErrors(), true)));
 
-//            $this->Flash->error(__('Escalation failed.'));
+            $this->Flash->error(__('Escalation failed.'));
         }
 
         //
@@ -340,8 +345,11 @@ class TicketsController extends AppController
 
     public function undoEscalate($id)
     {
+
+
         $identity = $this->request->getAttribute('authentication')->getIdentity();
         // base on id get the ticket
+
         $ticket = $this->Tickets->get($id);
 
         // update "escalate" to false (0)

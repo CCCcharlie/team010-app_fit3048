@@ -150,50 +150,51 @@ $checkConnection = function (string $name) {
                         </div>
 
                         <div>
-                            <?php if ($customer->archive == 0): ?>
-                            <?= $this->Html->link(__('Edit Customer'), ['action' => 'edit', $customer->id], ['class' => 'btn btn-primary', 'style' => 'justify-content: center; display: flex']) ?>
-                            <?php elseif ($customer->archive == 1): ?>
-                                <?= $this->Form->postLink(
-                                    __('Delete The Customers Profile'),
-                                    ['action' => 'deleteWithContents', $customer->id],
-                                    [
-                                        'class' => 'btn btn-danger',
-                                        'style' => 'justify-content: center; display: flex',
-                                        'confirm' => __('Are you sure you want to delete this customer profile and its associated contents? This process is irreversible!'),
-                                    ]
-                                ) ?>
-                            <?php endif; ?>
-                        </div>
-                        <div>
-                            <?php if ($customer->archive == 0): ?>
-                                <!-- Show the "Archive Profile" link if archive is 0 -->
-                                <?= $this->Html->link(
-                                    __('Archive Profile'),
-                                    ['action' => 'archive', $customer->id],
-                                    [
-                                        'class' => 'btn btn-secondary',
-                                        'style' => 'justify-content: center; display: flex',
-                                        'confirm' => __('Are you sure you want to archive the status for: {0} {1}? Archiving a profile will close all tickets and make the profile no longer editable until it has been unarchived.', $customer->f_name, $customer->l_name)
-                                    ]
-                                ) ?>
-                            <?php elseif ($customer->archive == 1): ?>
-                                <!-- Show the "Unarchive Profile" link if archive is 1 -->
-                                <?= $this->Html->link(
-                                    __('Unarchive Profile'),
-                                    ['action' => 'archive', $customer->id],
-                                    [
-                                        'class' => 'btn btn-success',
-                                        'style' => 'justify-content: center; display: flex',
-                                        'confirm' => __('Are you sure you want to unarchive the status for: {0} {1}? Unarchiving a profile will make it editable again.', $customer->f_name, $customer->l_name)
-                                    ]
-                                ) ?>
+                            <!-- Dont let users see button to edit, archive or delete customers-->
+                            <?php if ($this->Identity->get('role') === 'user'): ?>
 
-                                <!-- Show the "Delete Customer Profile" button if archive is 1 -->
+                            <?php else: ?>
+                                <?php if ($customer->archive == 0): ?>
+                                    <?= $this->Html->link(__('Edit Customer'), ['action' => 'edit', $customer->id], ['class' => 'btn btn-primary', 'style' => 'justify-content: center; display: flex']) ?>
+                                <?php elseif ($customer->archive == 1): ?>
+                                    <?= $this->Form->postLink(
+                                        __('Delete The Customers Profile'),
+                                        ['action' => 'deleteWithContents', $customer->id],
+                                        [
+                                            'class' => 'btn btn-danger',
+                                            'style' => 'justify-content: center; display: flex',
+                                            'confirm' => __('Are you sure you want to delete this customer profile and its associated contents? This process is irreversible!'),
+                                        ]
+                                    ) ?>
+                                <?php endif; ?>
+                                <div>
+                                <?php if ($customer->archive == 0): ?>
+                                    <!-- Show the "Archive Profile" link if archive is 0 -->
+                                    <?= $this->Html->link(
+                                        __('Archive Profile'),
+                                        ['action' => 'archive', $customer->id],
+                                        [
+                                            'class' => 'btn btn-secondary',
+                                            'style' => 'justify-content: center; display: flex',
+                                            'confirm' => __('Are you sure you want to archive the status for: {0} {1}? Archiving a profile will close all tickets and make the profile no longer editable until it has been unarchived.', $customer->f_name, $customer->l_name)
+                                        ]
+                                    ) ?>
+                                <?php elseif ($customer->archive == 1): ?>
+                                    <!-- Show the "Unarchive Profile" link if archive is 1 -->
+                                    <?= $this->Html->link(
+                                        __('Unarchive Profile'),
+                                        ['action' => 'archive', $customer->id],
+                                        [
+                                            'class' => 'btn btn-success',
+                                            'style' => 'justify-content: center; display: flex',
+                                            'confirm' => __('Are you sure you want to unarchive the status for: {0} {1}? Unarchiving a profile will make it editable again.', $customer->f_name, $customer->l_name)
+                                        ]
+                                    ) ?>
 
-
-
-                            <?php endif; ?>
-
+                                    <!-- Show the "Delete Customer Profile" button if archive is 1 -->
+                                    </div>
+                                <?php endif; ?>
+                            <?php endif ?>
                         </div>
 
                     </div>

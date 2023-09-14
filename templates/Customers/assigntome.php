@@ -109,14 +109,14 @@ to get the name or any value in the staff table, use the get and then the name o
                     </div>
                     <div class="row">
                         <div class="col-md-12">
-                            <?= $this->Form->create(null, ['url' => ['controller' => 'Customers', 'action' => 'index'], 'type' => 'get', 'class' => 'form-inline']) ?>
-                            <div class="form-group mr-2">
-                                <?= $this->Form->input('search', ['type' => 'text', 'class' => 'form-control', 'placeholder' => 'Search...']) ?>
-                            </div>
-                            <?= $this->Form->button(__('Search'), ['class' => 'btn btn-primary']) ?>
-                            `
-
-                            <?= $this->Form->end() ?>
+<!--                            --><?php //= $this->Form->create(null, ['url' => ['controller' => 'Customers', 'action' => 'index'], 'type' => 'get', 'class' => 'form-inline']) ?>
+<!--                            <div class="form-group mr-2">-->
+<!--                                --><?php //= $this->Form->input('search', ['type' => 'text', 'class' => 'form-control', 'placeholder' => 'Search...']) ?>
+<!--                            </div>-->
+<!--                            --><?php //= $this->Form->button(__('Search'), ['class' => 'btn btn-primary']) ?>
+<!--                            `-->
+<!---->
+<!--                            --><?php //= $this->Form->end() ?>
 
 
                             <br>
@@ -289,21 +289,21 @@ to get the name or any value in the staff table, use the get and then the name o
 <!--                        upgrade button-->
 
 
-                        <div class="form-group">
-                            <?= $this->Form->label('selected_ticket', 'Select Ticket', ['class' => 'col-form-label']) ?>
-                            <?php
-                            $options = [];
-                            foreach ($assigntickets as $ticket) {
-                                $options[$ticket->id] = $ticket->title;
-                            }
-                            echo $this->Form->select('selected_ticket', $options, [
-                                'class' => 'form-control',
-                                'id' => 'select-ticket',
-                            ]);
-                            ?>
-                        </div>
-
-                        <button id="navigate-button" class="btn btn-primary">Escalate the customer</button>
+<!--                        <div class="form-group">-->
+<!--                            --><?php //= $this->Form->label('selected_ticket', 'Select Ticket', ['class' => 'col-form-label']) ?>
+<!--                            --><?php
+//                            $options = [];
+//                            foreach ($assigntickets as $ticket) {
+//                                $options[$ticket->id] = $ticket->title;
+//                            }
+//                            echo $this->Form->select('selected_ticket', $options, [
+//                                'class' => 'form-control',
+//                                'id' => 'select-ticket',
+//                            ]);
+//                            ?>
+<!--                        </div>-->
+<!---->
+<!--                        <button id="navigate-button" class="btn btn-primary">Escalate the customer</button>-->
 
 
 

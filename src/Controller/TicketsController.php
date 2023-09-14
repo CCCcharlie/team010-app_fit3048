@@ -170,10 +170,9 @@ class TicketsController extends AppController
                 $this->getRequest()->getSession()->write('originalData', $originalData);
 
 //                for undo action
-                return $this->redirect($this->referer());
-//               return $this->redirect(['controller' => 'Customers', 'action' => 'view', $custId]);
+               return $this->redirect(['controller' => 'Customers', 'action' => 'view', $custId]);
             }
-            $this->Flash->error(__('This     Ticket could not be saved. Please, try again.'));
+            $this->Flash->error(__('This Ticket could not be saved. Please, try again.'));
         }
         $customers = $this->Tickets->Customers->find('list', ['limit' => 200])->all();
         $users = $this->Tickets->Users->find('list', [
@@ -185,9 +184,66 @@ class TicketsController extends AppController
 //        return to current address
         $refererUrl = $this->referer();
 //
+    }
+
+    /**
+     * Edit method
+     *
+     * @param string|null $id Ticket id.
+     * @return \Cake\Http\Response|null|void Redirects on successful edit, renders view otherwise.
+     * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
+     */
+    public function editticketunassigned($id = null)
+    {
+        //Obtain the query via key value pair [called from customer table view]
+        $firstName = $this->request->getQuery('f_name');
+        $lastName = $this->request->getQuery('l_name');
+        $custId = $this->request->getQuery('cust_id');
+        $fullName = $firstName . ' ' . $lastName;
+//        $ticketClosedStatus = $this->request->getQuery('ticket_closed');
+
+        $this->set(compact('fullName', 'custId'));
+
+        $ticket = $this->Tickets->get($id, [
+            'contain' => [],
+        ]);
+//
+        // Obtain the orginal data
+        $originalData = $this->Tickets->get($id, [
+            'contain' => [],
+        ]);
+        $this->set(compact('originalData', 'originalData'));
 
 
+//
+        if ($this->request->is(['patch', 'post', 'put'])) {
+            $ticket = $this->Tickets->patchEntity($ticket, $this->request->getData());
 
+//            debug($ticket);
+//            debug($id);
+//            exit;
+//
+            if ($this->Tickets->save($ticket)) {
+                $this->Flash->success(__('The Ticket: "'. $ticket->title . '" is successfully assigned'));
+                // Save the original data in the session
+                $this->getRequest()->getSession()->write('originalData', $originalData);
+
+//                for undo action
+//                return $this->redirect($this->redirect);
+                return $this->redirect(['action' => 'unassigned']);
+            }
+            $this->Flash->error(__('This Ticket could not be assigned. Please, try again.'));
+        }
+        $customers = $this->Tickets->Customers->find('list', ['limit' => 200])->all();
+        $users = $this->Tickets->Users->find('list', [
+            'keyField' => 'id',
+            'valueField' => 'f_name',
+            'limit' => 200
+        ])->all();
+        $this->set(compact('ticket', 'customers', 'users'));
+//        return to current address
+        $refererUrl = $this->referer();
+//
     }
 
     /**
@@ -315,7 +371,8 @@ class TicketsController extends AppController
 
         // base on id get the tickets
         $ticket = $this->Tickets->get($id);
-
+//debug($id);
+//exit();
         // update "escalate" to true（1）
         $ticket->escalate = true;
         $ticket->staff_id = 2;

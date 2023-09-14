@@ -78,7 +78,7 @@ class CounsellorsController extends AppController
             if ($this->Counsellors->save($counsellor)) {
                 $this->Flash->success(__('Counsellor ' . $counsellor->f_name . ' has been saved'));
 
-                return $this->redirect(['action' => 'index']);
+                return $this->redirect(['controller' => 'Customers', 'action' => 'view', $custId]);
             }
             $this->Flash->error(__('The counsellor could not be saved. Please, try again.'));
         }
@@ -95,6 +95,12 @@ class CounsellorsController extends AppController
      */
     public function edit($id = null)
     {
+        $firstName = $this->request->getQuery('f_name');
+        $lastName = $this->request->getQuery('l_name');
+        $custId = $this->request->getQuery('cust_id');
+        $fullName = $firstName . ' ' . $lastName;
+
+        $this->set(compact('fullName', 'custId'));
         $counsellor = $this->Counsellors->get($id, [
             'contain' => [],
         ]);
@@ -104,7 +110,7 @@ class CounsellorsController extends AppController
         if ($customer->archive == 1) {
             // Customer is archived, handle access denial here
             $this->Flash->error('Editing counsellors for archived customer profiles is not allowed.');
-            return $this->redirect(['action' => 'index']);
+            return $this->redirect(['controller' => 'Customers', 'action' => 'view', $custId]);
         }
 
         if ($this->request->is(['patch', 'post', 'put'])) {
@@ -112,7 +118,7 @@ class CounsellorsController extends AppController
             if ($this->Counsellors->save($counsellor)) {
                 $this->Flash->success(__('The counsellor has been saved.'));
 
-                return $this->redirect(['action' => 'index']);
+                return $this->redirect(['controller' => 'Customers', 'action' => 'view', $custId]);
             }
             $this->Flash->error(__('The counsellor could not be saved. Please, try again.'));
         }

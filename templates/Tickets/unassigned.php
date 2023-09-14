@@ -42,7 +42,6 @@
                 <tr>
                     <td><?= h($ticket->title) ?></td>
                     <td><?= h($ticket->type) ?></td>
-                    <td><?= !empty($ticket->closetime) ? h($ticket->closetime) : 'Not close' ?></td>
                     <td><?= $ticket->closed ? "Yes" : "No" ?></td>
                     <td>
                         <?php
@@ -51,11 +50,6 @@
                         } else {
                             echo 'Not available';
                         }
-                        ?>
-                    </td>
-                    <td>
-                        <?php
-                        echo !empty($ticket->user) ? $this->Html->link($ticket->user->id, ['controller' => 'Users', 'action' => 'view', $ticket->user->id]) : 'Not available';
                         ?>
                     </td>
                     <td class="actions">

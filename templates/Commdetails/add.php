@@ -3,7 +3,7 @@
  * @var \App\View\AppView $this
  * @var \App\Model\Entity\Commdetail $commdetail
  * @var \Cake\Collection\CollectionInterface|string[] $customers
- */$this->disableAutoLayout();
+ */
 ?>
 
 <!doctype html>

@@ -56,7 +56,7 @@ $checkConnection = function (string $name) {
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>GamBlock® - Customer Management: Expired Customers</title>
+    <title>GamBlock® - Customer Management: Customers</title>
     <!-- Bootstrap CSS -->
     <!-- In-built CSS -->
     <?= $this->Html->css(['style', 'bootstrap.min',]) ?>
@@ -134,7 +134,6 @@ to get the name or any value in the staff table, use the get and then the name o
                 <div class="section-block" id="cardaction">
                     <h3 class="section-title" style="color: midnightblue">Archived Customer View</h3>
                     <p style="color: midnightblue"> These profiles have been archived for a period longer than <?php echo number_format(($archivedTimeInSeconds / 31556952), 2); ?> years. It is strongly recommended that you delete these profiles. </p>
-
                 </div>
             </div>
         </di>
@@ -155,6 +154,14 @@ to get the name or any value in the staff table, use the get and then the name o
                         <div class="btn-group ml-2">
                             <?= $this->Form->button(__('Search'), ['class' => 'btn btn-primary custom-button']) ?>
                             <?= $this->Form->end() ?>
+
+                            <button id="table-view-btn" type="button" class="btn btn-primary custom-button">
+                                Table View
+                            </button>
+                            <button id="list-view-btn" type="button" class="btn btn-primary custom-button">List
+                                View
+                            </button>
+
                         </div>
                     </div>
                 </div>
@@ -242,15 +249,7 @@ to get the name or any value in the staff table, use the get and then the name o
                 <!--                                    --><?php //endif; ?>
                 <!--                                </th>-->
                 </tr>
-                <?= $this->Form->postLink(
-                    __('Delete All Archived Customer Profiles'),
-                    ['action' => 'deleteArchivedProfiles'],
-                    [
-                        'class' => 'btn btn-danger',
-                        'style' => 'justify-content: center; display: flex',
-                        'confirm' => __('WARNING: This will delete every profile on this list. All Tickets, and any other details associated with these accounts will be deleted forever. Please look through this list and be certain you wish to delete everything here.'),
-                    ]
-                ) ?>
+                <?= $this->Html->link(__('New Customer'), ['action' => 'add'], ['class' => 'btn btn-success float-right', 'style' => 'padding-bottom : 5px']) ?>
 
                 <br>
                 <br>
@@ -261,6 +260,8 @@ to get the name or any value in the staff table, use the get and then the name o
                     <!-- content show for assign to me -->
                 </div>
 
+
+                </div>
 
                 <!--table view option-->
                 <table class="table table-hover table-striped" id="customers-table">
@@ -334,11 +335,6 @@ to get the name or any value in the staff table, use the get and then the name o
                         </th>
                         <th class="col-md-5">
                             <div class="sorting-header">
-                                Archive Duration
-                            </div>
-                        </th>
-                        <th class="col-md-5">
-                            <div class="sorting-header">
                                 Notes
                             </div>
                         </th>
@@ -355,24 +351,7 @@ to get the name or any value in the staff table, use the get and then the name o
                             <td><?= h($customer->f_name) ?> </td>
                             <td><?= h($customer->l_name) ?></td>
                             <td><?= h($customer->status) ?></td>
-                            <td>
-                                <?php
-                                // Calculate the duration in days
-                                $archivedTime = strtotime($customer->archived_time);
-                                $currentTime = time();
-                                $durationInSeconds = $currentTime - $archivedTime;
 
-                                if ($durationInSeconds < 30 * 24 * 60 * 60) { // Less than 30 days
-                                    echo h(floor($durationInSeconds / (24 * 60 * 60))) . ' days';
-                                } elseif ($durationInSeconds < 12 * 30 * 24 * 60 * 60) { // Less than 12 months
-                                    echo h(floor($durationInSeconds / (30 * 24 * 60 * 60))) . ' months';
-                                } else { // More than 12 months
-                                    $years = floor($durationInSeconds / (12 * 30 * 24 * 60 * 60));
-                                    $months = floor(($durationInSeconds % (12 * 30 * 24 * 60 * 60)) / (30 * 24 * 60 * 60));
-                                    echo h($years) . ' years ' . h($months) . ' months';
-                                }
-                                ?>
-                            </td>
                             <td>
                                 <?php if (!empty($customer->notes)) : ?>
                                     <p><?= h($customer->notes) ?></p>
@@ -381,18 +360,17 @@ to get the name or any value in the staff table, use the get and then the name o
                                 <?php endif; ?>
                             </td>
                             <td style="width: 200px">
-                                <div style="display: flex; justify-content: space-between;">
-                                    <?= $this->Form->postLink(
-                                        __('Delete The Profile'),
-                                        ['action' => 'deleteWithContents', $customer->id],
-                                        [
-                                            'class' => 'btn btn-danger',
-                                            'confirm' => __('Are you sure you want to delete this customer profile and its associated contents? This process is irreversible!'),
-                                        ]
-                                    ) ?>
-                                    <?= $this->Html->link(__('View Full Profile'), ['action' => 'view', $customer->id], ['class' => 'btn btn-primary']) ?>
-                                </div>
+                                <?= $this->Form->postLink(
+                                    __('Delete The Profile'),
+                                    ['action' => 'deleteWithContents', $customer->id],
+                                    [
+                                        'class' => 'btn btn-danger',
+                                        'confirm' => __('Are you sure you want to delete this customer profile and its associated contents? This process is irreversible!'),
+                                    ]
+                                ) ?>
+                                <?= $this->Html->link(__('View Full Profile'), ['action' => 'view', $customer->id], ['class' => 'btn btn-primary']) ?>
                             </td>
+
                         </tr>
                     <?php endforeach; ?>
 

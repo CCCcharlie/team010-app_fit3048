@@ -86,16 +86,63 @@ class CustomersController extends AppController
         $this->set(compact('customers'));
     }
 
+    public function archiveddeleteprofiles()
+    {
+        // Define the time in seconds for a five-year duration
+        $archivedTimeInSeconds = 5 * 365 * 24 * 60 * 60; // Five years in seconds
+
+        $query = $this->Customers->find();
+
+        // Filter by the 'archive' flag set to 1
+        $query->where(['archive' => 1]);
+
+        $search = $this->request->getQuery('search');
+        if (!empty($search)) {
+            $searchConditions = [
+                'OR' => [
+                    'f_name LIKE' => '%' . $search . '%',
+                    'l_name LIKE' => '%' . $search . '%',
+                    'CONCAT(f_name, " ", l_name) LIKE' => '%' . $search . '%',
+                    'email LIKE' => '%' . $search . '%',
+                    'status LIKE' => '%' . $search . '%',
+                    'notes LIKE' => '%' . $search . '%',
+                    'Devices.transactionid LIKE' => '%' . $search . '%',
+                    'Devices.sessionid LIKE' => '%' . $search . '%'
+                ]
+            ];
+            $query->leftJoinWith('Devices')
+                ->where($searchConditions);
+        }
+
+        // Filter by 'archived_time' longer than $archivedTimeInSeconds
+        $currentTimestamp = time();
+        $archivedTimeAgo = $currentTimestamp - $archivedTimeInSeconds;
+        $query->where(['archived_time <' => date('Y-m-d H:i:s', $archivedTimeAgo)]);
+
+        $totalRecords = $query->count(); // Get the total number of records
+
+        $this->paginate = [
+            'limit' => $totalRecords, // Set the limit to the total number of records
+            'contain' => ['Tickets', 'Devices', 'Commdetails', 'Counsellors'],
+        ];
+        $customers = $this->paginate($query);
+
+        // Pass the $archivedTimeInSeconds variable to the view
+        $this->set(compact('customers', 'archivedTimeInSeconds'));
+    }
+
+
+
 
     /**
      * Index method
      *
      * @return \Cake\Http\Response|null|void Renders view
      */
-    public function archiveddeleteprofiles()
+    public function archivedprofiles()
     {
-        // Define the time in seconds for a five-year duration
-        $archivedTimeInSeconds = 5 * 365 * 24 * 60 * 60; // Five years in seconds
+        // Define the time in seconds (e.g., 300 seconds for 5 minutes)
+        $archivedTimeInSeconds = 300;
 
         $query = $this->Customers->find();
 
@@ -405,54 +452,6 @@ class CustomersController extends AppController
         }
 
         return $this->redirect(['action' => 'index']); // Redirect to a suitable page
-    }
-
-
-    public function deleteArchivedProfiles()
-    {
-        // Define the time in seconds (e.g., 300 seconds for 5 minutes)
-        $archivedTimeInSeconds = 300;
-
-        // Calculate the timestamp for the threshold
-        $currentTimestamp = time();
-        $archivedTimeAgo = $currentTimestamp - $archivedTimeInSeconds;
-        $thresholdDate = date('Y-m-d H:i:s', $archivedTimeAgo);
-
-        // Find and delete the archived customer profiles
-        $query = $this->Customers->find()
-            ->where([
-                'archive' => 1,
-                'archived_time <' => $thresholdDate,
-            ]);
-
-        foreach ($query as $customer) {
-            // Delete associated contents
-            $this->deleteContentsForCustomer($customer->id);
-
-            // Delete the customer profile
-            if ($this->Customers->delete($customer)) {
-                $this->Flash->success(__('Archived customer profiles that meet the criteria have been deleted.'));
-            } else {
-                $this->Flash->error(__('Unable to delete some archived customer profiles.'));
-            }
-        }
-
-        return $this->redirect(['action' => 'index']); // Redirect to a suitable page
-    }
-
-    private function deleteContentsForCustomer($customerId)
-    {
-        $ticketsTable = TableRegistry::getTableLocator()->get('Tickets');
-        $tickets = $ticketsTable->find()->where(['cust_id' => $customerId]);
-
-        foreach ($tickets as $ticket) {
-            $contentsTable = TableRegistry::getTableLocator()->get('Contents');
-            $contents = $contentsTable->find()->where(['ticket_id' => $ticket->id]);
-
-            foreach ($contents as $content) {
-                $contentsTable->delete($content);
-            }
-        }
     }
 
 

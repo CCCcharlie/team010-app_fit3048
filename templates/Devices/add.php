@@ -31,8 +31,6 @@
 </head>
 
 <body>
-
-
         <div class="column-responsive column-80">
             <div class="commdetails form content">
                 <div class="card">

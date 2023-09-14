@@ -44,8 +44,15 @@ return static function (RouteBuilder $routes) {
      */
     $routes->setRouteClass(DashedRoute::class);
     //  for update escalate value
+//    undo action
+
     $routes->connect('/tickets/update-escalate/:id', ['controller' => 'Tickets', 'action' => 'updateEscalate'])
         ->setPass(['id']);
+
+    $routes->connect('/tickets/undo-escalate/:id', ['controller' => 'Tickets', 'action' => 'undoEscalate'])
+        ->setPass(['id'])
+        ->setPatterns(['id' => '\d+'])
+        ->setMethods(['POST']);
 
 //
 

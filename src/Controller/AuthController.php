@@ -35,6 +35,17 @@ class AuthController extends AppController {
         $this->Authentication->allowUnauthenticated(['login', 'forgetPassword', 'resetPassword']);
 
         $this->Users = $this->fetchTable('Users');
+
+        //Now I know duplicate code fragments is bad practice and makes it hard to maintain, but I have no Idea why contentBlocks was not being retrieved from
+        // AppController.php as login function seems to execute first before beforerender of AppController is called
+        // Load keys from ContentBlocks
+        $this->contentBlocks = $this
+            ->fetchTable('Cb')
+            ->find('list', [
+                'keyField' => 'hint',
+                'valueField' => 'content_value'
+            ])
+            ->toArray();
     }
 
     /**
@@ -185,11 +196,38 @@ class AuthController extends AppController {
         $this->request->allowMethod(['get', 'post']);
         $result = $this->Authentication->getResult();
 
+        // Access ContentBlocks from the initialize function
+        $contentBlocks = $this->contentBlocks;
+
+        // Note: theres a strange bug that maxAttemptTimeOut to be +2 of what it should be, so If it is set to 5,
+        // instead it locks out at 7
+//        debug($contentBlocks);
+
+        $maxAttemptTimeOut = (int)$contentBlocks['security_max_attempts_timeout'];
+        $timeMultiplyFactor = (int)$contentBlocks['security_time_multiply_factor'];
+        $maxTimeoutDuration = (int)$contentBlocks['security_max_timeout_duration'];
+
+        //Set default conditions for CB values if they do not exist, preferably it should never be deleted at this moment
+        if($maxAttemptTimeOut === 0) {
+            $maxAttemptTimeOut = 3;
+        } else {
+            $maxAttemptTimeOut -= 2;
+        }
+        if($timeMultiplyFactor === 0) {
+            $timeMultiplyFactor = 2;
+        }
+        if($maxTimeoutDuration === 0) {
+            $maxTimeoutDuration = 86400;
+        }
+//        debug($maxAttemptTimeOut);
+//        debug($timeMultiplyFactor);
+//        debug($maxTimeoutDuration);
+//        exit;
         // Define maximum number of consecutive unsuccessful attempts before imposing timeouts. Put a CB on me when making a CMS
-        $maxAttemptsBeforeTimeout = 5;
+        $maxAttemptsBeforeTimeout = $maxAttemptTimeOut;
 
         // Define initial timeout duration (in seconds) and doubling factor. Put CB on me when making a CMS
-        $timeoutDoublingFactor = 2;
+        $timeoutDoublingFactor = $timeMultiplyFactor;
 
         // Get stored attempt count and timestamp from session
         $loginAttempts = $this->request->getSession()->read('login_attempts') ?? ['count' => 0, 'last_attempt_time' => 0];
@@ -257,7 +295,7 @@ class AuthController extends AppController {
             $this->setResponse($this->getResponse()->withCookie(new Cookie('total_lockout', (string)($totalAttempts))));
 
             // Check if timeout duration exceeds a maximum limit (optional)
-            $maxTimeout = 86400; // Maximum timeout duration (24 hours). Let it be changeable. ie. CB Me
+            $maxTimeout = $maxTimeoutDuration; // Maximum timeout duration (24 hours). Let it be changeable. ie. CB Me
             if ($initialTimeout > $maxTimeout) {
                 $initialTimeout = $maxTimeout;
             }
@@ -266,7 +304,9 @@ class AuthController extends AppController {
             $this->request->getSession()->write('login_attempts', ['count' => $totalAttempts, 'last_attempt_time' => $currentTime]);
 
             // Display the appropriate error message
-            if ($totalAttempts > $maxAttemptsBeforeTimeout) {
+            debug($totalAttempts);
+            debug($maxAttemptsBeforeTimeout);
+            if ($totalAttempts > $maxAttemptsBeforeTimeout + 2) {
                 $this->Flash->error("Too many unsuccessful attempts. You are locked out.");
             } elseif (!$recaptchaResult['success']) {
                 $this->Flash->error('reCAPTCHA verification failed. Please try again.');

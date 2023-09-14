@@ -82,6 +82,8 @@ class TicketsController extends AppController
         if ($this->request->is('post')) {
             $ticket = $this->Tickets->patchEntity($ticket, $this->request->getData());
 
+    //            debug($ticket);
+    //            exit;
             //closed is a boolean variable where closed = 0 mean it is Open
             $ticket->closed = false;
             $ticket->cust_id = $custId;
@@ -100,6 +102,8 @@ class TicketsController extends AppController
             ////////////////////////////////
             // End Generate the unique id //
             ////////////////////////////////
+
+            $ticket->escalate = true;
 
             if ($this->Tickets->save($ticket)) {
                 $this->Flash->success(__('The ticket titled: "'. $ticket->title . '" for ' . $fullName . ' Is successfully created'));
@@ -305,26 +309,57 @@ class TicketsController extends AppController
     }
 
     public function updateEscalate($id)
+
     {
+
+
         // base on id get the tickets
         $ticket = $this->Tickets->get($id);
 
         // update "escalate" to true（1）
         $ticket->escalate = true;
-        $ticket->staff_id = 1;
+        $ticket->staff_id = 2;
+
 
         // save
         if ($this->Tickets->save($ticket)) {
             //
             $this->Flash->success(__('Escalation successful.'));
+
+
+
         } else {
-            //
-            $this->Flash->error(__('Escalation failed.'));
+            $this->Flash->error(__('Escalation failed. Errors: {0}', print_r($ticket->getErrors(), true)));
+
+//            $this->Flash->error(__('Escalation failed.'));
         }
 
         //
         return $this->redirect($this->referer());
     }
+
+    public function undoEscalate($id)
+    {
+        $identity = $this->request->getAttribute('authentication')->getIdentity();
+        // base on id get the ticket
+        $ticket = $this->Tickets->get($id);
+
+        // update "escalate" to false (0)
+        $ticket->escalate = false;
+        $ticket->staff_id = $identity->get('id');// Remove the staff assignment if necessary.
+
+        // save
+        if ($this->Tickets->save($ticket)) {
+            $this->Flash->success(__('Deescalation successful.'));
+        } else {
+
+
+            $this->Flash->error(__('Deescalation failed.'));
+        }
+
+        return $this->redirect($this->referer());
+    }
+
 }
 
 

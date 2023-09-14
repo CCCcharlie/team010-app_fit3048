@@ -45,6 +45,7 @@ $this->assign('title', 'Login');
 <!--    <div class="row">-->
 <!--        <div class="column column-50 column-offset-25">-->
             <div class=" form-group">
+                <div class = "login-form-container">
 
 
                 <?= $this->Form->create(null, ['id' => 'login']); ?>
@@ -99,9 +100,9 @@ $this->assign('title', 'Login');
                     }
                     echo $this->Form->end();
                     ?>
+                    </div>
 
                     <!-- Display the countdown timer -->
-
 
                     <script>
                         // Function to update the countdown timer and refresh the page when it reaches 0
@@ -129,8 +130,6 @@ $this->assign('title', 'Login');
                     </script>
 
 
-
-
                 </fieldset>
 
                 <hr class="hr-between-buttons">
@@ -139,7 +138,6 @@ $this->assign('title', 'Login');
 <!--                --><?php //= $this->Html->link('Go to Homepage', '/', ['class' => 'button button-clear']) ?>
 
     </div>
-
 
 </div>
        <?php $this->start('footer_script'); ?>

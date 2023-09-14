@@ -54,11 +54,11 @@ class UsersController extends AppController
 //        debug($userRole);
 //        exit;
 
-        // Stop staff/regular users attempting to delete any staff member
-        if (($this->request->getParam('action') === 'edit' || $this->request->getParam('action') === 'delete') && ($adminRole === 'staff' || $adminRole === 'user')) {
-            $this->Flash->error(__('WARNING, ATTEMPTING TO ACCESS EDIT/DELETE WITHOUT PRIVILEGES IS STRICTLY PROHIBITED'));
+        // Whitelist "admin" and "root",  nobody else cannot access staff members besides them
+         if (($adminRole !== 'staff' || $adminRole !== 'user')) {
+            $this->Flash->error(__('Accessing staff accounts is stictly prohibited!'));
 
-            return $this->redirect(['action' => 'index']);
+            return $this->redirect(['controller' => 'Customers', 'action' => 'assigntome']);
         }
 
         // Dont let admin edit other admin/root, only allow themselves

@@ -20,6 +20,7 @@
     <?= $this->Html->css(['fontawesome-all'], ['block' => true]) ?>
 
 
+
     <style>
         .paginator {
             display: flex;
@@ -61,6 +62,7 @@
 </head>
 
 <body>
+
 
         <div class="customers assigntome content">
                     <!-- ============================================================== -->
@@ -109,7 +111,7 @@ to get the name or any value in the staff table, use the get and then the name o
                         <div class="col-md-12">
                             <?= $this->Form->create(null, ['url' => ['controller' => 'Customers', 'action' => 'index'], 'type' => 'get', 'class' => 'form-inline']) ?>
                             <div class="form-group mr-2">
-                                <?= $this->Form->input('search', ['type' => 'text', 'class' => 'form-control', 'placeholder' => 'Search by name']) ?>
+                                <?= $this->Form->input('search', ['type' => 'text', 'class' => 'form-control', 'placeholder' => 'Search...']) ?>
                             </div>
                             <?= $this->Form->button(__('Search'), ['class' => 'btn btn-primary']) ?>
                             `
@@ -201,7 +203,7 @@ to get the name or any value in the staff table, use the get and then the name o
                             </tr>
                             <?= $this->Html->link(__('New Customer'), ['action' => 'add'], ['class' => 'btn btn-success float-right']) ?>
                             <!--         Add the "Undo Changes" link with an ID -->
-                            <button id="undobutton" class="btn btn-primary">Unescalate the customer</button>
+<!--                            <button id="undobutton" class="btn btn-primary">Unescalate the customer</button>-->
 
                             <br>
                             <br>
@@ -389,42 +391,44 @@ to get the name or any value in the staff table, use the get and then the name o
                 <!--    --><?php //if ($this->Paginator->counter(__('Page {{page}} of {{pages}}, showing {{current}} record(s) out of {{count}} total')) === 'Page 1 of 0, showing 0 record(s) out of 0 total'): ?>
 <!--        <p>No results found.</p>-->
 <!--    --><?php //endif; ?>
-                <script>
-                    // JavaScript
-                    document.getElementById('changeStaffButton').addEventListener('click', function () {
-
-                    });
-                </script>
 
 
         <script>
+
+            var selectedTicketId; // declare selectedTicketId
+
+
+            document.getElementById('undobutton').addEventListener('click', function () {
+                // Get selectedTicketId and staffId
+
+                var staffId =<?= $identity->get('id'); ?> /* current staffId */;
+                console.log(staffId); // check
+                console.log(selectedTicketId); // check
+
+                // Construct the URL with both selectedTicketId and staffId
+
+                // var url = '/team010-app_fit3048/tickets/undoEscalate/' + selectedTicketId +'?staffId=' + staffId;
+
+                // Redirect to undoEscalate with both parameters
+                window.location.href = url;
+            });
+
             document.getElementById('navigate-button').addEventListener('click', function () {
                 // get ticketID
-                var selectedTicketId = document.getElementById('select-ticket').value;
+                 selectedTicketId = document.getElementById('select-ticket').value;
 
                 // refer to the update
                 // window.location.href = '/team010-app_fit3048/tickets/edit/' + selectedTicketId;
 
                 // console.log(selectedTicketId); // check
 
-                window.location.href = '/team010-app_fit3048/tickets/updateEscalate/' + selectedTicketId;
+                window.location.href = '/tickets/updateEscalate/' + selectedTicketId;
 
                 // undo button style
-                document.getElementById('undobutton').style.display = 'block';
-            });
+                // document.getElementById('undobutton').style.display = 'block';
+            })
 
-            document.getElementById('undobutton').addEventListener('click', function () {
-                // Get selectedTicketId and staffId
-                var selectedTicketId = document.getElementById('select-ticket').value;
-                var staffId =<?= $identity->get('id'); ?> /* current staffId */;
-                console.log(staffId); // check
-                console.log(selectedTicketId); // check
-                // Construct the URL with both selectedTicketId and staffId
-                var url = '/team010-app_fit3048/tickets/undoEscalate/' + selectedTicketId ;
 
-                // Redirect to undoEscalate with both parameters
-                window.location.href = url;
-            });
         </script>
 
 

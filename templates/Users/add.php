@@ -94,23 +94,29 @@
                                     <small class="form-text text-muted">At least 8 characters with at least one number.</small>
                                 </div>
 
-                                <small class="text-muted" style="font-style: italic;">Please note: Setting a user to Admin will give them control over ALL other accounts. Including this one. Use this sparingly.</small>
+                                <small class="text-muted" style="font-style: italic;">Please note: Setting a user to Admin will give them control over ALL other accounts. With exception to Root. Use this sparingly.</small>
 <!--                                    <div class="form-group" style="display: flex; align-items: center;">-->
 <!--                                        --><?php //= $this->Form->label('Set User As Admin?', null, ['class' => 'col-form-label', 'style' => 'margin-right: 10px;']) ?>
 <!--                                        --><?php //= $this->Form->control('admin_status', ['label' => false, 'class' => 'form-control']) ?>
 <!--                                    </div>-->
+
+                                <?php
+                                // Assuming $role_choice is an array of options
+                                $filteredRoleChoice = array_filter($role_choice, function ($value) {
+                                    return $value !== 'Root'; // Filter out the 'Root' option
+                                });
+                                ?>
 
                                 <div class="form-group" style="display: flex; align-items: center;">
                                     <?= $this->Form->label('Staff Role Privileges', null, ['class' => 'col-form-label', 'style' => 'margin-right: 10px;']) ?>
                                     <?=
                                     $this->Form->control('role', [
                                         'type' => 'select',
-                                        'options' => $role_choice,
+                                        'options' => $filteredRoleChoice, // Use the filtered array
                                         'label' => false,
                                     ]); ?>
                                 </div>
 
-                                <h1> REMOVE ROOT OPTION FROM USERS (staff member) CONTROLLER WHEN WE ABOUT TO DEPLOY THIS, ALSO REMOVE THIS TEXT</h1>
 
                                 <br>
                                 <div class="form-group d-flex justify-content-between align-items-center">

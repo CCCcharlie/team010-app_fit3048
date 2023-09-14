@@ -2,6 +2,8 @@
 declare(strict_types=1);
 
 namespace App\Controller;
+use Cake\Error\FatalErrorException;
+use Cake\Event\EventInterface;
 use Cake\ORM\TableRegistry;
 /**
  * Customers Controller
@@ -11,6 +13,62 @@ use Cake\ORM\TableRegistry;
  */
 class CustomersController extends AppController
 {
+
+    public function beforeFilter(EventInterface $event)
+    {
+        parent::beforeFilter($event);
+
+        // Since theres a bug where doing before filter here does not redirect authentication properly to login, this is
+        // more or less a bandaid fix, this should be included in every beforeFilter code of controller where there is
+        // a need of user privileges, example below:
+        if($this->checkLoggedIn() === null){
+            return $this->redirect(['controller' => 'Auth', 'action' => 'login']);
+        }
+
+        $action = $this->getRequest()->getParam('action');
+        $loggedInRole = $this->Authentication->getIdentity()->role;
+
+        if ($loggedInRole === 'user') {
+            if ($action === 'assigntome' || $action === 'view') {
+                //do nothing, user is allowed to access assigntome and view customers
+            } else {
+                $this->Flash->error(__('Insufficient privileges'));
+                return $this->redirect(['action' => 'assigntome']);}
+        }
+
+        // Blacklist these pages for "staff" members
+        //  archiveindex, archiveddeleteprofiles, escalatetome
+        if($loggedInRole === 'staff') {
+            if($action === 'archiveindex' || $action === 'archiveddeleteprofiles' || $action === 'escalatetome' ) {
+                $this->Flash->error(__('Insufficient privileges'));
+                return $this->redirect(['action' => 'assigntome']);
+            }
+        }
+    }
+
+
+    /**
+     * Controller initialize override
+     *
+     * @return void
+     */
+    public function initialize(): void {
+        parent::initialize();
+
+        //Now I know duplicate code fragments is bad practice and makes it hard to maintain, but I have no Idea why contentBlocks was not being retrieved from
+        // AppController.php as login function seems to execute first before beforerender of AppController is called
+        // Load keys from ContentBlocks
+        $this->contentBlocks = $this
+            ->fetchTable('Cb')
+            ->find('list', [
+                'keyField' => 'hint',
+                'valueField' => 'content_value'
+            ])
+            ->toArray();
+    }
+
+
+
     /**
      * Index method
      *
@@ -88,8 +146,16 @@ class CustomersController extends AppController
 
     public function archiveddeleteprofiles()
     {
+        // Access ContentBlocks from the initialize function
+        $contentBlocks = $this->contentBlocks;
+
+        $getArchivedTime = (int)$contentBlocks['security_archived_time_ready_delete'];
+        //Set default conditions for CB values if they do not exist, preferably it should never be deleted at this moment
+        if($getArchivedTime === 0) {
+            $getArchivedTime = 5 * 365 * 24 * 60 * 60;
+        }
         // Define the time in seconds for a five-year duration
-        $archivedTimeInSeconds = 5 * 365 * 24 * 60 * 60; // Five years in seconds
+        $archivedTimeInSeconds = $getArchivedTime; // Five years in seconds
 
         $query = $this->Customers->find();
 
@@ -192,9 +258,6 @@ class CustomersController extends AppController
  */
     public function assigntome()
     {
-
-
-
         // Get the current user id
         $identity = $this->request->getAttribute('authentication')->getIdentity();
         $currentStaffId = $identity->get('id');
@@ -453,6 +516,56 @@ class CustomersController extends AppController
 
         return $this->redirect(['action' => 'index']); // Redirect to a suitable page
     }
+
+
+    public function deleteArchivedProfiles()
+    {
+        // Define the time in seconds for a five-year duration
+        $archivedTimeInSeconds = 5 * 365 * 24 * 60 * 60; // Five years in seconds
+
+        // Calculate the timestamp for the threshold
+        $currentTimestamp = time();
+        $archivedTimeAgo = $currentTimestamp - $archivedTimeInSeconds;
+        $thresholdDate = date('Y-m-d H:i:s', $archivedTimeAgo);
+
+        // Find and delete the archived customer profiles
+        $query = $this->Customers->find()
+            ->where([
+                'archive' => 1,
+                'archived_time <' => $thresholdDate,
+            ]);
+
+        foreach ($query as $customer) {
+            // Delete associated contents
+            $this->deleteContentsForCustomer($customer->id);
+
+            // Delete the customer profile
+            if ($this->Customers->delete($customer)) {
+                $this->Flash->success(__('Archived customer profiles that meet the criteria have been deleted.'));
+            } else {
+                $this->Flash->error(__('Unable to delete some archived customer profiles.'));
+            }
+        }
+
+        return $this->redirect(['action' => 'index']); // Redirect to a suitable page
+    }
+
+    private function deleteContentsForCustomer($customerId)
+    {
+        $ticketsTable = TableRegistry::getTableLocator()->get('Tickets');
+        $tickets = $ticketsTable->find()->where(['cust_id' => $customerId]);
+
+        foreach ($tickets as $ticket) {
+            $contentsTable = TableRegistry::getTableLocator()->get('Contents');
+            $contents = $contentsTable->find()->where(['ticket_id' => $ticket->id]);
+
+            foreach ($contents as $content) {
+                $contentsTable->delete($content);
+            }
+        }
+    }
+
+
 
 
     /**

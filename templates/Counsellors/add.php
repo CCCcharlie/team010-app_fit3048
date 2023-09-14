@@ -65,12 +65,6 @@
                                     <?= $this->Form->error('notes'); ?>
                                 </div>
                                 <div class="form-group">
-                                    <?= $this->Form->label('cust_id', 'Customer', ['class' => 'col-form-label']) ?>
-                                    <?= $this->Form->input('cust_id', ['options' => $customers, 'empty' => true, 'class' => 'form-control']) ?>
-                                    <!-- Display validation error for the 'cust_id' field -->
-                                    <?= $this->Form->error('cust_id'); ?>
-                                </div>
-                                <div class="form-group">
                                     <?= $this->Form->label('contact', 'Contact', ['class' => 'col-form-label']) ?>
                                     <?= $this->Form->input('contact', ['class' => 'form-control', 'maxlength' => 500]) ?>
                                     <!-- Display validation error for the 'contact' field -->

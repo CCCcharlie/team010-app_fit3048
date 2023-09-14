@@ -26,9 +26,6 @@
     <?= $this->Html->css(['fontawesome-all'], ['block' => true]) ?>
 
     <style>
-        .side-nav a,
-        .top-nav-links a,
-        th a,
         .actions a {
              color: #ffffff;
         }

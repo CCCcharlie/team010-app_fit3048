@@ -99,7 +99,11 @@
                                         </div>
                                     </fieldset>
                                     <div class="form-group d-flex justify-content-between align-items-center">
-                                        <?= $this->Html->link(__('Return to Customer'), ['controller' => 'Customers', 'action' => 'view', $custId], ['class' => 'btn btn-rounded btn-secondary']) ?>
+                                        <?= $this->Html->link(__('Return to Customer'), isset($custId)
+                                            ? ['controller' => 'Customers', 'action' => 'view', $custId]
+                                            : ['controller' => 'Tickets', 'action' => 'unassigned'],
+                                            ['class' => 'btn btn-rounded btn-secondary']) ?>
+
                                         <?= $this->Form->button(__('Submit'), ['class' => 'btn btn-primary']) ?>
         <!--              undo originalData not passing            debug($originalData);           -->
         <!--                                      --><?php //=  $this->getRequest()->getSession()->write('originalData', $originalData);?>

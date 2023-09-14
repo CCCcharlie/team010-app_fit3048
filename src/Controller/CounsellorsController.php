@@ -116,8 +116,7 @@ class CounsellorsController extends AppController
         if ($this->request->is(['patch', 'post', 'put'])) {
             $counsellor = $this->Counsellors->patchEntity($counsellor, $this->request->getData());
             if ($this->Counsellors->save($counsellor)) {
-                $this->Flash->success(__('The counsellor has been saved.'));
-
+                $this->Flash->success(__('The counsellor:  "'. $counsellor->f_name . '" has been successfully edited'));
                 return $this->redirect(['controller' => 'Customers', 'action' => 'view', $custId]);
             }
             $this->Flash->error(__('The counsellor could not be saved. Please, try again.'));

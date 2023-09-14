@@ -284,7 +284,10 @@ class AuthController extends AppController {
             $fallbackLocation = ['controller' => 'Customers', 'action' => 'index'];
 
             // Redirect the user to the location they're trying to access
-            return $this->redirect($this->Authentication->getLoginRedirect() ?? $fallbackLocation);
+//            return $this->redirect($this->Authentication->getLoginRedirect() ?? $fallbackLocation);
+            // Because assigntome is available to all, to prevent unecessary flash errors, redirect them there
+
+            return $this->redirect(['controller' => 'Customers', 'action' => 'assigntome']);
         }
 
         // Display an error if the user submitted their credentials but authentication or reCAPTCHA failed
@@ -304,8 +307,8 @@ class AuthController extends AppController {
             $this->request->getSession()->write('login_attempts', ['count' => $totalAttempts, 'last_attempt_time' => $currentTime]);
 
             // Display the appropriate error message
-            debug($totalAttempts);
-            debug($maxAttemptsBeforeTimeout);
+//            debug($totalAttempts);
+//            debug($maxAttemptsBeforeTimeout);
             if ($totalAttempts > $maxAttemptsBeforeTimeout + 2) {
                 $this->Flash->error("Too many unsuccessful attempts. You are locked out.");
             } elseif (!$recaptchaResult['success']) {

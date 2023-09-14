@@ -2,6 +2,8 @@
 declare(strict_types=1);
 
 namespace App\Controller;
+use Cake\Error\FatalErrorException;
+use Cake\Event\EventInterface;
 use Cake\ORM\TableRegistry;
 /**
  * Customers Controller
@@ -11,6 +13,62 @@ use Cake\ORM\TableRegistry;
  */
 class CustomersController extends AppController
 {
+
+    public function beforeFilter(EventInterface $event)
+    {
+        parent::beforeFilter($event);
+
+        // Since theres a bug where doing before filter here does not redirect authentication properly to login, this is
+        // more or less a bandaid fix, this should be included in every beforeFilter code of controller where there is
+        // a need of user privileges, example below:
+        if($this->checkLoggedIn() === null){
+            return $this->redirect(['controller' => 'Auth', 'action' => 'login']);
+        }
+
+        $action = $this->getRequest()->getParam('action');
+        $loggedInRole = $this->Authentication->getIdentity()->role;
+
+        if ($loggedInRole === 'user') {
+            if ($action === 'assigntome' || $action === 'view') {
+                //do nothing, user is allowed to access assigntome and view customers
+            } else {
+                $this->Flash->error(__('Insufficient privileges'));
+                return $this->redirect(['action' => 'assigntome']);}
+        }
+
+        // Blacklist these pages for "staff" members
+        //  archiveindex, archiveddeleteprofiles, escalatetome
+        if($loggedInRole === 'staff') {
+            if($action === 'archiveindex' || $action === 'archiveddeleteprofiles' || $action === 'escalatetome' ) {
+                $this->Flash->error(__('Insufficient privileges'));
+                return $this->redirect(['action' => 'assigntome']);
+            }
+        }
+    }
+
+
+    /**
+     * Controller initialize override
+     *
+     * @return void
+     */
+    public function initialize(): void {
+        parent::initialize();
+
+        //Now I know duplicate code fragments is bad practice and makes it hard to maintain, but I have no Idea why contentBlocks was not being retrieved from
+        // AppController.php as login function seems to execute first before beforerender of AppController is called
+        // Load keys from ContentBlocks
+        $this->contentBlocks = $this
+            ->fetchTable('Cb')
+            ->find('list', [
+                'keyField' => 'hint',
+                'valueField' => 'content_value'
+            ])
+            ->toArray();
+    }
+
+
+
     /**
      * Index method
      *
@@ -88,8 +146,16 @@ class CustomersController extends AppController
 
     public function archiveddeleteprofiles()
     {
+        // Access ContentBlocks from the initialize function
+        $contentBlocks = $this->contentBlocks;
+
+        $getArchivedTime = (int)$contentBlocks['security_archived_time_ready_delete'];
+        //Set default conditions for CB values if they do not exist, preferably it should never be deleted at this moment
+        if($getArchivedTime === 0) {
+            $getArchivedTime = 5 * 365 * 24 * 60 * 60;
+        }
         // Define the time in seconds for a five-year duration
-        $archivedTimeInSeconds = 5 * 365 * 24 * 60 * 60; // Five years in seconds
+        $archivedTimeInSeconds = $getArchivedTime; // Five years in seconds
 
         $query = $this->Customers->find();
 
@@ -192,9 +258,6 @@ class CustomersController extends AppController
  */
     public function assigntome()
     {
-
-
-
         // Get the current user id
         $identity = $this->request->getAttribute('authentication')->getIdentity();
         $currentStaffId = $identity->get('id');

@@ -294,13 +294,34 @@ to get the name or any value in the staff table, use the get and then the name o
                             <?php
                             $options = [];
                             foreach ($assigntickets as $ticket) {
-                                $options[$ticket->id] = $ticket->title;
+                                if ($ticket->cust_id === $customer->id) {
+                                    $options[$ticket->id] = $ticket->title;
+                                }
                             }
                             echo $this->Form->select('selected_ticket', $options, [
                                 'class' => 'form-control',
                                 'id' => 'select-ticket',
                             ]);
                             ?>
+                        </div>
+
+
+
+
+
+<!--                                                                        <div class="form-group">-->
+<!--                            --><?php //= $this->Form->label('selected_ticket', 'Select Ticket', ['class' => 'col-form-label']) ?>
+<!--                            --><?php
+//                            $options = [];
+//                            foreach ($assigntickets as $ticket) {
+//                                $options[$ticket->id] = $ticket->title;
+//                            }
+//                            echo $this->Form->select('selected_ticket', $options, [
+//                                'class' => 'form-control',
+//                                'id' => 'select-ticket',
+//                            ]);
+//                            ?>
+
                         </div>
 
                         <button id="navigate-button" class="btn btn-primary">Escalate the customer</button>
@@ -416,6 +437,7 @@ to get the name or any value in the staff table, use the get and then the name o
             document.getElementById('navigate-button').addEventListener('click', function () {
                 // get ticketID
                  selectedTicketId = document.getElementById('select-ticket').value;
+
 
                 // refer to the update
                 // window.location.href = '/team010-app_fit3048/tickets/edit/' + selectedTicketId;

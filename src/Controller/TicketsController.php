@@ -315,7 +315,8 @@ class TicketsController extends AppController
 
         // base on id get the tickets
         $ticket = $this->Tickets->get($id);
-
+debug($id);
+exit();
         // update "escalate" to true（1）
         $ticket->escalate = true;
         $ticket->staff_id = 2;

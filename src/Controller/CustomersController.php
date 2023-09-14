@@ -37,9 +37,9 @@ class CustomersController extends AppController
         }
 
         // Blacklist these pages for "staff" members
-        //  archiveindex, archiveddeleteprofiles, escalatetome
+        //  archiveddeleteprofiles, escalatetome
         if($loggedInRole === 'staff') {
-            if($action === 'archiveindex' || $action === 'archiveddeleteprofiles' || $action === 'escalatetome' ) {
+            if($action === 'archiveddeleteprofiles' || $action === 'escalatetome' ) {
                 $this->Flash->error(__('Insufficient privileges'));
                 return $this->redirect(['action' => 'assigntome']);
             }
@@ -267,11 +267,13 @@ class CustomersController extends AppController
             ->innerJoinWith('Tickets', function ($query) use ($currentStaffId) {
                 return $query->where([
                     'Tickets.staff_id' => $currentStaffId,
-                    'Tickets.closetime IS NULL'
                 ]);
             })
             ->distinct(['Customers.id'])// Add this line to ensure distinct customers
             ->all();
+
+//        debug($assignedCustomers);
+//        exit;
 
 //debug($assignedCustomers);
 //exit;

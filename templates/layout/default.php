@@ -130,12 +130,17 @@
                                         <!-- Change my link to assigned to me page when done. -->
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link" href="/customers">View All</a>
+                                        <a class="nav-link" href="/customers">View All Customers</a>
                                     </li>
                                     <li class="nav-item">
                                         <a class="nav-link" href="/customers/add">Add a Customer
                                             Profile</a>
                                     </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="/customers/archiveindex"> View all archived profiles</a>
+                                    </li>
+
+
                                 </ul>
                             </div>
                         </li>
@@ -151,11 +156,19 @@
                                 <ul class="nav flex-column">
                                     <li class="nav-item">
                                         <a class="nav-link" href="/Users/">View All Staff Accounts</a>
+                                    </li>
+                                    <li class="nav-item">
                                         <a class="nav-link" href="/tickets/unassigned">View unassigned tickets</a>
-                                        <a class="nav-link" href="/counsellors">View counsellors</a>
+                                    </li>
+                                    <li class="nav-item">
                                         <a class="nav-link" href="/customers/escalatetome"> View the escalated customer  </a>
+                                    </li>
+                                    <li class="nav-item">
                                         <a class="nav-link" href="/cb"> Edit Contents  </a>
-
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="/customers/archiveddeleteprofiles"> View outdated profiles </a>
+                                    </li>
 
                                     </li>
                                 </ul>

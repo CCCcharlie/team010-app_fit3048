@@ -155,12 +155,6 @@ to get the name or any value in the staff table, use the get and then the name o
                             <?= $this->Form->button(__('Search'), ['class' => 'btn btn-primary custom-button']) ?>
                             <?= $this->Form->end() ?>
 
-                            <button id="table-view-btn" type="button" class="btn btn-primary custom-button">
-                                Table View
-                            </button>
-                            <button id="list-view-btn" type="button" class="btn btn-primary custom-button">List
-                                View
-                            </button>
 
                         </div>
                     </div>

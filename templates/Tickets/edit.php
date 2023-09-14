@@ -101,7 +101,7 @@
                                     <div class="form-group d-flex justify-content-between align-items-center">
                                         <?= $this->Html->link(__('Return to Customer'), isset($custId)
                                             ? ['controller' => 'Customers', 'action' => 'view', $custId]
-                                            : ['controller' => 'UnassignedTickets', 'action' => 'index'],
+                                            : ['controller' => 'Tickets', 'action' => 'unassigned'],
                                             ['class' => 'btn btn-rounded btn-secondary']) ?>
 
                                         <?= $this->Form->button(__('Submit'), ['class' => 'btn btn-primary']) ?>

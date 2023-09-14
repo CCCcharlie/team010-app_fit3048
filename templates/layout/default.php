@@ -117,159 +117,63 @@
                         <li class="nav-divider">
                             Menu
                         </li>
-                            <!-- User Navbar view -->
-                            <?php if ($this->Identity->get('role') === 'user'): ?>
-                                <li class="nav-item ">
-                                    <a class="nav-link active" href="#" data-toggle="collapse" aria-expanded="true"
-                                       data-target="#submenu-1" aria-controls="submenu-1"><i
-                                            class="fa fa-fw fa-user-circle"></i>Customer Management <span
-                                            class="badge badge-success">6</span></a>
-                                    <div id="submenu-1" class="submenu show" style="">
-                                        <ul class="nav flex-column">
-                                            <li class="nav-item">
-                                                <a class="nav-link" href="/customers/assigntome">Assigned Customers</a>
-                                                <!-- Change my link to assigned to me page when done. -->
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </li>
-                            <!-- End User Navbar view -->
+                        <li class="nav-item ">
+                            <a class="nav-link active" href="#" data-toggle="collapse" aria-expanded="true"
+                               data-target="#submenu-1" aria-controls="submenu-1"><i
+                                    class="fa fa-fw fa-user-circle"></i>Customer Management <span
+                                    class="badge badge-success">6</span></a>
+                            <div id="submenu-1" class="submenu show" style="">
+                                <ul class="nav flex-column">
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="/customers/assigntome">Assigned Customers</a>
 
-                            <!-- Staff view -->
-                            <?php elseif($this->Identity->get('role') === 'staff'): ?>
-                                <li class="nav-item ">
-                                    <a class="nav-link active" href="#" data-toggle="collapse" aria-expanded="true"
-                                       data-target="#submenu-1" aria-controls="submenu-1"><i
-                                            class="fa fa-fw fa-user-circle"></i>Customer Management <span
-                                            class="badge badge-success">6</span></a>
-                                    <div id="submenu-1" class="submenu show" style="">
-                                        <ul class="nav flex-column">
-                                            <li class="nav-item">
-                                                <a class="nav-link" href="/customers/assigntome">Assigned Customers</a>
+                                        <!-- Change my link to assigned to me page when done. -->
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="/customers">View All Customers</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="/customers/add">Add a Customer
+                                            Profile</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="/customers/archiveindex"> View all archived profiles</a>
+                                    </li>
 
-                                                <!-- Change my link to assigned to me page when done. -->
-                                            </li>
-                                            <li class="nav-item">
-                                                <a class="nav-link" href="/customers">View All</a>
-                                            </li>
-                                            <li class="nav-item">
-                                                <a class="nav-link" href="/customers/add">Add a Customer
-                                                    Profile</a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </li>
-                            <!-- End User Navbar view -->
 
-                            <!-- Admin view -->
-                            <?php elseif($this->Identity->get('role') === 'admin'): ?>
+                                </ul>
+                            </div>
+                        </li>
+                        <li class="nav-divider">
+                            Admin Features
+                            <!-- Change to me admin only visible. -->
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#" data-toggle="collapse" aria-expanded="true"
+                               data-target="#submenu-6" aria-controls="submenu-6"><i class="fa-solid fa-user-tie"></i>Staff
+                                Management</a>
+                            <div id="submenu-6" class="submenu show" style="">
+                                <ul class="nav flex-column">
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="/Users/">View All Staff Accounts</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="/tickets/unassigned">View unassigned tickets</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="/customers/escalatetome"> View the escalated customer  </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="/cb"> Edit Contents  </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="/customers/archiveddeleteprofiles"> View outdated profiles </a>
+                                    </li>
 
-                                <li class="nav-item ">
-                                    <a class="nav-link active" href="#" data-toggle="collapse" aria-expanded="true"
-                                       data-target="#submenu-1" aria-controls="submenu-1"><i
-                                            class="fa fa-fw fa-user-circle"></i>Customer Management <span
-                                            class="badge badge-success">6</span></a>
-                                    <div id="submenu-1" class="submenu show" style="">
-                                        <ul class="nav flex-column">
-                                            <li class="nav-item">
-                                                <a class="nav-link" href="/customers/assigntome">Assigned Customers</a>
-
-                                                <!-- Change my link to assigned to me page when done. -->
-                                            </li>
-                                            <li class="nav-item">
-                                                <a class="nav-link" href="/customers">View All</a>
-                                            </li>
-                                            <li class="nav-item">
-                                                <a class="nav-link" href="/customers/add">Add a Customer
-                                                    Profile</a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </li>
-                                <li class="nav-divider">
-                                    Admin Features
-                                    <!-- Change to me admin only visible. -->
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="#" data-toggle="collapse" aria-expanded="true"
-                                       data-target="#submenu-6" aria-controls="submenu-6"><i class="fa-solid fa-user-tie"></i>Staff
-                                        Management</a>
-                                    <div id="submenu-6" class="submenu show" style="">
-                                        <ul class="nav flex-column">
-                                            <li class="nav-item">
-                                                <a class="nav-link" href="/Users/">View All Staff Accounts</a>
-                                            </li>
-                                            <li class="nav-item">
-                                                <a class="nav-link" href="/tickets/unassigned">View unassigned tickets</a>
-                                            </li>
-                                            <li class="nav-item">
-                                                <a class="nav-link" href="/customers/escalatetome"> View the escalated customer  </a>
-                                            </li>
-                                            <li class="nav-item">
-                                                <a class="nav-link" href="/cb"> Edit Contents  </a>
-                                            </li>
-                                            <li class="nav-item">
-                                                <a class="nav-link" href="/customers/archiveddeleteprofiles"> View Outdated Profiles </a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </li>
-                            <!-- End Admin view -->
-
-                            <!-- Root view -->
-                            <?php elseif($this->Identity->get('role') === 'root'): ?>
-                                <li class="nav-item ">
-                                    <a class="nav-link active" href="#" data-toggle="collapse" aria-expanded="true"
-                                       data-target="#submenu-1" aria-controls="submenu-1"><i
-                                            class="fa fa-fw fa-user-circle"></i>Customer Management <span
-                                            class="badge badge-success">6</span></a>
-                                    <div id="submenu-1" class="submenu show" style="">
-                                        <ul class="nav flex-column">
-                                            <li class="nav-item">
-                                                <a class="nav-link" href="/customers/assigntome">Assigned Customers</a>
-
-                                                <!-- Change my link to assigned to me page when done. -->
-                                            </li>
-                                            <li class="nav-item">
-                                                <a class="nav-link" href="/customers">View All</a>
-                                            </li>
-                                            <li class="nav-item">
-                                                <a class="nav-link" href="/customers/add">Add a Customer
-                                                    Profile</a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </li>
-                                <li class="nav-divider">
-                                    Admin Features
-                                    <!-- Change to me admin only visible. -->
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="#" data-toggle="collapse" aria-expanded="true"
-                                       data-target="#submenu-6" aria-controls="submenu-6"><i class="fa-solid fa-user-tie"></i>Staff
-                                        Management</a>
-                                    <div id="submenu-6" class="submenu show" style="">
-                                        <ul class="nav flex-column">
-                                            <li class="nav-item">
-                                                <a class="nav-link" href="/Users/">View All Staff Accounts</a>
-                                            </li>
-                                            <li class="nav-item">
-                                                <a class="nav-link" href="/tickets/unassigned">View unassigned tickets</a>
-                                            </li>
-                                            <li class="nav-item">
-                                                <a class="nav-link" href="/customers/escalatetome"> View the escalated customer  </a>
-                                            </li>
-                                            <li class="nav-item">
-                                                <a class="nav-link" href="/cb"> Edit Contents  </a>
-                                            </li>
-                                            <li class="nav-item">
-                                                    <a class="nav-link" href="/customers/archiveddeleteprofiles"> View Outdated Profiles </a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </li>
-                            <!-- End Root view -->
-                            <?php endif ?>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
                     </ul>
                 </div>
             </nav>

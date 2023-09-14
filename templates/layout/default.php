@@ -164,7 +164,7 @@
                                         <a class="nav-link" href="/customers/escalatetome"> View Escalated Customers  </a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link" href="/cb"> Edit Contents  </a>
+                                        <a class="nav-link" href="/cb"> Edit Site Content</a>
                                     </li>
                                     <li class="nav-item">
                                         <a class="nav-link" href="/customers/archiveddeleteprofiles"> View Outdated Profiles </a>

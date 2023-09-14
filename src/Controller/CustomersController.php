@@ -457,8 +457,8 @@ class CustomersController extends AppController
 
     public function deleteArchivedProfiles()
     {
-        // Define the time in seconds (e.g., 300 seconds for 5 minutes)
-        $archivedTimeInSeconds = 300;
+        // Define the time in seconds for a five-year duration
+        $archivedTimeInSeconds = 5 * 365 * 24 * 60 * 60; // Five years in seconds
 
         // Calculate the timestamp for the threshold
         $currentTimestamp = time();

@@ -289,25 +289,25 @@ to get the name or any value in the staff table, use the get and then the name o
 <!--                        upgrade button-->
 
 
-<!--                        <div class="form-group">-->
-<!--                            --><?php //= $this->Form->label('selected_ticket', 'Select Ticket', ['class' => 'col-form-label']) ?>
-<!--                            --><?php
-//                            $options = [];
-//                            foreach ($assigntickets as $ticket) {
-//                                $options[$ticket->id] = $ticket->title;
-//                            }
-//                            echo $this->Form->select('selected_ticket', $options, [
-//                                'class' => 'form-control',
-//                                'id' => 'select-ticket',
-//                            ]);
-//                            ?>
-<!--                        </div>-->
-<!---->
-<!--                        <button id="navigate-button" class="btn btn-primary">Escalate the customer</button>-->
+                        <div class="form-group">
+                            <?= $this->Form->label('selected_ticket', 'Select Ticket', ['class' => 'col-form-label']) ?>
+                            <?php
+                            $options = [];
+                            foreach ($assigntickets as $ticket) {
+                                $options[$ticket->id] = $ticket->title;
+                            }
+                            echo $this->Form->select('selected_ticket', $options, [
+                                'class' => 'form-control',
+                                'id' => 'select-ticket',
+                            ]);
+                            ?>
+                        </div>
+
+                        <button id="navigate-button" class="btn btn-primary">Escalate the customer</button>
 
 
 
-                        <!--                                                --><?php //foreach ($assigntickets as $ticket): ?>
+<!--                                                                        --><?php //foreach ($assigntickets as $ticket): ?>
 <!--                            --><?php //echo $this->Html->link(
 //                                __('Escalate the customer'),
 //                                [
@@ -404,6 +404,7 @@ to get the name or any value in the staff table, use the get and then the name o
             document.getElementById('navigate-button').addEventListener('click', function () {
                 // get ticketID
                  selectedTicketId = document.getElementById('select-ticket').value;
+                sessionStorage.setItem("selectedTicketId", selectedTicketId);
 
                 // refer to the update
                 // window.location.href = '/team010-app_fit3048/tickets/edit/' + selectedTicketId;
@@ -420,12 +421,14 @@ to get the name or any value in the staff table, use the get and then the name o
                 // Get selectedTicketId and staffId
 
                 var staffId =<?= $identity->get('id'); ?> /* current staffId */;
-                console.log(staffId); // check
-                console.log(selectedTicketId); // check
+                var selectedTicketId = sessionStorage.getItem("selectedTicketId");
 
+       console.log(selectedTicketId); // check
                 // Construct the URL with both selectedTicketId and staffId
 
-                // var url = '/team010-app_fit3048/tickets/undoEscalate/' + selectedTicketId +'?staffId=' + staffId;
+                // var url = '/team010-app_fit3048/tickets/undoEscalate/' + 1 +'?staffId=' + staffId;
+
+                var url = '/team010-app_fit3048/tickets/undoEscalate/' + selectedTicketId +'?staffId=' + staffId;
 
                 // Redirect to undoEscalate with both parameters
                 window.location.href = url;

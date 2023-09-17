@@ -294,7 +294,9 @@ to get the name or any value in the staff table, use the get and then the name o
                             <?php
                             $options = [];
                             foreach ($assigntickets as $ticket) {
-                                $options[$ticket->id] = $ticket->title;
+                                if ($ticket ->cust_id == $customer->id) {
+                                    $options[$ticket->id] = $ticket->title;
+                                }
                             }
                             echo $this->Form->select('selected_ticket', $options, [
                                 'class' => 'form-control',
@@ -423,7 +425,7 @@ to get the name or any value in the staff table, use the get and then the name o
                 var staffId =<?= $identity->get('id'); ?> /* current staffId */;
                 var selectedTicketId = sessionStorage.getItem("selectedTicketId");
 
-       console.log(selectedTicketId); // check
+       // console.log(selectedTicketId); // check
                 // Construct the URL with both selectedTicketId and staffId
 
                 // var url = '/team010-app_fit3048/tickets/undoEscalate/' + 1 +'?staffId=' + staffId;

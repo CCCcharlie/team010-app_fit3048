@@ -203,7 +203,7 @@ to get the name or any value in the staff table, use the get and then the name o
                             </tr>
                             <?= $this->Html->link(__('New Customer'), ['action' => 'add'], ['class' => 'btn btn-success float-right']) ?>
                             <!--         Add the "Undo Changes" link with an ID -->
-<!--                            <button id="undobutton" class="btn btn-primary">Unescalate the customer</button>-->
+                            <button id="undobutton" class="btn btn-primary">Unescalate the customer</button>
 
                             <br>
                             <br>
@@ -416,23 +416,11 @@ to get the name or any value in the staff table, use the get and then the name o
 
         <script>
 
-            var selectedTicketId; // declare selectedTicketId
+            var selectedTicketId;
+             // declare selectedTicketId
 
 
-            //document.getElementById('undobutton').addEventListener('click', function () {
-            //    // Get selectedTicketId and staffId
-            //
-            //    var staffId =<?php //= $identity->get('id'); ?>// /* current staffId */;
-            //    console.log(staffId); // check
-            //    console.log(selectedTicketId); // check
-            //
-            //    // Construct the URL with both selectedTicketId and staffId
-            //
-            //    // var url = '/team010-app_fit3048/tickets/undoEscalate/' + selectedTicketId +'?staffId=' + staffId;
-            //
-            //    // Redirect to undoEscalate with both parameters
-            //    window.location.href = url;
-            //});
+
 
             document.getElementById("navigate-button-<?= $customer->id ?>").addEventListener('click', function () {
                 // get ticketID
@@ -448,7 +436,24 @@ to get the name or any value in the staff table, use the get and then the name o
 
                 // undo button style
                 // document.getElementById('undobutton').style.display = 'block';
-            })
+            });
+
+            document.getElementById('undobutton').addEventListener('click', function () {
+                // Get selectedTicketId and staffId
+
+                var staffId =<?= $identity->get('id'); ?> /* current staffId */;
+                console.log(staffId); // check
+                console.log(selectedTicketId); // check
+
+                // Construct the URL with both selectedTicketId and staffId
+
+                // var url = '/team010-app_fit3048/tickets/undoEscalate/' + selectedTicketId +'?staffId=' + staffId;
+
+                // Redirect to undoEscalate with both parameters
+                window.location.href = url;
+            });
+
+
 
 
         </script>

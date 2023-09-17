@@ -347,7 +347,8 @@ class TicketsController extends AppController
     public function undoEscalate($id)
     {
 
-
+debug($id);
+exit();
         $identity = $this->request->getAttribute('authentication')->getIdentity();
         // base on id get the ticket
 

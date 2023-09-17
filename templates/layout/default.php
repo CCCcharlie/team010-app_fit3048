@@ -156,6 +156,9 @@
                                             <a class="nav-link" href="/customers/add">Add a Customer
                                                 Profile</a>
                                         </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="/customers/archiveindex">View All archived profiles</a>
+                                        </li>
                                     </ul>
                                 </div>
                             </li>
@@ -204,9 +207,9 @@
                                         <li class="nav-item">
                                             <a class="nav-link" href="/tickets/unassigned">View unassigned tickets</a>
                                         </li>
-                                        <li class="nav-item">
-                                            <a class="nav-link" href="/customers/escalatetome"> View the escalated customer  </a>
-                                        </li>
+<!--                                        <li class="nav-item">-->
+<!--                                            <a class="nav-link" href="/customers/escalatetome"> View the escalated customer  </a>-->
+<!--                                        </li>-->
                                         <li class="nav-item">
                                             <a class="nav-link" href="/cb"> Edit Contents  </a>
                                         </li>
@@ -236,8 +239,10 @@
                                             <a class="nav-link" href="/customers">View All</a>
                                         </li>
                                         <li class="nav-item">
-                                            <a class="nav-link" href="/customers/add">Add a Customer
-                                                Profile</a>
+                                            <a class="nav-link" href="/customers/add">Add a Customer Profile</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="/customers/archiveindex">View All archived profiles</a>
                                         </li>
                                     </ul>
                                 </div>
@@ -258,9 +263,9 @@
                                         <li class="nav-item">
                                             <a class="nav-link" href="/tickets/unassigned">View unassigned tickets</a>
                                         </li>
-                                        <li class="nav-item">
-                                            <a class="nav-link" href="/customers/escalatetome"> View the escalated customer  </a>
-                                        </li>
+<!--                                        <li class="nav-item">-->
+<!--                                            <a class="nav-link" href="/customers/escalatetome"> View the escalated customer  </a>-->
+<!--                                        </li>-->
                                         <li class="nav-item">
                                             <a class="nav-link" href="/cb"> Edit Contents  </a>
                                         </li>

@@ -55,7 +55,7 @@
                         ?>
                     </td>
                     <td class="actions">
-                        <?= $this->Html->link(__('Re-Assign'), ['action' => 'edit', $ticket->id]) ?>
+                        <?= $this->Html->link(__('Re-Assign'), ['action' => 'editticketunassigned', $ticket->id]) ?>
                     </td>
                 </tr>
             <?php endforeach; ?>

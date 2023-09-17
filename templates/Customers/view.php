@@ -78,9 +78,9 @@ $checkConnection = function (string $name) {
 <body>
 
 <div class="customers view content">
-<!-- ============================================================== -->
-<!-- pageheader -->
-<!-- ============================================================== -->
+    <!-- ============================================================== -->
+    <!-- pageheader -->
+    <!-- ============================================================== -->
     <div class="row">
         <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
             <div class="page-header">
@@ -151,7 +151,7 @@ $checkConnection = function (string $name) {
 
                         <div>
                             <?php if ($customer->archive == 0): ?>
-                            <?= $this->Html->link(__('Edit Customer'), ['action' => 'edit', $customer->id], ['class' => 'btn btn-primary', 'style' => 'justify-content: center; display: flex']) ?>
+                                <?= $this->Html->link(__('Edit Customer'), ['action' => 'edit', $customer->id], ['class' => 'btn btn-primary', 'style' => 'justify-content: center; display: flex']) ?>
                             <?php elseif ($customer->archive == 1): ?>
                                 <?= $this->Form->postLink(
                                     __('Delete The Customers Profile'),
@@ -274,80 +274,80 @@ $checkConnection = function (string $name) {
                                     <div id="allticket">
                                         <!-- If user or staff, only show their tickets -->
                                         <?php if ($this->Identity->get('role') === 'user' || $this->Identity->get('role') === 'staff'): ?>
-                                        <div class="card">
-                                            <p>            <!-- Cards section -->
-                                                <?php foreach ($tickets as $ticket): ?>
-                                                <?php if($this->Identity->get('id') === $ticket->staff_id): ?>
-                                            <div class="col-xl-12 col-lg-12 col-md-12col-sm-12 col-12">
-                                                <div class="card">
-                                                    <?php if ($ticket->closed == true) : ?>
-                                                    <div class="card-header d-flex"
-                                                         style="background-color: lightgray">
-                                                        <?php elseif ($ticket->closed == false) : ?>
+                                            <div class="card">
+                                                <p>            <!-- Cards section -->
+                                                    <?php foreach ($tickets as $ticket): ?>
+                                                    <?php if($this->Identity->get('id') === $ticket->staff_id): ?>
+                                                <div class="col-xl-12 col-lg-12 col-md-12col-sm-12 col-12">
+                                                    <div class="card">
+                                                        <?php if ($ticket->closed == true) : ?>
                                                         <div class="card-header d-flex"
-                                                             style="background-color: #50C878">
-                                                            <?php endif; ?>
-                                                            <div>
-                                                                <h4 class="card-header-title">
-                                                                    Title: <?= h($ticket->title) ?></h4>
-                                                                <h5> Type: <?= h($ticket->type) ?> </h5>
-                                                                <?php if ($ticket->closed == true) : ?>
-                                                                    <h6> Status: Closed </h6>
-                                                                <?php elseif ($ticket->closed == false) : ?>
-                                                                    <h6> Status: Open </h6>
+                                                             style="background-color: lightgray">
+                                                            <?php elseif ($ticket->closed == false) : ?>
+                                                            <div class="card-header d-flex"
+                                                                 style="background-color: #50C878">
                                                                 <?php endif; ?>
-                                                            </div>
-                                                            <?php if ($customer->archive == 0): ?>
-                                                                <div class="toolbar ml-auto">
-                                                                    <?php
-                                                                    //if true means it is closed. Allow option to open ticket
-                                                                    if ($ticket->closed) {
-                                                                        echo $this->Form->postLink(__('Open ticket'), ['controller' => 'Tickets', 'action' => 'update_ticket', $ticket->id], ['class' => 'btn btn-primary', 'confirm' => __("Are you sure you want to Reopen ticket ID: {0} \n Customer: {1} {2} ", $ticket->id, $customer->f_name, $customer->l_name)]);
-                                                                    } else {
-                                                                        echo $this->Form->postLink(__('Close ticket'), ['controller' => 'Tickets', 'action' => 'update_ticket', $ticket->id], ['class' => 'btn btn-close', 'confirm' => __("Are you sure you want to Close ticket ID: {0} \n Customer: {1} {2} ", $ticket->id, $customer->f_name, $customer->l_name)]);
-                                                                    }
-                                                                    ?>
+                                                                <div>
+                                                                    <h4 class="card-header-title">
+                                                                        Title: <?= h($ticket->title) ?></h4>
+                                                                    <h5> Type: <?= h($ticket->type) ?> </h5>
+                                                                    <?php if ($ticket->closed == true) : ?>
+                                                                        <h6> Status: Closed </h6>
+                                                                    <?php elseif ($ticket->closed == false) : ?>
+                                                                        <h6> Status: Open </h6>
+                                                                    <?php endif; ?>
                                                                 </div>
-                                                            <?php endif; ?>
+                                                                <?php if ($customer->archive == 0): ?>
+                                                                    <div class="toolbar ml-auto">
+                                                                        <?php
+                                                                        //if true means it is closed. Allow option to open ticket
+                                                                        if ($ticket->closed) {
+                                                                            echo $this->Form->postLink(__('Open ticket'), ['controller' => 'Tickets', 'action' => 'update_ticket', $ticket->id], ['class' => 'btn btn-primary', 'confirm' => __("Are you sure you want to Reopen ticket ID: {0} \n Customer: {1} {2} ", $ticket->id, $customer->f_name, $customer->l_name)]);
+                                                                        } else {
+                                                                            echo $this->Form->postLink(__('Close ticket'), ['controller' => 'Tickets', 'action' => 'update_ticket', $ticket->id], ['class' => 'btn btn-close', 'confirm' => __("Are you sure you want to Close ticket ID: {0} \n Customer: {1} {2} ", $ticket->id, $customer->f_name, $customer->l_name)]);
+                                                                        }
+                                                                        ?>
+                                                                    </div>
+                                                                <?php endif; ?>
 
-                                                        </div>
-
-
-                                                        <div class="card-body">
-
-                                                            <div class="card-text">
-                                                                <p><span
-                                                                        class="card-info">Ticket ID:</span> <?= h($ticket->id) ?>
-                                                                </p>
-                                                                <p><span
-                                                                        class="card-info">Customer:</span> <?= h($customer->f_name) ?>
-                                                                </p>
-                                                                <p><span
-                                                                        class="card-info">Assigned staff:</span>
-
-                                                                    <?php
-                                                                    if ($ticket->staff_id !== null) {
-                                                                        echo $this->Html->link(__($ticket->user->f_name), ['controller' => 'Users', 'action' => 'view', $ticket->staff_id]);
-                                                                    } else {
-                                                                        echo 'No staff assigned';
-                                                                    }
-                                                                    ?>
-                                                                </p>
-                                                                <p><span
-                                                                        class="card-info">Create time:</span> <?= $ticket->createtime->i18nFormat('yyyy-MM-dd HH:mm:ss', 'Australia/Sydney') ?>
-                                                                </p>
-                                                                <br>
                                                             </div>
-                                                            <div
-                                                                style="display: flex; justify-content: space-between">
-                                                                <a class="btn btn-primary"
-                                                                   data-toggle="collapse"
-                                                                   href="#collapseExample<?= $ticket->id ?>"
-                                                                   role="button" aria-expanded="false"
-                                                                   aria-controls="collapseExample">
-                                                                    Expand Attachments
-                                                                </a>
-                                                                <span>
+
+
+                                                            <div class="card-body">
+
+                                                                <div class="card-text">
+                                                                    <p><span
+                                                                            class="card-info">Ticket ID:</span> <?= h($ticket->id) ?>
+                                                                    </p>
+                                                                    <p><span
+                                                                            class="card-info">Customer:</span> <?= h($customer->f_name) ?>
+                                                                    </p>
+                                                                    <p><span
+                                                                            class="card-info">Assigned staff:</span>
+
+                                                                        <?php
+                                                                        if ($ticket->staff_id !== null) {
+                                                                            echo $this->Html->link(__($ticket->user->f_name), ['controller' => 'Users', 'action' => 'view', $ticket->staff_id]);
+                                                                        } else {
+                                                                            echo 'No staff assigned';
+                                                                        }
+                                                                        ?>
+                                                                    </p>
+                                                                    <p><span
+                                                                            class="card-info">Create time:</span> <?= $ticket->createtime->i18nFormat('yyyy-MM-dd HH:mm:ss', 'Australia/Sydney') ?>
+                                                                    </p>
+                                                                    <br>
+                                                                </div>
+                                                                <div
+                                                                    style="display: flex; justify-content: space-between">
+                                                                    <a class="btn btn-primary"
+                                                                       data-toggle="collapse"
+                                                                       href="#collapseExample<?= $ticket->id ?>"
+                                                                       role="button" aria-expanded="false"
+                                                                       aria-controls="collapseExample">
+                                                                        Expand Attachments
+                                                                    </a>
+                                                                    <span>
                                                         <?php if ($this->Identity->get('role') == 'root' || $this->Identity->get('role') == 'admin'): ?>
                                                             <?php if ($customer->archive == 0): ?>
                                                                 <?php echo $this->Html->link(__('Edit'), ['controller' => 'Tickets', 'action' => 'edit', $ticket->id,
@@ -370,174 +370,174 @@ $checkConnection = function (string $name) {
                                                         <?php else: ?>
                                                         <?php endif; ?>
                                                             </span>
+                                                                </div>
                                                             </div>
-                                                        </div>
-                                                        <!-- In order to show unique collapse for each class, its id must be different. -->
-                                                        <div class="collapse"
-                                                             id="collapseExample<?= $ticket->id ?>">
-                                                            <div class="card card-body">
-                                                                <!-- Because contents is already asked in Customers controller in this query
+                                                            <!-- In order to show unique collapse for each class, its id must be different. -->
+                                                            <div class="collapse"
+                                                                 id="collapseExample<?= $ticket->id ?>">
+                                                                <div class="card card-body">
+                                                                    <!-- Because contents is already asked in Customers controller in this query
 
-                                                                        $tickets = $this->Customers->Tickets->find('all')
-                                                                        ->where(['cust_id' => $customer->id])
-                                                                        ->contain(['Users', 'Contents']) // I want to retrieve the name of the staff (users) & contents, so this is added so I can reference it
-                                                                        ->toArray();
+                                                                            $tickets = $this->Customers->Tickets->find('all')
+                                                                            ->where(['cust_id' => $customer->id])
+                                                                            ->contain(['Users', 'Contents']) // I want to retrieve the name of the staff (users) & contents, so this is added so I can reference it
+                                                                            ->toArray();
 
-                                                                      We can reiterate contents for that ticket here as follows
-                                                                -->
+                                                                          We can reiterate contents for that ticket here as follows
+                                                                    -->
 
-                                                                <!-- In order to pass a query to a controller, must add the '?'. Can be obtained via key value pair in the controller -->
-                                                                <?php if ($customer->archive == 0): ?>
-                                                                    <?= $this->Html->link(__('Add Attachments +'), ['controller' => 'Contents', 'action' => 'add',
-                                                                        '?' => [
-                                                                            'ticket_id' => $ticket->id,
-                                                                            'f_name' => $customer->f_name,
-                                                                            'l_name' => $customer->l_name,
-                                                                            'cust_id' => $customer->id
-                                                                        ],
-                                                                    ], ['class' => 'btn btn-success mt-3', 'style' => 'margin: 10px']); ?>
-                                                                <?php endif; ?>
+                                                                    <!-- In order to pass a query to a controller, must add the '?'. Can be obtained via key value pair in the controller -->
+                                                                    <?php if ($customer->archive == 0): ?>
+                                                                        <?= $this->Html->link(__('Add Attachments +'), ['controller' => 'Contents', 'action' => 'add',
+                                                                            '?' => [
+                                                                                'ticket_id' => $ticket->id,
+                                                                                'f_name' => $customer->f_name,
+                                                                                'l_name' => $customer->l_name,
+                                                                                'cust_id' => $customer->id
+                                                                            ],
+                                                                        ], ['class' => 'btn btn-success mt-3', 'style' => 'margin: 10px']); ?>
+                                                                    <?php endif; ?>
 
 
-                                                                <?php if ($ticket->contents) : ?>
-                                                                    <?php foreach ($ticket->contents as $content): ?>
-                                                                        <div class="card">
-                                                                            <div class="card-body">
-                                                                                <h5 class="card-title">
-                                                                                    Attachment
-                                                                                    Type: <?= $content->content_type ?></h5>
-                                                                                <h6 class="card-title">
-                                                                                    Create
-                                                                                    date: <?= $content->createtime ?></h6>
-                                                                                <p class="card-text"><?= h($content->content) ?></p>
-                                                                                <!-- Why urlencode? because since im storing images as "conversation/image.png", passing $content->content as it is would only pass
-                                                                                     "conversation", not good. As such, as it is passed to download, you must decode it-->
-                                                                                <div
-                                                                                    style="display: flex; justify-content: space-between">
-                                                                                    <?= $this->Html->link('Download Attachment', ['controller' => 'Contents', 'action' => 'download', urlencode($content->content)], ['class' => 'btn btn-primary card__button']) ?>
-                                                                                    <?= $this->Form->postLink(__('Delete'), ['controller' => 'Contents', 'action' => 'delete', $content->id], ['confirm' => __('Are you sure you want to delete this file?'), 'class' => 'btn btn-rounded btn-danger']) ?>
+                                                                    <?php if ($ticket->contents) : ?>
+                                                                        <?php foreach ($ticket->contents as $content): ?>
+                                                                            <div class="card">
+                                                                                <div class="card-body">
+                                                                                    <h5 class="card-title">
+                                                                                        Attachment
+                                                                                        Type: <?= $content->content_type ?></h5>
+                                                                                    <h6 class="card-title">
+                                                                                        Create
+                                                                                        date: <?= $content->createtime ?></h6>
+                                                                                    <p class="card-text"><?= h($content->content) ?></p>
+                                                                                    <!-- Why urlencode? because since im storing images as "conversation/image.png", passing $content->content as it is would only pass
+                                                                                         "conversation", not good. As such, as it is passed to download, you must decode it-->
+                                                                                    <div
+                                                                                        style="display: flex; justify-content: space-between">
+                                                                                        <?= $this->Html->link('Download Attachment', ['controller' => 'Contents', 'action' => 'download', urlencode($content->content)], ['class' => 'btn btn-primary card__button']) ?>
+                                                                                        <?= $this->Form->postLink(__('Delete'), ['controller' => 'Contents', 'action' => 'delete', $content->id], ['confirm' => __('Are you sure you want to delete this file?'), 'class' => 'btn btn-rounded btn-danger']) ?>
+                                                                                    </div>
                                                                                 </div>
                                                                             </div>
+                                                                        <?php endforeach; ?>
+                                                                        <!-- In order to pass a query to a controller, must add the '?'. Can be obtained via key value pair in the controller -->
+                                                                        <?= $this->Html->link(__('Add Attachments +'), ['controller' => 'Contents', 'action' => 'add',
+                                                                            '?' => ['ticket_id' => $ticket->id,
+                                                                                'f_name' => $customer->f_name,
+                                                                                'l_name' => $customer->l_name,
+                                                                                'cust_id' => $customer->id
+                                                                            ],
+                                                                        ], ['class' => 'btn btn-success mt-3', 'style' => 'margin: 10px']); ?>
+                                                                    <?php else: ?>
+                                                                        <div class="card">
+                                                                            <div class="card-body">
+                                                                                <p> No attachments </p>
+                                                                            </div>
                                                                         </div>
-                                                                    <?php endforeach; ?>
-                                                                    <!-- In order to pass a query to a controller, must add the '?'. Can be obtained via key value pair in the controller -->
-                                                                    <?= $this->Html->link(__('Add Attachments +'), ['controller' => 'Contents', 'action' => 'add',
-                                                                        '?' => ['ticket_id' => $ticket->id,
-                                                                            'f_name' => $customer->f_name,
-                                                                            'l_name' => $customer->l_name,
-                                                                            'cust_id' => $customer->id
-                                                                        ],
-                                                                    ], ['class' => 'btn btn-success mt-3', 'style' => 'margin: 10px']); ?>
-                                                                <?php else: ?>
-                                                                    <div class="card">
-                                                                        <div class="card-body">
-                                                                            <p> No attachments </p>
-                                                                        </div>
-                                                                    </div>
-                                                                <?php endif; ?>
+                                                                    <?php endif; ?>
+                                                                </div>
                                                             </div>
                                                         </div>
                                                     </div>
+
+                                                    <?php else: ?>
+                                                        <!-- Dont display any tickets -->
+                                                    <?php endif ?>
+                                                    <?php endforeach ?>
+                                                    <!-- End card section -->
+                                                    </p>
                                                 </div>
-
-                                                <?php else: ?>
-                                                    <!-- Dont display any tickets -->
-                                                <?php endif ?>
-                                                <?php endforeach ?>
-                                                <!-- End card section -->
-                                                </p>
                                             </div>
-                                        </div>
 
-                                        <!-- if its an admin or root, show all -->
+                                            <!-- if its an admin or root, show all -->
                                         <?php else: ?>
-                                        <div class="card">
-                                            <p>            <!-- Cards section -->
-                                                <?php foreach ($tickets as $ticket): ?>
-                                            <div class="col-xl-12 col-lg-12 col-md-12col-sm-12 col-12">
-                                                <div class="card">
-                                                    <?php if ($ticket->closed == true) : ?>
-                                                    <div class="card-header d-flex"
-                                                         style="background-color: lightgray">
-                                                        <?php elseif ($ticket->closed == false) : ?>
+                                            <div class="card">
+                                                <p>            <!-- Cards section -->
+                                                    <?php foreach ($tickets as $ticket): ?>
+                                                <div class="col-xl-12 col-lg-12 col-md-12col-sm-12 col-12">
+                                                    <div class="card">
+                                                        <?php if ($ticket->closed == true) : ?>
                                                         <div class="card-header d-flex"
-                                                             style="background-color: #50C878">
-                                                            <?php endif; ?>
-                                                            <div>
-                                                                <h4 class="card-header-title">
-                                                                    Title: <?= h($ticket->title) ?></h4>
-                                                                <h5> Type: <?= h($ticket->type) ?> </h5>
-                                                                <?php if ($ticket->closed == true) : ?>
-                                                                    <h6> Status: Closed </h6>
-                                                                <?php elseif ($ticket->closed == false) : ?>
-                                                                    <h6> Status: Open </h6>
+                                                             style="background-color: lightgray">
+                                                            <?php elseif ($ticket->closed == false) : ?>
+                                                            <div class="card-header d-flex"
+                                                                 style="background-color: #50C878">
                                                                 <?php endif; ?>
-                                                            </div>
-                                                            <?php if ($customer->archive == 0): ?>
-                                                                <div class="toolbar ml-auto">
-                                                                    <?php
-                                                                    //if true means it is closed. Allow option to open ticket
-                                                                    if ($ticket->closed) {
-                                                                        echo $this->Form->postLink(__('Open ticket'), ['controller' => 'Tickets', 'action' => 'update_ticket', $ticket->id], ['class' => 'btn btn-primary', 'confirm' => __("Are you sure you want to Reopen ticket ID: {0} \n Customer: {1} {2} ", $ticket->id, $customer->f_name, $customer->l_name)]);
-                                                                    } else {
-                                                                        echo $this->Form->postLink(__('Close ticket'), ['controller' => 'Tickets', 'action' => 'update_ticket', $ticket->id], ['class' => 'btn btn-close', 'confirm' => __("Are you sure you want to Close ticket ID: {0} \n Customer: {1} {2} ", $ticket->id, $customer->f_name, $customer->l_name)]);
-                                                                    }
-                                                                    ?>
+                                                                <div>
+                                                                    <h4 class="card-header-title">
+                                                                        Title: <?= h($ticket->title) ?></h4>
+                                                                    <h5> Type: <?= h($ticket->type) ?> </h5>
+                                                                    <?php if ($ticket->closed == true) : ?>
+                                                                        <h6> Status: Closed </h6>
+                                                                    <?php elseif ($ticket->closed == false) : ?>
+                                                                        <h6> Status: Open </h6>
+                                                                    <?php endif; ?>
                                                                 </div>
-                                                            <?php endif; ?>
+                                                                <?php if ($customer->archive == 0): ?>
+                                                                    <div class="toolbar ml-auto">
+                                                                        <?php
+                                                                        //if true means it is closed. Allow option to open ticket
+                                                                        if ($ticket->closed) {
+                                                                            echo $this->Form->postLink(__('Open ticket'), ['controller' => 'Tickets', 'action' => 'update_ticket', $ticket->id], ['class' => 'btn btn-primary', 'confirm' => __("Are you sure you want to Reopen ticket ID: {0} \n Customer: {1} {2} ", $ticket->id, $customer->f_name, $customer->l_name)]);
+                                                                        } else {
+                                                                            echo $this->Form->postLink(__('Close ticket'), ['controller' => 'Tickets', 'action' => 'update_ticket', $ticket->id], ['class' => 'btn btn-close', 'confirm' => __("Are you sure you want to Close ticket ID: {0} \n Customer: {1} {2} ", $ticket->id, $customer->f_name, $customer->l_name)]);
+                                                                        }
+                                                                        ?>
+                                                                    </div>
+                                                                <?php endif; ?>
 
-                                                        </div>
-
-
-                                                        <div class="card-body">
-
-                                                            <div class="card-text">
-                                                                <p><span
-                                                                        class="card-info">Ticket ID:</span> <?= h($ticket->id) ?>
-                                                                </p>
-                                                                <p><span
-                                                                        class="card-info">Customer:</span> <?= h($customer->f_name) ?>
-                                                                </p>
-                                                                <p><span
-                                                                        class="card-info">Assigned staff:</span>
-
-                                                                    <?php
-                                                                    if ($ticket->staff_id !== null) {
-                                                                        echo $this->Html->link(__($ticket->user->f_name), ['controller' => 'Users', 'action' => 'view', $ticket->staff_id]);
-                                                                    } else {
-                                                                        echo 'No staff assigned';
-                                                                    }
-                                                                    ?>
-                                                                </p>
-                                                                <p><span
-                                                                        class="card-info">Create time:</span> <?= $ticket->createtime->i18nFormat('yyyy-MM-dd HH:mm:ss', 'Australia/Sydney') ?>
-                                                                </p>
-                                                                <br>
                                                             </div>
-                                                            <div
-                                                                style="display: flex; justify-content: space-between">
-                                                                <a class="btn btn-primary"
-                                                                   data-toggle="collapse"
-                                                                   href="#collapseExample<?= $ticket->id ?>"
-                                                                   role="button" aria-expanded="false"
-                                                                   aria-controls="collapseExample">
-                                                                    Expand Attachments
-                                                                </a>
-                                                                <span>
+
+
+                                                            <div class="card-body">
+
+                                                                <div class="card-text">
+                                                                    <p><span
+                                                                            class="card-info">Ticket ID:</span> <?= h($ticket->id) ?>
+                                                                    </p>
+                                                                    <p><span
+                                                                            class="card-info">Customer:</span> <?= h($customer->f_name) ?>
+                                                                    </p>
+                                                                    <p><span
+                                                                            class="card-info">Assigned staff:</span>
+
+                                                                        <?php
+                                                                        if ($ticket->staff_id !== null) {
+                                                                            echo $this->Html->link(__($ticket->user->f_name), ['controller' => 'Users', 'action' => 'view', $ticket->staff_id]);
+                                                                        } else {
+                                                                            echo 'No staff assigned';
+                                                                        }
+                                                                        ?>
+                                                                    </p>
+                                                                    <p><span
+                                                                            class="card-info">Create time:</span> <?= $ticket->createtime->i18nFormat('yyyy-MM-dd HH:mm:ss', 'Australia/Sydney') ?>
+                                                                    </p>
+                                                                    <br>
+                                                                </div>
+                                                                <div
+                                                                    style="display: flex; justify-content: space-between">
+                                                                    <a class="btn btn-primary"
+                                                                       data-toggle="collapse"
+                                                                       href="#collapseExample<?= $ticket->id ?>"
+                                                                       role="button" aria-expanded="false"
+                                                                       aria-controls="collapseExample">
+                                                                        Expand Attachments
+                                                                    </a>
+                                                                    <span>
                                                         <?php if ($this->Identity->get('role') == 'root' || $this->Identity->get('role') == 'admin'): ?>
-                                                                    <?php if ($customer->archive == 0): ?>
-                                                            <?php echo $this->Html->link(__('Edit'), ['controller' => 'Tickets', 'action' => 'edit', $ticket->id,
-                                                                '?' => [
-                                                                    'f_name' => $customer->f_name,
-                                                                    'l_name' => $customer->l_name,
-                                                                    'cust_id' => $customer->id,
+                                                            <?php if ($customer->archive == 0): ?>
+                                                                <?php echo $this->Html->link(__('Edit'), ['controller' => 'Tickets', 'action' => 'edit', $ticket->id,
+                                                                    '?' => [
+                                                                        'f_name' => $customer->f_name,
+                                                                        'l_name' => $customer->l_name,
+                                                                        'cust_id' => $customer->id,
 //                                                                                'ticket_closed' => $ticket->closed
-                                                                ],
-                                                            ], ['class' => 'btn btn-primary']);
+                                                                    ],
+                                                                ], ['class' => 'btn btn-primary']);
 
-                                                            //Removed delete for now, it breaks if try to delete with an attachment present inside
+                                                                //Removed delete for now, it breaks if try to delete with an attachment present inside
 
-                                                            ?>
+                                                                ?>
                                                             <?php endif; ?>
                                                             <!--                                                                        --><?php //= $this->Form->postLink(__('Delete'), ['controller' => 'Tickets', 'action' => 'delete', $ticket->id], [
 //                                                                            'class' => 'btn btn-danger',
@@ -546,80 +546,80 @@ $checkConnection = function (string $name) {
                                                         <?php else: ?>
                                                         <?php endif; ?>
                                                             </span>
+                                                                </div>
                                                             </div>
-                                                        </div>
-                                                        <!-- In order to show unique collapse for each class, its id must be different. -->
-                                                        <div class="collapse"
-                                                             id="collapseExample<?= $ticket->id ?>">
-                                                            <div class="card card-body">
-                                                                <!-- Because contents is already asked in Customers controller in this query
+                                                            <!-- In order to show unique collapse for each class, its id must be different. -->
+                                                            <div class="collapse"
+                                                                 id="collapseExample<?= $ticket->id ?>">
+                                                                <div class="card card-body">
+                                                                    <!-- Because contents is already asked in Customers controller in this query
 
-                                                                        $tickets = $this->Customers->Tickets->find('all')
-                                                                        ->where(['cust_id' => $customer->id])
-                                                                        ->contain(['Users', 'Contents']) // I want to retrieve the name of the staff (users) & contents, so this is added so I can reference it
-                                                                        ->toArray();
+                                                                            $tickets = $this->Customers->Tickets->find('all')
+                                                                            ->where(['cust_id' => $customer->id])
+                                                                            ->contain(['Users', 'Contents']) // I want to retrieve the name of the staff (users) & contents, so this is added so I can reference it
+                                                                            ->toArray();
 
-                                                                      We can reiterate contents for that ticket here as follows
-                                                                -->
+                                                                          We can reiterate contents for that ticket here as follows
+                                                                    -->
 
-                                                                <!-- In order to pass a query to a controller, must add the '?'. Can be obtained via key value pair in the controller -->
-                                                                <?php if ($customer->archive == 0): ?>
-                                                                    <?= $this->Html->link(__('Add Attachments +'), ['controller' => 'Contents', 'action' => 'add',
-                                                                        '?' => [
-                                                                            'ticket_id' => $ticket->id,
-                                                                            'f_name' => $customer->f_name,
-                                                                            'l_name' => $customer->l_name,
-                                                                            'cust_id' => $customer->id
-                                                                        ],
-                                                                    ], ['class' => 'btn btn-success mt-3', 'style' => 'margin: 10px']); ?>
-                                                                <?php endif; ?>
+                                                                    <!-- In order to pass a query to a controller, must add the '?'. Can be obtained via key value pair in the controller -->
+                                                                    <?php if ($customer->archive == 0): ?>
+                                                                        <?= $this->Html->link(__('Add Attachments +'), ['controller' => 'Contents', 'action' => 'add',
+                                                                            '?' => [
+                                                                                'ticket_id' => $ticket->id,
+                                                                                'f_name' => $customer->f_name,
+                                                                                'l_name' => $customer->l_name,
+                                                                                'cust_id' => $customer->id
+                                                                            ],
+                                                                        ], ['class' => 'btn btn-success mt-3', 'style' => 'margin: 10px']); ?>
+                                                                    <?php endif; ?>
 
 
-                                                                <?php if ($ticket->contents) : ?>
-                                                                    <?php foreach ($ticket->contents as $content): ?>
-                                                                        <div class="card">
-                                                                            <div class="card-body">
-                                                                                <h5 class="card-title">
-                                                                                    Attachment
-                                                                                    Type: <?= $content->content_type ?></h5>
-                                                                                <h6 class="card-title">
-                                                                                    Create
-                                                                                    date: <?= $content->createtime ?></h6>
-                                                                                <p class="card-text"><?= h($content->content) ?></p>
-                                                                                <!-- Why urlencode? because since im storing images as "conversation/image.png", passing $content->content as it is would only pass
-                                                                                     "conversation", not good. As such, as it is passed to download, you must decode it-->
-                                                                                <div
-                                                                                    style="display: flex; justify-content: space-between">
-                                                                                    <?= $this->Html->link('Download Attachment', ['controller' => 'Contents', 'action' => 'download', urlencode($content->content)], ['class' => 'btn btn-primary card__button']) ?>
-                                                                                    <?= $this->Form->postLink(__('Delete'), ['controller' => 'Contents', 'action' => 'delete', $content->id], ['confirm' => __('Are you sure you want to delete this file?'), 'class' => 'btn btn-rounded btn-danger']) ?>
+                                                                    <?php if ($ticket->contents) : ?>
+                                                                        <?php foreach ($ticket->contents as $content): ?>
+                                                                            <div class="card">
+                                                                                <div class="card-body">
+                                                                                    <h5 class="card-title">
+                                                                                        Attachment
+                                                                                        Type: <?= $content->content_type ?></h5>
+                                                                                    <h6 class="card-title">
+                                                                                        Create
+                                                                                        date: <?= $content->createtime ?></h6>
+                                                                                    <p class="card-text"><?= h($content->content) ?></p>
+                                                                                    <!-- Why urlencode? because since im storing images as "conversation/image.png", passing $content->content as it is would only pass
+                                                                                         "conversation", not good. As such, as it is passed to download, you must decode it-->
+                                                                                    <div
+                                                                                        style="display: flex; justify-content: space-between">
+                                                                                        <?= $this->Html->link('Download Attachment', ['controller' => 'Contents', 'action' => 'download', urlencode($content->content)], ['class' => 'btn btn-primary card__button']) ?>
+                                                                                        <?= $this->Form->postLink(__('Delete'), ['controller' => 'Contents', 'action' => 'delete', $content->id], ['confirm' => __('Are you sure you want to delete this file?'), 'class' => 'btn btn-rounded btn-danger']) ?>
+                                                                                    </div>
                                                                                 </div>
                                                                             </div>
+                                                                        <?php endforeach; ?>
+                                                                        <!-- In order to pass a query to a controller, must add the '?'. Can be obtained via key value pair in the controller -->
+                                                                        <?= $this->Html->link(__('Add Attachments +'), ['controller' => 'Contents', 'action' => 'add',
+                                                                            '?' => ['ticket_id' => $ticket->id,
+                                                                                'f_name' => $customer->f_name,
+                                                                                'l_name' => $customer->l_name,
+                                                                                'cust_id' => $customer->id
+                                                                            ],
+                                                                        ], ['class' => 'btn btn-success mt-3', 'style' => 'margin: 10px']); ?>
+                                                                    <?php else: ?>
+                                                                        <div class="card">
+                                                                            <div class="card-body">
+                                                                                <p> No attachments </p>
+                                                                            </div>
                                                                         </div>
-                                                                    <?php endforeach; ?>
-                                                                    <!-- In order to pass a query to a controller, must add the '?'. Can be obtained via key value pair in the controller -->
-                                                                    <?= $this->Html->link(__('Add Attachments +'), ['controller' => 'Contents', 'action' => 'add',
-                                                                        '?' => ['ticket_id' => $ticket->id,
-                                                                            'f_name' => $customer->f_name,
-                                                                            'l_name' => $customer->l_name,
-                                                                            'cust_id' => $customer->id
-                                                                        ],
-                                                                    ], ['class' => 'btn btn-success mt-3', 'style' => 'margin: 10px']); ?>
-                                                                <?php else: ?>
-                                                                    <div class="card">
-                                                                        <div class="card-body">
-                                                                            <p> No attachments </p>
-                                                                        </div>
-                                                                    </div>
-                                                                <?php endif; ?>
+                                                                    <?php endif; ?>
+                                                                </div>
                                                             </div>
                                                         </div>
                                                     </div>
+                                                    <?php endforeach ?>
+                                                    <!-- End card section -->
+                                                    </p>
                                                 </div>
-                                                <?php endforeach ?>
-                                                <!-- End card section -->
-                                                </p>
                                             </div>
-                                        </div>
 
                                         <?php endif ?>
                                     </div>
@@ -638,103 +638,73 @@ $checkConnection = function (string $name) {
                                                 <?php foreach ($tickets as $ticket): ?>
                                                     <div
                                                         class="col-xl-12 col-lg-12 col-md-12col-sm-12 col-12">
-                                                <?php if ($this->Identity->get('role') === 'user' || $this->Identity->get('role') === 'staff'): ?>
-                                                        <?php if ($ticket->closed == true && $this->Identity->get('id') === $ticket->staff_id) : ?>
-                                                            <div class="card">
-                                                                <div class="card-header d-flex"
-                                                                     style="background-color: lightgray">
-                                                                    <div>
-                                                                        <h4 class="card-header-title">
-                                                                            Title: <?= h($ticket->title) ?></h4>
-                                                                        <h5>
-                                                                            Type: <?= h($ticket->type) ?> </h5>
-                                                                        <?php if ($ticket->closed == true) : ?>
-                                                                            <h6> Status: Closed </h6>
-                                                                        <?php elseif ($ticket->closed == false) : ?>
-                                                                            <h6> Status: Open </h6>
-                                                                        <?php endif; ?>
+                                                        <?php if ($this->Identity->get('role') === 'user' || $this->Identity->get('role') === 'staff'): ?>
+                                                            <?php if ($ticket->closed == true && $this->Identity->get('id') === $ticket->staff_id) : ?>
+                                                                <div class="card">
+                                                                    <div class="card-header d-flex"
+                                                                         style="background-color: lightgray">
+                                                                        <div>
+                                                                            <h4 class="card-header-title">
+                                                                                Title: <?= h($ticket->title) ?></h4>
+                                                                            <h5>
+                                                                                Type: <?= h($ticket->type) ?> </h5>
+                                                                            <?php if ($ticket->closed == true) : ?>
+                                                                                <h6> Status: Closed </h6>
+                                                                            <?php elseif ($ticket->closed == false) : ?>
+                                                                                <h6> Status: Open </h6>
+                                                                            <?php endif; ?>
+                                                                        </div>
+                                                                        <div class="toolbar ml-auto">
+                                                                            <?php if ($customer->archive == 0): ?>
+                                                                                <?php
+                                                                                //if true means it is closed. Allow option to open ticket
+                                                                                if ($ticket->closed) {
+                                                                                    echo $this->Form->postLink(__('Open ticket'), ['controller' => 'Tickets', 'action' => 'update_ticket', $ticket->id], ['class' => 'btn btn-primary', 'confirm' => __("Are you sure you want to Reopen ticket ID: {0} \n Customer: {1} {2} ", $ticket->id, $customer->f_name, $customer->l_name)]);
+                                                                                } else {
+                                                                                    echo $this->Form->postLink(__('Close ticket'), ['controller' => 'Tickets', 'action' => 'update_ticket', $ticket->id], ['class' => 'btn btn-primary', 'confirm' => __("Are you sure you want to Close ticket ID: {0} \n Customer: {1} {2} ", $ticket->id, $customer->f_name, $customer->l_name), 'style' => 'background-color: #E3242B; color: #FFFFFF;']);
+                                                                                }
+                                                                                ?>
+                                                                            <?php endif; ?>
+
+
+                                                                        </div>
                                                                     </div>
-                                                                    <div class="toolbar ml-auto">
-                                                                        <?php if ($customer->archive == 0): ?>
-                                                                            <?php
-                                                                            //if true means it is closed. Allow option to open ticket
-                                                                            if ($ticket->closed) {
-                                                                                echo $this->Form->postLink(__('Open ticket'), ['controller' => 'Tickets', 'action' => 'update_ticket', $ticket->id], ['class' => 'btn btn-primary', 'confirm' => __("Are you sure you want to Reopen ticket ID: {0} \n Customer: {1} {2} ", $ticket->id, $customer->f_name, $customer->l_name)]);
-                                                                            } else {
-                                                                                echo $this->Form->postLink(__('Close ticket'), ['controller' => 'Tickets', 'action' => 'update_ticket', $ticket->id], ['class' => 'btn btn-primary', 'confirm' => __("Are you sure you want to Close ticket ID: {0} \n Customer: {1} {2} ", $ticket->id, $customer->f_name, $customer->l_name), 'style' => 'background-color: #E3242B; color: #FFFFFF;']);
-                                                                            }
-                                                                            ?>
-                                                                        <?php endif; ?>
-
-
+                                                                    <div class="card-body">
+                                                                        <div class="card-text">
+                                                                            <p><span class="card-info">Ticket ID:</span> <?= h($ticket->id) ?>
+                                                                            </p>
+                                                                            <p><span
+                                                                                    class="card-info">Customer:</span> <?= h($customer->f_name) ?>
+                                                                            </p>
+                                                                            <p><span class="card-info">Assigned staff:</span> <?= $this->Html->link(__($ticket->user->f_name), ['controller' => 'Users', 'action' => 'view', $ticket->staff_id]) ?>
+                                                                            </p>
+                                                                            <p><span class="card-info">Create time:</span> <?= h($ticket->createtime) ?>
+                                                                            </p>
+                                                                            <br>
+                                                                        </div>
+                                                                        <!--                                                                            <a href="#" class="btn btn-primary card__button" id="showButton">Go somewhere</a>-->
+                                                                        <a class="btn btn-primary"
+                                                                           data-toggle="collapse"
+                                                                           href="#collapseShowCloseTicket<?= $ticket->id ?>"
+                                                                           role="button" aria-expanded="false"
+                                                                           aria-controls="collapseExample">
+                                                                            Expand Attachments
+                                                                        </a>
                                                                     </div>
-                                                                </div>
-                                                                <div class="card-body">
-                                                                    <div class="card-text">
-                                                                        <p><span class="card-info">Ticket ID:</span> <?= h($ticket->id) ?>
-                                                                        </p>
-                                                                        <p><span
-                                                                                class="card-info">Customer:</span> <?= h($customer->f_name) ?>
-                                                                        </p>
-                                                                        <p><span class="card-info">Assigned staff:</span> <?= $this->Html->link(__($ticket->user->f_name), ['controller' => 'Users', 'action' => 'view', $ticket->staff_id]) ?>
-                                                                        </p>
-                                                                        <p><span class="card-info">Create time:</span> <?= h($ticket->createtime) ?>
-                                                                        </p>
-                                                                        <br>
-                                                                    </div>
-                                                                    <!--                                                                            <a href="#" class="btn btn-primary card__button" id="showButton">Go somewhere</a>-->
-                                                                    <a class="btn btn-primary"
-                                                                       data-toggle="collapse"
-                                                                       href="#collapseShowCloseTicket<?= $ticket->id ?>"
-                                                                       role="button" aria-expanded="false"
-                                                                       aria-controls="collapseExample">
-                                                                        Expand Attachments
-                                                                    </a>
-                                                                </div>
-                                                                <!-- In order to show unique collapse for each class, its id must be different. -->
-                                                                <div class="collapse"
-                                                                     id="collapseShowCloseTicket<?= $ticket->id ?>">
-                                                                    <div class="card card-body">
-                                                                        <!-- Because contents is already asked in Customers controller in this query
+                                                                    <!-- In order to show unique collapse for each class, its id must be different. -->
+                                                                    <div class="collapse"
+                                                                         id="collapseShowCloseTicket<?= $ticket->id ?>">
+                                                                        <div class="card card-body">
+                                                                            <!-- Because contents is already asked in Customers controller in this query
 
-                                                                                $tickets = $this->Customers->Tickets->find('all')
-                                                                                ->where(['cust_id' => $customer->id])
-                                                                                ->contain(['Users', 'Contents']) // I want to retrieve the name of the staff (users) & contents, so this is added so I can reference it
-                                                                                ->toArray();
+                                                                                    $tickets = $this->Customers->Tickets->find('all')
+                                                                                    ->where(['cust_id' => $customer->id])
+                                                                                    ->contain(['Users', 'Contents']) // I want to retrieve the name of the staff (users) & contents, so this is added so I can reference it
+                                                                                    ->toArray();
 
-                                                                              We can reiterate contents for that ticket here as follows
-                                                                        -->
+                                                                                  We can reiterate contents for that ticket here as follows
+                                                                            -->
 
-                                                                        <!-- In order to pass a query to a controller, must add the '?'. Can be obtained via key value pair in the controller -->
-                                                                        <?= $this->Html->link(__('Add Attachments +'), ['controller' => 'Contents', 'action' => 'add',
-                                                                            '?' => ['ticket_id' => $ticket->id,
-                                                                                'f_name' => $customer->f_name,
-                                                                                'l_name' => $customer->l_name,
-                                                                                'cust_id' => $customer->id
-                                                                            ],
-                                                                        ], ['class' => 'btn btn-success mt-3', 'style' => 'margin: 10px']); ?>
-
-                                                                        <?php if ($ticket->contents) : ?>
-                                                                            <?php foreach ($ticket->contents as $content): ?>
-                                                                                <div class="card">
-                                                                                    <div class="card-body">
-                                                                                        <h5 class="card-title">
-                                                                                            Attachment
-                                                                                            Type: <?= $content->content_type ?></h5>
-                                                                                        <h6 class="card-title">
-                                                                                            Create
-                                                                                            date: <?= $content->createtime ?></h6>
-                                                                                        <p class="card-text"><?= h($content->content) ?></p>
-                                                                                        <!-- Why urlencode? because since im storing images as "conversation/image.png", passing $content->content as it is would only pass
-                                                                                             "conversation", not good. As such, as it is passed to download, you must decode it-->
-                                                                                        <div
-                                                                                            style="display: flex; justify-content: space-between">
-                                                                                            <?= $this->Html->link('Download Attachment', ['controller' => 'Contents', 'action' => 'download', urlencode($content->content)], ['class' => 'btn btn-primary card__button']) ?>
-                                                                                            <?= $this->Form->postLink(__('Delete'), ['controller' => 'Contents', 'action' => 'delete', $content->id], ['confirm' => __('Are you sure you want to delete this file?'), 'class' => 'btn btn-rounded btn-danger']) ?>
-                                                                                        </div>
-                                                                                    </div>
-                                                                                </div>
-                                                                            <?php endforeach; ?>
                                                                             <!-- In order to pass a query to a controller, must add the '?'. Can be obtained via key value pair in the controller -->
                                                                             <?= $this->Html->link(__('Add Attachments +'), ['controller' => 'Contents', 'action' => 'add',
                                                                                 '?' => ['ticket_id' => $ticket->id,
@@ -743,140 +713,170 @@ $checkConnection = function (string $name) {
                                                                                     'cust_id' => $customer->id
                                                                                 ],
                                                                             ], ['class' => 'btn btn-success mt-3', 'style' => 'margin: 10px']); ?>
-                                                                        <?php else: ?>
-                                                                            <div class="card">
-                                                                                <div class="card-body">
-                                                                                    <p> No attachments </p>
+
+                                                                            <?php if ($ticket->contents) : ?>
+                                                                                <?php foreach ($ticket->contents as $content): ?>
+                                                                                    <div class="card">
+                                                                                        <div class="card-body">
+                                                                                            <h5 class="card-title">
+                                                                                                Attachment
+                                                                                                Type: <?= $content->content_type ?></h5>
+                                                                                            <h6 class="card-title">
+                                                                                                Create
+                                                                                                date: <?= $content->createtime ?></h6>
+                                                                                            <p class="card-text"><?= h($content->content) ?></p>
+                                                                                            <!-- Why urlencode? because since im storing images as "conversation/image.png", passing $content->content as it is would only pass
+                                                                                                 "conversation", not good. As such, as it is passed to download, you must decode it-->
+                                                                                            <div
+                                                                                                style="display: flex; justify-content: space-between">
+                                                                                                <?= $this->Html->link('Download Attachment', ['controller' => 'Contents', 'action' => 'download', urlencode($content->content)], ['class' => 'btn btn-primary card__button']) ?>
+                                                                                                <?= $this->Form->postLink(__('Delete'), ['controller' => 'Contents', 'action' => 'delete', $content->id], ['confirm' => __('Are you sure you want to delete this file?'), 'class' => 'btn btn-rounded btn-danger']) ?>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                <?php endforeach; ?>
+                                                                                <!-- In order to pass a query to a controller, must add the '?'. Can be obtained via key value pair in the controller -->
+                                                                                <?= $this->Html->link(__('Add Attachments +'), ['controller' => 'Contents', 'action' => 'add',
+                                                                                    '?' => ['ticket_id' => $ticket->id,
+                                                                                        'f_name' => $customer->f_name,
+                                                                                        'l_name' => $customer->l_name,
+                                                                                        'cust_id' => $customer->id
+                                                                                    ],
+                                                                                ], ['class' => 'btn btn-success mt-3', 'style' => 'margin: 10px']); ?>
+                                                                            <?php else: ?>
+                                                                                <div class="card">
+                                                                                    <div class="card-body">
+                                                                                        <p> No attachments </p>
+                                                                                    </div>
                                                                                 </div>
-                                                                            </div>
-                                                                        <?php endif; ?>
+                                                                            <?php endif; ?>
+                                                                        </div>
                                                                     </div>
                                                                 </div>
-                                                            </div>
+                                                            <?php else: ?>
+                                                                <!-- Do nothing -->
+                                                            <?php endif; ?>
+
                                                         <?php else: ?>
-                                                        <!-- Do nothing -->
-                                                        <?php endif; ?>
+                                                            <!-- display all for root and admin -->
+                                                            <?php if ($ticket->closed == true) : ?>
+                                                                <div class="card">
+                                                                    <div class="card-header d-flex"
+                                                                         style="background-color: lightgray">
+                                                                        <div>
+                                                                            <h4 class="card-header-title">
+                                                                                Title: <?= h($ticket->title) ?></h4>
+                                                                            <h5>
+                                                                                Type: <?= h($ticket->type) ?> </h5>
+                                                                            <?php if ($ticket->closed == true) : ?>
+                                                                                <h6> Status: Closed </h6>
+                                                                            <?php elseif ($ticket->closed == false) : ?>
+                                                                                <h6> Status: Open </h6>
+                                                                            <?php endif; ?>
+                                                                        </div>
+                                                                        <div class="toolbar ml-auto">
+                                                                            <?php if ($customer->archive == 0): ?>
+                                                                                <?php
+                                                                                //if true means it is closed. Allow option to open ticket
+                                                                                if ($ticket->closed) {
+                                                                                    echo $this->Form->postLink(__('Open ticket'), ['controller' => 'Tickets', 'action' => 'update_ticket', $ticket->id], ['class' => 'btn btn-primary', 'confirm' => __("Are you sure you want to Reopen ticket ID: {0} \n Customer: {1} {2} ", $ticket->id, $customer->f_name, $customer->l_name)]);
+                                                                                } else {
+                                                                                    echo $this->Form->postLink(__('Close ticket'), ['controller' => 'Tickets', 'action' => 'update_ticket', $ticket->id], ['class' => 'btn btn-primary', 'confirm' => __("Are you sure you want to Close ticket ID: {0} \n Customer: {1} {2} ", $ticket->id, $customer->f_name, $customer->l_name), 'style' => 'background-color: #E3242B; color: #FFFFFF;']);
+                                                                                }
+                                                                                ?>
+                                                                            <?php endif; ?>
 
-                                                <?php else: ?>
-                                                <!-- display all for root and admin -->
-                                                <?php if ($ticket->closed == true) : ?>
-                                                            <div class="card">
-                                                                <div class="card-header d-flex"
-                                                                     style="background-color: lightgray">
-                                                                    <div>
-                                                                        <h4 class="card-header-title">
-                                                                            Title: <?= h($ticket->title) ?></h4>
-                                                                        <h5>
-                                                                            Type: <?= h($ticket->type) ?> </h5>
-                                                                        <?php if ($ticket->closed == true) : ?>
-                                                                            <h6> Status: Closed </h6>
-                                                                        <?php elseif ($ticket->closed == false) : ?>
-                                                                            <h6> Status: Open </h6>
-                                                                        <?php endif; ?>
+
+                                                                        </div>
                                                                     </div>
-                                                                    <div class="toolbar ml-auto">
-                                                                        <?php if ($customer->archive == 0): ?>
-                                                                            <?php
-                                                    //if true means it is closed. Allow option to open ticket
-                                                    if ($ticket->closed) {
-                                                        echo $this->Form->postLink(__('Open ticket'), ['controller' => 'Tickets', 'action' => 'update_ticket', $ticket->id], ['class' => 'btn btn-primary', 'confirm' => __("Are you sure you want to Reopen ticket ID: {0} \n Customer: {1} {2} ", $ticket->id, $customer->f_name, $customer->l_name)]);
-                                                    } else {
-                                                        echo $this->Form->postLink(__('Close ticket'), ['controller' => 'Tickets', 'action' => 'update_ticket', $ticket->id], ['class' => 'btn btn-primary', 'confirm' => __("Are you sure you want to Close ticket ID: {0} \n Customer: {1} {2} ", $ticket->id, $customer->f_name, $customer->l_name), 'style' => 'background-color: #E3242B; color: #FFFFFF;']);
-                                                    }
-                                                    ?>
-                                                                        <?php endif; ?>
+                                                                    <div class="card-body">
+                                                                        <div class="card-text">
+                                                                            <p><span class="card-info">Ticket ID:</span> <?= h($ticket->id) ?>
+                                                                            </p>
+                                                                            <p><span
+                                                                                    class="card-info">Customer:</span> <?= h($customer->f_name) ?>
+                                                                            </p>
+                                                                            <p><span class="card-info">Assigned staff:</span> <?= $this->Html->link(__($ticket->user->f_name), ['controller' => 'Users', 'action' => 'view', $ticket->staff_id]) ?>
+                                                                            </p>
+                                                                            <p><span class="card-info">Create time:</span> <?= h($ticket->createtime) ?>
+                                                                            </p>
+                                                                            <br>
+                                                                        </div>
+                                                                        <!--                                                                            <a href="#" class="btn btn-primary card__button" id="showButton">Go somewhere</a>-->
+                                                                        <a class="btn btn-primary"
+                                                                           data-toggle="collapse"
+                                                                           href="#collapseShowCloseTicket<?= $ticket->id ?>"
+                                                                           role="button" aria-expanded="false"
+                                                                           aria-controls="collapseExample">
+                                                                            Expand Attachments
+                                                                        </a>
+                                                                    </div>
+                                                                    <!-- In order to show unique collapse for each class, its id must be different. -->
+                                                                    <div class="collapse"
+                                                                         id="collapseShowCloseTicket<?= $ticket->id ?>">
+                                                                        <div class="card card-body">
+                                                                            <!-- Because contents is already asked in Customers controller in this query
 
+                                                                                    $tickets = $this->Customers->Tickets->find('all')
+                                                                                    ->where(['cust_id' => $customer->id])
+                                                                                    ->contain(['Users', 'Contents']) // I want to retrieve the name of the staff (users) & contents, so this is added so I can reference it
+                                                                                    ->toArray();
 
+                                                                                  We can reiterate contents for that ticket here as follows
+                                                                            -->
+
+                                                                            <!-- In order to pass a query to a controller, must add the '?'. Can be obtained via key value pair in the controller -->
+                                                                            <?= $this->Html->link(__('Add Attachments +'), ['controller' => 'Contents', 'action' => 'add',
+                                                                                '?' => ['ticket_id' => $ticket->id,
+                                                                                    'f_name' => $customer->f_name,
+                                                                                    'l_name' => $customer->l_name,
+                                                                                    'cust_id' => $customer->id
+                                                                                ],
+                                                                            ], ['class' => 'btn btn-success mt-3', 'style' => 'margin: 10px']); ?>
+
+                                                                            <?php if ($ticket->contents) : ?>
+                                                                                <?php foreach ($ticket->contents as $content): ?>
+                                                                                    <div class="card">
+                                                                                        <div class="card-body">
+                                                                                            <h5 class="card-title">
+                                                                                                Attachment
+                                                                                                Type: <?= $content->content_type ?></h5>
+                                                                                            <h6 class="card-title">
+                                                                                                Create
+                                                                                                date: <?= $content->createtime ?></h6>
+                                                                                            <p class="card-text"><?= h($content->content) ?></p>
+                                                                                            <!-- Why urlencode? because since im storing images as "conversation/image.png", passing $content->content as it is would only pass
+                                                                                                 "conversation", not good. As such, as it is passed to download, you must decode it-->
+                                                                                            <div
+                                                                                                style="display: flex; justify-content: space-between">
+                                                                                                <?= $this->Html->link('Download Attachment', ['controller' => 'Contents', 'action' => 'download', urlencode($content->content)], ['class' => 'btn btn-primary card__button']) ?>
+                                                                                                <?= $this->Form->postLink(__('Delete'), ['controller' => 'Contents', 'action' => 'delete', $content->id], ['confirm' => __('Are you sure you want to delete this file?'), 'class' => 'btn btn-rounded btn-danger']) ?>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                <?php endforeach; ?>
+                                                                                <!-- In order to pass a query to a controller, must add the '?'. Can be obtained via key value pair in the controller -->
+                                                                                <?= $this->Html->link(__('Add Attachments +'), ['controller' => 'Contents', 'action' => 'add',
+                                                                                    '?' => ['ticket_id' => $ticket->id,
+                                                                                        'f_name' => $customer->f_name,
+                                                                                        'l_name' => $customer->l_name,
+                                                                                        'cust_id' => $customer->id
+                                                                                    ],
+                                                                                ], ['class' => 'btn btn-success mt-3', 'style' => 'margin: 10px']); ?>
+                                                                            <?php else: ?>
+                                                                                <div class="card">
+                                                                                    <div class="card-body">
+                                                                                        <p> No attachments </p>
+                                                                                    </div>
+                                                                                </div>
+                                                                            <?php endif; ?>
+                                                                        </div>
                                                                     </div>
                                                                 </div>
-                                                                <div class="card-body">
-                                                                    <div class="card-text">
-                                                                        <p><span class="card-info">Ticket ID:</span> <?= h($ticket->id) ?>
-                                                                        </p>
-                                                                        <p><span
-                                                                                class="card-info">Customer:</span> <?= h($customer->f_name) ?>
-                                                                        </p>
-                                                                        <p><span class="card-info">Assigned staff:</span> <?= $this->Html->link(__($ticket->user->f_name), ['controller' => 'Users', 'action' => 'view', $ticket->staff_id]) ?>
-                                                                        </p>
-                                                                        <p><span class="card-info">Create time:</span> <?= h($ticket->createtime) ?>
-                                                                        </p>
-                                                                        <br>
-                                                                    </div>
-                                                                    <!--                                                                            <a href="#" class="btn btn-primary card__button" id="showButton">Go somewhere</a>-->
-                                                <a class="btn btn-primary"
-                                                   data-toggle="collapse"
-                                                   href="#collapseShowCloseTicket<?= $ticket->id ?>"
-                                                   role="button" aria-expanded="false"
-                                                   aria-controls="collapseExample">
-                                                    Expand Attachments
-                                                </a>
-                                            </div>
-                                            <!-- In order to show unique collapse for each class, its id must be different. -->
-                                            <div class="collapse"
-                                                 id="collapseShowCloseTicket<?= $ticket->id ?>">
-                                                <div class="card card-body">
-                                                    <!-- Because contents is already asked in Customers controller in this query
-
-                                                            $tickets = $this->Customers->Tickets->find('all')
-                                                            ->where(['cust_id' => $customer->id])
-                                                            ->contain(['Users', 'Contents']) // I want to retrieve the name of the staff (users) & contents, so this is added so I can reference it
-                                                            ->toArray();
-
-                                                          We can reiterate contents for that ticket here as follows
-                                                    -->
-
-                                                    <!-- In order to pass a query to a controller, must add the '?'. Can be obtained via key value pair in the controller -->
-                                                    <?= $this->Html->link(__('Add Attachments +'), ['controller' => 'Contents', 'action' => 'add',
-                                                        '?' => ['ticket_id' => $ticket->id,
-                                                            'f_name' => $customer->f_name,
-                                                            'l_name' => $customer->l_name,
-                                                            'cust_id' => $customer->id
-                                                        ],
-                                                    ], ['class' => 'btn btn-success mt-3', 'style' => 'margin: 10px']); ?>
-
-                                                    <?php if ($ticket->contents) : ?>
-                                                        <?php foreach ($ticket->contents as $content): ?>
-                                                            <div class="card">
-                                                                <div class="card-body">
-                                                                    <h5 class="card-title">
-                                                                        Attachment
-                                                                        Type: <?= $content->content_type ?></h5>
-                                                                    <h6 class="card-title">
-                                                                        Create
-                                                                        date: <?= $content->createtime ?></h6>
-                                                                    <p class="card-text"><?= h($content->content) ?></p>
-                                                                    <!-- Why urlencode? because since im storing images as "conversation/image.png", passing $content->content as it is would only pass
-                                                                         "conversation", not good. As such, as it is passed to download, you must decode it-->
-                                                                    <div
-                                                                        style="display: flex; justify-content: space-between">
-                                                                        <?= $this->Html->link('Download Attachment', ['controller' => 'Contents', 'action' => 'download', urlencode($content->content)], ['class' => 'btn btn-primary card__button']) ?>
-                                                                        <?= $this->Form->postLink(__('Delete'), ['controller' => 'Contents', 'action' => 'delete', $content->id], ['confirm' => __('Are you sure you want to delete this file?'), 'class' => 'btn btn-rounded btn-danger']) ?>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        <?php endforeach; ?>
-                                                        <!-- In order to pass a query to a controller, must add the '?'. Can be obtained via key value pair in the controller -->
-                                                        <?= $this->Html->link(__('Add Attachments +'), ['controller' => 'Contents', 'action' => 'add',
-                                                            '?' => ['ticket_id' => $ticket->id,
-                                                                'f_name' => $customer->f_name,
-                                                                'l_name' => $customer->l_name,
-                                                                'cust_id' => $customer->id
-                                                            ],
-                                                        ], ['class' => 'btn btn-success mt-3', 'style' => 'margin: 10px']); ?>
-                                                    <?php else: ?>
-                                                        <div class="card">
-                                                            <div class="card-body">
-                                                                <p> No attachments </p>
-                                                            </div>
-                                                        </div>
-                                                    <?php endif; ?>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <?php else: ?>
-                                            <!-- Do nothing -->
-                                        <?php endif; ?>
-                                                <?php endif ?>
+                                                            <?php else: ?>
+                                                                <!-- Do nothing -->
+                                                            <?php endif; ?>
+                                                        <?php endif ?>
                                                     </div>
                                                 <?php endforeach ?>
                                                 <!-- End card section -->
@@ -1249,13 +1249,13 @@ $checkConnection = function (string $name) {
 
 
                                     <?php if ($customer->archive == 0): ?>
-                                    <?php echo $this->Html->link(__('Add New Device'), ['controller' => 'Devices', 'action' => 'add',
-                                        '?' => [
-                                            'f_name' => $customer->f_name,
-                                            'l_name' => $customer->l_name,
-                                            'cust_id' => $customer->id
-                                        ],
-                                    ], ['class' => 'btn btn-success mt-3']); ?>
+                                        <?php echo $this->Html->link(__('Add New Device'), ['controller' => 'Devices', 'action' => 'add',
+                                            '?' => [
+                                                'f_name' => $customer->f_name,
+                                                'l_name' => $customer->l_name,
+                                                'cust_id' => $customer->id
+                                            ],
+                                        ], ['class' => 'btn btn-success mt-3']); ?>
                                     <?php endif; ?>
 
                                 </div>

@@ -290,23 +290,30 @@ to get the name or any value in the staff table, use the get and then the name o
 
 
                         <div class="form-group">
+
+
                             <?= $this->Form->label('selected_ticket', 'Select Ticket', ['class' => 'col-form-label']) ?>
                             <?php
                             $options = [];
                             foreach ($assigntickets as $ticket) {
                                 if ($ticket ->cust_id == $customer->id) {
                                     $options[$ticket->id] = $ticket->title;
+
                                 }
+
                             }
                             echo $this->Form->select('selected_ticket', $options, [
                                 'class' => 'form-control',
-                                'id' => 'select-ticket',
+//                                'data-ticket-id' => $ticket->id
+                                'id' => "select-ticket-<?= $ticket->id ?>",
+
                             ]);
+
+
                             ?>
                         </div>
 
-                        <button id="navigate-button" class="btn btn-primary">Escalate the customer</button>
-
+                        <button id="navigate-button-<?= $customer->id ?>" class="btn btn-primary">Escalate the customer</button>
 
 
 <!--                                                                        --><?php //foreach ($assigntickets as $ticket): ?>
@@ -330,6 +337,7 @@ to get the name or any value in the staff table, use the get and then the name o
 
 
                     </div>
+
                     <?= $this->Html->link(__('View Full Profile'), ['action' => 'view', $customer->id], ['class' => 'btn btn-primary']) ?>
                 </div>
             </div>
@@ -398,26 +406,38 @@ to get the name or any value in the staff table, use the get and then the name o
         <script>
 
             var selectedTicketId;
-             // declare selectedTicketId
 
+             // declare
+             // for selection
+            //document.getElementById("select-ticket-<?php //$ticket->id ?>//").addEventListener("change", function() {
+            //    // get the value
+            //    var selectedOption = this.options[this.selectedIndex];
+            //    if (selectedOption) {
+            //        // 提取所选选项的值（这里假设你的选项的值是 $ticket->id）
+            //        var selectedTicketId = selectedOption.value;
+            //        console.log("Selected Ticket ID: " + selectedTicketId);
+            //
+            //        // 在这里可以使用 selectedTicketId 进行后续操作
+            //    }
+            //});
+                //
 
+                document.getElementById('navigate-button-<?= debug( $customer->id );$customer->id ?>').addEventListener('click', function () {
+                    // get ticketID
+                    //
+                    //sessionStorage.setItem("selectedTicketId", selectedTicketId);
 
+                    // refer to the update
+                    // window.location.href = '/team010-app_fit3048/tickets/edit/' + selectedTicketId;
 
-            document.getElementById('navigate-button').addEventListener('click', function () {
-                // get ticketID
-                 selectedTicketId = document.getElementById('select-ticket').value;
-                sessionStorage.setItem("selectedTicketId", selectedTicketId);
+                    console.log( 2);// check
 
-                // refer to the update
-                // window.location.href = '/team010-app_fit3048/tickets/edit/' + selectedTicketId;
+                    // window.location.href = '/team010-app_fit3048/tickets/updateEscalate/' + selectedTicketId;
 
-                // console.log(selectedTicketId); // check
+                    // undo button style
+                    // document.getElementById('undobutton').style.display = 'block';
+                });
 
-                window.location.href = '/team010-app_fit3048/tickets/updateEscalate/' + selectedTicketId;
-
-                // undo button style
-                // document.getElementById('undobutton').style.display = 'block';
-            });
 
             document.getElementById('undobutton').addEventListener('click', function () {
                 // Get selectedTicketId and staffId

@@ -224,7 +224,7 @@
                             <!-- Root view -->
                         <?php elseif($this->Identity->get('role') === 'root'): ?>
                             <li class="nav-item ">
-                                <a class="nav-link active" href="#" data-toggle="collapse" aria-expanded="true"
+                                <a class="nav-link" href="#" data-toggle="collapse" aria-expanded="true"
                                    data-target="#submenu-1" aria-controls="submenu-1"><i
                                         class="fa fa-fw fa-user-circle"></i>Customer Management <span
                                         class="badge badge-success">6</span></a>

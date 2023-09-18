@@ -400,9 +400,9 @@ class TicketsController extends AppController
             // Save the ticket
             if ($this->Tickets->save($ticket)) {
 
-                $this->Flash->success(__('Escalation successful for Ticket ID: {0}', $ticket->id));
+                $this->Flash->success(__('Escalation successful for Ticket ID: {0}', $ticket->title));
             } else {
-                $this->Flash->error(__('Escalation failed for Ticket ID: {0}', $ticket->id));
+                $this->Flash->error(__('Escalation failed for Ticket ID: {0}', $ticket->title));
             }
         }
 
@@ -437,9 +437,9 @@ class TicketsController extends AppController
 
             // Save the ticket
             if ($this->Tickets->save($ticket)) {
-                $this->Flash->success(__('Deescalation successful for Ticket ID: {0}', $ticket->id));
+                $this->Flash->success(__('Deescalation successful for Ticket ID: {0}', $ticket->title));
             } else {
-                $this->Flash->error(__('Deescalation failed for Ticket ID: {0}', $ticket->id));
+                $this->Flash->error(__('Deescalation failed for Ticket ID: {0}', $ticket->title));
             }
         }
 

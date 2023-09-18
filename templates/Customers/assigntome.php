@@ -203,7 +203,7 @@ to get the name or any value in the staff table, use the get and then the name o
                             </tr>
                             <?= $this->Html->link(__('New Customer'), ['action' => 'add'], ['class' => 'btn btn-success float-right']) ?>
                             <!--         Add the "Undo Changes" link with an ID -->
-                            <button id="undobutton" class="btn btn-primary">Unescalate the customer</button>
+                            <button id="undobutton" class="btn btn-primary" style="margin-left: 2vw">Unescalate the customer</button>
 
                             <br>
                             <br>

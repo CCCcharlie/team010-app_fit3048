@@ -385,7 +385,15 @@ class TicketsController extends AppController
             ])
             ->contain(['Users',  'Customers'])
             ->all();
-//        debug($assigntickets);
+
+        $rootuser = $this->Tickets->Users->find()
+            ->where([
+                'Users.role' => 'root'
+            ])
+            ->contain(['Tickets'])
+            ->first();
+        $rootuserid = $rootuser->id;
+//        debug($rootuserid);
 //        exit();
 
 
@@ -393,7 +401,7 @@ class TicketsController extends AppController
         foreach ($assigntickets as $ticket) {
             // Update "escalate" to true（1）
             $ticket->escalate = true;
-            $ticket->staff_id = 2;
+            $ticket->staff_id = $rootuserid;
             $this->request->getSession()->write('escalatedTickets', $assigntickets);
 
 

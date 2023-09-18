@@ -58,9 +58,9 @@
             $identity = $this->request->getAttribute('authentication')->getIdentity();
             ?>
 
-            <div class="row" style="padding: 10px;">
+            <div class="row" style="padding: 10px; ">
                 <div class="col-md-6 text-right">
-                    <p style="margin-right: 10px;">Welcome, <?= $identity->get('f_name'); ?></p>
+                    <p style="margin-right: 10px; width: 100%;">Welcome, <?= $identity->get('f_name'); ?></p>
                 </div>
                 <div class="col-md-6">
                     <a href="#" class="text-right">

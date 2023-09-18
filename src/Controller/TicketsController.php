@@ -399,7 +399,7 @@ class TicketsController extends AppController
 
             // Save the ticket
             if ($this->Tickets->save($ticket)) {
-
+                $this->request->getSession()->write('escalated', true);
                 $this->Flash->success(__('Escalation successful for Ticket : {0}', $ticket->title));
             } else {
                 $this->Flash->error(__('Escalation failed for Ticket : {0}', $ticket->title));
@@ -429,6 +429,8 @@ class TicketsController extends AppController
 
             // Save the ticket
             if ($this->Tickets->save($ticket)) {
+                $this->request->getSession()->write('escalated', false);
+
                 $this->Flash->success(__('Deescalation successful for Ticket : {0}', $ticket->title));
             } else {
                 $this->Flash->error(__('Deescalation failed for Ticket : {0}', $ticket->title));

@@ -150,7 +150,7 @@
                                             <!-- Change my link to assigned to me page when done. -->
                                         </li>
                                         <li class="nav-item">
-                                            <a class="nav-link" href="/customers">View All</a>
+                                            <a class="nav-link" href="/customers">View All Customers</a>
                                         </li>
                                         <li class="nav-item">
                                             <a class="nav-link" href="/customers/add">Add a Customer

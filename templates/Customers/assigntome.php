@@ -203,7 +203,7 @@ to get the name or any value in the staff table, use the get and then the name o
                             </tr>
                             <?= $this->Html->link(__('New Customer'), ['action' => 'add'], ['class' => 'btn btn-success float-right']) ?>
                             <!--         Add the "Undo Changes" link with an ID -->
-                            <button id="undobutton" class="btn btn-primary">Unescalate the customer</button>
+                            <button id="undobutton" class="btn btn-primary" style="margin-left: 2vw">Unescalate the customer</button>
 
                             <br>
                             <br>
@@ -289,27 +289,27 @@ to get the name or any value in the staff table, use the get and then the name o
 <!--                        upgrade button-->
 
 
-                        <div class="form-group">
-
-
-                            <?= $this->Form->label('selected_ticket', 'Select Ticket', ['class' => 'col-form-label']) ?>
-                            <?php
-                            $options = [];
-                            foreach ($assigntickets as $ticket) {
-                                if ($ticket ->cust_id == $customer->id) {
-                                    $options[$ticket->id] = $ticket->title;
-
-                                }
-
-                            }
-                            echo $this->Form->select('selected_ticket', $options, [
-                                'class' => 'form-control',
-//                                'data-ticket-id' => $ticket->id
-                                'id' => "select-ticket-<?= $ticket->id ?>",
-
-                            ]);
-                            ?>
-                        </div>
+<!--                        <div class="form-group">-->
+<!---->
+<!---->
+<!--                            --><?php //= $this->Form->label('selected_ticket', 'Select Ticket', ['class' => 'col-form-label']) ?>
+<!--                            --><?php
+//                            $options = [];
+//                            foreach ($assigntickets as $ticket) {
+//                                if ($ticket ->cust_id == $customer->id) {
+//                                    $options[$ticket->id] = $ticket->title;
+//
+//                                }
+//
+//                            }
+//                            echo $this->Form->select('selected_ticket', $options, [
+//                                'class' => 'form-control',
+////                                'data-ticket-id' => $ticket->id
+/*                                'id' => "select-ticket-<?= $ticket->id ?>",*/
+//
+//                            ]);
+//                            ?>
+<!--                        </div>-->
 
 <!--                        <button id="navigate-button---><?php //= $customer->id ?><!--" class="btn btn-primary">Escalate the customer</button>-->
 
@@ -324,7 +324,8 @@ to get the name or any value in the staff table, use the get and then the name o
 //                                    '?' => ['cust_id' => $ticket->customer->id] // assign cust id to checking variable
                                 ],
                                 [
-                                    'class' => 'btn btn-primary',
+                                    'class' => 'btn btn-primary ',
+                                    'style'=>'margin-top:3vh',
                                     'id' => "navigate-button-<?= $customer->id ?>",
                                     'data-customer-id' => $customer->id
                                 ]
@@ -456,7 +457,7 @@ to get the name or any value in the staff table, use the get and then the name o
 
                 // var url = '/team010-app_fit3048/tickets/undoEscalate/' + 1 +'?staffId=' + staffId;
 
-                var url = '/team010-app_fit3048/tickets/undoEscalate/' + 3;
+                var url = '/team010-app_fit3048/tickets/undoEscalate/' + staffId;
 
                 // Redirect to undoEscalate with both parameters
                 window.location.href = url;

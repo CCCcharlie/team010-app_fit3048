@@ -400,9 +400,9 @@ class TicketsController extends AppController
             // Save the ticket
             if ($this->Tickets->save($ticket)) {
 
-                $this->Flash->success(__('Escalation successful for Ticket ID: {0}', $ticket->title));
+                $this->Flash->success(__('Escalation successful for Ticket : {0}', $ticket->title));
             } else {
-                $this->Flash->error(__('Escalation failed for Ticket ID: {0}', $ticket->title));
+                $this->Flash->error(__('Escalation failed for Ticket : {0}', $ticket->title));
             }
         }
 
@@ -418,15 +418,7 @@ class TicketsController extends AppController
         $identity = $this->request->getAttribute('authentication')->getIdentity();
         $staffId = $identity->get('id');
 
-        // Get the related tickets for assigned customers
-        $assigntickets = $this->Tickets->find()
-            ->where([
-                'Tickets.staff_id' => $staffId,
-                'Tickets.cust_id' => $id,
-                'Tickets.closetime IS NULL'
-            ])
-            ->contain(['Users', 'Customers'])
-            ->all();
+
 
         // Loop through the assigned tickets and de-escalate them
         foreach ($escalatedTickets as $ticket) {
@@ -437,9 +429,9 @@ class TicketsController extends AppController
 
             // Save the ticket
             if ($this->Tickets->save($ticket)) {
-                $this->Flash->success(__('Deescalation successful for Ticket ID: {0}', $ticket->title));
+                $this->Flash->success(__('Deescalation successful for Ticket : {0}', $ticket->title));
             } else {
-                $this->Flash->error(__('Deescalation failed for Ticket ID: {0}', $ticket->title));
+                $this->Flash->error(__('Deescalation failed for Ticket : {0}', $ticket->title));
             }
         }
 

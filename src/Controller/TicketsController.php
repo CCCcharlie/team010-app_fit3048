@@ -393,8 +393,7 @@ class TicketsController extends AppController
             ->contain(['Tickets'])
             ->first();
         $rootuserid = $rootuser->id;
-//        debug($rootuserid);
-//        exit();
+
 
 
         // Loop through the assigned tickets
@@ -402,9 +401,28 @@ class TicketsController extends AppController
             // Update "escalate" to true（1）
             $ticket->escalate = true;
             $ticket->staff_id = $rootuserid;
+//mark down the staff escalating
+
+
+            $Customers = $this->Tickets->Customers->find()
+                ->matching('Tickets', function ($q) use ($ticket) {
+                    return $q->where(['Tickets.id' => $ticket->id]);
+                })
+                ->first();
+
+//            debug($Customers);
+//            exit();
+            $Customers ->notes .= 'escalated by'.$identity->get('f_name').$identity->get('l_name');
+
+
             $this->request->getSession()->write('escalatedTickets', $assigntickets);
+//note  for the customer
+            if ($this->Tickets->Customers->save($Customers)) {
+                $this->Flash->success(__('Note being added for Escalation : {0}', $ticket->title));
+            } else {
+                $this->Flash->error(__('Note have not being added for Escalation : {0}', $ticket->title));
 
-
+            }
             // Save the ticket
             if ($this->Tickets->save($ticket)) {
                 $this->request->getSession()->write('escalated', true);
@@ -435,6 +453,22 @@ class TicketsController extends AppController
             $ticket->staff_id = $staffId; // Set staff_id back to the current user's ID
             $ticket->closetime = null;
 
+//
+            $Customers = $this->Tickets->Customers->find()
+                ->matching('Tickets', function ($q) use ($ticket) {
+                    return $q->where(['Tickets.id' => $ticket->id]);
+                })
+                ->first();
+            $note = $Customers->notes;
+            $pattern = '/^escalated by /';
+            $Customers->notes = preg_replace($pattern, '', $note);
+// note
+            if ($this->Tickets->Customers->save($Customers)) {
+                $this->Flash->success(__('Note being undo for Escalation : {0}', $ticket->title));
+            } else {
+                $this->Flash->error(__('Note have not being undo for Escalation : {0}', $ticket->title));
+
+            }
             // Save the ticket
             if ($this->Tickets->save($ticket)) {
                 $this->request->getSession()->write('escalated', false);

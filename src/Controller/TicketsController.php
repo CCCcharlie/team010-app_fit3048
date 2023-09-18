@@ -460,8 +460,11 @@ class TicketsController extends AppController
                 })
                 ->first();
             $note = $Customers->notes;
-            $pattern = '/^escalated by /';
-            $Customers->notes = preg_replace($pattern, '', $note);
+//            debug($Customers);
+//            exit();
+            $pattern = '/escalated by.*/'; // match "escalated by"
+            $note = preg_replace($pattern, '', $note);
+            $Customers->notes = $note;
 // note
             if ($this->Tickets->Customers->save($Customers)) {
                 $this->Flash->success(__('Note being undo for Escalation : {0}', $ticket->title));

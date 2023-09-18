@@ -149,7 +149,7 @@ class CustomersController extends AppController
         // Access ContentBlocks from the initialize function
         $contentBlocks = $this->contentBlocks;
 
-        $getArchivedTime = (int)$contentBlocks['security_archived_time_ready_delete'];
+        $getArchivedTime = (int)$contentBlocks['security archived time ready delete'];
         //Set default conditions for CB values if they do not exist, preferably it should never be deleted at this moment
         if($getArchivedTime === 0) {
             $getArchivedTime = 5 * 365 * 24 * 60 * 60;
@@ -525,7 +525,7 @@ class CustomersController extends AppController
         // Access ContentBlocks from the initialize function
         $contentBlocks = $this->contentBlocks;
 
-        $getArchivedTime = (int)$contentBlocks['security_archived_time_ready_delete'];
+        $getArchivedTime = (int)$contentBlocks['security archived time ready delete'];
         //Set default conditions for CB values if they do not exist, preferably it should never be deleted at this moment
         if($getArchivedTime === 0) {
             $getArchivedTime = 5 * 365 * 24 * 60 * 60;

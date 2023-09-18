@@ -154,7 +154,7 @@ $checkConnection = function (string $name) {
                                 <?= $this->Html->link(__('Edit Customer'), ['action' => 'edit', $customer->id], ['class' => 'btn btn-primary', 'style' => 'justify-content: center; display: flex']) ?>
                             <?php elseif ($customer->archive == 1): ?>
                                 <?= $this->Form->postLink(
-                                    __('Delete The Customers Profile'),
+                                    __('Delete Customer Profile'),
                                     ['action' => 'deleteWithContents', $customer->id],
                                     [
                                         'class' => 'btn btn-danger',

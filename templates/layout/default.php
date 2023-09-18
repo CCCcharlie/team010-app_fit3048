@@ -224,7 +224,7 @@
                             <!-- Root view -->
                         <?php elseif($this->Identity->get('role') === 'root'): ?>
                             <li class="nav-item ">
-                                <a class="nav-link active" href="#" data-toggle="collapse" aria-expanded="true"
+                                <a class="nav-link" href="#" data-toggle="collapse" aria-expanded="true"
                                    data-target="#submenu-1" aria-controls="submenu-1"><i
                                         class="fa fa-fw fa-user-circle"></i>Customer Management <span
                                         class="badge badge-success">6</span></a>
@@ -239,10 +239,10 @@
                                             <a class="nav-link" href="/customers">View All Customers</a>
                                         </li>
                                         <li class="nav-item">
-                                            <a class="nav-link" href="/customers/add">Add a Customer Profile</a>
+                                            <a class="nav-link" href="/customers/add">Add A Customer Profile</a>
                                         </li>
                                         <li class="nav-item">
-                                            <a class="nav-link" href="/customers/archiveindex">View All archived profiles</a>
+                                            <a class="nav-link" href="/customers/archiveindex">View All Archived Profiles</a>
                                         </li>
                                     </ul>
                                 </div>
@@ -261,16 +261,16 @@
                                             <a class="nav-link" href="/Users/">View All Staff Accounts</a>
                                         </li>
                                         <li class="nav-item">
-                                            <a class="nav-link" href="/tickets/unassigned">View unassigned tickets</a>
+                                            <a class="nav-link" href="/tickets/unassigned">View Unassigned Tickets</a>
                                         </li>
 <!--                                        <li class="nav-item">-->
 <!--                                            <a class="nav-link" href="/customers/escalatetome"> View the escalated customer  </a>-->
 <!--                                        </li>-->
                                         <li class="nav-item">
-                                            <a class="nav-link" href="/cb"> Edit Contents  </a>
+                                            <a class="nav-link" href="/cb"> Edit Site Contents  </a>
                                         </li>
                                         <li class="nav-item">
-                                            <a class="nav-link" href="/customers/archiveddeleteprofiles"> View Outdated Profiles </a>
+                                            <a class="nav-link" href="/customers/archiveddeleteprofiles"> View Outdated Archived Profiles </a>
                                         </li>
                                     </ul>
                                 </div>

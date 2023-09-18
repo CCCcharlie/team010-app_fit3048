@@ -203,9 +203,9 @@ class AuthController extends AppController {
         // instead it locks out at 7
 //        debug($contentBlocks);
 
-        $maxAttemptTimeOut = (int)$contentBlocks['security max attempts timeout'];
-        $timeMultiplyFactor = (int)$contentBlocks['security time multiply factor'];
-        $maxTimeoutDuration = (int)$contentBlocks['security max timeout duration'];
+        $maxAttemptTimeOut = (int)$contentBlocks['security_max_attempts_timeout'];
+        $timeMultiplyFactor = (int)$contentBlocks['security_time_multiply_factor'];
+        $maxTimeoutDuration = (int)$contentBlocks['security_max_timeout_duration'];
 
         //Set default conditions for CB values if they do not exist, preferably it should never be deleted at this moment
         if($maxAttemptTimeOut === 0) {

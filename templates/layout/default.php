@@ -50,7 +50,7 @@
     <div class="dashboard-header">
         <nav class="navbar navbar-expand-lg bg-white fixed-top" style="display: flex; justify-content: space-between;">
             <a class="navbar-brand" href="/">
-                <?php $logo = $contentBlocks['navigation header logo']?>
+                <?php $logo = $contentBlocks['navigation_header_logo']?>
                 <?= $this->Html->image($logo, ['alt' => 'GamBlock Logo', 'class' => 'navbar-b;and', 'style' => 'width: auto; height: 70px;']); ?>
             </a>
 

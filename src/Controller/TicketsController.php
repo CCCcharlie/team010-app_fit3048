@@ -11,6 +11,9 @@ namespace App\Controller;
  */
 class TicketsController extends AppController
 {
+
+
+
     /**
      * Index method
      *
@@ -367,33 +370,40 @@ class TicketsController extends AppController
     public function updateEscalate($id)
 
     {
+        $identity = $this->request->getAttribute('authentication')->getIdentity();
+        $staffId= $identity->get('id');
+//        current user
+
+        // Get the related tickets for assigned customers
+        $assigntickets = $this->Tickets->find()
+            ->where([
+                'Tickets.staff_id' => $staffId,
+                'Tickets.cust_id' => $id,
+                'Tickets.closetime IS NULL'
 
 
-        // base on id get the tickets
-        $ticket = $this->Tickets->get($id);
-//debug($id);
-//exit();
-        // update "escalate" to true（1）
-        $ticket->escalate = true;
-        $ticket->staff_id = 2;
-//        debug($id);
-//      debug($identity->get('id'));
+            ])
+            ->contain(['Users',  'Customers'])
+            ->all();
+//        debug($assigntickets);
 //        exit();
 
 
-        // Pass $id to the view as selectedTicketId
+        // Loop through the assigned tickets
+        foreach ($assigntickets as $ticket) {
+            // Update "escalate" to true（1）
+            $ticket->escalate = true;
+            $ticket->staff_id = 2;
+            $this->request->getSession()->write('escalatedTickets', $assigntickets);
 
-        // save
-        if ($this->Tickets->save($ticket)) {
-            //
-            $this->Flash->success(__('Escalation successful.'));
 
+            // Save the ticket
+            if ($this->Tickets->save($ticket)) {
 
-
-        } else {
-//            $this->Flash->error(__('Escalation failed. Errors: {0}', print_r($ticket->getErrors(), true)));
-
-            $this->Flash->error(__('Escalation failed.'));
+                $this->Flash->success(__('Escalation successful for Ticket ID: {0}', $ticket->id));
+            } else {
+                $this->Flash->error(__('Escalation failed for Ticket ID: {0}', $ticket->id));
+            }
         }
 
         //
@@ -401,27 +411,36 @@ class TicketsController extends AppController
     }
 
     public function undoEscalate($id)
+
     {
+        $escalatedTickets = $this->request->getSession()->read('escalatedTickets');
 
-//debug($id);
-//exit();
         $identity = $this->request->getAttribute('authentication')->getIdentity();
-        // base on id get the ticket
+        $staffId = $identity->get('id');
 
-        $ticket = $this->Tickets->get($id);
+        // Get the related tickets for assigned customers
+        $assigntickets = $this->Tickets->find()
+            ->where([
+                'Tickets.staff_id' => $staffId,
+                'Tickets.cust_id' => $id,
+                'Tickets.closetime IS NULL'
+            ])
+            ->contain(['Users', 'Customers'])
+            ->all();
 
-        // update "escalate" to false (0)
-        $ticket->escalate = false;
-        $ticket->staff_id = $identity->get('id');// Remove the staff assignment if necessary.
-        $ticket->closetime = null;
+        // Loop through the assigned tickets and de-escalate them
+        foreach ($escalatedTickets as $ticket) {
+            // Update "escalate" to false (0)
+            $ticket->escalate = false;
+            $ticket->staff_id = $staffId; // Set staff_id back to the current user's ID
+            $ticket->closetime = null;
 
-        // save
-        if ($this->Tickets->save($ticket)) {
-            $this->Flash->success(__('Deescalation successful.'));
-        } else {
-
-
-            $this->Flash->error(__('Deescalation failed.'));
+            // Save the ticket
+            if ($this->Tickets->save($ticket)) {
+                $this->Flash->success(__('Deescalation successful for Ticket ID: {0}', $ticket->id));
+            } else {
+                $this->Flash->error(__('Deescalation failed for Ticket ID: {0}', $ticket->id));
+            }
         }
 
         return $this->redirect($this->referer());

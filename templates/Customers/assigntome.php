@@ -308,27 +308,29 @@ to get the name or any value in the staff table, use the get and then the name o
                                 'id' => "select-ticket-<?= $ticket->id ?>",
 
                             ]);
-
-
                             ?>
                         </div>
 
-                        <button id="navigate-button-<?= $customer->id ?>" class="btn btn-primary">Escalate the customer</button>
+<!--                        <button id="navigate-button---><?php //= $customer->id ?><!--" class="btn btn-primary">Escalate the customer</button>-->
 
 
-<!--                                                                        --><?php //foreach ($assigntickets as $ticket): ?>
-<!--                            --><?php //echo $this->Html->link(
-//                                __('Escalate the customer'),
-//                                [
-//                                    'controller' => 'Tickets',
-//                                    'action' => 'edit',
-//                                    $ticket->id,
+
+                            <?php echo $this->Html->link(
+                                __('Escalate the customer'),
+                                [
+                                    'controller' => 'Tickets',
+                                    'action' => 'updateEscalate',
+                                    $customer->id
 //                                    '?' => ['cust_id' => $ticket->customer->id] // assign cust id to checking variable
-//                                ],
-//                                ['class' => 'btn btn-primary']
-//                            ); ?>
-<!--                            --><?php //echo ' '; ?>
-<!--                        --><?php //endforeach; ?>
+                                ],
+                                [
+                                    'class' => 'btn btn-primary',
+                                    'id' => "navigate-button-<?= $customer->id ?>",
+                                    'data-customer-id' => $customer->id
+                                ]
+                            ); ?>
+                            <?php echo ' '; ?>
+
 
 
 
@@ -422,21 +424,25 @@ to get the name or any value in the staff table, use the get and then the name o
             //});
                 //
 
-                document.getElementById('navigate-button-<?= debug( $customer->id );$customer->id ?>').addEventListener('click', function () {
-                    // get ticketID
-                    //
-                    //sessionStorage.setItem("selectedTicketId", selectedTicketId);
-
-                    // refer to the update
-                    // window.location.href = '/team010-app_fit3048/tickets/edit/' + selectedTicketId;
-
-                    console.log( 2);// check
-
-                    // window.location.href = '/team010-app_fit3048/tickets/updateEscalate/' + selectedTicketId;
-
-                    // undo button style
-                    // document.getElementById('undobutton').style.display = 'block';
-                });
+                //document.getElementById('navigate-button-<?php //= $customer->id ?>//').addEventListener('click', function () {
+                //    //var escalateLink = document.getElementById("select-ticket-<?php ////$ticket->id ?>////").addEventListener("change", function() {
+                //    //var selectedTicketId = escalateLink.getAttribute('data-customer-id'); // 获取 data-customer-id 的值
+                //
+                //    // get ticketID
+                //    //
+                //    // sessionStorage.setItem("selectedTicketId", selectedTicketId);
+                //
+                //    // refer to the update
+                //    // window.location.href = '/team010-app_fit3048/tickets/edit/' + selectedTicketId;
+                //
+                //    console.log( selectedTicketId);// check
+                //    debug（）
+                //
+                //    // window.location.href = '/team010-app_fit3048/tickets/updateEscalate/' + selectedTicketId;
+                //
+                //    // undo button style
+                //    // document.getElementById('undobutton').style.display = 'block';
+                //});
 
 
             document.getElementById('undobutton').addEventListener('click', function () {
@@ -450,7 +456,7 @@ to get the name or any value in the staff table, use the get and then the name o
 
                 // var url = '/team010-app_fit3048/tickets/undoEscalate/' + 1 +'?staffId=' + staffId;
 
-                var url = '/team010-app_fit3048/tickets/undoEscalate/' + selectedTicketId +'?staffId=' + staffId;
+                var url = '/team010-app_fit3048/tickets/undoEscalate/' + 3;
 
                 // Redirect to undoEscalate with both parameters
                 window.location.href = url;

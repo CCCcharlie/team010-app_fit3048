@@ -412,7 +412,7 @@ class TicketsController extends AppController
 
 //            debug($Customers);
 //            exit();
-            $Customers ->notes .= 'escalated by'.$identity->get('f_name').$identity->get('l_name');
+            $Customers ->notes .= 'Escalated by'.' '.$identity->get('f_name').' '.$identity->get('l_name');
 
 
             $this->request->getSession()->write('escalatedTickets', $assigntickets);
@@ -462,7 +462,7 @@ class TicketsController extends AppController
             $note = $Customers->notes;
 //            debug($Customers);
 //            exit();
-            $pattern = '/escalated by.*/'; // match "escalated by"
+            $pattern = '/Escalated by.*/'; // match "escalated by"
             $note = preg_replace($pattern, '', $note);
             $Customers->notes = $note;
 // note

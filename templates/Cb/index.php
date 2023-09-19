@@ -76,7 +76,7 @@
                 <tbody>
                 <?php foreach ($cbs as $cb): ?>
                     <tr>
-                        <td><?= h($cb->hint) ?></td>
+                        <td><?= h(str_replace("_", " ", $cb->hint)) ?></td>
                         <?php if($cb->content_type == 'image'): ?>
                             <td class="image-table"><?= $this->Html->image($cb->content_value, ['alt' => $cb->hint]); ?></td>
                         <?php else: ?>

@@ -385,21 +385,47 @@ class TicketsController extends AppController
             ])
             ->contain(['Users',  'Customers'])
             ->all();
-//        debug($assigntickets);
-//        exit();
+
+        $rootuser = $this->Tickets->Users->find()
+            ->where([
+                'Users.role' => 'root'
+            ])
+            ->contain(['Tickets'])
+            ->first();
+        $rootuserid = $rootuser->id;
+
 
 
         // Loop through the assigned tickets
         foreach ($assigntickets as $ticket) {
             // Update "escalate" to true（1）
             $ticket->escalate = true;
-            $ticket->staff_id = 2;
+            $ticket->staff_id = $rootuserid;
+//mark down the staff escalating
+
+
+            $Customers = $this->Tickets->Customers->find()
+                ->matching('Tickets', function ($q) use ($ticket) {
+                    return $q->where(['Tickets.id' => $ticket->id]);
+                })
+                ->first();
+
+//            debug($Customers);
+//            exit();
+            $Customers ->notes .= 'Escalated by'.' '.$identity->get('f_name').' '.$identity->get('l_name');
+
+
             $this->request->getSession()->write('escalatedTickets', $assigntickets);
+//note  for the customer
+            if ($this->Tickets->Customers->save($Customers)) {
+                $this->Flash->success(__('Note being added for Escalation : {0}', $ticket->title));
+            } else {
+                $this->Flash->error(__('Note have not being added for Escalation : {0}', $ticket->title));
 
-
+            }
             // Save the ticket
             if ($this->Tickets->save($ticket)) {
-
+                $this->request->getSession()->write('escalated', true);
                 $this->Flash->success(__('Escalation successful for Ticket : {0}', $ticket->title));
             } else {
                 $this->Flash->error(__('Escalation failed for Ticket : {0}', $ticket->title));
@@ -427,8 +453,29 @@ class TicketsController extends AppController
             $ticket->staff_id = $staffId; // Set staff_id back to the current user's ID
             $ticket->closetime = null;
 
+//
+            $Customers = $this->Tickets->Customers->find()
+                ->matching('Tickets', function ($q) use ($ticket) {
+                    return $q->where(['Tickets.id' => $ticket->id]);
+                })
+                ->first();
+            $note = $Customers->notes;
+//            debug($Customers);
+//            exit();
+            $pattern = '/Escalated by.*/'; // match "escalated by"
+            $note = preg_replace($pattern, '', $note);
+            $Customers->notes = $note;
+// note
+            if ($this->Tickets->Customers->save($Customers)) {
+                $this->Flash->success(__('Note being undo for Escalation : {0}', $ticket->title));
+            } else {
+                $this->Flash->error(__('Note have not being undo for Escalation : {0}', $ticket->title));
+
+            }
             // Save the ticket
             if ($this->Tickets->save($ticket)) {
+                $this->request->getSession()->write('escalated', false);
+
                 $this->Flash->success(__('Deescalation successful for Ticket : {0}', $ticket->title));
             } else {
                 $this->Flash->error(__('Deescalation failed for Ticket : {0}', $ticket->title));

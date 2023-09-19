@@ -203,7 +203,10 @@ to get the name or any value in the staff table, use the get and then the name o
                             </tr>
                             <?= $this->Html->link(__('New Customer'), ['action' => 'add'], ['class' => 'btn btn-success float-right']) ?>
                             <!--         Add the "Undo Changes" link with an ID -->
-                            <button id="undobutton" class="btn btn-primary" style="margin-left: 2vw">Unescalate the customer</button>
+                                    <button id="undobutton" class="btn btn-primary" style="margin-left: 2vw">Unescalate the customer</button>
+
+
+
 
                             <br>
                             <br>
@@ -416,18 +419,18 @@ to get the name or any value in the staff table, use the get and then the name o
             //    // get the value
             //    var selectedOption = this.options[this.selectedIndex];
             //    if (selectedOption) {
-            //        // 提取所选选项的值（这里假设你的选项的值是 $ticket->id）
+            //
             //        var selectedTicketId = selectedOption.value;
             //        console.log("Selected Ticket ID: " + selectedTicketId);
             //
-            //        // 在这里可以使用 selectedTicketId 进行后续操作
+            //        //
             //    }
             //});
                 //
 
                 //document.getElementById('navigate-button-<?php //= $customer->id ?>//').addEventListener('click', function () {
                 //    //var escalateLink = document.getElementById("select-ticket-<?php ////$ticket->id ?>////").addEventListener("change", function() {
-                //    //var selectedTicketId = escalateLink.getAttribute('data-customer-id'); // 获取 data-customer-id 的值
+                //    //var selectedTicketId = escalateLink.getAttribute('data-customer-id');
                 //
                 //    // get ticketID
                 //    //
@@ -445,14 +448,26 @@ to get the name or any value in the staff table, use the get and then the name o
                 //    // document.getElementById('undobutton').style.display = 'block';
                 //});
 
+<!--            --><?php //debug( $this->request->getSession()->read('escalatedTickets'))?>
+
+             // check the escalate action have been done
+            var escalated = <?= json_encode($this->request->getSession()->read('escalated')); ?>;
+
+            if ( escalated == true ) {
+                //
+                document.getElementById("undobutton").style.display = "inherit";
+            } else {
+                //
+                document.getElementById("undobutton").style.display = "none";
+            }
 
             document.getElementById('undobutton').addEventListener('click', function () {
                 // Get selectedTicketId and staffId
 
                 var staffId =<?= $identity->get('id'); ?> /* current staffId */;
-                var selectedTicketId = sessionStorage.getItem("selectedTicketId");
 
-       // console.log(selectedTicketId); // check
+
+                // console.log(escalatedTickets); // check
                 // Construct the URL with both selectedTicketId and staffId
 
                 // var url = '/team010-app_fit3048/tickets/undoEscalate/' + 1 +'?staffId=' + staffId;

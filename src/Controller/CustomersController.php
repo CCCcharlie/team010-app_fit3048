@@ -37,9 +37,9 @@ class CustomersController extends AppController
         }
 
         // Blacklist these pages for "staff" members
-        //  archiveindex, archiveddeleteprofiles, escalatetome
+        //  archiveddeleteprofiles, escalatetome
         if($loggedInRole === 'staff') {
-            if($action === 'archiveindex' || $action === 'archiveddeleteprofiles' || $action === 'escalatetome' ) {
+            if($action === 'archiveddeleteprofiles' || $action === 'escalatetome' ) {
                 $this->Flash->error(__('Insufficient privileges'));
                 return $this->redirect(['action' => 'assigntome']);
             }
@@ -267,11 +267,13 @@ class CustomersController extends AppController
             ->innerJoinWith('Tickets', function ($query) use ($currentStaffId) {
                 return $query->where([
                     'Tickets.staff_id' => $currentStaffId,
-                    'Tickets.closetime IS NULL'
                 ]);
             })
             ->distinct(['Customers.id'])// Add this line to ensure distinct customers
             ->all();
+
+//        debug($assignedCustomers);
+//        exit;
 
 //debug($assignedCustomers);
 //exit;
@@ -520,8 +522,16 @@ class CustomersController extends AppController
 
     public function deleteArchivedProfiles()
     {
-        // Define the time in seconds for a five-year duration
-        $archivedTimeInSeconds = 5 * 365 * 24 * 60 * 60; // Five years in seconds
+        // Access ContentBlocks from the initialize function
+        $contentBlocks = $this->contentBlocks;
+
+        $getArchivedTime = (int)$contentBlocks['security_archived_time_ready_delete'];
+        //Set default conditions for CB values if they do not exist, preferably it should never be deleted at this moment
+        if($getArchivedTime === 0) {
+            $getArchivedTime = 5 * 365 * 24 * 60 * 60;
+        }
+
+        $archivedTimeInSeconds = $getArchivedTime; // defaults to Five years in seconds
 
         // Calculate the timestamp for the threshold
         $currentTimestamp = time();

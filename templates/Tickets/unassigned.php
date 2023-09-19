@@ -25,7 +25,9 @@
 </head>
 <body>
 <div class="tickets index content">
-    <h3><?= __('Tickets') ?></h3>
+    <h3><?= __('Unassigned Tickets') ?></h3>
+    <p style="color: midnightblue"> These profiles do not have an assigned staff member. Please assign a staff member to these profiles. </p>
+
     <div class="table-responsive table table-hover table-striped">
         <table>
             <thead>
@@ -53,7 +55,7 @@
                         ?>
                     </td>
                     <td class="actions">
-                        <?= $this->Html->link(__('Re-Assign'), ['action' => 'edit', $ticket->id]) ?>
+                        <?= $this->Html->link(__('Re-Assign'), ['action' => 'editticketunassigned', $ticket->id]) ?>
                     </td>
                 </tr>
             <?php endforeach; ?>

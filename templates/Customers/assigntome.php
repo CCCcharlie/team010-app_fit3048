@@ -109,14 +109,14 @@ to get the name or any value in the staff table, use the get and then the name o
                     </div>
                     <div class="row">
                         <div class="col-md-12">
-                            <?= $this->Form->create(null, ['url' => ['controller' => 'Customers', 'action' => 'index'], 'type' => 'get', 'class' => 'form-inline']) ?>
-                            <div class="form-group mr-2">
-                                <?= $this->Form->input('search', ['type' => 'text', 'class' => 'form-control', 'placeholder' => 'Search...']) ?>
-                            </div>
-                            <?= $this->Form->button(__('Search'), ['class' => 'btn btn-primary']) ?>
-                            `
-
-                            <?= $this->Form->end() ?>
+<!--                            --><?php //= $this->Form->create(null, ['url' => ['controller' => 'Customers', 'action' => 'index'], 'type' => 'get', 'class' => 'form-inline']) ?>
+<!--                            <div class="form-group mr-2">-->
+<!--                                --><?php //= $this->Form->input('search', ['type' => 'text', 'class' => 'form-control', 'placeholder' => 'Search...']) ?>
+<!--                            </div>-->
+<!--                            --><?php //= $this->Form->button(__('Search'), ['class' => 'btn btn-primary']) ?>
+<!--                            `-->
+<!---->
+<!--                            --><?php //= $this->Form->end() ?>
 
 
                             <br>
@@ -203,7 +203,10 @@ to get the name or any value in the staff table, use the get and then the name o
                             </tr>
                             <?= $this->Html->link(__('New Customer'), ['action' => 'add'], ['class' => 'btn btn-success float-right']) ?>
                             <!--         Add the "Undo Changes" link with an ID -->
-<!--                            <button id="undobutton" class="btn btn-primary">Unescalate the customer</button>-->
+                                    <button id="undobutton" class="btn btn-primary" style="margin-left: 2vw">Unescalate the customer</button>
+
+
+
 
                             <br>
                             <br>
@@ -289,37 +292,49 @@ to get the name or any value in the staff table, use the get and then the name o
 <!--                        upgrade button-->
 
 
-                        <div class="form-group">
-                            <?= $this->Form->label('selected_ticket', 'Select Ticket', ['class' => 'col-form-label']) ?>
-                            <?php
-                            $options = [];
-                            foreach ($assigntickets as $ticket) {
-                                $options[$ticket->id] = $ticket->title;
-                            }
-                            echo $this->Form->select('selected_ticket', $options, [
-                                'class' => 'form-control',
-                                'id' => 'select-ticket',
-                            ]);
-                            ?>
-                        </div>
+<!--                        <div class="form-group">-->
+<!---->
+<!---->
+<!--                            --><?php //= $this->Form->label('selected_ticket', 'Select Ticket', ['class' => 'col-form-label']) ?>
+<!--                            --><?php
+//                            $options = [];
+//                            foreach ($assigntickets as $ticket) {
+//                                if ($ticket ->cust_id == $customer->id) {
+//                                    $options[$ticket->id] = $ticket->title;
+//
+//                                }
+//
+//                            }
+//                            echo $this->Form->select('selected_ticket', $options, [
+//                                'class' => 'form-control',
+////                                'data-ticket-id' => $ticket->id
+/*                                'id' => "select-ticket-<?= $ticket->id ?>",*/
+//
+//                            ]);
+//                            ?>
+<!--                        </div>-->
 
-                        <button id="navigate-button" class="btn btn-primary">Escalate the customer</button>
+<!--                        <button id="navigate-button---><?php //= $customer->id ?><!--" class="btn btn-primary">Escalate the customer</button>-->
 
 
 
-                        <!--                                                --><?php //foreach ($assigntickets as $ticket): ?>
-<!--                            --><?php //echo $this->Html->link(
-//                                __('Escalate the customer'),
-//                                [
-//                                    'controller' => 'Tickets',
-//                                    'action' => 'edit',
-//                                    $ticket->id,
+                            <?php echo $this->Html->link(
+                                __('Escalate the customer'),
+                                [
+                                    'controller' => 'Tickets',
+                                    'action' => 'updateEscalate',
+                                    $customer->id
 //                                    '?' => ['cust_id' => $ticket->customer->id] // assign cust id to checking variable
-//                                ],
-//                                ['class' => 'btn btn-primary']
-//                            ); ?>
-<!--                            --><?php //echo ' '; ?>
-<!--                        --><?php //endforeach; ?>
+                                ],
+                                [
+                                    'class' => 'btn btn-primary ',
+                                    'style'=>'margin-top:3vh',
+                                    'id' => "navigate-button-<?= $customer->id ?>",
+                                    'data-customer-id' => $customer->id
+                                ]
+                            ); ?>
+                            <?php echo ' '; ?>
+
 
 
 
@@ -328,6 +343,7 @@ to get the name or any value in the staff table, use the get and then the name o
 
 
                     </div>
+
                     <?= $this->Html->link(__('View Full Profile'), ['action' => 'view', $customer->id], ['class' => 'btn btn-primary']) ?>
                 </div>
             </div>
@@ -395,38 +411,74 @@ to get the name or any value in the staff table, use the get and then the name o
 
         <script>
 
-            var selectedTicketId; // declare selectedTicketId
+            var selectedTicketId;
 
-
-            //document.getElementById('undobutton').addEventListener('click', function () {
-            //    // Get selectedTicketId and staffId
+             // declare
+             // for selection
+            //document.getElementById("select-ticket-<?php //$ticket->id ?>//").addEventListener("change", function() {
+            //    // get the value
+            //    var selectedOption = this.options[this.selectedIndex];
+            //    if (selectedOption) {
             //
-            //    var staffId =<?php //= $identity->get('id'); ?>// /* current staffId */;
-            //    console.log(staffId); // check
-            //    console.log(selectedTicketId); // check
+            //        var selectedTicketId = selectedOption.value;
+            //        console.log("Selected Ticket ID: " + selectedTicketId);
             //
-            //    // Construct the URL with both selectedTicketId and staffId
-            //
-            //    // var url = '/team010-app_fit3048/tickets/undoEscalate/' + selectedTicketId +'?staffId=' + staffId;
-            //
-            //    // Redirect to undoEscalate with both parameters
-            //    window.location.href = url;
+            //        //
+            //    }
             //});
+                //
 
-            document.getElementById('navigate-button').addEventListener('click', function () {
-                // get ticketID
-                 selectedTicketId = document.getElementById('select-ticket').value;
+                //document.getElementById('navigate-button-<?php //= $customer->id ?>//').addEventListener('click', function () {
+                //    //var escalateLink = document.getElementById("select-ticket-<?php ////$ticket->id ?>////").addEventListener("change", function() {
+                //    //var selectedTicketId = escalateLink.getAttribute('data-customer-id');
+                //
+                //    // get ticketID
+                //    //
+                //    // sessionStorage.setItem("selectedTicketId", selectedTicketId);
+                //
+                //    // refer to the update
+                //    // window.location.href = '/team010-app_fit3048/tickets/edit/' + selectedTicketId;
+                //
+                //    console.log( selectedTicketId);// check
+                //    debug（）
+                //
+                //    // window.location.href = '/team010-app_fit3048/tickets/updateEscalate/' + selectedTicketId;
+                //
+                //    // undo button style
+                //    // document.getElementById('undobutton').style.display = 'block';
+                //});
 
-                // refer to the update
-                // window.location.href = '/team010-app_fit3048/tickets/edit/' + selectedTicketId;
+<!--            --><?php //debug( $this->request->getSession()->read('escalatedTickets'))?>
 
-                // console.log(selectedTicketId); // check
+             // check the escalate action have been done
+            var escalated = <?= json_encode($this->request->getSession()->read('escalated')); ?>;
 
-                window.location.href = '/team010-app_fit3048/tickets/updateEscalate/' + selectedTicketId;
+            if ( escalated == true ) {
+                //
+                document.getElementById("undobutton").style.display = "inherit";
+            } else {
+                //
+                document.getElementById("undobutton").style.display = "none";
+            }
 
-                // undo button style
-                // document.getElementById('undobutton').style.display = 'block';
-            })
+            document.getElementById('undobutton').addEventListener('click', function () {
+                // Get selectedTicketId and staffId
+
+                var staffId =<?= $identity->get('id'); ?> /* current staffId */;
+
+
+                // console.log(escalatedTickets); // check
+                // Construct the URL with both selectedTicketId and staffId
+
+                // var url = '/team010-app_fit3048/tickets/undoEscalate/' + 1 +'?staffId=' + staffId;
+
+                var url = '/team010-app_fit3048/tickets/undoEscalate/' + staffId;
+
+                // Redirect to undoEscalate with both parameters
+                window.location.href = url;
+            });
+
+
 
 
         </script>

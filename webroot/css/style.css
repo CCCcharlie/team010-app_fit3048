@@ -3234,6 +3234,10 @@ btn-link
     min-width: 80%;
     min-height: 75%;
 }
+.login-form-container {
+    max-height: 500px; /* Set a fixed maximum height as needed */
+    overflow: auto; /* Add scrollbars if content overflows */
+}
 
 .card-header {
     background-color: #fff;
@@ -3247,7 +3251,7 @@ btn-link
 }
 
 .card-body {
-    width:inherit;
+    width: inherit;
     height: inherit;
 }
 

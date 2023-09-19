@@ -25,17 +25,25 @@
 
     <link href="https://fonts.googleapis.com/css?family=Raleway:400,700" rel="stylesheet">
 
-    <?= $this->Html->css(['normalize.min', 'milligram.min', 'cake']) ?>
+    <?= $this->Html->css(['errorpage', 'cake']) ?>
+    <?= $this->Html->script(['jquery-3.3.1.min.js', 'bootstrap.bundle.js', 'main-js', 'jquery.slimscroll.js', 'errorpage']) ?>
+
 
     <?= $this->fetch('meta') ?>
     <?= $this->fetch('css') ?>
     <?= $this->fetch('script') ?>
 </head>
+
 <body>
-    <div class="error-container">
+<div class="cont_principal">
+    <div class="cont_error">
+
         <?= $this->Flash->render() ?>
         <?= $this->fetch('content') ?>
         <?= $this->Html->link(__('Back'), 'javascript:history.back()') ?>
     </div>
+    <div class="cont_aura_1"></div>
+    <div class="cont_aura_2"></div>
+</div>
 </body>
 </html>

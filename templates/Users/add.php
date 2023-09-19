@@ -101,7 +101,6 @@
 <!--                                    </div>-->
 
                                 <?php
-                                // Assuming $role_choice is an array of options
                                 $filteredRoleChoice = array_filter($role_choice, function ($value) {
                                     return $value !== 'Root'; // Filter out the 'Root' option
                                 });

@@ -11,6 +11,9 @@ namespace App\Controller;
  */
 class TicketsController extends AppController
 {
+
+
+
     /**
      * Index method
      *
@@ -170,10 +173,9 @@ class TicketsController extends AppController
                 $this->getRequest()->getSession()->write('originalData', $originalData);
 
 //                for undo action
-                return $this->redirect($this->referer());
-//               return $this->redirect(['controller' => 'Customers', 'action' => 'view', $custId]);
+               return $this->redirect(['controller' => 'Customers', 'action' => 'view', $custId]);
             }
-            $this->Flash->error(__('This     Ticket could not be saved. Please, try again.'));
+            $this->Flash->error(__('This Ticket could not be saved. Please, try again.'));
         }
         $customers = $this->Tickets->Customers->find('list', ['limit' => 200])->all();
         $users = $this->Tickets->Users->find('list', [
@@ -185,9 +187,66 @@ class TicketsController extends AppController
 //        return to current address
         $refererUrl = $this->referer();
 //
+    }
+
+    /**
+     * Edit method
+     *
+     * @param string|null $id Ticket id.
+     * @return \Cake\Http\Response|null|void Redirects on successful edit, renders view otherwise.
+     * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
+     */
+    public function editticketunassigned($id = null)
+    {
+        //Obtain the query via key value pair [called from customer table view]
+        $firstName = $this->request->getQuery('f_name');
+        $lastName = $this->request->getQuery('l_name');
+        $custId = $this->request->getQuery('cust_id');
+        $fullName = $firstName . ' ' . $lastName;
+//        $ticketClosedStatus = $this->request->getQuery('ticket_closed');
+
+        $this->set(compact('fullName', 'custId'));
+
+        $ticket = $this->Tickets->get($id, [
+            'contain' => [],
+        ]);
+//
+        // Obtain the orginal data
+        $originalData = $this->Tickets->get($id, [
+            'contain' => [],
+        ]);
+        $this->set(compact('originalData', 'originalData'));
 
 
+//
+        if ($this->request->is(['patch', 'post', 'put'])) {
+            $ticket = $this->Tickets->patchEntity($ticket, $this->request->getData());
 
+//            debug($ticket);
+//            debug($id);
+//            exit;
+//
+            if ($this->Tickets->save($ticket)) {
+                $this->Flash->success(__('The Ticket: "'. $ticket->title . '" is successfully assigned'));
+                // Save the original data in the session
+                $this->getRequest()->getSession()->write('originalData', $originalData);
+
+//                for undo action
+//                return $this->redirect($this->redirect);
+                return $this->redirect(['action' => 'unassigned']);
+            }
+            $this->Flash->error(__('This Ticket could not be assigned. Please, try again.'));
+        }
+        $customers = $this->Tickets->Customers->find('list', ['limit' => 200])->all();
+        $users = $this->Tickets->Users->find('list', [
+            'keyField' => 'id',
+            'valueField' => 'f_name',
+            'limit' => 200
+        ])->all();
+        $this->set(compact('ticket', 'customers', 'users'));
+//        return to current address
+        $refererUrl = $this->referer();
+//
     }
 
     /**
@@ -311,32 +370,66 @@ class TicketsController extends AppController
     public function updateEscalate($id)
 
     {
+        $identity = $this->request->getAttribute('authentication')->getIdentity();
+        $staffId= $identity->get('id');
+//        current user
+
+        // Get the related tickets for assigned customers
+        $assigntickets = $this->Tickets->find()
+            ->where([
+                'Tickets.staff_id' => $staffId,
+                'Tickets.cust_id' => $id,
+                'Tickets.closetime IS NULL'
 
 
-        // base on id get the tickets
-        $ticket = $this->Tickets->get($id);
+            ])
+            ->contain(['Users',  'Customers'])
+            ->all();
 
-        // update "escalate" to true（1）
-        $ticket->escalate = true;
-        $ticket->staff_id = 2;
-//        debug($id);
-//      debug($identity->get('id'));
-//        exit();
-
-
-        // Pass $id to the view as selectedTicketId
-
-        // save
-        if ($this->Tickets->save($ticket)) {
-            //
-            $this->Flash->success(__('Escalation successful.'));
+        $rootuser = $this->Tickets->Users->find()
+            ->where([
+                'Users.role' => 'root'
+            ])
+            ->contain(['Tickets'])
+            ->first();
+        $rootuserid = $rootuser->id;
 
 
 
-        } else {
-//            $this->Flash->error(__('Escalation failed. Errors: {0}', print_r($ticket->getErrors(), true)));
+        // Loop through the assigned tickets
+        foreach ($assigntickets as $ticket) {
+            // Update "escalate" to true（1）
+            $ticket->escalate = true;
+            $ticket->staff_id = $rootuserid;
+//mark down the staff escalating
 
-            $this->Flash->error(__('Escalation failed.'));
+
+            $Customers = $this->Tickets->Customers->find()
+                ->matching('Tickets', function ($q) use ($ticket) {
+                    return $q->where(['Tickets.id' => $ticket->id]);
+                })
+                ->first();
+
+//            debug($Customers);
+//            exit();
+            $Customers ->notes .= 'Escalated by'.' '.$identity->get('f_name').' '.$identity->get('l_name');
+
+
+            $this->request->getSession()->write('escalatedTickets', $assigntickets);
+//note  for the customer
+            if ($this->Tickets->Customers->save($Customers)) {
+                $this->Flash->success(__('Note being added for Escalation : {0}', $ticket->title));
+            } else {
+                $this->Flash->error(__('Note have not being added for Escalation : {0}', $ticket->title));
+
+            }
+            // Save the ticket
+            if ($this->Tickets->save($ticket)) {
+                $this->request->getSession()->write('escalated', true);
+                $this->Flash->success(__('Escalation successful for Ticket : {0}', $ticket->title));
+            } else {
+                $this->Flash->error(__('Escalation failed for Ticket : {0}', $ticket->title));
+            }
         }
 
         //
@@ -344,25 +437,49 @@ class TicketsController extends AppController
     }
 
     public function undoEscalate($id)
-    {
 
+    {
+        $escalatedTickets = $this->request->getSession()->read('escalatedTickets');
 
         $identity = $this->request->getAttribute('authentication')->getIdentity();
-        // base on id get the ticket
-
-        $ticket = $this->Tickets->get($id);
-
-        // update "escalate" to false (0)
-        $ticket->escalate = false;
-        $ticket->staff_id = $identity->get('id');// Remove the staff assignment if necessary.
-
-        // save
-        if ($this->Tickets->save($ticket)) {
-            $this->Flash->success(__('Deescalation successful.'));
-        } else {
+        $staffId = $identity->get('id');
 
 
-            $this->Flash->error(__('Deescalation failed.'));
+
+        // Loop through the assigned tickets and de-escalate them
+        foreach ($escalatedTickets as $ticket) {
+            // Update "escalate" to false (0)
+            $ticket->escalate = false;
+            $ticket->staff_id = $staffId; // Set staff_id back to the current user's ID
+            $ticket->closetime = null;
+
+//
+            $Customers = $this->Tickets->Customers->find()
+                ->matching('Tickets', function ($q) use ($ticket) {
+                    return $q->where(['Tickets.id' => $ticket->id]);
+                })
+                ->first();
+            $note = $Customers->notes;
+//            debug($Customers);
+//            exit();
+            $pattern = '/Escalated by.*/'; // match "escalated by"
+            $note = preg_replace($pattern, '', $note);
+            $Customers->notes = $note;
+// note
+            if ($this->Tickets->Customers->save($Customers)) {
+                $this->Flash->success(__('Note being undo for Escalation : {0}', $ticket->title));
+            } else {
+                $this->Flash->error(__('Note have not being undo for Escalation : {0}', $ticket->title));
+
+            }
+            // Save the ticket
+            if ($this->Tickets->save($ticket)) {
+                $this->request->getSession()->write('escalated', false);
+
+                $this->Flash->success(__('Deescalation successful for Ticket : {0}', $ticket->title));
+            } else {
+                $this->Flash->error(__('Deescalation failed for Ticket : {0}', $ticket->title));
+            }
         }
 
         return $this->redirect($this->referer());

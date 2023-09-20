@@ -82,38 +82,71 @@
                             <?= $this->Form->create($customer) ?>
                             <div class="text-center">
                                 <h2 class="font-24 mb-0">
-                                    <?= $this->Form->control('f_name', ['class' => 'form-control', 'label' => false]) ?>
-                                    <!--                                            --><?php //= $this->Form->error('f_name'); ?>
-                                    <?= $this->Form->control('l_name', ['class' => 'form-control', 'label' => false]) ?>
-                                    <!-- Display validation error for the 'f_name' field -->
-                                    <!--                                            -->
-                                    <?php //= $this->Form->error('l_name'); ?><!--</h2>-->
-                                    <p>
-                                        Status: <?= $this->Form->control('status', ['class' => 'form-control', 'label' => false]) ?></p>
-                                    <!-- Display validation error for the 'f_name' field -->
-                                    <!--                                        --><?php //= $this->Form->error('status'); ?>
-                            </div>
-                        </div>
-                        <div class="card-body border-top">
-                            <h3 class="font-16">Main E-Mail:</h3>
-                            <div class="">
-                                <ul class="list-unstyled mb-0">
-                                    <li class="mb-2"><?= $this->Form->control('email', ['class' => 'form-control', 'label' => false]) ?></li>
-                                    <!-- Display validation error for the 'f_name' field -->
-                                    <!--                                            --><?php //= $this->Form->error('email'); ?>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="card-body border-top">
-                            <h3 class="font-16">Notes:</h3>
-                            <p class="mb-0"><?= $this->Form->control('notes', ['class' => 'form-control', 'style' => 'height: 15rem', 'type' => 'textarea', 'label' => false]) ?></p>
-                            <!-- Display validation error for the 'f_name' field -->
-                            <?= $this->Form->error('notes'); ?>
-                        </div>
-                        <?= $this->Html->link(__('Return to Customer'), ['controller' => 'Customers', 'action' => 'view', $customer->id], ['class' => 'btn btn-rounded btn-secondary']) ?>
+                                    <?= $this->Form->input('f_name', [
+                                        'class' => 'form-control',
+                                        'maxlength' => 32,
+                                        'required' => true,
+                                        'title' => 'Please enter your first name using letters, hyphens, and apostrophes only',
+                                        'pattern' => '^(?! )[A-Za-z-]+$',
+                                        'label' => 'First Name*',
+                                        'label' => ['class' => 'col-form-label blue-label-text']
+                                    ]) ?>
 
-                        <?= $this->Form->button(__('Submit'), ['class' => 'btn btn-rounded btn-primary', 'id' => 'submit-button']) ?>
-                        <?= $this->Form->end() ?>
+                                    <?= $this->Form->input('l_name', [
+                                        'class' => 'form-control',
+                                        'maxlength' => 32,
+                                        'required' => true,
+                                        'title' => 'Please enter your last name using letters and hyphens only',
+                                        'pattern' => '^(?! )[A-Za-z-]+$',
+                                        'label' => 'Last Name*',
+                                        'label' => ['class' => 'col-form-label blue-label-text']
+                                    ]) ?>
+                                    <p>
+                                        Status: <?= $this->Form->input('status', [
+                                            'class' => 'form-control',
+                                            'label' => false
+                                        ]) ?></p>
+                                </h2>
+                            </div>
+
+                            <!-- Email Address Field -->
+                            <div class="card-body border-top">
+                                <h3 class="font-16">Main E-Mail:</h3>
+                                <div class="">
+                                    <ul class="list-unstyled mb-0">
+                                        <li class="mb-2"><?= $this->Form->input('email', [
+                                                'class' => 'form-control',
+                                                'label' => false,
+                                                'placeholder' => 'name@mail.com',
+                                                'type' => 'email',
+                                                'required' => true,
+                                                'pattern' => '[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}',
+                                                'title' => 'Please enter a valid email address with a domain (e.g., name@mail.com)',
+                                                'maxlength' => 320
+                                            ]) ?></li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <div class="card-body border-top">
+                                <h3 class="font-16">Notes:</h3>
+                                <p class="mb-0"><?= $this->Form->input('notes', [
+                                        'class' => 'form-control',
+                                        'style' => 'height: 15rem',
+                                        'type' => 'textarea',
+                                        'label' => false,
+                                        'title' => 'Add any notes here',
+                                        'placeholder' => 'eg. Has 4 dogs.',
+                                        'maxlength' => 500
+                                    ]) ?></p>
+                                <?= $this->Form->error('notes'); ?>
+                                <textarea name="notes" id="notes" class="form-control" title="Enter notes" placeholder="Notes go here.." maxlength="500" style="height: 150px;"></textarea>
+                            </div>
+
+                            <?= $this->Html->link(__('Return to Customer'), ['controller' => 'Customers', 'action' => 'view', $customer->id], ['class' => 'btn btn-rounded btn-secondary']) ?>
+
+                            <?= $this->Form->button(__('Submit'), ['class' => 'btn btn-rounded btn-primary', 'id' => 'submit-button']) ?>
+                            <?= $this->Form->end() ?>
                     </div>
                     <!-- ============================================================== -->
                     <!-- end card profile -->

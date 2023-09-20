@@ -182,6 +182,7 @@ th {
 .pagination li {
     margin: 0 0.5rem;
 }
+
 .prev.disabled a,
 .next.disabled a {
     cursor: not-allowed;

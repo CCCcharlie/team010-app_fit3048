@@ -68,7 +68,8 @@ $checkConnection = function (string $name) {
 
 
 
-
+<!--for scrolling text-->
+    <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
 
 </head>
 
@@ -99,15 +100,30 @@ to get the name or any value in the staff table, use the get and then the name o
                 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                     <br>
                     <br>
-                    <h6 class="text-center">Welcome to the GamBlock home page. Please select an option from the left tool-bar.</h6>
+                    <h6 class="section-title" style="font-size: 1.5em !important;">Welcome to the GamBlock home page. Please select an option from the left tool-bar.</h6>
                 </div>
             </div>
         </div>
     </div>
+
+
     <!-- ============================================================== -->
     <!-- end main wrapper -->
     <!-- ============================================================== -->
 </div>
+    <div class="content2">
+        <div class="content__container">
+            <p class="content__container__text">
+                Gameblock
+            </p>
+            <ul class="content__container__list">
+                <li class="content__container__list__item">Customer Management !</li>
+                <li class="content__container__list__item">Assigned Customers!</li>
+                <li class="content__container__list__item">Admin Features !</li>
+                <li class="content__container__list__item">View Unassigned Tickets !</li>
+            </ul>
+        </div>
+    </div>
 <!-- ============================================================== -->
 <!-- end main wrapper -->
 <!-- ============================================================== -->

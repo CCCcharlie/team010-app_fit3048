@@ -228,7 +228,7 @@ $checkConnection = function (string $name) {
                             <li class="nav-item">
                                 <a class="nav-link" id="pills-consellor-tab" data-toggle="pill"
                                    href="#pills-consellor" role="tab" aria-controls="pills-consellor"
-                                   aria-selected="false">Consellor</a>
+                                   aria-selected="false">Counsellor</a>
                             </li>
 
                         </ul>
@@ -1204,14 +1204,13 @@ $checkConnection = function (string $name) {
                                     <?php
                                     if (!empty($customer->devices)) {
                                         echo '<table class="table table-bordered">';
-                                        echo '<thead><tr><th scope="col">Device Model</th><th scope="col">Technical Details</th><th scope="col">Session ID</th><th scope="col">Transaction ID</th><th scope="col">Platform</th><th scope="col">Gamblock Ver.</th><th scope="col">Actions</th></tr></thead>';
+                                        echo '<thead><tr><th scope="col">Device Model</th><th scope="col">Technical Details</th><th scope="col"></th><th scope="col">Transaction ID</th><th scope="col">Platform</th><th scope="col">Gamblock Ver.</th><th scope="col">Actions</th></tr></thead>';
                                         echo '<tbody>';
 
                                         foreach ($customer->devices as $device) {
                                             echo '<tr>';
                                             echo '<td>' . h($device->device_model) . '</td>';
                                             echo '<td>' . h($device->technical_details) . '</td>';
-                                            echo '<td>' . h($device->sessionid) . '</td>';
                                             echo '<td>' . h($device->transactionid) . '</td>';
                                             echo '<td>' . h($device->platform) . '</td>';
                                             echo '<td>' . h($device->gamblock_ver) . '</td>';

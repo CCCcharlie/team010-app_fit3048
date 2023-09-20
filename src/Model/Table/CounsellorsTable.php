@@ -77,6 +77,8 @@ class CounsellorsTable extends Table
             ->integer('cust_id')
             ->allowEmptyString('cust_id');
 
+        // Quick Custom rule to check if a string does not start with a space
+
         return $validator;
     }
 

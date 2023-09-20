@@ -197,25 +197,31 @@
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="#" data-toggle="collapse" aria-expanded="true"
-                                   data-target="#submenu-6" aria-controls="submenu-6"><i class="fa-solid fa-user-tie"></i>Staff
-                                    Management</a>
+                                   data-target="#submenu-6" aria-controls="submenu-6"><i class="fa-solid fa-user-tie"></i>Staff Management</a>
                                 <div id="submenu-6" class="submenu show" style="">
                                     <ul class="nav flex-column">
                                         <li class="nav-item">
                                             <a class="nav-link" href="/Users/">View All Staff Accounts</a>
                                         </li>
                                         <li class="nav-item">
-                                            <a class="nav-link" href="/tickets/unassigned">View unassigned tickets</a>
+                                            <a class="nav-link" href="/tickets/unassigned">View Unassigned Tickets</a>
                                         </li>
 <!--                                        <li class="nav-item">-->
 <!--                                            <a class="nav-link" href="/customers/escalatetome"> View the escalated customer  </a>-->
 <!--                                        </li>-->
                                         <li class="nav-item">
-                                            <a class="nav-link" href="/cb"> Edit Contents  </a>
+                                            <a class="nav-link" href="/customers/archiveddeleteprofiles"> View Outdated Archived Profiles </a>
                                         </li>
+                                    </ul>
+                                </div>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#" data-toggle="collapse" aria-expanded="true"
+                                   data-target="#submenu-7" aria-controls="submenu-6"><i class="fa-solid fa-gear"></i>Content Management</a>
+                                <div id="submenu-7" class="submenu show" style="">
+                                    <ul class="nav flex-column">
                                         <li class="nav-item">
-                                            <a class="nav-link" href="/customers/archiveddeleteprofiles"> View Outdated Profiles </a>
-                                        </li>
+                                            <a class="nav-link" href="/cb"> Edit Site Contents  </a>
                                     </ul>
                                 </div>
                             </li>
@@ -253,8 +259,7 @@
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="#" data-toggle="collapse" aria-expanded="true"
-                                   data-target="#submenu-6" aria-controls="submenu-6"><i class="fa-solid fa-user-tie"></i>Staff
-                                    Management</a>
+                                   data-target="#submenu-6" aria-controls="submenu-6"><i class="fa-solid fa-user-tie"></i>Staff Management</a>
                                 <div id="submenu-6" class="submenu show" style="">
                                     <ul class="nav flex-column">
                                         <li class="nav-item">
@@ -267,11 +272,18 @@
 <!--                                            <a class="nav-link" href="/customers/escalatetome"> View the escalated customer  </a>-->
 <!--                                        </li>-->
                                         <li class="nav-item">
-                                            <a class="nav-link" href="/cb"> Edit Site Contents  </a>
-                                        </li>
-                                        <li class="nav-item">
                                             <a class="nav-link" href="/customers/archiveddeleteprofiles"> View Outdated Archived Profiles </a>
                                         </li>
+                                    </ul>
+                                </div>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#" data-toggle="collapse" aria-expanded="true"
+                                   data-target="#submenu-7" aria-controls="submenu-6"><i class="fa-solid fa-gear"></i>Content Management</a>
+                                <div id="submenu-7" class="submenu show" style="">
+                                    <ul class="nav flex-column">
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="/cb"> Edit Site Contents  </a>
                                     </ul>
                                 </div>
                             </li>

@@ -50,7 +50,8 @@
                                     'maxlength' => 32,
                                     'required' => true,
                                     'title' => 'Please enter the first name using letters apostrophes and hyphens only',
-                                    'pattern' => '^[A-Za-z-]+$'
+                                    'pattern' => '^[A-Za-z-]+$',
+                                    'oninput' => 'this.setCustomValidity(this.value.charAt(0) === " " ? "First Name cannot start with a space" : "")',
                                 ]) ?>
                                 <!-- Display validation error for the 'f_name' field -->
                                 <?= $this->Form->error('f_name'); ?>
@@ -64,7 +65,8 @@
                                     'maxlength' => 32,
                                     'required' => true,
                                     'title' => 'Please enter the last name using letters, apostrophes and hyphens only',
-                                    'pattern' => '^[A-Za-z-]+$'
+                                    'pattern' => '^[A-Za-z-]+$',
+                                    'oninput' => 'this.setCustomValidity(this.value.charAt(0) === " " ? "Last name cannot start with a space" : "")',
                                 ]) ?>
                                 <!-- Display validation error for the 'f_name' field -->
                                 <?= $this->Form->error('l_name'); ?>
@@ -79,7 +81,8 @@
                                     'type' => 'email',
                                     'required' => true,
                                     'title' => 'Please enter a valid email address',
-                                    'maxlength' => 320
+                                    'maxlength' => 320,
+                                    'oninput' => 'this.setCustomValidity(this.value.charAt(0) === " " ? "E-mail cannot start with a space" : "")',
                                 ]) ?>
                                 <!-- Display validation error for the 'f_name' field -->
                                 <?= $this->Form->error('email'); ?>
@@ -106,7 +109,10 @@
                             </div>
 
                         </fieldset>
-                        <?= $this->Form->button(__('Submit'), ['class' => 'btn btn-primary']) ?>
+                        <div class="form-group d-flex justify-content-between align-items-center">
+                            <?= $this->Html->link(__('Cancel'), ['action' => 'index'], ['class' => 'btn btn-secondary']) ?>
+                            <?= $this->Form->button(__('Submit'), ['class' => 'btn btn-primary']) ?>
+                        </div>
                         <?= $this->Form->end() ?>
                     </div>
                 </div>

@@ -58,6 +58,7 @@ body {
     background: #f5f7fa;
 }
 .content {
+    margin-top: -2vh;
     padding: 2rem;
     background: #ffffff;
     border-radius: 0.4rem;
@@ -181,6 +182,7 @@ th {
 .pagination li {
     margin: 0 0.5rem;
 }
+
 .prev.disabled a,
 .next.disabled a {
     cursor: not-allowed;

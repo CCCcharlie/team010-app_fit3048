@@ -217,7 +217,10 @@ class AuthController extends AppController {
             $timeMultiplyFactor = 2;
         }
         if($maxTimeoutDuration === 0) {
-            $maxTimeoutDuration = 86400;
+            //Convert minutes to seconds, we will store security_max_timeout_duration as minutes instead of seconds
+            $maxTimeoutDuration = $maxTimeoutDuration * 60;
+        } else {
+
         }
 //        debug($maxAttemptTimeOut);
 //        debug($timeMultiplyFactor);

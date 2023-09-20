@@ -42,8 +42,9 @@
                                         'maxlength' => 32, // Maximum of 32 characters
                                         'required' => true,
                                         'title' => 'Please enter your first name using letters and hyphens only',
-                                        'pattern' => '^[A-Za-z-]+$'
+                                        'oninput' => 'this.setCustomValidity(this.value.charAt(0) === " " ? "First name cannot start with a space" : "")',
                                     ]) ?>
+
                                     <!-- Display validation error for the 'f_name' field -->
                                     <?= $this->Form->error('f_name'); ?>
 
@@ -56,7 +57,8 @@
                                         'maxlength' => 32, // Maximum of 32 characters
                                         'required' => true,
                                         'title' => 'Please enter your last name using letters and hyphens only',
-                                        'pattern' => '^[A-Za-z-]+$'
+                                        'pattern' => '^[A-Za-z-]+$',
+                                        'oninput' => 'this.setCustomValidity(this.value.charAt(0) === " " ? "Last name cannot start with a space" : "")'
                                     ]) ?>
                                     <!-- Display validation error for the 'f_name' field -->
                                     <?= $this->Form->error('l_name'); ?>
@@ -72,7 +74,8 @@
                                         'required' => true,
                                         'pattern' => '[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}',
                                         'title' => 'Please enter a valid email address with a domain (e.g., name@mail.com)',
-                                        'maxlength' => 320 // Maximum of 320 characters
+                                        'maxlength' => 320, // Maximum of 320 characters
+                                        'oninput' => 'this.setCustomValidity(this.value.charAt(0) === " " ? "E-mail cannot start with a space" : "")'
                                     ]) ?>
                                     <!-- Display validation error for the 'f_name' field -->
                                     <?= $this->Form->error('email'); ?>
@@ -87,6 +90,7 @@
                                         'title' => 'Please enter a password (at least 8 characters with at least one number)',
                                         'maxlength' => 124, // Maximum of 124 characters
                                         'pattern' => '(?=.*\d).{8,}', // At least 8 characters with at least one number
+                                        'oninput' => 'this.setCustomValidity(this.value.charAt(0) === " " ? Password cannot start with a space" : "")'
                                     ]) ?>
                                     <!-- Display validation error for the 'f_name' field -->
                                     <?= $this->Form->error('password'); ?>

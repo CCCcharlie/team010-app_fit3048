@@ -88,6 +88,8 @@ $checkConnection = function (string $name) {
         .custom-button {
             margin-right: 2px;
         }
+
+
     </style>
 
 
@@ -511,6 +513,13 @@ to get the name or any value in the staff table, use the get and then the name o
                                 <button class="btn btn-primary" type="submit">Go</button>
 
                             </form>
+                            <ul class="pagination">
+                                <?= $this->Paginator->first('<< ' . __('first')) ?>
+                                <?= $this->Paginator->prev('< ' . __('previous')) ?>
+                                <?= $this->Paginator->numbers() ?>
+                                <?= $this->Paginator->next(__('next') . ' >') ?>
+                                <?= $this->Paginator->last(__('last') . ' >>') ?>
+                            </ul>
                         </div>
                         <p class="pagination-counter"><?= $this->Paginator->counter(__('Page {{page}} of {{pages}}, showing {{current}} record(s) out of {{count}} total')) ?></p>
                     </div>

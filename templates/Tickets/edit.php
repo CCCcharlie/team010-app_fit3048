@@ -56,7 +56,8 @@
                                                 'maxlength' => 50, // Maximum of 50 characters
                                                 'placeholder' => 'e.g. MacOS Update issue',
                                                 'required' => true,
-                                                'title' => 'Please enter a title (maximum 50 characters)'
+                                                'title' => 'Please enter a title (maximum 50 characters)',
+                                                'oninput' => 'this.setCustomValidity(this.value.charAt(0) === " " ? "Title cannot start with a space" : "")',
                                             ]) ?>
                                             <!-- Display validation error for the 'title' field -->
                                             <?= $this->Form->error('title'); ?>
@@ -69,7 +70,8 @@
                                                 'maxlength' => 30, // Maximum of 30 characters
                                                 'placeholder' => 'e.g. Update Issues',
                                                 'required' => true,
-                                                'title' => 'Please enter a type (maximum 30 characters)'
+                                                'title' => 'Please enter a type (maximum 30 characters)',
+                                                'oninput' => 'this.setCustomValidity(this.value.charAt(0) === " " ? "Type cannot start with a space" : "")',
                                             ]) ?>
                                             <!-- Display validation error for the 'type' field -->
                                             <?= $this->Form->error('type'); ?>

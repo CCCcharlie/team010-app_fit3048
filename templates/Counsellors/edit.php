@@ -31,33 +31,29 @@
                 <legend><?= __('Edit Counsellor') ?></legend>
             </h5>
             <?= $this->Form->create($counsellor) ?>
-            <div class="card-body">
-                <fieldset>
-                    <p>You have the ability to make multiple Counsellors in a row here. Hit 'Go Back' when done.</p>
-
+            <div class="card-body"><fieldset>
                     <div class="form-group">
                         <?= $this->Form->label('f_name', 'First Name', ['class' => 'col-form-label']) ?>
-                        <?= $this->Form->input('f_name', ['class' => 'form-control', 'maxlength' => 32, 'required' => true]) ?>
-                        <!-- Display validation error for the 'f_name' field -->
+                        <?= $this->Form->input('f_name', ['class' => 'form-control', 'maxlength' => 32, 'required' => true,
+                            'oninput' => 'this.setCustomValidity(this.value.charAt(0) === " " ? "First Name cannot start with a space" : "")']) ?>
                         <?= $this->Form->error('f_name'); ?>
                     </div>
                     <div class="form-group">
                         <?= $this->Form->label('l_name', 'Last Name', ['class' => 'col-form-label']) ?>
-                        <?= $this->Form->input('l_name', ['class' => 'form-control', 'maxlength' => 32, 'required' => true]) ?>
-                        <!-- Display validation error for the 'l_name' field -->
+                        <?= $this->Form->input('l_name', ['class' => 'form-control', 'maxlength' => 32, 'required' => true,
+                            'oninput' => 'this.setCustomValidity(this.value.charAt(0) === " " ? "Last Name cannot start with a space" : "")']) ?>
                         <?= $this->Form->error('l_name'); ?>
                     </div>
                     <div class="form-group">
                         <?= $this->Form->label('notes', 'Notes', ['class' => 'col-form-label']) ?>
-                        <?= $this->Form->input('notes', ['class' => 'form-control', 'maxlength' => 150]) ?>
-                        <!-- Display validation error for the 'notes' field -->
+                        <?= $this->Form->input('notes', ['class' => 'form-control', 'maxlength' => 150,
+                            'oninput' => 'this.setCustomValidity(this.value.charAt(0) === " " ? "Notes cannot start with a space" : "")']) ?>
                         <?= $this->Form->error('notes'); ?>
                     </div>
-<!--                    <div class="form-group">-->
                     <div class="form-group">
                         <?= $this->Form->label('contact', 'Contact', ['class' => 'col-form-label']) ?>
-                        <?= $this->Form->input('contact', ['class' => 'form-control', 'maxlength' => 500]) ?>
-                        <!-- Display validation error for the 'contact' field -->
+                        <?= $this->Form->input('contact', ['class' => 'form-control', 'maxlength' => 500,
+                            'oninput' => 'this.setCustomValidity(this.value.charAt(0) === " " ? "Contact cannot start with a space" : "")']) ?>
                         <?= $this->Form->error('contact'); ?>
                     </div>
                 </fieldset>

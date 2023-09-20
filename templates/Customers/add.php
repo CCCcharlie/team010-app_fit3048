@@ -48,7 +48,8 @@
                                     'maxlength' => 32, // Maximum of 32 characters
                                     'required' => true,
                                     'title' => 'Please enter your first name using letters, hyphens and apostrophes only',
-                                    'pattern' => '^[A-Za-z-]+$'
+                                    'pattern' => '^[A-Za-z-]+$',
+                                    'oninput' => 'this.setCustomValidity(this.value.charAt(0) === " " ? "First name cannot start with a space" : "")',]) ?>
                                 ]) ?>
                                 <!-- Display validation error for the 'f_name' field -->
                                 <?= $this->Form->error('f_name'); ?>
@@ -61,7 +62,9 @@
                                     'maxlength' => 32, // Maximum of 32 characters
                                     'required' => true,
                                     'title' => 'Please enter your last name using letters and hyphens only',
-                                    'pattern' => '^[A-Za-z-]+$'
+                                    'pattern' => '^[A-Za-z-]+$',
+                                'oninput' => 'this.setCustomValidity(this.value.charAt(0) === " " ? "Last name cannot start with a space" : "")',
+                                ]) ?>
                                 ]) ?>
                                 <!-- Display validation error for the 'f_name' field -->
                                 <?= $this->Form->error('l_name'); ?>
@@ -76,7 +79,8 @@
                                     'required' => true,
                                     'pattern' => '[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}',
                                     'title' => 'Please enter a valid email address with a domain (e.g., name@mail.com)',
-                                    'maxlength' => 320 // Maximum of 320 characters
+                                    'maxlength' => 320, // Maximum of 320 characters
+                                    'oninput' => 'this.setCustomValidity(this.value.charAt(0) === " " ? "Email cannot start with a space" : "")',
                                 ]) ?>
                                 <!-- Display validation error for the 'f_name' field -->
                                 <?= $this->Form->error('email'); ?>
@@ -88,7 +92,8 @@
                                     'class' => 'form-control',
                                     'title' => 'Please enter a customer status',
                                     'placeholder' => 'eg. Friendly Customer',
-                                    'maxlength' => 50
+                                    'maxlength' => 50,
+                                    'oninput' => 'this.setCustomValidity(this.value.charAt(0) === " " ? "Status cannot start with a space" : "")',
                                 ]) ?>
                                 <!-- Display validation error for the 'f_name' field -->
                                 <?= $this->Form->error('status'); ?>
@@ -96,6 +101,13 @@
                             </div>
                             <div class="form-group">
                                 <?= $this->Form->label('notes', 'Notes', ['class' => 'blue-label-text']) ?>
+                                <?= $this->Form->input('notes', [
+                                    'class' => 'form-control',
+                                    'title' => 'Add any notes here',
+                                    'placeholder' => 'eg. Has 4 dogs.',
+                                    'maxlength' => 500,
+                                    'oninput' => 'this.setCustomValidity(this.value.charAt(0) === " " ? "Notes cannot start with a space" : "")',
+                                ]) ?>
                                 <!-- Display validation error for the 'f_name' field -->
                                 <?= $this->Form->error('notes'); ?>
                                 <textarea name="notes" id="notes" class="form-control" title="Enter notes" placeholder="Notes go here.." maxlength="500" style="height: 150px;"></textarea>

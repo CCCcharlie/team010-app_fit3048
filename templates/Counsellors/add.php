@@ -48,25 +48,37 @@
                             <fieldset>
                                 <div class="form-group">
                                     <?= $this->Form->label('f_name', 'First Name', ['class' => 'col-form-label']) ?>
-                                    <?= $this->Form->input('f_name', ['class' => 'form-control', 'maxlength' => 32]) ?>
+                                    <?= $this->Form->input('f_name', ['class' => 'form-control', 'maxlength' => 32,
+                                        'placeholder' => 'First Name...',
+                                        'required' => true,
+                                        'oninput' => 'this.setCustomValidity(this.value.charAt(0) === " " ? First Name cannot start with a space" : "")']) ?>
                                     <!-- Display validation error for the 'f_name' field -->
                                     <?= $this->Form->error('f_name'); ?>
                                 </div>
                                 <div class="form-group">
                                     <?= $this->Form->label('l_name', 'Last Name', ['class' => 'col-form-label']) ?>
-                                    <?= $this->Form->input('l_name', ['class' => 'form-control', 'maxlength' => 32]) ?>
+                                    <?= $this->Form->input('l_name', ['class' => 'form-control', 'maxlength' => 32,
+                                        'placeholder' => 'Last name..',
+                                        'required' => true,
+                                        'oninput' => 'this.setCustomValidity(this.value.charAt(0) === " " ? "Last name cannot start with a space" : "")']) ?>
                                     <!-- Display validation error for the 'l_name' field -->
                                     <?= $this->Form->error('l_name'); ?>
                                 </div>
                                 <div class="form-group">
                                     <?= $this->Form->label('notes', 'Notes', ['class' => 'col-form-label']) ?>
-                                    <?= $this->Form->input('notes', ['class' => 'form-control', 'maxlength' => 150]) ?>
+                                    <?= $this->Form->input('notes', ['class' => 'form-control', 'maxlength' => 150,
+                                        'placeholder' => 'Notes...',
+                                        'required' => false,
+                                        'oninput' => 'this.setCustomValidity(this.value.charAt(0) === " " ? Notes cannot start with a space" : "")']) ?>
                                     <!-- Display validation error for the 'notes' field -->
                                     <?= $this->Form->error('notes'); ?>
                                 </div>
                                 <div class="form-group">
-                                    <?= $this->Form->label('contact', 'Contact', ['class' => 'col-form-label']) ?>
-                                    <?= $this->Form->input('contact', ['class' => 'form-control', 'maxlength' => 500]) ?>
+                                    <?= $this->Form->label('contact', 'Contact Information', ['class' => 'col-form-label']) ?>
+                                    <?= $this->Form->input('contact', ['class' => 'form-control', 'maxlength' => 500,
+                                        'placeholder' => 'Phone, Email, etc.',
+                                        'required' => false,
+                                        'oninput' => 'this.setCustomValidity(this.value.charAt(0) === " " ? Notes cannot start with a space" : "")']) ?>
                                     <!-- Display validation error for the 'contact' field -->
                                     <?= $this->Form->error('contact'); ?>
                                 </div>

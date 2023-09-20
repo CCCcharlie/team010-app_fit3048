@@ -40,13 +40,13 @@
 
                 <div class="form-group">
                     <?= $this->Form->label('type', 'Type', ['class' => 'col-form-label']) ?>
-                    <?= $this->Form->input('type', ['class' => 'form-control', 'maxlength' => 100, 'required' => true, 'placeholder' => 'e.g. Facebook, Instagram, Phone, Fax, E-mail...']) ?>
+                    <?= $this->Form->input('type', ['class' => 'form-control', 'maxlength' => 100, 'required' => true, 'placeholder' => 'e.g. Facebook, Instagram, Phone, Fax, E-mail...',  'oninput' => 'this.setCustomValidity(this.value.charAt(0) === " " ? "Type cannot start with a space" : "")']) ?>
                     <!-- Display validation error for the 'f_name' field -->
                     <?= $this->Form->error('type'); ?>
                 </div>
                 <div class="form-group">
                     <?= $this->Form->label('link', 'Link', ['class' => 'col-form-label']) ?>
-                    <?= $this->Form->input('link', ['class' => 'form-control', 'maxlength' => 500, 'required' => true, 'placeholder' =>'e.g. https://www.facebook.com/GamBlock/']) ?>
+                    <?= $this->Form->input('link', ['class' => 'form-control', 'maxlength' => 500, 'required' => true, 'placeholder' =>'e.g. https://www.facebook.com/GamBlock/', 'oninput' => 'this.setCustomValidity(this.value.charAt(0) === " " ? "Link cannot start with a space" : "")']) ?>
                     <!-- Display validation error for the 'f_name' field -->
                     <?= $this->Form->error('link'); ?>
                 </div>

@@ -58,74 +58,76 @@ class UsersTable extends Table
      */
     public function validationDefault(Validator $validator): Validator
     {
+        // Validation for 'f_name'
         $validator
             ->scalar('f_name')
             ->maxLength('f_name', 32)
             ->requirePresence('f_name', 'create')
             ->notEmptyString('f_name')
-            ->add('f_name', [
-                'validCharacters' => [
-                    'rule' => ['custom', '/^[a-zA-Z]+(?:[-\'\s]{1}[a-zA-Z]+)*$/'],
-                    'message' => 'Please enter a valid name. Names cannot have multiple "-", or apostrophes in a row. Names cannot have numbers. Names cannot start with a space.'
-                ]
+            ->add('f_name_format', [
+                'rule' => ['custom', '/^[a-zA-Z]+(?:[-\'\s]{1}[a-zA-Z]+)*$/'],
+                'message' => 'Names cannot have multiple "-", or apostrophes in a row. Names cannot have numbers.'
+            ])
+            ->add('f_name_starting_space', [
+                'rule' => ['notStartsWithSpace'],
+                'message' => 'Names cannot start with a space.'
             ]);
 
+        // Validation for 'l_name'
         $validator
             ->scalar('l_name')
             ->maxLength('l_name', 32)
             ->requirePresence('l_name', 'create')
             ->notEmptyString('l_name')
-            ->add('l_name', [
-                'validCharacters' => [
-                    'rule' => ['custom', '/^[a-zA-Z]+(?:[-\'\s]{1}[a-zA-Z]+)*$/'],
-                    'message' => 'Please enter a valid name. Names cannot have multiple "-", or apostrophes in a row. Names cannot have numbers. Names cannot start with a space. '
-                ]
+            ->add('l_name_format', [
+                'rule' => ['custom', '/^[a-zA-Z]+(?:[-\'\s]{1}[a-zA-Z]+)*$/'],
+                'message' => 'Names cannot have multiple "-", or apostrophes in a row. Names cannot have numbers.'
+            ])
+            ->add('l_name_starting_space', [
+                'rule' => ['notStartsWithSpace'],
+                'message' => 'Names cannot start with a space.'
             ]);
 
-//        $validator
-//            ->integer('age')
-//            ->requirePresence('age', 'create')
-//            ->notEmptyString('age');
-
+        // Validation for 'email'
         $validator
             ->scalar('email')
             ->maxLength('email', 320)
             ->requirePresence('email', 'create')
             ->notEmptyString('email')
-            ->add('email', [
-                'validEmail' => [
-                    'rule' => 'email',
-                    'message' => 'Please enter a valid email address. Eg. test@holistichealings.com'
-                ],
-                'emailContainsAt' => [
-                    'rule' => ['custom', '/@/'],
-                    'message' => 'Your e-mail must contain the @ symbol.'
-                ],
-                'noConsecutiveDelimiters' => [
-                    'rule' => ['custom', '/^(?!.*(\.\.|\@\@)).*$/'],
-                    'message' => 'Your e-mail address cannot contain consecutive delimiters (e.g. ".." or "@@").'
-                ],
-                'noSpecialCharacters' => [
-                    'rule' => ['custom', '/^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/'],
-                    'message' => 'Your e-mail address can only contain letters, digits, hyphens, underscores, dots, and at symbols.'
-                ]
+            ->add('validEmail', [
+                'rule' => 'email',
+                'message' => 'Please enter a valid email address. Eg. test@holistichealings.com'
+            ])
+            ->add('emailContainsAt', [
+                'rule' => ['custom', '/@/'],
+                'message' => 'Your e-mail must contain the @ symbol.'
+            ])
+            ->add('noConsecutiveDelimiters', [
+                'rule' => ['custom', '/^(?!.*(\.\.|\@\@)).*$/'],
+                'message' => 'Your e-mail address cannot contain consecutive delimiters (e.g. ".." or "@@").'
+            ])
+            ->add('noSpecialCharacters', [
+                'rule' => ['custom', '/^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/'],
+                'message' => 'Your e-mail address can only contain letters, digits, hyphens, underscores, dots, and at symbols.'
             ]);
 
+        // Validation for 'role'
         $validator
             ->scalar('role')
             ->requirePresence('role', 'create')
             ->notEmptyString('role')
-            ->add('role', 'inList', [
+            ->add('validRole', [
                 'rule' => ['inList', ['root', 'admin', 'staff', 'user']],
                 'message' => 'Please select a valid role.'
             ]);
 
+        // Validation for 'password'
         $validator
             ->scalar('password')
             ->maxLength('password', 124)
             ->requirePresence('password', 'create')
             ->notEmptyString('password')
-            ->add('password', 'custom', [
+            ->add('customPassword', [
                 'rule' => function ($value, $context) {
                     // Check if the password has at least 8 characters and contains at least one number
                     return (strlen($value) >= 8) && preg_match('/\d/', $value);
@@ -133,10 +135,11 @@ class UsersTable extends Table
                 'message' => 'Password must be at least 8 characters long and contain at least one number'
             ]);
 
-        $validator
-            ->scalar('timezone')
-            ->maxLength('timezone', 50)
-            ->allowEmptyString('timezone');
+    // Quick Custom rule to check if a string does not start with a space
+        $validator->add('notStartsWithSpace', [
+            'rule' => ['custom', '/^[^\s].*$/'],
+            'message' => 'Text cannot start with a space.'
+        ]);
 
 //        $validator
 //            ->boolean('admin_status')

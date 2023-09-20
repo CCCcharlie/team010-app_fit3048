@@ -25,7 +25,7 @@
 
     <link href="https://fonts.googleapis.com/css?family=Raleway:400,700" rel="stylesheet">
 
-    <?= $this->Html->css(['errorpage', 'cake']) ?>
+    <?= $this->Html->css(['errorpage', 'bootstrap.min']) ?>
     <?= $this->Html->script(['jquery-3.3.1.min.js', 'bootstrap.bundle.js', 'main-js', 'jquery.slimscroll.js', 'errorpage']) ?>
 
 
@@ -35,12 +35,13 @@
 </head>
 
 <body>
+<!--Template by Dany Santos https://codepen.io/THEORLAN2-->
 <div class="cont_principal">
     <div class="cont_error">
 
         <?= $this->Flash->render() ?>
         <?= $this->fetch('content') ?>
-        <?= $this->Html->link(__('Back'), 'javascript:history.back()') ?>
+        <?= $this->Html->link(__('Take Me Back!'), 'javascript:history.back()', ['class' => 'btn btn-primary']) ?>
     </div>
     <div class="cont_aura_1"></div>
     <div class="cont_aura_2"></div>

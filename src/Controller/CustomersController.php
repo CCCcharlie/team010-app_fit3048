@@ -101,7 +101,8 @@ class CustomersController extends AppController
         $totalRecords = $query->count(); // Get the total number of records
 
         $this->paginate = [
-            'limit' => $totalRecords, // Set the limit to the total number of records
+//            'limit' => $totalRecords, // Set the limit to the total number of records
+            'limit' => 25, 
             'contain' => ['Tickets', 'Devices', 'Commdetails', 'Counsellors'],
         ];
         $customers = $this->paginate($query);

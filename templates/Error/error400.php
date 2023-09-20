@@ -36,5 +36,6 @@ endif;
 ?>
 <h1><?= h($message) ?></h1>
 <p class="error">
-    <?= __d('cake', 'It seems the address: {0} does not exist on this site. If this does not seem right Contact your network admin.', "<strong>'{$url}'</strong>") ?>
+    <?= __d('cake', 'It seems the address: {0} does not exist on this site.', "<strong>'{$url}'</strong>") ?>
+    <?= __d('cake', 'If this does not seem right. Contact your network admin.',) ?>
 </p>

@@ -228,7 +228,7 @@ $checkConnection = function (string $name) {
                             <li class="nav-item">
                                 <a class="nav-link" id="pills-consellor-tab" data-toggle="pill"
                                    href="#pills-consellor" role="tab" aria-controls="pills-consellor"
-                                   aria-selected="false">Consellor</a>
+                                   aria-selected="false">Counsellor</a>
                             </li>
 
                         </ul>

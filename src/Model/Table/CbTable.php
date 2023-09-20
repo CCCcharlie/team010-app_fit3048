@@ -74,7 +74,12 @@ class CbTable extends Table
             ->add( 'content_image', [
                 'mimeType' => [
                     'rule' => [ 'mimeType', [ 'image/jpg', 'image/png', 'image/jpeg' ] ],
-                    'message' => 'Please upload only jpg and png.',
+                    'message' => 'Please upload only JPG, PNG, JPEG.',
+                ],
+                //Filesize is a rule that apparently exists, ensures an upper limit to how much data can be uploaded
+                'fileSize' => [
+                    'rule' => ['uploadedFile', ['maxSize' => '2MB']], // Adjust the size limit as needed
+                    'message' => 'Image size must be 2MB or less.', // Change the message as needed
                 ],
             ] );
 

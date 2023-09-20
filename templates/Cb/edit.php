@@ -62,6 +62,11 @@
                                 }
                                 ?>
                             </td>
+                            <td>
+                            <?php if($cb->content_type == "image"){
+                                echo @$this->Html->image($cb->previous_value, ['alt' => 'Image Unavailable']);
+                            } ?>
+                            </td>
                         </tr>
                     </table>
                     <br>
@@ -114,6 +119,19 @@
 
 <script>
     function showPreview(event) {
+        var input = event.target;
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+            reader.onload = function(e) {
+                var previewImage = document.getElementById("previewImage");
+                previewImage.src = e.target.result;
+                document.getElementById("imagePreview").style.display = "block";
+            };
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+
+    function showCVPreview(event) {
         var input = event.target;
         if (input.files && input.files[0]) {
             var reader = new FileReader();

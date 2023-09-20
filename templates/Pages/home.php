@@ -99,7 +99,7 @@ to get the name or any value in the staff table, use the get and then the name o
                 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                     <br>
                     <br>
-                    <h6 class="text-center">Welcome to the GamBlock home page. Please select an option from the left tool-bar.</h6>
+                    <h6 class="section-title" style="">Welcome to the GamBlock home page. Please select an option from the left tool-bar.</h6>
                 </div>
             </div>
         </div>

@@ -53,10 +53,10 @@
                     <div class="accordion-panel">
                         <p>This is the site content editor. It's here to let you change your website and keep things up to-date. <br>
                         Don't know how to edit? Follow the tips listed here: </p>
-                        <p>i.) Find the piece you want to edit through using both the hint and the description.</p>
-                        <p>ii.) Click 'Edit' on the Actions Column.</p>
-                        <p>iii.) Change the content to your desires. </p>
-                        <p>iv.) Hit submit. Your changes should apply to the website instantly. </p>
+                        <p>1. Find the piece you want to edit through using both the hint and the description.</p>
+                        <p>2. Click 'Edit' on the Actions Column.</p>
+                        <p>3. Change the content to your desires. </p>
+                        <p>4. Hit submit. Your changes should apply to the website instantly. </p>
                         <p>Success! </p>
                     </div>
                 </div>

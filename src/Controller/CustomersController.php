@@ -154,7 +154,11 @@ class CustomersController extends AppController
         //Set default conditions for CB values if they do not exist, preferably it should never be deleted at this moment
         if($getArchivedTime === 0) {
             $getArchivedTime = 5 * 365 * 24 * 60 * 60;
+        } else {
+            //Convert minutes to seconds, we will store security_archived_time_ready_delete as minutes instead of seconds
+            $getArchivedTime = $getArchivedTime * 60;
         }
+
         // Define the time in seconds for a five-year duration
         $archivedTimeInSeconds = $getArchivedTime; // Five years in seconds
 
@@ -530,6 +534,9 @@ class CustomersController extends AppController
         //Set default conditions for CB values if they do not exist, preferably it should never be deleted at this moment
         if($getArchivedTime === 0) {
             $getArchivedTime = 5 * 365 * 24 * 60 * 60;
+        } else {
+            //Convert minutes to seconds, we will store security_archived_time_ready_delete as minutes instead of seconds
+            $getArchivedTime = $getArchivedTime * 60;
         }
 
         $archivedTimeInSeconds = $getArchivedTime; // defaults to Five years in seconds

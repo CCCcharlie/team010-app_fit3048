@@ -109,7 +109,10 @@
                             </div>
 
                         </fieldset>
-                        <?= $this->Form->button(__('Submit'), ['class' => 'btn btn-primary']) ?>
+                        <div class="form-group d-flex justify-content-between align-items-center">
+                            <?= $this->Html->link(__('Cancel'), ['action' => 'index'], ['class' => 'btn btn-secondary']) ?>
+                            <?= $this->Form->button(__('Submit'), ['class' => 'btn btn-primary']) ?>
+                        </div>
                         <?= $this->Form->end() ?>
                     </div>
                 </div>

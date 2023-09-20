@@ -9,7 +9,7 @@ use Cake\Core\Configure;
 use Cake\Error\Debugger;
 
 $this->layout = 'error';
-
+$message = "Error 404: Page not found";
 if (Configure::read('debug')) :
     $this->layout = 'dev_error';
 
@@ -36,6 +36,5 @@ endif;
 ?>
 <h2><?= h($message) ?></h2>
 <p class="error">
-    <strong><?= __d('cake', 'Error') ?>: </strong>
-    <?= __d('cake', 'The requested address {0} was not found on this server.', "<strong>'{$url}'</strong>") ?>
+    <?= __d('cake', 'It seems the address: {0} does not exist on this site.', "<strong>'{$url}'</strong>") ?>
 </p>

@@ -11,7 +11,7 @@
 <!--<p class="error">-->
 <!--    <strong>--><?php //= __d('cake', 'Error') ?><!--: </strong>-->
 <!--    --><?php //= __d('cake', 'An internal error has occurred') ?>
-<!--    <!--    <a href="-->--><?php ////= $this->Url->build(['controller' => 'Pages', 'action' => 'Home']) ?><!--<!--">Take me home!</a>-->-->
+<!--      <a href="--><?php ////= $this->Url->build(['controller' => 'Pages', 'action' => 'Home']) ?><!--">Take me home!</a>-->
 <!--</p>-->
 
 
@@ -55,7 +55,7 @@ if (Configure::read('debug')) :
     $this->end();
 endif;
 ?>
-<h2><?= __d('cake', 'An Internal Error Has Occurred.') ?></h2>
+<h2><?= __d('cake', 'Something has gone wrong!') ?></h2>
 <p class="error">
     <strong><?= __d('cake', 'Error') ?>: </strong>
     <?= h($message) ?>

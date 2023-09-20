@@ -11,7 +11,7 @@
 <!--<p class="error">-->
 <!--    <strong>--><?php //= __d('cake', 'Error') ?><!--: </strong>-->
 <!--    --><?php //= __d('cake', 'An internal error has occurred') ?>
-<!--      <a href="--><?php ////= $this->Url->build(['controller' => 'Pages', 'action' => 'Home']) ?><!--<!--">Take me home!</a>-->-->
+<!--      <a href="--><?php ////= $this->Url->build(['controller' => 'Pages', 'action' => 'Home']) ?><!--">Take me home!</a>-->-->
 <!--</p>-->
 
 

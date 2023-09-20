@@ -79,31 +79,20 @@ class CustomersTable extends Table
             ->maxLength('f_name', 32)
             ->requirePresence('f_name', 'create')
             ->notEmptyString('f_name')
-            ->add('f_name', [
-                'validCharacters' => [
-                    'rule' => ['custom', '/^[a-zA-Z]+(?:[-\'\s]{1}[a-zA-Z]+)*$/'],
-                    'message' => 'Please enter a valid first name. Names cannot have multiple "-", or apostrophes in a row. Names cannot have numbers. '
-                ]
+            ->add('f_name_format', [
+                'rule' => ['custom', '/^[a-zA-Z]+(?:[-\'\s]{1}[a-zA-Z]+)*$/'],
+                'message' => 'Names cannot have multiple "-", or apostrophes in a row. Names cannot have numbers.'
             ]);
 
-            $validator
-                ->scalar('l_name')
-                ->maxLength('l_name', 32)
-                ->requirePresence('l_name', 'create')
-                ->notEmptyString('l_name')
-                ->add('l_name', [
-                    'validCharacters' => [
-                        'rule' => ['custom', '/^[a-zA-Z]+(?:[-\'\s]{1}[a-zA-Z]+)*$/'],
-                        'message' => 'Please enter a valid last name. Names cannot have multiple "-", or apostrophes in a row. Names cannot have numbers. '
-                    ]
-                ]);
-
-
-        //Age removed, validation unecessary
-//        $validator
-//            ->integer('age')
-//            ->requirePresence('age', 'create')
-//            ->notEmptyString('age');
+        $validator
+            ->scalar('l_name')
+            ->maxLength('l_name', 32)
+            ->requirePresence('l_name', 'create')
+            ->notEmptyString('l_name')
+            ->add('l_name_format', [
+                'rule' => ['custom', '/^[a-zA-Z]+(?:[-\'\s]{1}[a-zA-Z]+)*$/'],
+                'message' => 'Names cannot have multiple "-", or apostrophes in a row. Names cannot have numbers.'
+            ]);
 
         $validator
             ->email('email')
@@ -115,11 +104,11 @@ class CustomersTable extends Table
             ->maxLength('status', 50)
             ->requirePresence('status', 'create')
             ->notEmptyString('status');
-
         $validator
             ->scalar('notes')
             ->maxLength('notes', 1000)
             ->allowEmptyString('notes');
+
 
         return $validator;
     }

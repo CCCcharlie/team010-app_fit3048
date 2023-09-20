@@ -28,7 +28,7 @@
 
     <link href="https://fonts.googleapis.com/css?family=Raleway:400,700" rel="stylesheet">
 
-    <?= $this->Html->css(['bootstrap.min.css', 'style.css', 'cake']) ?>
+    <?= $this->Html->css(['bootstrap.min.css', 'style.css', 'cake', 'error']) ?>
 
     <?= $this->fetch('meta') ?>
     <?= $this->fetch('css') ?>

@@ -388,7 +388,8 @@ class TicketsController extends AppController
 
         $rootuser = $this->Tickets->Users->find()
             ->where([
-                'Users.role' => 'root'
+                'Users.role' => 'root',
+                'Users.id' != $staffId
             ])
             ->contain(['Tickets'])
             ->first();

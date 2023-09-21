@@ -77,6 +77,31 @@ $checkConnection = function (string $name) {
 
 <body>
 
+<div class="F">
+    <div class="page-header" id="top">
+
+        <div class="page-breadcrumb">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="/" class="breadcrumb-link">Home</a></li>
+                    <li class="breadcrumb-item"><a href="/customers" class="breadcrumb-link">View all customers</a></li>
+
+                    <li class="breadcrumb-item active" aria-current="page">Customers profile</li>
+                </ol>
+            </nav>
+        </div>
+        <!-- To obtain the identity, use $identity = $this->request->getAttribute('authentication')->getIdentity(); to find the currently logged in entity
+to get the name or any value in the staff table, use the get and then the name of the attribute $identity->get('staff_fname')-->
+        <?php $identity = $this->request->getAttribute('authentication')->getIdentity();
+        //                        debug($identity->get('f_name'));
+        //                        exit();
+        ?>
+        <!--                                <h2 class="pageheader-title" style="color: lightslategrey">Welcome, -->
+        <?php //= $identity->get('f_name'); ?><!--</h2>-->
+
+    </div>
+</div>
+
 <div class="customers view content">
     <!-- ============================================================== -->
     <!-- pageheader -->

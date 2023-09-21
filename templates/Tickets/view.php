@@ -16,7 +16,31 @@
         }
     </style>
 </head>
+<div class="page-header" id="top">
+    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+        <div class="page-breadcrumb">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="/" class="breadcrumb-link">Home</a></li>
+                    <li class="breadcrumb-item"><a href="/tickets" class="breadcrumb-link">View all tickets</a></li>
+
+                    <li class="breadcrumb-item active" aria-current="page">Current tickets</li>
+                </ol>
+            </nav>
+        </div>
+    </div>
+    <!-- To obtain the identity, use $identity = $this->request->getAttribute('authentication')->getIdentity(); to find the currently logged in entity
+to get the name or any value in the staff table, use the get and then the name of the attribute $identity->get('staff_fname')-->
+    <!--                                <h2 class="pageheader-title" style="color: lightslategrey">Welcome, --><?php //= $identity->get('f_name'); ?><!--</h2>-->
+
+    <!-- Can you add login user to name here if you get chance Bryan?  -->
+    <!-- Sure Alex-->
+
+    <p class="pageheader-text"></p>
+</div>
+
 <div class="row">
+
 
     <aside class="column">
         <div class="side-nav" style="margin-left: 2vw">

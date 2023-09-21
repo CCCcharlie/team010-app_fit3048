@@ -39,7 +39,7 @@ to get the name or any value in the staff table, use the get and then the name o
         <table>
             <thead>
                 <tr>
-                    <th><?= $this->Paginator->sort('title') ?></th>
+                    <th><?= $this->Paginator->sort('title')?></th>
 
                     <th><?= $this->Paginator->sort('id') ?></th>
                     <th><?= $this->Paginator->sort('type') ?></th>

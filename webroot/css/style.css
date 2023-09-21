@@ -3373,6 +3373,13 @@ btn-link
     min-width: 80%;
     min-height: 75%;
 }
+.tickets-view{
+    margin-left: 14vw;
+    margin-right: 5vw;
+    width: 80%;
+
+
+}
 .login-form-container {
     max-height: 500px; /* Set a fixed maximum height as needed */
     overflow: auto; /* Add scrollbars if content overflows */

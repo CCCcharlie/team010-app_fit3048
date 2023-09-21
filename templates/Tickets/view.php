@@ -4,12 +4,23 @@
  * @var \App\Model\Entity\Ticket $ticket
  */
 ?>
+<head>
+
+    <?= $this->Html->css(['style', 'bootstrap.min',]) ?>
+    <?= $this->Html->css(['fontawesome-all'], ['block' => true]) ?>
+    <style>
+        td {
+            max-width: 80px;
+            /*width: 200px;*/
+            overflow-wrap: break-word;
+        }
+    </style>
+</head>
 <div class="row">
 
-
     <aside class="column">
-        <div class="side-nav">
-            <h4 class="heading"><?= __('Actions') ?></h4>
+        <div class="side-nav" style="margin-left: 2vw">
+            <h4 class="heading" ><?= __('Actions') ?></h4>
             <?= $this->Html->link(__('Edit Ticket'), ['action' => 'edit', $ticket->id], ['class' => 'side-nav-item']) ?>
             <?= $this->Form->postLink(__('Delete Ticket'), ['action' => 'delete', $ticket->id], ['confirm' => __('Are you sure you want to delete # {0}?', $ticket->id), 'class' => 'side-nav-item']) ?>
             <?= $this->Html->link(__('List Tickets'), ['action' => 'index'], ['class' => 'side-nav-item']) ?>
@@ -17,7 +28,7 @@
         </div>
     </aside>
     <div class="column-responsive column-80">
-        <div class="tickets-view content">
+        <div class="card tickets-view content">
             <h3><?= h($ticket->id) ?></h3>
             <table>
                 <tr>
@@ -49,7 +60,9 @@
                     <td><?= $ticket->closed ? __('Yes') : __('No'); ?></td>
                 </tr>
             </table>
-            <div class="related">
+
+            <div class=" card  related">
+                <div class="card-body">
                 <h4><?= __('Related Contents') ?></h4>
                 <?php if (!empty($ticket->contents)) : ?>
                 <div class="table-responsive">
@@ -76,6 +89,8 @@
                 </div>
                 <?php endif; ?>
             </div>
+            </div>
         </div>
     </div>
+</div>
 </div>

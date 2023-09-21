@@ -17,7 +17,7 @@
         </div>
     </aside>
     <div class="column-responsive column-80">
-        <div class="tickets view content">
+        <div class="tickets-view content">
             <h3><?= h($ticket->id) ?></h3>
             <table>
                 <tr>

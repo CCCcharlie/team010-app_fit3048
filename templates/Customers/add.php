@@ -50,7 +50,6 @@
                                     'title' => 'Please enter your first name using letters, hyphens and apostrophes only',
                                     'pattern' => '^[A-Za-z-]+$',
                                     'oninput' => 'this.setCustomValidity(this.value.charAt(0) === " " ? "First name cannot start with a space" : "")',]) ?>
-                                ]) ?>
                                 <!-- Display validation error for the 'f_name' field -->
                                 <?= $this->Form->error('f_name'); ?>
                                 <small class="form-text text-muted">Letters, hyphens and apostrophes only.</small>
@@ -64,7 +63,6 @@
                                     'title' => 'Please enter your last name using letters and hyphens only',
                                     'pattern' => '^[A-Za-z-]+$',
                                 'oninput' => 'this.setCustomValidity(this.value.charAt(0) === " " ? "Last name cannot start with a space" : "")',
-                                ]) ?>
                                 ]) ?>
                                 <!-- Display validation error for the 'f_name' field -->
                                 <?= $this->Form->error('l_name'); ?>

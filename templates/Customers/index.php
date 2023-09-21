@@ -96,6 +96,15 @@ $checkConnection = function (string $name) {
 </head>
 
 <body>
+<div class="page-breadcrumb">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="/" class="breadcrumb-link">Home</a></li>
+
+            <li class="breadcrumb-item active" aria-current="page">View all customers</li>
+        </ol>
+    </nav>
+</div>
 
         <div class="customers index content">
             <!-- ============================================================== -->
@@ -105,15 +114,6 @@ $checkConnection = function (string $name) {
                 <div class="F">
                     <div class="page-header" id="top">
 
-                        <div class="page-breadcrumb">
-                            <nav aria-label="breadcrumb">
-                                <ol class="breadcrumb">
-                                    <li class="breadcrumb-item"><a href="/" class="breadcrumb-link">Home</a></li>
-
-                                    <li class="breadcrumb-item active" aria-current="page">View all customers</li>
-                                </ol>
-                            </nav>
-                        </div>
                         <!-- To obtain the identity, use $identity = $this->request->getAttribute('authentication')->getIdentity(); to find the currently logged in entity
 to get the name or any value in the staff table, use the get and then the name of the attribute $identity->get('staff_fname')-->
                         <?php $identity = $this->request->getAttribute('authentication')->getIdentity();
@@ -130,7 +130,6 @@ to get the name or any value in the staff table, use the get and then the name o
             <!-- end pageheader  -->
             <!-- ============================================================== -->
 
-            <div class="customers index content">
                 <div class="row">
                     <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                         <div class="section-block" id="cardaction">
@@ -525,7 +524,6 @@ to get the name or any value in the staff table, use the get and then the name o
                     </div>
                 </div>
             </div>
-        </div>
 
 <!---->
 <!--                    EXPLAINING THE SCRIPTS -->

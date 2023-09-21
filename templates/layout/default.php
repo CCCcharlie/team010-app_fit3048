@@ -127,7 +127,7 @@
                                 <div id="submenu-1" class="submenu show" style="">
                                     <ul class="nav flex-column">
                                         <li class="nav-item">
-                                            <a class="nav-link" href="/customers/assigntome">Assigned Customers</a>
+                                            <a class="nav-link" href="/customers/assigntome"><i class="fa-solid fa-user-group"></i>Assigned To Me</a>
                                             <!-- Change my link to assigned to me page when done. -->
                                         </li>
                                     </ul>
@@ -145,19 +145,17 @@
                                 <div id="submenu-1" class="submenu show" style="">
                                     <ul class="nav flex-column">
                                         <li class="nav-item">
-                                            <a class="nav-link" href="/customers/assigntome">Assigned Customers</a>
-
-                                            <!-- Change my link to assigned to me page when done. -->
+                                            <a class="nav-link" href="/customers/assigntome"><i class="fa-solid fa-user-group"></i>Assigned To Me</a>
                                         </li>
                                         <li class="nav-item">
-                                            <a class="nav-link" href="/customers">View All Customers</a>
+                                            <a class="nav-link" href="/customers"><i class="fa-duotone fa-users"></i>View All Customers</a>
                                         </li>
                                         <li class="nav-item">
-                                            <a class="nav-link" href="/customers/add">Add a Customer
+                                            <a class="nav-link" href="/customers/add"><i class="fa-solid fa-user-plus"></i>Add a Customer
                                                 Profile</a>
                                         </li>
                                         <li class="nav-item">
-                                            <a class="nav-link" href="/customers/archiveindex">View All archived profiles</a>
+                                            <a class="nav-link" href="/customers/archiveindex"><i class="fa-solid fa-user-lock"></i>View All Archived Customers</a>
                                         </li>
                                     </ul>
                                 </div>
@@ -175,18 +173,17 @@
                                 <div id="submenu-1" class="submenu show" style="">
                                     <ul class="nav flex-column">
                                         <li class="nav-item">
-                                            <a class="nav-link" href="/customers/assigntome">Assigned Customers</a>
-
-                                            <!-- Change my link to assigned to me page when done. -->
+                                            <a class="nav-link" href="/customers/assigntome"><i class="fa-solid fa-user-group"></i>Assigned To Me</a>
                                         </li>
                                         <li class="nav-item">
-                                            <a class="nav-link" href="/customers">View All Customers</a>
+                                            <a class="nav-link" href="/customers"><i class="fa-duotone fa-users"></i>View All Customers</a>
                                         </li>
                                         <li class="nav-item">
-                                            <a class="nav-link" href="/customers/add">Add a Customer Profile</a>
+                                            <a class="nav-link" href="/customers/add"><i class="fa-solid fa-user-plus"></i>Add a Customer
+                                                Profile</a>
                                         </li>
                                         <li class="nav-item">
-                                            <a class="nav-link" href="/customers/archiveindex">View All archived profiles</a>
+                                            <a class="nav-link" href="/customers/archiveindex"><i class="fa-solid fa-user-lock"></i>View All Archived Customers</a>
                                         </li>
                                     </ul>
                                 </div>
@@ -203,15 +200,26 @@
                                         <li class="nav-item">
                                             <a class="nav-link" href="/Users/">View All Staff Accounts</a>
                                         </li>
+                                    </ul>
+                                </div>
+                            </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link" href="#" data-toggle="collapse" aria-expanded="true"
+                                   data-target="#submenu-7" aria-controls="submenu-6"><i class="fa-solid fa-user-pen"></i>Advanced Customer Management</a>
+                                <div id="submenu-7" class="submenu show" style="">
+                                    <ul class="nav flex-column">
                                         <li class="nav-item">
-                                            <a class="nav-link" href="/tickets/unassigned">View Unassigned Tickets</a>
+                                            <a class="nav-link" href="/tickets/unassigned">Manage Unassigned Tickets</a>
                                         </li>
-<!--                                        <li class="nav-item">-->
-<!--                                            <a class="nav-link" href="/customers/escalatetome"> View the escalated customer  </a>-->
-<!--                                        </li>-->
+
                                         <li class="nav-item">
-                                            <a class="nav-link" href="/customers/archiveddeleteprofiles"> View Outdated Archived Profiles </a>
+                                            <a class="nav-link" href="/customers/archiveddeleteprofiles"> Manage Outdated Archived Profiles </a>
                                         </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="/customers/archiveddeleteprofiles"> Manage Escalated Customers</a>
+                                        </li>
+
                                     </ul>
                                 </div>
                             </li>
@@ -237,7 +245,7 @@
                                 <div id="submenu-1" class="submenu show" style="">
                                     <ul class="nav flex-column">
                                         <li class="nav-item">
-                                            <a class="nav-link" href="/customers/assigntome">Assigned Customers</a>
+                                            <a class="nav-link" href="/customers/assigntome">Assigned to Me</a>
 
                                             <!-- Change my link to assigned to me page when done. -->
                                         </li>
@@ -265,15 +273,26 @@
                                         <li class="nav-item">
                                             <a class="nav-link" href="/Users/">View All Staff Accounts</a>
                                         </li>
+                                    </ul>
+                                </div>
+                            </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link" href="#" data-toggle="collapse" aria-expanded="true"
+                                   data-target="#submenu-7" aria-controls="submenu-6"><i class="fa-solid fa-user-pen"></i>Advanced Customer Management</a>
+                                <div id="submenu-7" class="submenu show" style="">
+                                    <ul class="nav flex-column">
                                         <li class="nav-item">
-                                            <a class="nav-link" href="/tickets/unassigned">View Unassigned Tickets</a>
+                                            <a class="nav-link" href="/tickets/unassigned">Manage Unassigned Tickets</a>
                                         </li>
-<!--                                        <li class="nav-item">-->
-<!--                                            <a class="nav-link" href="/customers/escalatetome"> View the escalated customer  </a>-->
-<!--                                        </li>-->
+
                                         <li class="nav-item">
-                                            <a class="nav-link" href="/customers/archiveddeleteprofiles"> View Outdated Archived Profiles </a>
+                                            <a class="nav-link" href="/customers/archiveddeleteprofiles"> Manage Outdated Archived Profiles </a>
                                         </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="/customers/archiveddeleteprofiles"> Manage Escalated Customers</a>
+                                        </li>
+
                                     </ul>
                                 </div>
                             </li>

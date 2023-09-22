@@ -86,29 +86,36 @@
                             </div>
                             <div class="form-group">
                                 <?= $this->Form->label('status', 'Status', ['class' => 'blue-label-text']) ?>
-                                <?= $this->Form->input('status', [
-                                    'class' => 'form-control',
-                                    'title' => 'Please enter a customer status',
-                                    'placeholder' => 'eg. Friendly Customer',
-                                    'maxlength' => 50,
-                                    'oninput' => 'this.setCustomValidity(this.value.charAt(0) === " " ? "Status cannot start with a space" : "")',
-                                ]) ?>
+                                <div class="input-group">
+                                    <?= $this->Form->select(
+                                        'status',
+                                        ['resolved' => 'Issue resolved', 'not_resolved' => 'Issue not resolved', 'no_issues' => 'No Issues Recorded'],
+                                        [
+                                            'class' => 'custom-select select-with-arrow', // Add 'select-with-arrow' class
+                                            'label' => false
+                                        ]
+                                    ) ?>
+                                </div>
                                 <!-- Display validation error for the 'f_name' field -->
                                 <?= $this->Form->error('status'); ?>
-                                <small class="form-text text-muted">Not Required</small>
+                                <small class="form-text text-muted">Required</small>
                             </div>
                             <div class="form-group">
                                 <?= $this->Form->label('notes', 'Notes', ['class' => 'blue-label-text']) ?>
-                                <?= $this->Form->input('notes', [
-                                    'class' => 'form-control',
-                                    'title' => 'Add any notes here',
-                                    'placeholder' => 'eg. Has 4 dogs.',
-                                    'maxlength' => 500,
-                                    'oninput' => 'this.setCustomValidity(this.value.charAt(0) === " " ? "Notes cannot start with a space" : "")',
-                                ]) ?>
+                                <?= $this->Form->textarea(
+                                    'notes',
+                                    [
+                                        'class' => 'form-control',
+                                        'title' => 'Add any notes here',
+                                        'placeholder' => 'e.g., Has 4 dogs.',
+                                        'maxlength' => 500,
+                                        'rows' => 5, // Adjust the number of rows to control the initial height
+                                        'oninput' => 'this.setCustomValidity(this.value.charAt(0) === " " ? "Notes cannot start with a space" : "")',
+                                    ]
+                                ) ?>
+
                                 <!-- Display validation error for the 'f_name' field -->
                                 <?= $this->Form->error('notes'); ?>
-                                <textarea name="notes" id="notes" class="form-control" title="Enter notes" placeholder="Notes go here.." maxlength="500" style="height: 150px;"></textarea>
                                 <small class="form-text text-muted">500 Character limit. Not Required</small>
                             </div>
 

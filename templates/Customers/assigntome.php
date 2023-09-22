@@ -121,7 +121,6 @@ to get the name or any value in the staff table, use the get and then the name o
 
                             <br>
                             <h3 style ="color: midnightblue" class="section-title"> Sort by: </h3>
-                            <br>
 
 
 

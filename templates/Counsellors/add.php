@@ -77,7 +77,7 @@
                                     <?= $this->Form->label('contact', 'Contact Information', ['class' => 'col-form-label']) ?>
                                     <?= $this->Form->input('contact', ['class' => 'form-control', 'maxlength' => 500,
                                         'placeholder' => 'Phone, Email, etc.',
-                                        'required' => false,
+                                        'required' => true,
                                         'oninput' => 'this.setCustomValidity(this.value.charAt(0) === " " ? Notes cannot start with a space" : "")']) ?>
                                     <!-- Display validation error for the 'contact' field -->
                                     <?= $this->Form->error('contact'); ?>

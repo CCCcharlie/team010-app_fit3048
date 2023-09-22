@@ -256,17 +256,30 @@ class TicketsController extends AppController
      * @return \Cake\Http\Response|null|void Redirects to index.
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
      */
-    public function delete($id = null)
+    public function delete($ticketId)
     {
-        $this->request->allowMethod(['post', 'delete']);
-        $ticket = $this->Tickets->get($id);
-        if ($this->Tickets->delete($ticket)) {
-            $this->Flash->success(__('The ticket has been deleted.'));
-        } else {
-            $this->Flash->error(__('The ticket could not be deleted. Please, try again.'));
+        $ticketsTable = TableRegistry::getTableLocator()->get('Tickets');
+        $contentsTable = TableRegistry::getTableLocator()->get('Contents');
+
+        // Find the ticket and its associated customer ID
+        $ticket = $ticketsTable->get($ticketId);
+        $customerId = $ticket->cust_id;
+
+        // Find and delete the contents associated with the ticket
+        $contents = $contentsTable->find()->where(['ticket_id' => $ticketId]);
+
+        foreach ($contents as $content) {
+            $contentsTable->delete($content);
         }
 
-        return $this->redirect($this->referer());
+        if ($ticketsTable->delete($ticket)) {
+            $this->Flash->success(__('The ticket and associated contents have been deleted.'));
+        } else {
+            $this->Flash->error(__('Unable to delete the ticket.'));
+        }
+
+        // Redirect to the Customer view page based on the customer ID
+        return $this->redirect(['controller' => 'Customers', 'action' => 'view', $customerId]);
     }
 
     public function updateTicket($id = null)

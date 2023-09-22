@@ -121,7 +121,7 @@ to get the name or any value in the staff table, use the get and then the name o
         <div class="row">
             <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                 <div class="section-block" id="cardaction">
-                    <h3 class="section-title" style="color: midnightblue">Archived Customer View</h3>
+                    <h3 class="section-title" style="color: midnightblue">Outdated Archived Customer View</h3>
                     <p style="color: midnightblue"> These profiles have been archived for a period longer than <?php echo number_format(($archivedTimeInSeconds / 31556952), 2); ?> years. It is strongly recommended that you delete these profiles. </p>
                 </div>
             </div>
@@ -224,17 +224,18 @@ to get the name or any value in the staff table, use the get and then the name o
                 <!--                                    --><?php //endif; ?>
                 <!--                                </th>-->
                 </tr>
-                <?= $this->Form->postLink(
-                    __('Delete All Archived Customer Profiles'),
-                    ['action' => 'deleteArchivedProfiles'],
-                    [
-                        'class' => 'btn btn-danger',
-                        'style' => 'justify-content: center; display: flex',
-                        'confirm' => __('WARNING: This will delete every profile on this list. All Tickets, and any other details associated with these accounts will be deleted forever. Please look through this list and be certain you wish to delete everything here.'),
-                    ]
-                ) ?>
+            <?= $this->Form->postLink(
+                __('Delete All Outdated Profiles'),
+                ['action' => 'deleteArchivedProfiles'],
+                [
+                    'class' => 'btn btn-danger float-right', // Add 'float-right' class here
+                    'style' => 'justify-content: center; display: flex',
+                    'confirm' => __('WARNING: This will delete every profile on this list. All Tickets, and any other details associated with these accounts will be deleted forever. Please look through this list and be certain you wish to delete everything here.'),
+                ]
+            ) ?>
 
-                <br>
+
+            <br>
                 <br>
 
 
@@ -370,8 +371,10 @@ to get the name or any value in the staff table, use the get and then the name o
             <!--                        <a href="javascript: " id="return-to-top"><i class="icon-chevron-up"></i></a>-->
         </div>
     </div>
-</div>
 
+
+
+</body>
 <!---->
 <!--                    EXPLAINING THE SCRIPTS -->
 <!--                    Concept - Template-->
@@ -404,8 +407,6 @@ to get the name or any value in the staff table, use the get and then the name o
     });
 </script>
 
-
-</body>
 
 </html>
 

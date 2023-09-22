@@ -101,13 +101,24 @@
                                         'label' => 'Last Name*',
                                         'label' => ['class' => 'col-form-label blue-label-text']
                                     ]) ?>
-                                    <p>
-                                        Status: <?= $this->Form->input('status', [
-                                            'class' => 'form-control',
-                                            'label' => false
-                                        ]) ?></p>
-                                </h2>
+
+
                             </div>
+
+                            <div class="card-body border-top">
+                                <h3 class="font-16">Status:</h3>
+                                <div class="input-group">
+                                    <?= $this->Form->select(
+                                        'status',
+                                        ['resolved' => 'Issue resolved', 'not_resolved' => 'Issue not resolved', 'no_issues' => 'No Issues Recorded'],
+                                        [
+                                            'class' => 'custom-select select-with-arrow', // Add 'select-with-arrow' class
+                                            'label' => false
+                                        ]
+                                    ) ?>
+                                </div>
+                            </div>
+
 
                             <!-- Email Address Field -->
                             <div class="card-body border-top">
@@ -140,7 +151,7 @@
                                         'maxlength' => 500
                                     ]) ?></p>
                                 <?= $this->Form->error('notes'); ?>
-                                <textarea name="notes" id="notes" class="form-control" title="Enter notes" placeholder="Notes go here.." maxlength="500" style="height: 150px;"></textarea>
+<!--                                <textarea name="notes" id="notes" class="form-control" title="Enter notes" placeholder="Notes go here.." maxlength="500" style="height: 150px;"></textarea>-->
                             </div>
 
                             <?= $this->Html->link(__('Return to Customer'), ['controller' => 'Customers', 'action' => 'view', $customer->id], ['class' => 'btn btn-rounded btn-secondary']) ?>

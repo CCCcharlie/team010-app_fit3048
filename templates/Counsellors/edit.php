@@ -52,7 +52,7 @@
                     </div>
                     <div class="form-group">
                         <?= $this->Form->label('contact', 'Contact', ['class' => 'col-form-label']) ?>
-                        <?= $this->Form->input('contact', ['class' => 'form-control', 'maxlength' => 500,
+                        <?= $this->Form->input('contact', ['class' => 'form-control', 'maxlength' => 500, 'required' => true,
                             'oninput' => 'this.setCustomValidity(this.value.charAt(0) === " " ? "Contact cannot start with a space" : "")']) ?>
                         <?= $this->Form->error('contact'); ?>
                     </div>

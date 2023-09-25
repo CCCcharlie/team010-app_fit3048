@@ -90,30 +90,34 @@ class TicketsController extends AppController
             //closed is a boolean variable where closed = 0 mean it is Open
             $ticket->closed = false;
             $ticket->cust_id = $custId;
-
-            /////////////////////////////
-            // Generate the unique id  //
-            /////////////////////////////
-
-            // Call the generate id function in the AppController.php
-
-            $identifier = 'TCKT';
-            $generateId = $this->generateId($identifier, $ticket->title, $ticket->type);
-
-            $ticket->id = $generateId;
-
-            ////////////////////////////////
-            // End Generate the unique id //
-            ////////////////////////////////
-
             $ticket->escalate = true;
 
+            //Generate ID only if no errors precaution
+            if($ticket->hasErrors() === false) {
+
+                /////////////////////////////
+                // Generate the unique id  //
+                /////////////////////////////
+
+                // Call the generate id function in the AppController.php
+
+                $identifier = 'TCKT';
+                $generateId = $this->generateId($identifier, $ticket->title, $ticket->type);
+
+                $ticket->id = $generateId;
+
+                ////////////////////////////////
+                // End Generate the unique id //
+                ////////////////////////////////
+
+            }
+
             if ($this->Tickets->save($ticket)) {
-                $this->Flash->success(__('The ticket titled: "'. $ticket->title . '" for ' . $fullName . ' Is successfully created'));
+                $this->Flash->success(__('The ticket titled: "' . $ticket->title . '" for ' . $fullName . ' Is successfully created'));
 
                 return $this->redirect(['controller' => 'Customers', 'action' => 'view', $custId]);
             }
-            $this->Flash->error(__('The ticket for titled: "'. $ticket->title . '" for ' .   $fullName . ' could not be created'));
+            $this->Flash->error(__('The ticket for titled: "' . $ticket->title . '" for ' . $fullName . ' could not be created'));
         }
         $customers = $this->Tickets->Customers->find('list', ['limit' => 200])->all();
 

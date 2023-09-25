@@ -189,29 +189,35 @@ class UsersController extends AppController
         if ($this->request->is('post')) {
             $user = $this->Users->patchEntity($user, $this->request->getData());
 
-//            debug($user);
+//            debug($user->hasErrors());
 //            exit;
 
-            /////////////////////////////
-            // Generate the unique id  //
-            /////////////////////////////
+            // Ah so the reason f_name does not show up when fail validation on first name is because f_name has an ERROR,
+            // which is why f_name is NULL during id generation.
+            // Therefore, we must check first if theres error FIRST and THEN generate ID if no error
 
-            // Call the generate id function in the AppController.php
+            //Generate ID only if no errors precaution
+            if($user->hasErrors() === false) {
+                /////////////////////////////
+                // Generate the unique id  //
+                /////////////////////////////
 
-            $identifier = 'STF';
-            $generateId = $this->generateId($identifier, $user->f_name, $user->l_name);
+                // Call the generate id function in the AppController.php
 
-            $user->id = $generateId;
+                $identifier = 'STF';
+                $generateId = $this->generateId($identifier, $user->f_name, $user->l_name);
 
-            ////////////////////////////////
-            // End Generate the unique id //
-            ////////////////////////////////
+                $user->id = $generateId;
 
+                ////////////////////////////////
+                // End Generate the unique id //
+                ////////////////////////////////
+            }
             if ($this->Users->save($user)) {
                 $this->Flash->success(__('You have successfully added the following account: {0} {1}', $user->f_name, $user->l_name));
-
                 return $this->redirect(['action' => 'index']);
             }
+            // In the off case if save fails
             $this->Flash->error(__('The user could not be saved. Please, try again.'));
         }
         $this->set(compact('user'));

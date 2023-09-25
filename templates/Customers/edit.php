@@ -110,7 +110,7 @@
                                 <div class="input-group">
                                     <?= $this->Form->select(
                                         'status',
-                                        ['resolved' => 'Issue resolved', 'not_resolved' => 'Issue not resolved', 'no_issues' => 'No Issues Recorded'],
+                                        ['resolved' => 'Issue resolved', 'unresolved' => 'Issue unresolved', 'no_issues' => 'No Issues Recorded'],
                                         [
                                             'class' => 'custom-select select-with-arrow', // Add 'select-with-arrow' class
                                             'label' => false

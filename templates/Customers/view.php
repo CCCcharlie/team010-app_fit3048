@@ -1461,7 +1461,7 @@ to get the name or any value in the staff table, use the get and then the name o
             </style>
         </div>
     </div>
-</div>
+
 
 
 <!-- SCRIPTS GO HERE -->

@@ -1049,7 +1049,7 @@ to get the name or any value in the staff table, use the get and then the name o
                                                             <?php if ($ticket->closed == false) : ?>
                                                                 <div class="card">
                                                                     <div class="card-header d-flex"
-                                                                         style="background-color: lightgray">
+                                                                         style="background-color: #50C878">
                                                                         <div>
                                                                             <h4 class="card-header-title">
                                                                                 Title: <?= h($ticket->title) ?></h4>

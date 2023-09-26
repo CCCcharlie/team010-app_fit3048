@@ -56,7 +56,6 @@
                                         'title' => 'Please enter a title (maximum 50 characters)',
                                         'oninput' => 'this.setCustomValidity(this.value.charAt(0) === " " ? "Title cannot start with a space" : "")',
                                     ]) ?>
-                                    ]) ?>
                                     <!-- Display validation error for the 'f_name' field -->
                                     <?= $this->Form->error('title'); ?>
 

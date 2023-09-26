@@ -107,7 +107,7 @@
                                     [
                                         'class' => 'form-control',
                                         'title' => 'Add any notes here',
-                                        'placeholder' => 'e.g., Tendency to contact using FB and Instagram under different names.',
+                                        'placeholder' => 'e.g., Tendency to contact through numerous different contact methods.',
                                         'maxlength' => 500,
                                         'rows' => 5, // Adjust the number of rows to control the initial height
                                         'oninput' => 'this.setCustomValidity(this.value.charAt(0) === " " ? "Notes cannot start with a space" : "")',

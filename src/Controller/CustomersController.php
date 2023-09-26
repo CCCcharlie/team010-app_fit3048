@@ -90,7 +90,6 @@ class CustomersController extends AppController
                     'status LIKE' => '%' . $search . '%',
                     'notes LIKE' => '%' . $search . '%',
                     'Devices.transactionid LIKE' => '%' . $search . '%',
-                    'Devices.sessionid LIKE' => '%' . $search . '%'
                 ]
             ];
             $query->leftJoinWith('Devices')

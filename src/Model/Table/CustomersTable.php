@@ -79,17 +79,17 @@ class CustomersTable extends Table
             ->maxLength('f_name', 32)
             ->requirePresence('f_name', 'create')
             ->notEmptyString('f_name');
-//        ->add('f_name_format', [
-//        'rule' => ['custom', '/^[a-zA-Z]+(?:[-\'\s]{1}[a-zA-Z]+)*$/'],
-//        'message' => 'Names cannot have multiple "-", or apostrophes in a row. Names cannot have numbers.'
-//    ]);
+//            ->add('f_name', [
+//            'rule' => ['custom', '/^[a-zA-Z]+(?:[-\'\s]{1}[a-zA-Z]+)*$/'],
+//            'message' => 'Names cannot have multiple "-", or apostrophes in a row. Names cannot have numbers.'
+//        ]);
 
         $validator
             ->scalar('l_name')
             ->maxLength('l_name', 32)
             ->requirePresence('l_name', 'create')
             ->notEmptyString('l_name');
-//            ->add('l_name_format', [
+//            ->add('l_name', [
 //                'rule' => ['custom', '/^[a-zA-Z]+(?:[-\'\s]{1}[a-zA-Z]+)*$/'],
 //                'message' => 'Names cannot have multiple "-", or apostrophes in a row. Names cannot have numbers.'
 //            ]);

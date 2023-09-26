@@ -102,7 +102,7 @@ class CustomersController extends AppController
 
         $this->paginate = [
 //            'limit' => $totalRecords, // Set the limit to the total number of records
-            'limit' => 25, 
+            'limit' => 25,
             'contain' => ['Tickets', 'Devices', 'Commdetails', 'Counsellors'],
         ];
         $customers = $this->paginate($query);
@@ -409,20 +409,23 @@ class CustomersController extends AppController
 //            debug($customer);
 //            exit;
 
-            /////////////////////////////
-            // Generate the unique id  //
-            /////////////////////////////
+            //Generate ID only if no errors precaution
+            if($customer->hasErrors() === false) {
+                /////////////////////////////
+                // Generate the unique id  //
+                /////////////////////////////
 
-            // Call the generate id function in the AppController.php
+                // Call the generate id function in the AppController.php
 
-            $identifier = 'CUS';
-            $generateId = $this->generateId($identifier, $customer->f_name, $customer->l_name);
+                $identifier = 'CUS';
+                $generateId = $this->generateId($identifier, $customer->f_name, $customer->l_name);
 
-            $customer->id = $generateId;
+                $customer->id = $generateId;
 
-            ////////////////////////////////
-            // End Generate the unique id //
-            ////////////////////////////////
+                ////////////////////////////////
+                // End Generate the unique id //
+                ////////////////////////////////
+            }
 
             if ($this->Customers->save($customer)) {
                 $this->Flash->success(__('{0} {1} has been added to the system!', $customer->f_name, $customer->l_name));

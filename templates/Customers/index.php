@@ -268,7 +268,7 @@ to get the name or any value in the staff table, use the get and then the name o
                             <?php foreach ($customers as $customer): ?>
                                 <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12">
                                     <div class="card">
-                                        <div class="card-header d-flex">
+                                        <div class="card-header">
                                             <h4 class="card-header-title"><?= h($customer->f_name) ?> <?= h($customer->l_name) ?></h4>
                                             <div class="toolbar card-toolbar-tabs ml-auto">
                                                 <ul class="nav nav-pills" role="tablist">

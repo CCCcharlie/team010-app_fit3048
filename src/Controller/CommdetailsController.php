@@ -72,10 +72,13 @@ class CommdetailsController extends AppController
             // Set the custId here instead of the form
             $commdetail->cust_id = $custId;
 
-            // Generate the unique id
-            $identifier = 'CCOMMS';
-            $generateId = $this->generateId($identifier, $commdetail->type, $commdetail->link);
-            $commdetail->id = $generateId;
+            //Generate ID only if no errors precaution
+            if($customer->hasErrors() === false) {
+                // Generate the unique id
+                $identifier = 'CCOMMS';
+                $generateId = $this->generateId($identifier, $commdetail->type, $commdetail->link);
+                $commdetail->id = $generateId;
+            }
 
             if ($this->Commdetails->save($commdetail)) {
                 $this->Flash->success(__('The communication details for: ' . $fullName . ' has been saved'));

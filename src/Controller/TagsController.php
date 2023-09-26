@@ -52,20 +52,24 @@ class TagsController extends AppController
         $tag = $this->Tags->newEmptyEntity();
         if ($this->request->is('post')) {
             $tag = $this->Tags->patchEntity($tag, $this->request->getData());
-            /////////////////////////////
-            // Generate the unique id  //
-            /////////////////////////////
 
-            // Call the generate id function in the AppController.php
+            //Generate ID only if no errors precaution
+            if($tag->hasErrors() === false) {
+                /////////////////////////////
+                // Generate the unique id  //
+                /////////////////////////////
 
-            $identifier = 'TAGS';
-            $generateId = $this->generateId($identifier, $tag->title, $tag->description);
+                // Call the generate id function in the AppController.php
 
-            $tag->id = $generateId;
+                $identifier = 'TAGS';
+                $generateId = $this->generateId($identifier, $tag->title, $tag->description);
 
-            ////////////////////////////////
-            // End Generate the unique id //
-            ////////////////////////////////
+                $tag->id = $generateId;
+
+                ////////////////////////////////
+                // End Generate the unique id //
+                ////////////////////////////////
+            }
 
             if ($this->Tags->save($tag)) {
                 $this->Flash->success(__('The tag has been saved.'));
@@ -73,6 +77,7 @@ class TagsController extends AppController
                 return $this->redirect(['action' => 'index']);
             }
             $this->Flash->error(__('The tag could not be saved. Please, try again.'));
+
         }
         $customers = $this->Tags->Customers->find('list', ['limit' => 200])->all();
         $this->set(compact('tag', 'customers'));

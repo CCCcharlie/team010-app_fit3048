@@ -120,7 +120,7 @@ to get the name or any value in the staff table, use the get and then the name o
 
 
                             <br>
-                            <h3 style ="color: midnightblue" class="section-title"> Sort by: </h3>
+                            <h6 style ="color: midnightblue" class="section-title"> Sort by:
 
 
 
@@ -205,7 +205,7 @@ to get the name or any value in the staff table, use the get and then the name o
                                     <button id="undobutton" class="btn btn-primary" style="margin-left: 2vw">Unescalate the customer</button>
 
 
-
+                            </h6>
 
                             <br>
                             <br>

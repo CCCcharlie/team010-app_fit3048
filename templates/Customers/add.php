@@ -85,11 +85,11 @@
                                 <small class="form-text text-muted">Please enter a valid email address.</small>
                             </div>
                             <div class="form-group">
-                                <?= $this->Form->label('status', 'Status', ['class' => 'blue-label-text']) ?>
+                                <?= $this->Form->label('status', 'Status*', ['class' => 'blue-label-text']) ?>
                                 <div class="input-group">
                                     <?= $this->Form->select(
                                         'status',
-                                        ['resolved' => 'Issue resolved', 'not_resolved' => 'Issue not resolved', 'no_issues' => 'No Issues Recorded'],
+                                        ['resolved' => 'Issue resolved', 'unresolved' => 'Issue unresolved', 'no_issues' => 'No Issues Recorded'],
                                         [
                                             'class' => 'custom-select select-with-arrow', // Add 'select-with-arrow' class
                                             'label' => false
@@ -107,7 +107,7 @@
                                     [
                                         'class' => 'form-control',
                                         'title' => 'Add any notes here',
-                                        'placeholder' => 'e.g., Has 4 dogs.',
+                                        'placeholder' => 'e.g., Tendency to contact using FB and Instagram under different names.',
                                         'maxlength' => 500,
                                         'rows' => 5, // Adjust the number of rows to control the initial height
                                         'oninput' => 'this.setCustomValidity(this.value.charAt(0) === " " ? "Notes cannot start with a space" : "")',

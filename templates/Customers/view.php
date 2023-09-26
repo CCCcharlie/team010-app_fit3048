@@ -297,8 +297,8 @@ to get the name or any value in the staff table, use the get and then the name o
                                     </div>
                                     <!-- End of Header buttons -->
                                     <div id="allticket">
-                                        <!-- If user or staff, only show their tickets -->
-                                        <?php if ($this->Identity->get('role') === 'user' || $this->Identity->get('role') === 'staff'): ?>
+                                        <!-- If not admin or root, only show their tickets -->
+                                        <?php if ($this->Identity->get('role') !== 'root' || $this->Identity->get('role') === 'admin'): ?>
                                             <div class="card">
                                                 <p>            <!-- Cards section -->
                                                     <?php foreach ($tickets as $ticket): ?>
@@ -373,7 +373,7 @@ to get the name or any value in the staff table, use the get and then the name o
                                                                         Expand Attachments
                                                                     </a>
                                                                     <span>
-                                                        <?php if ($this->Identity->get('role') == 'root' || $this->Identity->get('role') == 'admin'): ?>
+                                                                    <?php if ($this->Identity->get('role') == 'root' || $this->Identity->get('role') == 'admin'): ?>
                                                             <?php if ($customer->archive == 0): ?>
                                                                 <?php echo $this->Html->link(__('Edit'), ['controller' => 'Tickets', 'action' => 'edit', $ticket->id,
                                                                     '?' => [
@@ -384,8 +384,8 @@ to get the name or any value in the staff table, use the get and then the name o
                                                                     ],
                                                                 ], ['class' => 'btn btn-primary']);
 
-                                                                //Removed delete for now, it breaks if try to delete with an attachment present inside
-
+                                                                // Should be able to delete tickets now
+                                                                echo $this->Form->postLink(__('Delete Ticket'), ['controller' => 'Tickets', 'action' => 'delete', $ticket->id], ['confirm' => __('Are you sure you want to delete ticket {0}?', $ticket->title), 'class' => 'btn btn-danger'])
                                                                 ?>
                                                             <?php endif; ?>
                                                             <!--                                                                        --><?php //= $this->Form->postLink(__('Delete'), ['controller' => 'Tickets', 'action' => 'delete', $ticket->id], [
@@ -394,7 +394,7 @@ to get the name or any value in the staff table, use the get and then the name o
 //                                                                        ]) ?>
                                                         <?php else: ?>
                                                         <?php endif; ?>
-                                                            </span>
+                                                                    </span>
                                                                 </div>
                                                             </div>
                                                             <!-- In order to show unique collapse for each class, its id must be different. -->
@@ -474,7 +474,7 @@ to get the name or any value in the staff table, use the get and then the name o
                                                 </div>
                                             </div>
 
-                                            <!-- if its an admin or root, show all -->
+                                            <!-- if the logged in user has role [admin/root] show all -->
                                         <?php else: ?>
                                             <div class="card">
                                                 <p>            <!-- Cards section -->
@@ -560,8 +560,8 @@ to get the name or any value in the staff table, use the get and then the name o
                                                                     ],
                                                                 ], ['class' => 'btn btn-primary']);
 
-                                                                //Removed delete for now, it breaks if try to delete with an attachment present inside
-
+                                                                // Should be able to delete tickets now
+                                                                echo $this->Form->postLink(__('Delete Ticket'), ['controller' => 'Tickets', 'action' => 'delete', $ticket->id], ['confirm' => __('Are you sure you want to delete ticket {0}?', $ticket->title), 'class' => 'btn btn-danger'])
                                                                 ?>
                                                             <?php endif; ?>
                                                             <!--                                                                        --><?php //= $this->Form->postLink(__('Delete'), ['controller' => 'Tickets', 'action' => 'delete', $ticket->id], [
@@ -663,7 +663,7 @@ to get the name or any value in the staff table, use the get and then the name o
                                                 <?php foreach ($tickets as $ticket): ?>
                                                     <div
                                                         class="col-xl-12 col-lg-12 col-md-12col-sm-12 col-12">
-                                                        <?php if ($this->Identity->get('role') === 'user' || $this->Identity->get('role') === 'staff'): ?>
+                                                        <?php if ($this->Identity->get('role') !== 'root' || $this->Identity->get('role') !== 'admin'): ?>
                                                             <?php if ($ticket->closed == true && $this->Identity->get('id') === $ticket->staff_id) : ?>
                                                                 <div class="card">
                                                                     <div class="card-header d-flex"
@@ -706,7 +706,8 @@ to get the name or any value in the staff table, use the get and then the name o
                                                                             <p><span class="card-info">Create time:</span> <?= h($ticket->createtime) ?>
                                                                             </p>
                                                                             <br>
-                                                                        </div>
+                                                                            <div
+                                                                                style="display: flex; justify-content: space-between">
                                                                         <!--                                                                            <a href="#" class="btn btn-primary card__button" id="showButton">Go somewhere</a>-->
                                                                         <a class="btn btn-primary"
                                                                            data-toggle="collapse"
@@ -715,6 +716,29 @@ to get the name or any value in the staff table, use the get and then the name o
                                                                            aria-controls="collapseExample">
                                                                             Expand Attachments
                                                                         </a>
+                                                                        <span>
+                                                                    <?php if ($this->Identity->get('role') == 'root' || $this->Identity->get('role') == 'admin'): ?>
+                                                                        <?php if ($customer->archive == 0): ?>
+                                                                            <?php echo $this->Html->link(__('Edit'), ['controller' => 'Tickets', 'action' => 'edit', $ticket->id,
+                                                                                '?' => [
+                                                                                    'f_name' => $customer->f_name,
+                                                                                    'l_name' => $customer->l_name,
+                                                                                    'cust_id' => $customer->id,
+//                                                                                'ticket_closed' => $ticket->closed
+                                                                                ],
+                                                                            ], ['class' => 'btn btn-primary']);
+
+                                                                            // Should be able to delete tickets now
+                                                                            echo $this->Form->postLink(__('Delete Ticket'), ['controller' => 'Tickets', 'action' => 'delete', $ticket->id], ['confirm' => __('Are you sure you want to delete ticket {0}?', $ticket->title), 'class' => 'btn btn-danger'])
+                                                                            ?>
+                                                                        <?php endif; ?>
+                                                                        <!--                                                                        --><?php //= $this->Form->postLink(__('Delete'), ['controller' => 'Tickets', 'action' => 'delete', $ticket->id], [
+//                                                                            'class' => 'btn btn-danger',
+//                                                                            'confirm' => __('Are you sure you want to delete Ticket title:  {0} \n From customer {1} {2}?', $ticket->title , $customer->f_name, $customer->l_name)
+//                                                                        ]) ?>
+                                                                    <?php else: ?>
+                                                                    <?php endif; ?>
+                                                                    </span>
                                                                     </div>
                                                                     <!-- In order to show unique collapse for each class, its id must be different. -->
                                                                     <div class="collapse"
@@ -779,9 +803,8 @@ to get the name or any value in the staff table, use the get and then the name o
                                                                     </div>
                                                                 </div>
                                                             <?php else: ?>
-                                                                <!-- Do nothing -->
+                                                            <!-- Do nothing -->
                                                             <?php endif; ?>
-
                                                         <?php else: ?>
                                                             <!-- display all for root and admin -->
                                                             <?php if ($ticket->closed == true) : ?>
@@ -826,7 +849,8 @@ to get the name or any value in the staff table, use the get and then the name o
                                                                             <p><span class="card-info">Create time:</span> <?= h($ticket->createtime) ?>
                                                                             </p>
                                                                             <br>
-                                                                        </div>
+                                                                            <div
+                                                                                style="display: flex; justify-content: space-between">
                                                                         <!--                                                                            <a href="#" class="btn btn-primary card__button" id="showButton">Go somewhere</a>-->
                                                                         <a class="btn btn-primary"
                                                                            data-toggle="collapse"
@@ -835,6 +859,29 @@ to get the name or any value in the staff table, use the get and then the name o
                                                                            aria-controls="collapseExample">
                                                                             Expand Attachments
                                                                         </a>
+                                                                        <span>
+                                                                    <?php if ($this->Identity->get('role') == 'root' || $this->Identity->get('role') == 'admin'): ?>
+                                                                        <?php if ($customer->archive == 0): ?>
+                                                                            <?php echo $this->Html->link(__('Edit'), ['controller' => 'Tickets', 'action' => 'edit', $ticket->id,
+                                                                                '?' => [
+                                                                                    'f_name' => $customer->f_name,
+                                                                                    'l_name' => $customer->l_name,
+                                                                                    'cust_id' => $customer->id,
+//                                                                                'ticket_closed' => $ticket->closed
+                                                                                ],
+                                                                            ], ['class' => 'btn btn-primary']);
+
+                                                                            // Should be able to delete tickets now
+                                                                            echo $this->Form->postLink(__('Delete Ticket'), ['controller' => 'Tickets', 'action' => 'delete', $ticket->id], ['confirm' => __('Are you sure you want to delete ticket {0}?', $ticket->title), 'class' => 'btn btn-danger'])
+                                                                            ?>
+                                                                        <?php endif; ?>
+                                                                        <!--                                                                        --><?php //= $this->Form->postLink(__('Delete'), ['controller' => 'Tickets', 'action' => 'delete', $ticket->id], [
+//                                                                            'class' => 'btn btn-danger',
+//                                                                            'confirm' => __('Are you sure you want to delete Ticket title:  {0} \n From customer {1} {2}?', $ticket->title , $customer->f_name, $customer->l_name)
+//                                                                        ]) ?>
+                                                                    <?php else: ?>
+                                                                    <?php endif; ?>
+                                                                    </span>
                                                                     </div>
                                                                     <!-- In order to show unique collapse for each class, its id must be different. -->
                                                                     <div class="collapse"
@@ -967,7 +1014,8 @@ to get the name or any value in the staff table, use the get and then the name o
                                                                             <p><span class="card-info">Create time:</span> <?= h($ticket->createtime) ?>
                                                                             </p>
                                                                             <br>
-                                                                        </div>
+                                                                            <div
+                                                                                style="display: flex; justify-content: space-between">
                                                                         <!--                                                                            <a href="#" class="btn btn-primary card__button" id="showButton">Go somewhere</a>-->
                                                                         <a class="btn btn-primary"
                                                                            data-toggle="collapse"
@@ -976,6 +1024,29 @@ to get the name or any value in the staff table, use the get and then the name o
                                                                            aria-controls="collapseExample">
                                                                             Expand Attachments
                                                                         </a>
+                                                                        <span>
+                                                                    <?php if ($this->Identity->get('role') == 'root' || $this->Identity->get('role') == 'admin'): ?>
+                                                                        <?php if ($customer->archive == 0): ?>
+                                                                            <?php echo $this->Html->link(__('Edit'), ['controller' => 'Tickets', 'action' => 'edit', $ticket->id,
+                                                                                '?' => [
+                                                                                    'f_name' => $customer->f_name,
+                                                                                    'l_name' => $customer->l_name,
+                                                                                    'cust_id' => $customer->id,
+//                                                                                'ticket_closed' => $ticket->closed
+                                                                                ],
+                                                                            ], ['class' => 'btn btn-primary']);
+
+                                                                            // Should be able to delete tickets now
+                                                                            echo $this->Form->postLink(__('Delete Ticket'), ['controller' => 'Tickets', 'action' => 'delete', $ticket->id], ['confirm' => __('Are you sure you want to delete ticket {0}?', $ticket->title), 'class' => 'btn btn-danger'])
+                                                                            ?>
+                                                                        <?php endif; ?>
+                                                                        <!--                                                                        --><?php //= $this->Form->postLink(__('Delete'), ['controller' => 'Tickets', 'action' => 'delete', $ticket->id], [
+//                                                                            'class' => 'btn btn-danger',
+//                                                                            'confirm' => __('Are you sure you want to delete Ticket title:  {0} \n From customer {1} {2}?', $ticket->title , $customer->f_name, $customer->l_name)
+//                                                                        ]) ?>
+                                                                    <?php else: ?>
+                                                                    <?php endif; ?>
+                                                                    </span>
                                                                     </div>
                                                                     <!-- In order to show unique collapse for each class, its id must be different. -->
                                                                     <div class="collapse"
@@ -1087,7 +1158,8 @@ to get the name or any value in the staff table, use the get and then the name o
                                                                             <p><span class="card-info">Create time:</span> <?= h($ticket->createtime) ?>
                                                                             </p>
                                                                             <br>
-                                                                        </div>
+                                                                            <div
+                                                                                style="display: flex; justify-content: space-between">
                                                                         <!--                                                                            <a href="#" class="btn btn-primary card__button" id="showButton">Go somewhere</a>-->
                                                                         <a class="btn btn-primary"
                                                                            data-toggle="collapse"
@@ -1096,6 +1168,29 @@ to get the name or any value in the staff table, use the get and then the name o
                                                                            aria-controls="collapseExample">
                                                                             Expand Attachments
                                                                         </a>
+                                                                        <span>
+                                                                    <?php if ($this->Identity->get('role') == 'root' || $this->Identity->get('role') == 'admin'): ?>
+                                                                        <?php if ($customer->archive == 0): ?>
+                                                                            <?php echo $this->Html->link(__('Edit'), ['controller' => 'Tickets', 'action' => 'edit', $ticket->id,
+                                                                                '?' => [
+                                                                                    'f_name' => $customer->f_name,
+                                                                                    'l_name' => $customer->l_name,
+                                                                                    'cust_id' => $customer->id,
+//                                                                                'ticket_closed' => $ticket->closed
+                                                                                ],
+                                                                            ], ['class' => 'btn btn-primary']);
+
+                                                                            // Should be able to delete tickets now
+                                                                            echo $this->Form->postLink(__('Delete Ticket'), ['controller' => 'Tickets', 'action' => 'delete', $ticket->id], ['confirm' => __('Are you sure you want to delete ticket {0}?', $ticket->title), 'class' => 'btn btn-danger'])
+                                                                            ?>
+                                                                        <?php endif; ?>
+                                                                        <!--                                                                        --><?php //= $this->Form->postLink(__('Delete'), ['controller' => 'Tickets', 'action' => 'delete', $ticket->id], [
+//                                                                            'class' => 'btn btn-danger',
+//                                                                            'confirm' => __('Are you sure you want to delete Ticket title:  {0} \n From customer {1} {2}?', $ticket->title , $customer->f_name, $customer->l_name)
+//                                                                        ]) ?>
+                                                                    <?php else: ?>
+                                                                    <?php endif; ?>
+                                                                    </span>
                                                                     </div>
                                                                     <!-- In order to show unique collapse for each class, its id must be different. -->
                                                                     <div class="collapse"

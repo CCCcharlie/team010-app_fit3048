@@ -68,12 +68,14 @@ class CounsellorsController extends AppController
         if ($this->request->is('post')) {
             $counsellor = $this->Counsellors->patchEntity($counsellor, $this->request->getData());
 
-            // Generate the unique id
-            $identifier = 'COUNS';
-            $generateId = $this->generateId($identifier, $counsellor->f_name, $counsellor->l_name);
-            $counsellor->id = $generateId;
-
             $counsellor->cust_id = $custId;
+            //Generate ID only if no errors precaution
+            if($customer->hasErrors() === false) {
+                // Generate the unique id
+                $identifier = 'COUNS';
+                $generateId = $this->generateId($identifier, $counsellor->f_name, $counsellor->l_name);
+                $counsellor->id = $generateId;
+            }
 
             if ($this->Counsellors->save($counsellor)) {
                 $this->Flash->success(__('Counsellor ' . $counsellor->f_name . ' has been saved'));

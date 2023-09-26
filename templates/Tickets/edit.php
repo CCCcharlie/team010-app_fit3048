@@ -106,13 +106,19 @@
                                             : ['controller' => 'Tickets', 'action' => 'unassigned'],
                                             ['class' => 'btn btn-rounded btn-secondary']) ?>
 
-                                        <?= $this->Form->button(__('Submit'), ['class' => 'btn btn-primary']) ?>
+                                        <div class="d-flex">
+                                            <div class="row">
+                                                <div class ="col-6">
+                                                    <?= $this->Form->button(__('Submit'), ['class' => 'btn btn-primary', 'style' => 'width: 100px; margin-right: 30px; margin-left: 90px']) ?>
+                                                </div>
+                                                <div class = "col-6">
+                                                    <?= $this->Html->link(__('Undo Changes'), ['action' => 'undo', $ticket->id, '?' => ['originalData' => $originalData]], ['class' => 'btn btn-warning', 'style' => 'width: 150px; margin-top: 20px']); ?>
+                                                </div>
         <!--              undo originalData not passing            debug($originalData);           -->
         <!--                                      --><?php //=  $this->getRequest()->getSession()->write('originalData', $originalData);?>
 
-                                        <?= $this->Html->link(__('Undo Changes'), ['action' => 'undo', $ticket->id, '?' => ['originalData' => $originalData]], ['class' => 'btn btn-warning']); ?>
-
-
+                                            </div>
+                                    </div>
                                     </div>
                                 </div>
                             </div>

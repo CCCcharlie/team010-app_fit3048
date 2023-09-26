@@ -59,7 +59,7 @@ class DevicesTable extends Table
     {
         $validator
             ->scalar('transactionid')
-            ->maxLength('transactionid', 8)
+            ->maxLength('transactionid', 20)
             ->requirePresence('transactionid', 'create')
             ->notEmptyString('transactionid');
 

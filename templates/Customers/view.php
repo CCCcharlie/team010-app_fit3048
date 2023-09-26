@@ -1229,7 +1229,7 @@ to get the name or any value in the staff table, use the get and then the name o
                                     <?php
                                     if (!empty($customer->devices)) {
                                         echo '<table class="table table-bordered">';
-                                        echo '<thead><tr><th scope="col">Device Model</th><th scope="col">Technical Details</th><th scope="col"></th><th scope="col">Transaction ID</th><th scope="col">Platform</th><th scope="col">Gamblock Ver.</th><th scope="col">Actions</th></tr></thead>';
+                                        echo '<thead><tr><th scope="col">Device Model</th><th scope="col">Technical Details</th><th scope="col">Transaction ID</th><th scope="col">Platform</th><th scope="col">Gamblock Ver.</th><th scope="col">Actions</th></tr></thead>';
                                         echo '<tbody>';
 
                                         foreach ($customer->devices as $device) {

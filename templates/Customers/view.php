@@ -906,9 +906,9 @@ to get the name or any value in the staff table, use the get and then the name o
                                                 <?php endforeach ?>
                                                 <!-- End card section -->
                                                 </p>
-                                        </div>
-                                            <?php endif; ?>
 
+                                            <?php endif; ?>
+                                        </div>
                                     </div>
                                     <div id="openticket" style="display: none;">
                                         <div class="card">

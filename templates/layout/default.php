@@ -216,7 +216,7 @@
                                             <a class="nav-link" href="/customers/archiveddeleteprofiles"> Manage Outdated Archived Profiles </a>
                                         </li>
                                         <li class="nav-item">
-                                            <a class="nav-link" href="/customers/archiveddeleteprofiles"> Manage Escalated Customers</a>
+                                            <a class="nav-link" href="/customers/escalatetome"> Manage Escalated Customers</a>
                                         </li>
 
                                     </ul>
@@ -289,7 +289,7 @@
                                             <a class="nav-link" href="/customers/archiveddeleteprofiles"> Manage Outdated Archived Profiles </a>
                                         </li>
                                         <li class="nav-item">
-                                            <a class="nav-link" href="/customers/archiveddeleteprofiles"> Manage Escalated Customers</a>
+                                            <a class="nav-link" href="/customers/escalatetome"> Manage Escalated Customers</a>
                                         </li>
 
                                     </ul>

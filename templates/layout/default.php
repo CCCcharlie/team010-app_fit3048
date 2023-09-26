@@ -127,7 +127,7 @@
                                 <div id="submenu-1" class="submenu show" style="">
                                     <ul class="nav flex-column">
                                         <li class="nav-item">
-                                            <a class="nav-link" href="/customers/assigntome"><i class="fa-solid fa-user-group"></i>Assigned To Me</a>
+                                            <a class="nav-link" href="/customers/assigntome">Assigned To Me</a>
                                             <!-- Change my link to assigned to me page when done. -->
                                         </li>
                                     </ul>
@@ -139,23 +139,22 @@
                         <?php elseif($this->Identity->get('role') === 'staff'): ?>
                             <li class="nav-item ">
                                 <a class="nav-link active" href="#" data-toggle="collapse" aria-expanded="true"
-                                   data-target="#submenu-1" aria-controls="submenu-1"><i
-                                        class="fa fa-fw fa-user-circle"></i>Customer Management <span
+                                   data-target="#submenu-1" aria-controls="submenu-1">Customer Management <span
                                         class="badge badge-success">6</span></a>
                                 <div id="submenu-1" class="submenu show" style="">
                                     <ul class="nav flex-column">
                                         <li class="nav-item">
-                                            <a class="nav-link" href="/customers/assigntome"><i class="fa-solid fa-user-group"></i>Assigned To Me</a>
+                                            <a class="nav-link" href="/customers/assigntome">Assigned To Me</a>
                                         </li>
                                         <li class="nav-item">
-                                            <a class="nav-link" href="/customers"><i class="fa-duotone fa-users"></i>View All Customers</a>
+                                            <a class="nav-link" href="/customers">View All Customers</a>
                                         </li>
                                         <li class="nav-item">
-                                            <a class="nav-link" href="/customers/add"><i class="fa-solid fa-user-plus"></i>Add a Customer
+                                            <a class="nav-link" href="/customers/add">Add a Customer
                                                 Profile</a>
                                         </li>
                                         <li class="nav-item">
-                                            <a class="nav-link" href="/customers/archiveindex"><i class="fa-solid fa-user-lock"></i>View All Archived Customers</a>
+                                            <a class="nav-link" href="/customers/archiveindex">View All Archived Customers</a>
                                         </li>
                                     </ul>
                                 </div>
@@ -173,17 +172,17 @@
                                 <div id="submenu-1" class="submenu show" style="">
                                     <ul class="nav flex-column">
                                         <li class="nav-item">
-                                            <a class="nav-link" href="/customers/assigntome"><i class="fa-solid fa-user-group"></i>Assigned To Me</a>
+                                            <a class="nav-link" href="/customers/assigntome">Assigned To Me</a>
                                         </li>
                                         <li class="nav-item">
-                                            <a class="nav-link" href="/customers"><i class="fa-duotone fa-users"></i>View All Customers</a>
+                                            <a class="nav-link" href="/customers">View All Customers</a>
                                         </li>
                                         <li class="nav-item">
-                                            <a class="nav-link" href="/customers/add"><i class="fa-solid fa-user-plus"></i>Add a Customer
+                                            <a class="nav-link" href="/customers/add">Add a Customer
                                                 Profile</a>
                                         </li>
                                         <li class="nav-item">
-                                            <a class="nav-link" href="/customers/archiveindex"><i class="fa-solid fa-user-lock"></i>View All Archived Customers</a>
+                                            <a class="nav-link" href="/customers/archiveindex">View All Archived Customers</a>
                                         </li>
                                     </ul>
                                 </div>

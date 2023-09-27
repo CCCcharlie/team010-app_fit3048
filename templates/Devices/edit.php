@@ -43,31 +43,31 @@
                                 <p> No fields here are mandatory.</p>
                                 <fieldset>
                                     <div class="form-group">
-                                        <?= $this->Form->label('transactionid', 'Transaction ID', ['class' => 'col-form-label']) ?>
+                                        <?= $this->Form->label('transactionid', 'Transaction ID*', ['class' => 'col-form-label']) ?>
                                         <?= $this->Form->control('transactionid', ['class' => 'form-control',  'maxlength' => 19, 'label' => false, 'oninput' => 'this.setCustomValidity(this.value.charAt(0) === " " ? "Transaction ID cannot start with a space" : "")']) ?>
                                         <!-- Display validation error for the 'f_name' field -->
                                         <?= $this->Form->error('transactionid'); ?>
                                     </div>
                                     <div class="form-group">
-                                        <?= $this->Form->label('device_model', 'Device Model', ['class' => 'col-form-label']) ?>
+                                        <?= $this->Form->label('device_model', 'Device Model*', ['class' => 'col-form-label']) ?>
                                         <?= $this->Form->control('device_model', ['class' => 'form-control',  'maxlength' => 54, 'label' => false, 'oninput' => 'this.setCustomValidity(this.value.charAt(0) === " " ? "Device Model cannot start with a space" : "")']) ?>
                                         <!-- Display validation error for the 'f_name' field -->
                                         <?= $this->Form->error('device_model'); ?>
                                     </div>
                                     <div class="form-group">
-                                        <?= $this->Form->label('technical_details', 'Technical Details', ['class' => 'col-form-label']) ?>
+                                        <?= $this->Form->label('technical_details', 'Technical Details*', ['class' => 'col-form-label']) ?>
                                         <?= $this->Form->control('technical_details', ['class' => 'form-control',  'maxlength' => 150, 'label' => false, 'oninput' => 'this.setCustomValidity(this.value.charAt(0) === " " ? "Technical Details cannot start with a space" : "")']) ?>
                                         <!-- Display validation error for the 'f_name' field -->
                                         <?= $this->Form->error('technical_details'); ?>
                                     </div>
                                     <div class="form-group">
-                                        <?= $this->Form->label('platform', 'Platform', ['class' => 'col-form-label']) ?>
+                                        <?= $this->Form->label('platform', 'Platform*', ['class' => 'col-form-label']) ?>
                                         <?= $this->Form->control('platform', ['class' => 'form-control',  'maxlength' => 20, 'label' => false, 'oninput' => 'this.setCustomValidity(this.value.charAt(0) === " " ? "Platform cannot start with a space" : "")']) ?>
                                         <!-- Display validation error for the 'f_name' field -->
                                         <?= $this->Form->error('platform'); ?>
                                     </div>
                                     <div class="form-group">
-                                        <?= $this->Form->label('gamblock_ver', 'GamBlock Version', ['class' => 'col-form-label']) ?>
+                                        <?= $this->Form->label('gamblock_ver', 'GamBlock Version*', ['class' => 'col-form-label']) ?>
                                         <?= $this->Form->control('gamblock_ver', ['class' => 'form-control',  'maxlength' => 30, 'label' => false, 'oninput' => 'this.setCustomValidity(this.value.charAt(0) === " " ? "GamBlock Version cannot start with a space" : "")']) ?>
                                         <!-- Display validation error for the 'f_name' field -->
                                         <?= $this->Form->error('gamblock_ver'); ?>

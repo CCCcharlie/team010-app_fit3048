@@ -402,6 +402,8 @@ class TicketsController extends AppController
             ])
             ->contain(['Users',  'Customers'])
             ->all();
+//        debug($assigntickets);
+//        exit();
 
         $rootuser = $this->Tickets->Users->find()
             ->where([
@@ -428,8 +430,7 @@ class TicketsController extends AppController
                 })
                 ->first();
 
-//            debug($Customers);
-//            exit();
+
             $Customers ->notes .= 'Escalated by'.' '.$identity->get('f_name').' '.$identity->get('l_name');
 
 
@@ -454,14 +455,15 @@ class TicketsController extends AppController
         return $this->redirect($this->referer());
     }
 
-    public function undoEscalate($id)
+    public function undoEscalate()
 
     {
+
+
         $escalatedTickets = $this->request->getSession()->read('escalatedTickets');
 
         $identity = $this->request->getAttribute('authentication')->getIdentity();
         $staffId = $identity->get('id');
-
 
 
         // Loop through the assigned tickets and de-escalate them
@@ -478,11 +480,13 @@ class TicketsController extends AppController
                 })
                 ->first();
             $note = $Customers->notes;
-//            debug($Customers);
-//            exit();
-            $pattern = '/Escalated by.*/'; // match "escalated by"
+
+            $pattern = '/escalated by.*/i';
             $note = preg_replace($pattern, '', $note);
             $Customers->notes = $note;
+//                    debug($note);
+//        exit();
+
 // note
             if ($this->Tickets->Customers->save($Customers)) {
                 $this->Flash->success(__('Note being undo for Escalation : {0}', $ticket->title));

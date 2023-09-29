@@ -466,7 +466,7 @@ to get the name or any value in the staff table, use the get and then the name o
             document.getElementById('undobutton').addEventListener('click', function () {
                 // Get selectedTicketId and staffId
 
-                var staffId =<?= $identity->get('id'); ?> /* current staffId */;
+                //var staffId =<?php //= $identity->get('id'); ?>// /* current staffId */;
 
 
                 // console.log(escalatedTickets); // check
@@ -474,7 +474,7 @@ to get the name or any value in the staff table, use the get and then the name o
 
                 // var url = '/team010-app_fit3048/tickets/undoEscalate/' + 1 +'?staffId=' + staffId;
 
-                var url = '/team010-app_fit3048/tickets/undoEscalate/' + staffId;
+                var url = '/team010-app_fit3048/tickets/undoEscalate' ;
 
                 // Redirect to undoEscalate with both parameters
                 window.location.href = url;

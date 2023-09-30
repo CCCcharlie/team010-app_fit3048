@@ -452,7 +452,7 @@ class TicketsController extends AppController
         }
 
         //
-        return $this->redirect($this->referer());
+        return $this->redirect(['controller' => 'Customers', 'action' => 'assigntome']);
     }
 
     public function undoEscalate()
@@ -504,7 +504,7 @@ class TicketsController extends AppController
             }
         }
 
-        return $this->redirect($this->referer());
+        return $this->redirect(['controller' => 'Customers', 'action' => 'assigntome']);
     }
 
 }

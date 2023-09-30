@@ -504,7 +504,22 @@ class TicketsController extends AppController
             }
         }
 
-        return $this->redirect(['controller' => 'Customers', 'action' => 'assigntome']);
+//        return $this->redirect(['controller' => 'Customers', 'action' => 'assigntome']);
+
+        $referer = $this->referer();
+
+// breakdown URL
+        $urlParts = parse_url($referer);
+        $path = trim($urlParts['path'], '/');
+
+// break it to controler and action
+        $pathSegments = explode('/', $path);
+        $controller = $pathSegments[0];
+        $action = $pathSegments[1];
+
+// redirect URL
+        return $this->redirect(['controller' => $controller, 'action' => $action]);
+
     }
 
 }

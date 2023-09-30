@@ -102,6 +102,7 @@ $checkConnection = function (string $name) {
             <li class="breadcrumb-item"><a href="/" class="breadcrumb-link">Home</a></li>
 
             <li class="breadcrumb-item active" aria-current="page">View all customers</li>
+
         </ol>
     </nav>
 </div>
@@ -133,8 +134,8 @@ to get the name or any value in the staff table, use the get and then the name o
                 <div class="row">
                     <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                         <div class="section-block" id="cardaction">
-                            <h3 class="section-title" style="color: midnightblue">Customer View</h3>
-                            <p style="color: midnightblue"> This page provides all profiles.  </p>
+                            <h3 class="section-title" style="color: royalblue; margin-top: -50px">Customer View</h3>
+                            <p style="color: royalblue" , > This page provides all profiles.  </p>
                         </div>
                     </div>
                 </div>
@@ -252,7 +253,7 @@ to get the name or any value in the staff table, use the get and then the name o
                         <!--                                    --><?php //endif; ?>
                         <!--                                </th>-->
                         </tr>
-                        <?= $this->Html->link(__('New Customer'), ['action' => 'add'], ['class' => 'btn btn-success float-right', 'style' => 'padding-bottom : 5px']) ?>
+                        <?= $this->Html->link(__('New Customer'), ['action' => 'add'], ['class' => 'btn btn-success float-right', 'style' => 'margin-top : -60px']) ?>
 
                         <br>
                         <br>

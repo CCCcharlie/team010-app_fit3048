@@ -396,13 +396,13 @@ class TicketsController extends AppController
             ->where([
                 'Tickets.staff_id' => $staffId,
                 'Tickets.cust_id' => $id,
-                'Tickets.closetime IS NULL'
+
 
 
             ])
             ->contain(['Users',  'Customers'])
             ->all();
-//        debug($assigntickets);
+//        debug($id);
 //        exit();
 
         $rootuser = $this->Tickets->Users->find()

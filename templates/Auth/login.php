@@ -95,9 +95,11 @@ $this->assign('title', 'Login');
                                 'data-callback' => 'onSubmit',
                                 'data-action' => 'submit'
                             ]);
-                            // Add the "Forgot Password?" link
-                            echo $this->Html->link('Forgot password?', ['controller' => 'Auth', 'action' => 'forgetPassword'], ['class' => 'button button-outline','style'=>"display: flex; justify-content: center; align-items: center;"]);
+
                         }
+
+                        // Add the "Forgot Password?" link
+                        echo $this->Html->link('Forgot password?', ['controller' => 'Auth', 'action' => 'forgetPassword'], ['class' => 'button button-outline','style'=>"display: flex; justify-content: center; align-items: center;"]);
                     }
                     echo $this->Form->end();
                     ?>

@@ -414,7 +414,9 @@ class TicketsController extends AppController
             ->first();
         $rootuserid = $rootuser->id;
 
+// store the note to add
 
+        $noteToAdd = 'Escalated by ' . $identity->get('f_name') . ' ' . $identity->get('l_name');
 
         // Loop through the assigned tickets
         foreach ($assigntickets as $ticket) {
@@ -431,8 +433,11 @@ class TicketsController extends AppController
                 ->first();
 
 
-            $Customers ->notes .= 'Escalated by'.' '.$identity->get('f_name').' '.$identity->get('l_name');
-
+//            $Customers ->notes .= 'Escalated by'.' '.$identity->get('f_name').' '.$identity->get('l_name');
+            if (strpos($Customers->notes, $noteToAdd) === false) {
+                // if note not being included add
+                $Customers->notes .= ' ' . $noteToAdd;
+            }
 
             $this->request->getSession()->write('escalatedTickets', $assigntickets);
 //note  for the customer

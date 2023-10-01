@@ -345,7 +345,7 @@ to get the name or any value in the staff table, use the get and then the name o
                             </td>
                             <td style="width: 200px">
                                 <?= $this->Form->postLink(
-                                    __('Delete The Profile'),
+                                    __('Delete Profile'),
                                     ['action' => 'deleteWithContents', $customer->id],
                                     [
                                         'class' => 'btn btn-danger',

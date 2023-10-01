@@ -335,7 +335,7 @@ $checkConnection = function (string $name) {
                                     </td>
                                     <td style="width: 200px">
                                         <?= $this->Form->postLink(
-                                            __('Delete The Profile'),
+                                            __('Delete Profile'),
                                             ['action' => 'deleteWithContents', $customer->id],
                                             [
                                                 'class' => 'btn btn-danger',

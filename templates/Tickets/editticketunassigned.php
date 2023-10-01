@@ -49,7 +49,7 @@
                             <fieldset>
 
                                 <div class="form-group">
-                                    <?= $this->Form->label('title', 'Title', ['class' => 'col-form-label']) ?>
+                                    <?= $this->Form->label('title', 'Title*', ['class' => 'col-form-label']) ?>
                                     <?= $this->Form->control('title', [
                                         'label' => false, // Prevent default label from appearing again
                                         'class' => 'form-control',
@@ -62,7 +62,7 @@
                                     <?= $this->Form->error('title'); ?>
                                 </div>
                                 <div class="form-group">
-                                    <?= $this->Form->label('type', 'Type', ['class' => 'col-form-label']) ?>
+                                    <?= $this->Form->label('type', 'Type*', ['class' => 'col-form-label']) ?>
                                     <?= $this->Form->control('type', [
                                         'label' => false, // Prevent default label from appearing again
                                         'class' => 'form-control',
@@ -94,7 +94,7 @@
         </div>
         -->
                                 <div class="form-group">
-                                    <?= $this->Form->label('staff_id', 'Staff', ['class' => 'col-form-label']) ?>
+                                    <?= $this->Form->label('staff_id', 'Staff*', ['class' => 'col-form-label']) ?>
                                     <?php echo $this->Form->control('staff_id', ['options' => $users, 'label'=>false]); ?>
                                 </div>
                             </fieldset>

@@ -74,7 +74,7 @@
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item"><a href="/" class="breadcrumb-link">Home</a></li>
                             <li class="breadcrumb-item"><a href="/customers" class="breadcrumb-link">View all customer</a></li>
-                            <li class="breadcrumb-item active" aria-current="page">Assigned to me</li>
+                            <li class="breadcrumb-item active" aria-current="page">Escalate to me</li>
                         </ol>
                     </nav>
                 </div>
@@ -100,17 +100,14 @@ to get the name or any value in the staff table, use the get and then the name o
     <div class="row">
         <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
             <div class="section-block" id="cardaction">
-                <h3 class="section-title" style="color: midnightblue">Assigned Customers</h3>
-                <p style ="color: midnightblue"> List of customers with tickets assigned to you.</p>
+                <h3 class="section-title" style="color: midnightblue">Escalated Customers</h3>
+                <p style ="color: midnightblue"> List of customers with tickets escalated.</p>
             </div>
         </div>
     </div>
     <div class="row">
         <div class="col-md-12">
             <?= $this->Form->create(null, ['url' => ['controller' => 'Customers', 'action' => 'index'], 'type' => 'get', 'class' => 'form-inline']) ?>
-            <div class="form-group mr-2">
-                <?= $this->Form->input('search', ['type' => 'text', 'class' => 'form-control', 'placeholder' => 'Search...']) ?>
-            </div>
             <?= $this->Form->button(__('Search'), ['class' => 'btn btn-primary']) ?>
             `
 
@@ -199,7 +196,6 @@ to get the name or any value in the staff table, use the get and then the name o
                     <?php endif; ?>
                 </th>
             </tr>
-            <?= $this->Html->link(__('New Customer'), ['action' => 'add'], ['class' => 'btn btn-success float-right']) ?>
 
             <br>
             <br>
@@ -333,7 +329,7 @@ to get the name or any value in the staff table, use the get and then the name o
         <?php endforeach; ?>
         <?php if (count($assignedCustomers)==0): ?>
             <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12" >
-                <p>No assigned customers found.</p>
+                <p>No escalated customers found.</p>
 
             </div>
 

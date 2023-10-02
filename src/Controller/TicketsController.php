@@ -416,7 +416,7 @@ class TicketsController extends AppController
 
 // store the note to add
 
-        $noteToAdd = 'Escalated by ' . $identity->get('f_name') . ' ' . $identity->get('l_name');
+        $noteToAdd = ' Escalated by ' . $identity->get('f_name') . ' ' . $identity->get('l_name');
 
         // Loop through the assigned tickets
         foreach ($assigntickets as $ticket) {

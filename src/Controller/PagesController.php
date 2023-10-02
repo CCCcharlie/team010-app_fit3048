@@ -80,6 +80,5 @@ class PagesController extends AppController
         // Debugging
         debug(compact('f_name', 'l_name'));
     }
-
-
 }
+

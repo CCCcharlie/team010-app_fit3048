@@ -16,7 +16,6 @@
             <?= $this->Form->create($user) ?>
             <fieldset>
                 <legend><?= __('Add a Staff member') ?></legend>
-                <h1> REGISTER MUST BE REMOVED [or relocated] AT THE END OF ITERATION 1</h1>
                 <?php
                 echo $this->Form->control('f_name', ['label' => 'Staff First Name*']);
                 echo $this->Form->control('l_name', ['label' => 'Staff First Name*']);

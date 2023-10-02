@@ -44,7 +44,7 @@
                         <fieldset>
                             <legend><?= __('Edit User') ?></legend>
                             <div class="form-group">
-                                <?= $this->Form->label('f_name', 'First Name', ['class' => 'col-form-label']) ?>
+                                <?= $this->Form->label('f_name', 'First Name*', ['class' => 'col-form-label']) ?>
                                 <?= $this->Form->input('f_name', [
                                     'class' => 'form-control',
                                     'maxlength' => 32,
@@ -59,7 +59,7 @@
                                 <small class="form-text text-muted">Letters and hyphens only.</small>
                             </div>
                             <div class="form-group">
-                                <?= $this->Form->label('l_name', 'Last Name', ['class' => 'col-form-label']) ?>
+                                <?= $this->Form->label('l_name', 'Last Name*', ['class' => 'col-form-label']) ?>
                                 <?= $this->Form->input('l_name', [
                                     'class' => 'form-control',
                                     'maxlength' => 32,
@@ -74,7 +74,7 @@
                                 <small class="form-text text-muted">Letters and hyphens only.</small>
                             </div>
                             <div class="form-group">
-                                <?= $this->Form->label('email', 'Email Address') ?>
+                                <?= $this->Form->label('email', 'Email Address*') ?>
                                 <?= $this->Form->input('email', [
                                     'class' => 'form-control',
                                     'placeholder' => 'name@mail.com',
@@ -99,7 +99,7 @@
 <!--                                </div>-->
 
                             <div class="form-group" style="display: flex; align-items: center;">
-                                <?= $this->Form->label('Staff Role Privileges', null, ['class' => 'col-form-label', 'style' => 'margin-right: 10px;']) ?>
+                                <?= $this->Form->label('Staff Role Privileges*', null, ['class' => 'col-form-label', 'style' => 'margin-right: 10px;']) ?>
                                 <?=
                                 $this->Form->control('role', [
                                     'type' => 'select',

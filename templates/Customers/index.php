@@ -102,6 +102,7 @@ $checkConnection = function (string $name) {
             <li class="breadcrumb-item"><a href="/" class="breadcrumb-link">Home</a></li>
 
             <li class="breadcrumb-item active" aria-current="page">View all customers</li>
+
         </ol>
     </nav>
 </div>
@@ -133,8 +134,8 @@ to get the name or any value in the staff table, use the get and then the name o
                 <div class="row">
                     <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                         <div class="section-block" id="cardaction">
-                            <h3 class="section-title" style="color: midnightblue">Customer View</h3>
-                            <p style="color: midnightblue"> This page provides all profiles.  </p>
+                            <h3 class="section-title" style="color: royalblue; margin-top: -50px">Customer View</h3>
+                            <p style="color: royalblue" , > This page provides all profiles.  </p>
                         </div>
                     </div>
                 </div>
@@ -147,22 +148,25 @@ to get the name or any value in the staff table, use the get and then the name o
                         <br>
                         <div class="row">
                             <div class="col-md-6">
-                                <h3 style="color: midnightblue">Filter:</h3>
+                                <h4 style="color: midnightblue">Filter:</h4>
                                 <?= $this->Form->create(null, ['url' => ['controller' => 'Customers', 'action' => 'index'], 'type' => 'get', 'class' => 'form-inline']) ?>
                                 <div class="form-group mr-2">
-                                    <?= $this->Form->input('search', ['type' => 'text', 'class' => 'form-control', 'placeholder' => 'Search...']) ?>
+                                    <?= $this->Form->input('search', ['type' => 'text', 'class' => 'form-control', 'placeholder' => 'Search...',
+                                        'value' => isset($_GET['search']) ? $_GET['search'] : '']) ?>
+<!--                                    check whether a search parameter exist in url / if true get the value / flase return ' '-->
                                 </div>
                                 <div class="d-flex justify-content-end align-items-center">
                                     <div class="form-group mr-2">
                                         <?= $this->Form->button(__('Search'), ['class' => 'btn btn-primary custom-button']) ?>
                                     </div>
+                                </div>
                                     <div class="btn-group">
                                         <button id="table-view-btn" type="button" class="btn btn-primary custom-button">
                                             Table View
                                         </button>
                                         <button id="list-view-btn" type="button" class="btn btn-primary custom-button">List View</button>
                                     </div>
-                                </div>
+
                                 <?= $this->Form->end() ?>
                             </div>
 
@@ -251,7 +255,7 @@ to get the name or any value in the staff table, use the get and then the name o
                         <!--                                    --><?php //endif; ?>
                         <!--                                </th>-->
                         </tr>
-                        <?= $this->Html->link(__('New Customer'), ['action' => 'add'], ['class' => 'btn btn-success float-right', 'style' => 'padding-bottom : 5px']) ?>
+                        <?= $this->Html->link(__('New Customer'), ['action' => 'add'], ['class' => 'btn btn-success float-right', 'style' => 'margin-top : -60px']) ?>
 
                         <br>
                         <br>

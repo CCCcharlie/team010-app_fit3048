@@ -102,7 +102,7 @@ to get the name or any value in the staff table, use the get and then the name o
                     <div class="row">
                         <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                             <div class="section-block" id="cardaction">
-                                <h3 class="section-title" style="color: midnightblue">Assigned Customers</h3>
+                                <h3 class="section-title" style="color: midnightblue; margin-top: -50px">Assigned Customers</h3>
                                 <p style ="color: midnightblue"> List of customers with tickets assigned to you.</p>
                             </div>
                         </div>
@@ -200,8 +200,11 @@ to get the name or any value in the staff table, use the get and then the name o
                                     <?php endif; ?>
                                 </th>
                             </tr>
-                            <?= $this->Html->link(__('New Customer'), ['action' => 'add'], ['class' => 'btn btn-success float-right']) ?>
-                            <!--         Add the "Undo Changes" link with an ID -->
+
+
+                                       <?= $this->Html->link(__('New Customer'), ['action' => 'add'], ['class' => 'btn btn-success float-right', 'style' => 'margin-top: -20px']) ?>
+
+                                <!--         Add the "Undo Changes" link with an ID -->
                                     <button id="undobutton" class="btn btn-primary" style="margin-left: 2vw">Unescalate the customer</button>
 
 
@@ -463,7 +466,7 @@ to get the name or any value in the staff table, use the get and then the name o
             document.getElementById('undobutton').addEventListener('click', function () {
                 // Get selectedTicketId and staffId
 
-                var staffId =<?= $identity->get('id'); ?> /* current staffId */;
+                //var staffId =<?php //= $identity->get('id'); ?>// /* current staffId */;
 
 
                 // console.log(escalatedTickets); // check
@@ -471,7 +474,7 @@ to get the name or any value in the staff table, use the get and then the name o
 
                 // var url = '/team010-app_fit3048/tickets/undoEscalate/' + 1 +'?staffId=' + staffId;
 
-                var url = '/team010-app_fit3048/tickets/undoEscalate/' + staffId;
+                var url = '/tickets/undoEscalate' ;
 
                 // Redirect to undoEscalate with both parameters
                 window.location.href = url;

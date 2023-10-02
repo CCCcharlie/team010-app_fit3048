@@ -396,12 +396,14 @@ class TicketsController extends AppController
             ->where([
                 'Tickets.staff_id' => $staffId,
                 'Tickets.cust_id' => $id,
-                'Tickets.closetime IS NULL'
+
 
 
             ])
             ->contain(['Users',  'Customers'])
             ->all();
+//        debug($id);
+//        exit();
 
         $rootuser = $this->Tickets->Users->find()
             ->where([
@@ -412,7 +414,9 @@ class TicketsController extends AppController
             ->first();
         $rootuserid = $rootuser->id;
 
+// store the note to add
 
+        $noteToAdd = 'Escalated by ' . $identity->get('f_name') . ' ' . $identity->get('l_name');
 
         // Loop through the assigned tickets
         foreach ($assigntickets as $ticket) {
@@ -428,10 +432,12 @@ class TicketsController extends AppController
                 })
                 ->first();
 
-//            debug($Customers);
-//            exit();
-            $Customers ->notes .= 'Escalated by'.' '.$identity->get('f_name').' '.$identity->get('l_name');
 
+//            $Customers ->notes .= 'Escalated by'.' '.$identity->get('f_name').' '.$identity->get('l_name');
+            if (strpos($Customers->notes, $noteToAdd) === false) {
+                // if note not being included add
+                $Customers->notes .= ' ' . $noteToAdd;
+            }
 
             $this->request->getSession()->write('escalatedTickets', $assigntickets);
 //note  for the customer
@@ -451,17 +457,18 @@ class TicketsController extends AppController
         }
 
         //
-        return $this->redirect($this->referer());
+        return $this->redirect(['controller' => 'Customers', 'action' => 'assigntome']);
     }
 
-    public function undoEscalate($id)
+    public function undoEscalate()
 
     {
+
+
         $escalatedTickets = $this->request->getSession()->read('escalatedTickets');
 
         $identity = $this->request->getAttribute('authentication')->getIdentity();
         $staffId = $identity->get('id');
-
 
 
         // Loop through the assigned tickets and de-escalate them
@@ -478,11 +485,13 @@ class TicketsController extends AppController
                 })
                 ->first();
             $note = $Customers->notes;
-//            debug($Customers);
-//            exit();
-            $pattern = '/Escalated by.*/'; // match "escalated by"
+
+            $pattern = '/escalated by.*/i';
             $note = preg_replace($pattern, '', $note);
             $Customers->notes = $note;
+//                    debug($note);
+//        exit();
+
 // note
             if ($this->Tickets->Customers->save($Customers)) {
                 $this->Flash->success(__('Note being undo for Escalation : {0}', $ticket->title));
@@ -500,7 +509,7 @@ class TicketsController extends AppController
             }
         }
 
-        return $this->redirect($this->referer());
+        return $this->redirect(['controller' => 'Customers', 'action' => 'assigntome']);
     }
 
 }

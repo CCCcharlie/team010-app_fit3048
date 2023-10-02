@@ -47,7 +47,7 @@
                         <div class="card-body">
                             <fieldset>
                                 <div class="form-group">
-                                    <?= $this->Form->label('f_name', 'First Name', ['class' => 'col-form-label']) ?>
+                                    <?= $this->Form->label('f_name', 'First Name*', ['class' => 'col-form-label']) ?>
                                     <?= $this->Form->input('f_name', ['class' => 'form-control', 'maxlength' => 32,
                                         'placeholder' => 'First Name...',
                                         'required' => true,
@@ -56,7 +56,7 @@
                                     <?= $this->Form->error('f_name'); ?>
                                 </div>
                                 <div class="form-group">
-                                    <?= $this->Form->label('l_name', 'Last Name', ['class' => 'col-form-label']) ?>
+                                    <?= $this->Form->label('l_name', 'Last Name*', ['class' => 'col-form-label']) ?>
                                     <?= $this->Form->input('l_name', ['class' => 'form-control', 'maxlength' => 32,
                                         'placeholder' => 'Last name..',
                                         'required' => true,
@@ -74,7 +74,7 @@
                                     <?= $this->Form->error('notes'); ?>
                                 </div>
                                 <div class="form-group">
-                                    <?= $this->Form->label('contact', 'Contact Information', ['class' => 'col-form-label']) ?>
+                                    <?= $this->Form->label('contact', 'Contact Information*', ['class' => 'col-form-label']) ?>
                                     <?= $this->Form->input('contact', ['class' => 'form-control', 'maxlength' => 500,
                                         'placeholder' => 'Phone, Email, etc.',
                                         'required' => true,

@@ -151,7 +151,9 @@ to get the name or any value in the staff table, use the get and then the name o
                                 <h4 style="color: midnightblue">Filter:</h4>
                                 <?= $this->Form->create(null, ['url' => ['controller' => 'Customers', 'action' => 'index'], 'type' => 'get', 'class' => 'form-inline']) ?>
                                 <div class="form-group mr-2">
-                                    <?= $this->Form->input('search', ['type' => 'text', 'class' => 'form-control', 'placeholder' => 'Search...']) ?>
+                                    <?= $this->Form->input('search', ['type' => 'text', 'class' => 'form-control', 'placeholder' => 'Search...',
+                                        'value' => isset($_GET['search']) ? $_GET['search'] : '']) ?>
+<!--                                    check whether a search parameter exist in url / if true get the value / flase return ' '-->
                                 </div>
                                 <div class="d-flex justify-content-end align-items-center">
                                     <div class="form-group mr-2">

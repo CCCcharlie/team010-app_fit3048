@@ -315,7 +315,7 @@ class CustomersController extends AppController
             ->innerJoinWith('Tickets', function ($query) use ($currentStaffId) {
                 return $query->where([
                     'Tickets.staff_id' => $currentStaffId,
-                    'Tickets.closetime IS NULL',
+//                    'Tickets.closetime IS NULL',
                     'Tickets.escalate IS TRUE'
                 ]);
             })

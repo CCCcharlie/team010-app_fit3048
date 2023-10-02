@@ -299,7 +299,7 @@ to get the name or any value in the staff table, use the get and then the name o
                                 ?>
                             </div>
 
-                            <button id="navigate-button" class="btn btn-primary">Escalate the customer</button>
+<!--                            <button id="navigate-button" class="btn btn-primary">Escalate the customer</button>-->
 
 
 

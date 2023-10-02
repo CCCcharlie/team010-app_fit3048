@@ -96,6 +96,7 @@ class CustomersTable extends Table
 
         $validator
             ->email('email')
+            ->maxLength('email', 320)
             ->requirePresence('email', 'create')
             ->notEmptyString('email');
 
@@ -106,7 +107,7 @@ class CustomersTable extends Table
             ->notEmptyString('status');
         $validator
             ->scalar('notes')
-            ->maxLength('notes', 1000)
+            ->maxLength('notes', 500)
             ->allowEmptyString('notes');
 
 

@@ -51,7 +51,7 @@
         <nav class="navbar navbar-expand-lg bg-white fixed-top" style="display: flex; justify-content: space-between;">
             <a class="navbar-brand" href="/customers/assigntome">
                 <?php $logo = $contentBlocks['navigation_header_logo']?>
-                <?= $this->Html->image($logo, ['alt' => 'GamBlock Logo', 'class' => 'navbar-b;and', 'style' => 'width: auto; height:auto']); ?>
+                <?= $this->Html->image($logo, ['alt' => 'GamBlock Logo', 'class' => 'navbar-b;and', 'style' => 'width: auto; height:60px']); ?>
             </a>
 
             <?php
@@ -105,6 +105,10 @@
     <!-- left sidebar -->
     <!-- ============================================================== -->
     <div class="nav-left-sidebar sidebar-dark">
+        <div id="mySidebar" class="sidebar">
+            <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">Close side bars</a>
+            <div id="main">
+                <button class="openbtn" onclick="openNav()">☰ X</button>
         <div class="menu-list">
             <nav class="navbar navbar-expand-lg navbar-light">
                 <a class="d-xl-none d-lg-none" href="#">Customer View</a>
@@ -312,6 +316,20 @@
             </nav>
         </div>
     </div>
+    </div>
+    </div>
+
+    <script>
+        function openNav() {
+            document.getElementById("mySidebar").style.width = "500px";
+            document.getElementById("main").style.marginLeft = "500px";
+        }
+
+        function closeNav() {
+            document.getElementById("mySidebar").style.width = "2";
+            document.getElementById("main").style.marginLeft= "2";
+        }
+    </script>
     <!-- ============================================================== -->
     <!-- end left sidebar -->
     <!-- ============================================================== -->

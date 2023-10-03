@@ -38,8 +38,9 @@
                                 <div class="form-group">
                                     <?= $this->Form->label('f_name', 'First Name*', ['class' => 'col-form-label']) ?>
                                     <?= $this->Form->input('f_name', [
-                                        'class' => 'form-control',
+                                        'class' => '',
                                         'maxlength' => 32, // Maximum of 32 characters
+                                        'size' => 32,
                                         'required' => true,
                                         'title' => 'Please enter your first name using letters and hyphens only',
                                         'oninput' => 'this.setCustomValidity(this.value.charAt(0) === " " ? "First name cannot start with a space" : "")',
@@ -53,8 +54,9 @@
                                 <div class="form-group">
                                     <?= $this->Form->label('l_name', 'Last Name*', ['class' => 'col-form-label']) ?>
                                     <?= $this->Form->input('l_name', [
-                                        'class' => 'form-control',
+                                        'class' => '',
                                         'maxlength' => 32, // Maximum of 32 characters
+                                        'size' => 32,
                                         'required' => true,
                                         'title' => 'Please enter your last name using letters and hyphens only',
                                         'pattern' => '^[A-Za-z-]+$',

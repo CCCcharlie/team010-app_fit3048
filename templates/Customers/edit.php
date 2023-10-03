@@ -80,29 +80,32 @@
                                 <img src="/img/avatar-1.png" alt="User Avatar">
                             </div>
                             <?= $this->Form->create($customer) ?>
-                            <div class="text-center">
-                                <h2 class="font-24 mb-0">
-                                    <?= $this->Form->input('f_name', [
-                                        'class' => 'form-control',
-                                        'maxlength' => 32,
-                                        'required' => true,
-                                        'title' => 'Please enter your first name using letters, hyphens, and apostrophes only',
-                                        'pattern' => '^(?! )[A-Za-z-]+$',
-                                        'label' => 'First Name*',
-                                        'label' => ['class' => 'col-form-label blue-label-text']
-                                    ]) ?>
+                            <div class="card-body border-top" style="">
+                                <h3 class="font-16">Name:</h3>
+                                <div class="text-center">
 
-                                    <?= $this->Form->input('l_name', [
-                                        'class' => 'form-control',
-                                        'maxlength' => 32,
-                                        'required' => true,
-                                        'title' => 'Please enter your last name using letters and hyphens only',
-                                        'pattern' => '^(?! )[A-Za-z-]+$',
-                                        'label' => 'Last Name*',
-                                        'label' => ['class' => 'col-form-label blue-label-text']
-                                    ]) ?>
+                                        <?= $this->Form->input('f_name', [
+                                            'class' => '',
+                                            'text-align' => 'center',
+                                            'maxlength' => 32,
+                                            'required' => true,
+                                            'title' => 'Please enter your first name using letters, hyphens, and apostrophes only',
+                                            'pattern' => '^(?! )[A-Za-z-]+$',
+                                            'label' => 'First Name*',
+                                            'label' => ['class' => 'col-form-label blue-label-text']
+                                        ]) ?>
 
-
+                                        <?= $this->Form->input('l_name', [
+                                            'class' => '',
+                                            'text-align' => 'center',
+                                            'maxlength' => 32,
+                                            'required' => true,
+                                            'title' => 'Please enter your last name using letters and hyphens only',
+                                            'pattern' => '^(?! )[A-Za-z-]+$',
+                                            'label' => 'Last Name*',
+                                            'label' => ['class' => 'col-form-label blue-label-text']
+                                        ]) ?>
+                                </div>
                             </div>
 
                             <div class="card-body border-top">

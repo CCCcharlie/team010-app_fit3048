@@ -28,6 +28,11 @@
             background-color: #ddd;
             border-color: #aaa;
         }
+
+        h3 {
+            display: flex;
+            justify-content: space-around;
+        }
     </style>
 </head>
 
@@ -81,7 +86,7 @@
                             </div>
                             <?= $this->Form->create($customer) ?>
                             <div class="card-body border-top" style="">
-                                <h3 class="font-16">Name:</h3>
+                                <h3 class="font-16" style="display: flex; justify-content: space-around">Name:</h3>
                                 <div class="text-center">
 
                                         <?= $this->Form->input('f_name', [
@@ -116,7 +121,8 @@
                                         ['resolved' => 'Issue resolved', 'unresolved' => 'Issue unresolved', 'no_issues' => 'No Issues Recorded'],
                                         [
                                             'class' => 'custom-select select-with-arrow', // Add 'select-with-arrow' class
-                                            'label' => false
+                                            'label' => false,
+                                            'style' => 'width: 150px;', // Set the width using CSS inline style
                                         ]
                                     ) ?>
                                 </div>

@@ -42,7 +42,6 @@ class CommdetailsTable extends Table
         $this->setTable('commdetails');
         $this->setDisplayField('id');
         $this->setPrimaryKey('id');
-
         $this->belongsTo('Customers', [
             'foreignKey' => 'cust_id',
             'joinType' => 'INNER',

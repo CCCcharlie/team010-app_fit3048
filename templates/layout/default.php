@@ -381,6 +381,11 @@
     var activeBreadcrumb = document.querySelector(".breadcrumb-item.active");
     activeBreadcrumb.textContent = lastWord;
 </script>
+
+<?= $this->Html->script(['jquery-3.3.1.min.js', 'bootstrap.bundle.js', 'main-js', 'jquery.slimscroll.js']) ?>
+<?= $this->Html->script('https://kit.fontawesome.com/b5c616a120.js', ['crossorigin' => 'anonymous']) ?>
+
+
 </body>
 </html>
 

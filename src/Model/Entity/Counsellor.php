@@ -14,7 +14,6 @@ use Cake\ORM\Entity;
  * @property string|null $notes
  * @property string $contact
  * @property int|null $cust_id
- *
  * @property \App\Model\Entity\Customer $customer
  */
 class Counsellor extends Entity

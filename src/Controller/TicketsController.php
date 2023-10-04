@@ -414,8 +414,8 @@ class TicketsController extends AppController
             ->first();
         $rootuserid = $rootuser->id;
 
-// store the note to add
 
+// store the note to add
         $noteToAdd = ' Escalated by ' . $identity->get('f_name') . ' ' . $identity->get('l_name');
 
         // Loop through the assigned tickets
@@ -423,23 +423,26 @@ class TicketsController extends AppController
             // Update "escalate" to true（1）
             $ticket->escalate = true;
             $ticket->staff_id = $rootuserid;
-//mark down the staff escalating
 
-
+            //delect previous note
             $Customers = $this->Tickets->Customers->find()
                 ->matching('Tickets', function ($q) use ($ticket) {
                     return $q->where(['Tickets.id' => $ticket->id]);
                 })
                 ->first();
+            $note = $Customers->notes;
 
-
-//            $Customers ->notes .= 'Escalated by'.' '.$identity->get('f_name').' '.$identity->get('l_name');
+            $pattern = '/escalated by.*/i';
+            $note = preg_replace($pattern, '', $note);
+            $Customers->notes = $note;
+//            bring note
             if (strpos($Customers->notes, $noteToAdd) === false) {
                 // if note not being included add
                 $Customers->notes .= ' ' . $noteToAdd;
             }
 
             $this->request->getSession()->write('escalatedTickets', $assigntickets);
+
 //note  for the customer
             if ($this->Tickets->Customers->save($Customers)) {
                 $this->Flash->success(__('Note being added for Escalation : {0}', $ticket->title));

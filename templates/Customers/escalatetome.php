@@ -62,7 +62,7 @@
 
 <body>
 
-<div class="customers assigntome content">
+<div class="customers  content">
     <!-- ============================================================== -->
     <!-- pageheader  -->
     <!-- ============================================================== -->
@@ -108,8 +108,13 @@ to get the name or any value in the staff table, use the get and then the name o
     <div class="row">
         <div class="col-md-12">
             <?= $this->Form->create(null, ['url' => ['controller' => 'Customers', 'action' => 'index'], 'type' => 'get', 'class' => 'form-inline']) ?>
+            <div class="form-group mr-2" >
+                <?= $this->Form->input('search', ['type' => 'text', 'class' => 'form-control', 'placeholder' => 'Search...',
+                    'value' => isset($_GET['search']) ? $_GET['search'] : '']) ?>
+                <!--                                    check whether a search parameter exist in url / if true get the value / flase return ' '-->
+            </div>
             <?= $this->Form->button(__('Search'), ['class' => 'btn btn-primary']) ?>
-            `
+
 
             <?= $this->Form->end() ?>
 
@@ -222,7 +227,7 @@ to get the name or any value in the staff table, use the get and then the name o
         </div>
 
 
-        <?php foreach ($assignedCustomers as $customer): ?>
+        <?php foreach ($escalatedCustomers as $customer): ?>
             <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
                 <div class="card">
                     <div class="card-header d-flex">
@@ -281,19 +286,19 @@ to get the name or any value in the staff table, use the get and then the name o
                             <!--                        upgrade button-->
 
 
-                            <div class="form-group">
-                                <?= $this->Form->label('selected_ticket', 'Select Ticket', ['class' => 'col-form-label']) ?>
-                                <?php
-                                $options = [];
-                                foreach ($assigntickets as $ticket) {
-                                    $options[$ticket->id] = $ticket->title;
-                                }
-                                echo $this->Form->select('selected_ticket', $options, [
-                                    'class' => 'form-control',
-                                    'id' => 'select-ticket',
-                                ]);
-                                ?>
-                            </div>
+<!--                            <div class="form-group">-->
+<!--                                --><?php //= $this->Form->label('selected_ticket', 'Select Ticket', ['class' => 'col-form-label']) ?>
+<!--                                --><?php
+//                                $options = [];
+//                                foreach ($escaltedtickets as $ticket) {
+//                                    $options[$ticket->id] = $ticket->title;
+//                                }
+//                                echo $this->Form->select('selected_ticket', $options, [
+//                                    'class' => 'form-control',
+//                                    'id' => 'select-ticket',
+//                                ]);
+//                                ?>
+<!--                            </div>-->
 
 <!--                            <button id="navigate-button" class="btn btn-primary">Escalate the customer</button>-->
 
@@ -327,7 +332,7 @@ to get the name or any value in the staff table, use the get and then the name o
 
             </div>
         <?php endforeach; ?>
-        <?php if (count($assignedCustomers)==0): ?>
+        <?php if (count($escalatedCustomers)==0): ?>
             <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12" >
                 <p>No escalated customers found.</p>
 

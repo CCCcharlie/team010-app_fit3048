@@ -417,7 +417,9 @@ class TicketsController extends AppController
 
 // store the note to add
         $noteToAdd = ' Escalated by ' . $identity->get('f_name') . ' ' . $identity->get('l_name');
-
+        $success = false;
+        $error = false;
+        $Customersname='';
         // Loop through the assigned tickets
         foreach ($assigntickets as $ticket) {
             // Update "escalate" to true（1）
@@ -431,7 +433,7 @@ class TicketsController extends AppController
                 })
                 ->first();
             $note = $Customers->notes;
-
+            $Customersname = $Customers->f_name . ' ' . $Customers->l_name;
             $pattern = '/escalated by.*/i';
             $note = preg_replace($pattern, '', $note);
             $Customers->notes = $note;
@@ -445,18 +447,32 @@ class TicketsController extends AppController
 
 //note  for the customer
             if ($this->Tickets->Customers->save($Customers)) {
-                $this->Flash->success(__('Note being added for Escalation : {0}', $ticket->title));
+//                $this->Flash->success(__('Note being added for Escalation : {0}', $ticket->title));
+                $success = true;
             } else {
-                $this->Flash->error(__('Note have not being added for Escalation : {0}', $ticket->title));
+//                $this->Flash->error(__('Note have not being added for Escalation : {0}', $ticket->title));
+                $error = true;
 
             }
             // Save the ticket
             if ($this->Tickets->save($ticket)) {
                 $this->request->getSession()->write('escalated', true);
-                $this->Flash->success(__('Escalation successful for Ticket : {0}', $ticket->title));
+//                $this->Flash->success(__('Escalation successful for Ticket : {0}', $ticket->title));
+                $success = true;
+
             } else {
-                $this->Flash->error(__('Escalation failed for Ticket : {0}', $ticket->title));
+//                $this->Flash->error(__('Escalation failed for Ticket : {0}', $ticket->title));
+                $error = true;
+
             }
+        }
+//                    debug($Customersname);
+//        exit();
+        if ($error) {
+            $this->Flash->error(__('There was an error during deescalation.'));
+        } elseif ($success) {
+            $this->Flash->success(__('Escalation successful for one or more tickets of customer: {0}', $Customersname));
+
         }
 
         //
@@ -492,8 +508,7 @@ class TicketsController extends AppController
             $pattern = '/escalated by.*/i';
             $note = preg_replace($pattern, '', $note);
             $Customers->notes = $note;
-//                    debug($note);
-//        exit();
+
 
 // note
             if ($this->Tickets->Customers->save($Customers)) {

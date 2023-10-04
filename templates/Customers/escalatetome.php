@@ -399,7 +399,7 @@ to get the name or any value in the staff table, use the get and then the name o
         console.log(customerId)
 
         // Construct the URL with the customer ID as a parameter
-        var url = '/team010-app_fit3048/tickets/descalate?customerId=' + customerId;
+        var url = '/tickets/descalate?customerId=' + customerId;
 
         // Redirect to Descalate action with the customer ID parameter
         window.location.href = url;

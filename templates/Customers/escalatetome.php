@@ -293,8 +293,7 @@ to get the name or any value in the staff table, use the get and then the name o
                         <script>
                             document.getElementById("undobutton-<?= $customer->id ?>").addEventListener('click', function () {
                                 // Get the customer ID
-                                var customerId = " "
-                                var customerId = <?= $customer->id ?>;
+                                var customerId = '<?= $customer->id ?>';
                                 console.log(customerId)
 
                                 // Construct the URL with the customer ID as a parameter

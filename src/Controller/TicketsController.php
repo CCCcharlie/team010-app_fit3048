@@ -515,6 +515,70 @@ class TicketsController extends AppController
         return $this->redirect(['controller' => 'Customers', 'action' => 'assigntome']);
     }
 
+
+    public function descalate()
+
+    {
+
+        $customerId = $this->request->getQuery('customerId');
+
+        $escalatedTickets = $this->Tickets->find()
+            ->where([
+
+                'Tickets.cust_id' => $customerId,
+                'Tickets.escalate' => true
+
+            ])
+            ->contain(['Users',  'Customers'])
+            ->all();
+//                    debug($escalatedTickets);
+//        exit();
+
+        $identity = $this->request->getAttribute('authentication')->getIdentity();
+        $staffId = $identity->get('id');
+
+
+        // Loop through the assigned tickets and de-escalate them
+        foreach ($escalatedTickets as $ticket) {
+            // Update "escalate" to false (0)
+            $ticket->escalate = false;
+            $ticket->staff_id = $staffId; // Set staff_id back to the current user's ID
+            $ticket->closetime = null;
+
+//
+            $Customers = $this->Tickets->Customers->find()
+                ->matching('Tickets', function ($q) use ($ticket) {
+                    return $q->where(['Tickets.id' => $ticket->id]);
+                })
+                ->first();
+            $note = $Customers->notes;
+
+            $pattern = '/escalated by.*/i';
+            $note = preg_replace($pattern, '', $note);
+            $Customers->notes = $note;
+
+
+// note
+            if ($this->Tickets->Customers->save($Customers)) {
+                $this->Flash->success(__('Note being undo for Escalation : {0}', $ticket->title));
+            } else {
+                $this->Flash->error(__('Note have not being undo for Escalation : {0}', $ticket->title));
+
+            }
+            // Save the ticket
+            if ($this->Tickets->save($ticket)) {
+                $this->request->getSession()->write('escalated', false);
+
+                $this->Flash->success(__('Deescalation successful for Ticket : {0}', $ticket->title));
+            } else {
+                $this->Flash->error(__('Deescalation failed for Ticket : {0}', $ticket->title));
+            }
+        }
+
+        return $this->redirect(['controller' => 'Customers', 'action' => 'escalatetome']);
+    }
+
+
 }
 
 

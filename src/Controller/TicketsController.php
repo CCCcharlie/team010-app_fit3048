@@ -417,6 +417,7 @@ class TicketsController extends AppController
 
 // store the note to add
         $noteToAdd = ' Escalated by ' . $identity->get('f_name') . ' ' . $identity->get('l_name');
+//        initialise the flag message
         $success = false;
         $error = false;
         $Customersname='';
@@ -469,7 +470,7 @@ class TicketsController extends AppController
 //                    debug($Customersname);
 //        exit();
         if ($error) {
-            $this->Flash->error(__('There was an error during deescalation.'));
+            $this->Flash->error(__('There was an error during escalation.'));
         } elseif ($success) {
             $this->Flash->success(__('Escalation successful for one or more tickets of customer: {0}', $Customersname));
 
@@ -482,7 +483,11 @@ class TicketsController extends AppController
     public function undoEscalate()
 
     {
-
+//        initialise the flag message
+        $success = false;
+        $error = false;
+        $Customersname='';
+//
 
         $escalatedTickets = $this->request->getSession()->read('escalatedTickets');
 
@@ -508,25 +513,39 @@ class TicketsController extends AppController
             $pattern = '/escalated by.*/i';
             $note = preg_replace($pattern, '', $note);
             $Customers->notes = $note;
+//
+            $Customersname = $Customers->f_name . ' ' . $Customers->l_name;
 
 
 // note
             if ($this->Tickets->Customers->save($Customers)) {
-                $this->Flash->success(__('Note being undo for Escalation : {0}', $ticket->title));
+//                $this->Flash->success(__('Note being undo for Escalation : {0}', $ticket->title));
+                $success = true;
+
             } else {
-                $this->Flash->error(__('Note have not being undo for Escalation : {0}', $ticket->title));
+//                $this->Flash->error(__('Note have not being undo for Escalation : {0}', $ticket->title));
+                $error = true;
 
             }
             // Save the ticket
             if ($this->Tickets->save($ticket)) {
                 $this->request->getSession()->write('escalated', false);
+                $success = true;
 
-                $this->Flash->success(__('Deescalation successful for Ticket : {0}', $ticket->title));
+//                $this->Flash->success(__('Deescalation successful for Ticket : {0}', $ticket->title));
             } else {
-                $this->Flash->error(__('Deescalation failed for Ticket : {0}', $ticket->title));
+                $error = true;
+
+//                $this->Flash->error(__('Deescalation failed for Ticket : {0}', $ticket->title));
             }
         }
 
+        if ($error) {
+            $this->Flash->error(__('There was an error during de-escalation.'));
+        } elseif ($success) {
+            $this->Flash->success(__('De-escalation successful for one or more tickets of customer: {0}', $Customersname));
+
+        }
         return $this->redirect(['controller' => 'Customers', 'action' => 'assigntome']);
     }
 
@@ -534,7 +553,11 @@ class TicketsController extends AppController
     public function descalate()
 
     {
-
+//inizalise
+        $success = false;
+        $error = false;
+        $Customersname = '';
+//
         $customerId = $this->request->getQuery('customerId');
 
         $escalatedTickets = $this->Tickets->find()
@@ -567,28 +590,37 @@ class TicketsController extends AppController
                 })
                 ->first();
             $note = $Customers->notes;
+//
+            $Customersname = $Customers->f_name . ' ' . $Customers->l_name;
 
+//
             $pattern = '/escalated by.*/i';
             $note = preg_replace($pattern, '', $note);
             $Customers->notes = $note;
 
 
-// note
+            // note
             if ($this->Tickets->Customers->save($Customers)) {
-                $this->Flash->success(__('Note being undo for Escalation : {0}', $ticket->title));
+                $success = true;
             } else {
-                $this->Flash->error(__('Note have not being undo for Escalation : {0}', $ticket->title));
-
+                $error = true;
             }
+
             // Save the ticket
             if ($this->Tickets->save($ticket)) {
                 $this->request->getSession()->write('escalated', false);
-
-                $this->Flash->success(__('Deescalation successful for Ticket : {0}', $ticket->title));
+                $success = true;
             } else {
-                $this->Flash->error(__('Deescalation failed for Ticket : {0}', $ticket->title));
+                $error = true;
             }
         }
+//        showing message
+        if ($error) {
+            $this->Flash->error(__('There was an error during deescalation.'));
+        } elseif ($success) {
+            $this->Flash->success(__('Deescalation successful for one or more tickets of customer: {0}', $Customersname));
+        }
+
 
         return $this->redirect(['controller' => 'Customers', 'action' => 'escalatetome']);
     }

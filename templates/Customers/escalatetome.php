@@ -283,52 +283,30 @@ to get the name or any value in the staff table, use the get and then the name o
                                 ?>
                             </div>
 
-                            <!--                        upgrade button-->
 
-
-<!--                            <div class="form-group">-->
-<!--                                --><?php //= $this->Form->label('selected_ticket', 'Select Ticket', ['class' => 'col-form-label']) ?>
-<!--                                --><?php
-//                                $options = [];
-//                                foreach ($escaltedtickets as $ticket) {
-//                                    $options[$ticket->id] = $ticket->title;
-//                                }
-//                                echo $this->Form->select('selected_ticket', $options, [
-//                                    'class' => 'form-control',
-//                                    'id' => 'select-ticket',
-//                                ]);
-//                                ?>
-<!--                            </div>-->
-
-<!--                            <button id="navigate-button" class="btn btn-primary">Escalate the customer</button>-->
-
-
-
-
-                            <!--                                                --><?php //foreach ($assigntickets as $ticket): ?>
-                            <!--                            --><?php //echo $this->Html->link(
-                            //                                __('Escalate the customer'),
-                            //                                [
-                            //                                    'controller' => 'Tickets',
-                            //                                    'action' => 'edit',
-                            //                                    $ticket->id,
-                            //                                    '?' => ['cust_id' => $ticket->customer->id] // assign cust id to checking variable
-                            //                                ],
-                            //                                ['class' => 'btn btn-primary']
-                            //                            ); ?>
-                            <!--                            --><?php //echo ' '; ?>
-                            <!--                        --><?php //endforeach; ?>
-
-
-
-                            <!--                        -->
 
 
 
                         </div>
                         <?= $this->Html->link(__('View Full Profile'), ['action' => 'view', $customer->id], ['class' => 'btn btn-primary']) ?>
                         <button id="undobutton-<?= $customer->id ?>"  class="btn btn-primary" style="margin-left: 2vw">Unescalate the customer</button>
+                        <script>
+                            document.getElementById("undobutton-<?= $customer->id ?>").addEventListener('click', function () {
+                                // Get the customer ID
 
+                                var customerId = <?= $customer->id ?>;
+                                console.log(customerId)
+
+                                // Construct the URL with the customer ID as a parameter
+                                var url = '/team010-app_fit3048/tickets/descalate?customerId=' + customerId;
+
+                                // Redirect to Descalate action with the customer ID parameter
+                                window.location.href = url;
+                            });
+
+
+
+                        </script>
                     </div>
                 </div>
 
@@ -391,23 +369,7 @@ to get the name or any value in the staff table, use the get and then the name o
 <!---->
 <!--    });-->
 <!--</script>-->
-<script>
-    document.getElementById('undobutton-<?= $customer->id ?>').addEventListener('click', function () {
-        // Get the customer ID
 
-        var customerId = <?= $customer->id ?>;
-        console.log(customerId)
-
-        // Construct the URL with the customer ID as a parameter
-        var url = '/tickets/descalate?customerId=' + customerId;
-
-        // Redirect to Descalate action with the customer ID parameter
-        window.location.href = url;
-    });
-
-
-
-</script>
 
 </body>
 </html>

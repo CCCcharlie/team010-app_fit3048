@@ -121,8 +121,8 @@ to get the name or any value in the staff table, use the get and then the name o
         <div class="row">
             <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                 <div class="section-block" id="cardaction">
-                    <h3 class="section-title" style="color: midnightblue; margin-top:-50px; margin-left:-30px">Outdated Archived Customer View</h3>
-                    <p style="color: midnightblue; margin-left:-30px"> These profiles have been archived for a period longer than <?php echo number_format(($archivedTimeInSeconds / 31556952), 2); ?> years. It is strongly recommended that you delete these profiles. </p>
+                    <h3 class="section-title" style="color: midnightblue; margin-top:-50px; margin-left:-15px">Outdated Archived Customer View</h3>
+                    <p style="color: midnightblue; margin-left:-15px"> These profiles have been archived for a period longer than <?php echo number_format(($archivedTimeInSeconds / 31556952), 2); ?> years. It is strongly recommended that you delete these profiles. </p>
                 </div>
             </div>
         </di>
@@ -229,7 +229,7 @@ to get the name or any value in the staff table, use the get and then the name o
                 ['action' => 'deleteArchivedProfiles'],
                 [
                     'class' => 'btn btn-danger float-right', // Add 'float-right' class here
-                    'style' => 'justify-content: center; display: flex; margin-right: 35px; margin-bottom: 10px; margin-left: 10px',
+                    'style' => 'justify-content: center; display: flex; margin-right: 35px; margin-bottom: 10px; margin-left: 15px',
                     'confirm' => __('WARNING: This will delete every profile on this list. All Tickets, and any other details associated with these accounts will be deleted forever. Please look through this list and be certain you wish to delete everything here.'),
                 ]
             ) ?>

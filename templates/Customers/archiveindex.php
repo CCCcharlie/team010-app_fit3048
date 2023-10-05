@@ -239,7 +239,7 @@ $checkConnection = function (string $name) {
 
 
                         <!--table view option-->
-                        <table class="table table-hover table-striped" id="customers-table">
+                        <table class="table table-hover table-striped" id="customers-table" style="margin-left: 70px">
                             <thead>
                             <tr>
                                 <th class="col-md-1">
@@ -334,15 +334,18 @@ $checkConnection = function (string $name) {
                                         <?php endif; ?>
                                     </td>
                                     <td style="width: 200px">
+                                        <div style="display: flex; flex-direction: column;">
                                         <?= $this->Form->postLink(
                                             __('Delete Profile'),
                                             ['action' => 'deleteWithContents', $customer->id],
                                             [
                                                 'class' => 'btn btn-danger',
                                                 'confirm' => __('Are you sure you want to delete this customer profile and its associated contents? This process is irreversible!'),
+                                                'style' => 'min-width: 65%;'
                                             ]
                                         ) ?>
-                                        <?= $this->Html->link(__('View Full Profile'), ['action' => 'view', $customer->id], ['class' => 'btn btn-primary']) ?>
+                                        <?= $this->Html->link(__('View Profile'), ['action' => 'view', $customer->id], ['class' => 'btn btn-primary', 'style' => 'min-width: 65%;']) ?>
+                                        </div>
                                     </td>
 
                                 </tr>

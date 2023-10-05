@@ -38,7 +38,7 @@
                     <div class="section-block" id="basicform">
                     </div>
                     <div class="card">
-                        <h5 class="card-header" style="color: midnightblue">Add a New Customer</h5>
+                        <h4 class="card-header" style="color: midnightblue">Add a New Customer</h4>
                         <div class="card-body">
                             <?= $this->Form->create($customer, ['onsubmit' => 'return validateEmail();']) ?>
                             <div class="form-group">

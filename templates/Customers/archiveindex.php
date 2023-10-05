@@ -239,7 +239,7 @@ $checkConnection = function (string $name) {
 
 
                         <!--table view option-->
-                        <table class="table table-hover table-striped" id="customers-table" style="margin-left: 70px">
+                        <table class="table table-hover table-striped" id="customers-table" style="margin-left: 150px">
                             <thead>
                             <tr>
                                 <th class="col-md-1">
@@ -360,6 +360,8 @@ $checkConnection = function (string $name) {
                             </tbody>
                         </table>
                     </div>
+                </div>
+                </div>
 
                     <!--                        <a href="javascript: " id="return-to-top"><i class="icon-chevron-up"></i></a>-->
 

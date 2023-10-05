@@ -229,7 +229,7 @@ to get the name or any value in the staff table, use the get and then the name o
                 ['action' => 'deleteArchivedProfiles'],
                 [
                     'class' => 'btn btn-danger float-right', // Add 'float-right' class here
-                    'style' => 'justify-content: center; display: flex; margin-right: 35px',
+                    'style' => 'justify-content: center; display: flex; margin-right: 35px; margin-bottom: 10px; margin-left: 10px',
                     'confirm' => __('WARNING: This will delete every profile on this list. All Tickets, and any other details associated with these accounts will be deleted forever. Please look through this list and be certain you wish to delete everything here.'),
                 ]
             ) ?>

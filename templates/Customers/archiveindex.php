@@ -121,7 +121,7 @@ $checkConnection = function (string $name) {
             <div class="row">
                 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                     <div class="section-block" id="cardaction">
-                        <h3 class="section-title" style="color: midnightblue">Archived Customer View</h3>
+                        <h3 class="section-title" style="color: midnightblue;" >Archived Customer View</h3>
                         <p style="color: midnightblue"> This page shows all archived profiles. </p>
                     </div>
                 </div>

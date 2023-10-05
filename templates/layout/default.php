@@ -252,7 +252,7 @@
                                             <a class="nav-link" href="/customers">View All Customers</a>
                                         </li>
                                         <li class="nav-item">
-                                            <a class="nav-link" href="/customers/add">Add A Customer Profile</a>
+                                            <a class="nav-link" href="/customers/add">Add New Customer Profile</a>
                                         </li>
                                         <li class="nav-item">
                                             <a class="nav-link" href="/customers/archiveindex">View All Archived Profiles</a>

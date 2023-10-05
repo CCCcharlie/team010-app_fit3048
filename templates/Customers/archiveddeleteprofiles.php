@@ -121,7 +121,7 @@ to get the name or any value in the staff table, use the get and then the name o
         <div class="row">
             <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                 <div class="section-block" id="cardaction">
-                    <h3 class="section-title" style="color: royalblue; margin-top:-50px; margin-left:-30px">Outdated Archived Customer View</h3>
+                    <h3 class="section-title" style="color: midnightblue; margin-top:-50px; margin-left:-30px">Outdated Archived Customer View</h3>
                     <p style="color: midnightblue; margin-left:-30px"> These profiles have been archived for a period longer than <?php echo number_format(($archivedTimeInSeconds / 31556952), 2); ?> years. It is strongly recommended that you delete these profiles. </p>
                 </div>
             </div>

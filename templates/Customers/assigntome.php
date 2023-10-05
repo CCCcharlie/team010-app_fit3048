@@ -357,7 +357,7 @@ to get the name or any value in the staff table, use the get and then the name o
         </div>
     <?php endforeach; ?>
                         <?php if (count($assignedCustomers)==0): ?>
-                            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12" >
+                            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12" style="color: midnightblue" >
                                 <p>No assigned customers found.</p>
 
                             </div>

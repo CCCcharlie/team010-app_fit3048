@@ -475,7 +475,6 @@ to get the name or any value in the staff table, use the get and then the name o
                 var url = '/tickets/undoEscalate/';
                 // var url = '/team010-app_fit3048/tickets/undoEscalate/';
 
-                // var url = '/tickets/undoEscalate' ;
 
                 // Redirect to undoEscalate with both parameters
                 window.location.href = url;

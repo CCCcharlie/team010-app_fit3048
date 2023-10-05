@@ -405,14 +405,14 @@ class TicketsController extends AppController
 //        debug($id);
 //        exit();
 
-        $rootuser = $this->Tickets->Users->find()
-            ->where([
-                'Users.role' => 'root',
-                'Users.id' != $staffId
-            ])
-            ->contain(['Tickets'])
-            ->first();
-        $rootuserid = $rootuser->id;
+//        $rootuser = $this->Tickets->Users->find()
+//            ->where([
+//                'Users.role' => 'root',
+//                'Users.id' != $staffId
+//            ])
+//            ->contain(['Tickets'])
+//            ->first();
+//        $rootuserid = $rootuser->id;
 
 
 // store the note to add
@@ -425,7 +425,9 @@ class TicketsController extends AppController
         foreach ($assigntickets as $ticket) {
             // Update "escalate" to true（1）
             $ticket->escalate = true;
-            $ticket->staff_id = $rootuserid;
+
+//            comment out cuz not assigned based on id
+//            $ticket->staff_id = $rootuserid;
 
             //delect previous note
             $Customers = $this->Tickets->Customers->find()
@@ -580,8 +582,9 @@ class TicketsController extends AppController
         foreach ($escalatedTickets as $ticket) {
             // Update "escalate" to false (0)
             $ticket->escalate = false;
-            $ticket->staff_id = $staffId; // Set staff_id back to the current user's ID
-            $ticket->closetime = null;
+
+//            $ticket->staff_id = $staffId; // Set staff_id back to the current user's ID
+//            $ticket->closetime = null;
 
 //
             $Customers = $this->Tickets->Customers->find()

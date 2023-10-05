@@ -121,6 +121,12 @@ class AppController extends Controller
         $threeCharAttribute1 = substr($importantAttribute1, 0, 3);
         $threeCharAttribute2 = substr($importantAttribute2, 0, 3);
 
+        //If there are any special characters, replace them with an "x" because attempting to reference that id will break it
+        // (ex: attempting to edit commdetails with primary key containing a "/")
+
+        $threeCharAttribute1 = preg_replace('/[^a-zA-Z0-9]/', 'x', $threeCharAttribute1);
+        $threeCharAttribute2 = preg_replace('/[^a-zA-Z0-9]/', 'x', $threeCharAttribute2);
+
         //Convert the 10 random numbers into string using strval
         $randNumStrings = strval(mt_rand());
 

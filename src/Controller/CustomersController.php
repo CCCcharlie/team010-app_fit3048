@@ -307,41 +307,51 @@ class CustomersController extends AppController
 
 
         // Get the current user id
-        $identity = $this->request->getAttribute('authentication')->getIdentity();
-        $currentStaffId = $identity->get('id');
+//        $identity = $this->request->getAttribute('authentication')->getIdentity();
+//        $currentStaffId = $identity->get('id');
+//
+//        // get the relate cust
+//        $assignedCustomers = $this->Customers->find()
+//            ->innerJoinWith('Tickets', function ($query) use ($currentStaffId) {
+//                return $query->where([
+//                    'Tickets.staff_id' => $currentStaffId,
+////                    'Tickets.closetime IS NULL',
+//                    'Tickets.escalate IS TRUE'
+//                ]);
+//            })
+//            ->distinct(['Customers.id'])// Add this line to ensure distinct customers
+//            ->all();
 
-        // get the relate cust
-        $assignedCustomers = $this->Customers->find()
-            ->innerJoinWith('Tickets', function ($query) use ($currentStaffId) {
-                return $query->where([
-                    'Tickets.staff_id' => $currentStaffId,
-//                    'Tickets.closetime IS NULL',
-                    'Tickets.escalate IS TRUE'
-                ]);
+//finding all the  customer with escalate is true
+
+        $escalatedCustomers = $this->Customers->find()
+            ->innerJoinWith('Tickets', function ($query) {
+                return $query->where(['Tickets.escalate' => true]);
             })
-            ->distinct(['Customers.id'])// Add this line to ensure distinct customers
+            ->distinct(['Customers.id'])
             ->all();
 
-//debug($assignedCustomers);
-//exit;
+
+
         // pass data
-        $this->set('assignedCustomers', $assignedCustomers);
+        $this->set('escalatedCustomers', $escalatedCustomers);
 
 //
 // Get the related tickets for assigned customers
-        $assigntickets = $this->Customers->Tickets->find()
-            ->where([
-                'Tickets.staff_id' => $currentStaffId,
-                'Tickets.closetime IS NULL'
-            ])
-            ->contain(['Users', 'Contents', 'Customers'])
-            ->all();
+//        $escaltedtickets = $this->Customers->Tickets->find()
+//            ->where([
+//                'Tickets.cust_id' => $escalatedCustomers,
+////                'Tickets.closetime IS NULL'
+//            ])
+//            ->contain(['Users', 'Contents', 'Customers'])
+//            ->all();
 
+//        debug($escalatedCustomers);
+//        exit;
 // Pass the tickets data to the view
 
-//        debug($assigntickets);
-//exit;
-        $this->set('assigntickets', $assigntickets);
+
+//        $this->set('escaltedtickets', $escaltedtickets);
 
     }
     /**

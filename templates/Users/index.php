@@ -66,7 +66,7 @@ to get the name or any value in the staff table, use the get and then the name o
             <!-- ============================================================== -->
 <div class="users index content">
 <div class="section-block" id="cardaction">
-<h3 class="section-title"><?= __('Staff Accounts') ?></h3>
+<h3 class="section-title" style="color: midnightblue"><?= __('Staff Accounts') ?></h3>
 
 <?php if ($this->Identity->get('role') == 'root' || $this->Identity->get('role') == 'admin'): ?>
     <?= $this->Html->link(__('Add a Staff Member'), ['action' => 'add'], ['class' => 'float-right btn btn-success' , 'style' => 'margin-top: -50px; margin-right: 10px; margin-bottom: 5px;' ]) ?>

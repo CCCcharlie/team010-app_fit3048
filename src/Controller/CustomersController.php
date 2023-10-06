@@ -271,6 +271,8 @@ class CustomersController extends AppController
             ->innerJoinWith('Tickets', function ($query) use ($currentStaffId) {
                 return $query->where([
                     'Tickets.staff_id' => $currentStaffId,
+                    'Tickets.escalate' => false,
+
                 ]);
             })
             ->distinct(['Customers.id'])// Add this line to ensure distinct customers

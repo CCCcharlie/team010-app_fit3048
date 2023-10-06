@@ -201,8 +201,13 @@ to get the name or any value in the staff table, use the get and then the name o
                                 </th>
                             </tr>
 
+
+                            <!--
+                             $this->Html->link(__('New Customer'), ['action' => 'add'], ['class' => 'btn btn-success float-right', 'style' => 'margin-top: -20px']) ?>
+                            -->
+
                                 <!--         Add the "Undo Changes" link with an ID -->
-                                    <button id="undobutton" class="btn btn-primary" style="margin-left: 2vw">Unescalate the customer</button>
+                                    <button id="undobutton" class="btn btn-primary" style="margin-left: 2vw">Undo previous escalation</button>
 
 
                             </h6>
@@ -329,7 +334,9 @@ to get the name or any value in the staff table, use the get and then the name o
                                     'class' => 'btn btn-primary ',
                                     'style'=>'margin-top:3vh',
                                     'id' => "navigate-button-<?= $customer->id ?>",
-                                    'data-customer-id' => $customer->id
+                                    'data-customer-id' => $customer->id,
+                                    'confirm' => __('You are requesting to escalate: {0} {1}, you should escalate a customer if you want them to be seen by senior staff members, for example if they are verbally abusive. Escalating cannot be undone! Are you sure? ', $customer->f_name, $customer->l_name)
+
                                 ]
                             ); ?>
                             <?php echo ' '; ?>
@@ -350,7 +357,7 @@ to get the name or any value in the staff table, use the get and then the name o
         </div>
     <?php endforeach; ?>
                         <?php if (count($assignedCustomers)==0): ?>
-                            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12" >
+                            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12" style="color: midnightblue" >
                                 <p>No assigned customers found.</p>
 
                             </div>
@@ -472,7 +479,6 @@ to get the name or any value in the staff table, use the get and then the name o
                 var url = '/tickets/undoEscalate/';
                 // var url = '/team010-app_fit3048/tickets/undoEscalate/';
 
-                // var url = '/tickets/undoEscalate' ;
 
                 // Redirect to undoEscalate with both parameters
                 window.location.href = url;

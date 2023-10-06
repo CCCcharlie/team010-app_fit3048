@@ -120,8 +120,7 @@ to get the name or any value in the staff table, use the get and then the name o
 
 
             <br>
-            <h3 style ="color: midnightblue" class="section-title"> Sort by: </h3>
-            <br>
+            <h6 style ="color: midnightblue" class="section-title"> Sort by:
 
 
 
@@ -199,9 +198,11 @@ to get the name or any value in the staff table, use the get and then the name o
                             <img src="<?= $this->Url->image('arrow-up.png', ['fullBase' => true, 'webroot' => 'img/', 'width' => 10]) ?>" alt="Up Arrow">
                         <?php endif; ?>
                     <?php endif; ?>
+            </h6>
                 </th>
             </tr>
 
+            <br>
             <br>
             <br>
 
@@ -294,7 +295,7 @@ to get the name or any value in the staff table, use the get and then the name o
                             document.getElementById("undobutton-<?= $customer->id ?>").addEventListener('click', function () {
                                 // Get the customer ID
                                 var customerId = '<?= $customer->id ?>';
-                                console.log(customerId)
+                                // console.log(customerId)
 
                                 // Construct the URL with the customer ID as a parameter
                                 var url = '/tickets/descalate?customerId=' + customerId;

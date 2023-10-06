@@ -90,7 +90,7 @@ class TicketsController extends AppController
             //closed is a boolean variable where closed = 0 mean it is Open
             $ticket->closed = false;
             $ticket->cust_id = $custId;
-            $ticket->escalate = true;
+            $ticket->escalate = false;
 
             //Generate ID only if no errors precaution
             if($ticket->hasErrors() === false) {
@@ -109,7 +109,6 @@ class TicketsController extends AppController
                 ////////////////////////////////
                 // End Generate the unique id //
                 ////////////////////////////////
-
             }
 
             if ($this->Tickets->save($ticket)) {

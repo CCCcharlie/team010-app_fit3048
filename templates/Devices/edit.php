@@ -56,7 +56,14 @@
                                     </div>
                                     <div class="form-group">
                                         <?= $this->Form->label('technical_details', 'Technical Details*', ['class' => 'col-form-label']) ?>
-                                        <?= $this->Form->control('technical_details', ['class' => 'form-control',  'maxlength' => 150, 'label' => false, 'oninput' => 'this.setCustomValidity(this.value.charAt(0) === " " ? "Technical Details cannot start with a space" : "")']) ?>
+                                        <?= $this->Form->textarea('technical_details', [
+                                            'class' => 'form-control',
+                                            'required' => true,
+                                            'maxlength' => 150,
+                                            'rows' => 2,
+                                            'placeholder' => 'eg. Android 13 API 33',
+                                            'oninput' => 'this.setCustomValidity(this.value.charAt(0) === " " ? "Version cannot start with a space" : "")'
+                                        ]) ?>
                                         <!-- Display validation error for the 'f_name' field -->
                                         <?= $this->Form->error('technical_details'); ?>
                                     </div>

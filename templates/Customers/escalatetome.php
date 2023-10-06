@@ -62,7 +62,7 @@
 
 <body>
 
-<div class="customers assigntome content">
+<div class="customers  content">
     <!-- ============================================================== -->
     <!-- pageheader  -->
     <!-- ============================================================== -->
@@ -74,7 +74,7 @@
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item"><a href="/" class="breadcrumb-link">Home</a></li>
                             <li class="breadcrumb-item"><a href="/customers" class="breadcrumb-link">View all customer</a></li>
-                            <li class="breadcrumb-item active" aria-current="page">Assigned to me</li>
+                            <li class="breadcrumb-item active" aria-current="page">Escalate to me</li>
                         </ol>
                     </nav>
                 </div>
@@ -100,26 +100,27 @@ to get the name or any value in the staff table, use the get and then the name o
     <div class="row">
         <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
             <div class="section-block" id="cardaction">
-                <h3 class="section-title" style="color: midnightblue">Assigned Customers</h3>
-                <p style ="color: midnightblue"> List of customers with tickets assigned to you.</p>
+                <h3 class="section-title" style="color: midnightblue">Escalated Customers</h3>
+                <p style ="color: midnightblue"> List of customers with tickets escalated.</p>
             </div>
         </div>
     </div>
     <div class="row">
         <div class="col-md-12">
             <?= $this->Form->create(null, ['url' => ['controller' => 'Customers', 'action' => 'index'], 'type' => 'get', 'class' => 'form-inline']) ?>
-            <div class="form-group mr-2">
-                <?= $this->Form->input('search', ['type' => 'text', 'class' => 'form-control', 'placeholder' => 'Search...']) ?>
+            <div class="form-group mr-2" >
+                <?= $this->Form->input('search', ['type' => 'text', 'class' => 'form-control', 'placeholder' => 'Search...',
+                    'value' => isset($_GET['search']) ? $_GET['search'] : '']) ?>
+                <!--                                    check whether a search parameter exist in url / if true get the value / flase return ' '-->
             </div>
             <?= $this->Form->button(__('Search'), ['class' => 'btn btn-primary']) ?>
-            `
+
 
             <?= $this->Form->end() ?>
 
 
             <br>
-            <h3 style ="color: midnightblue" class="section-title"> Sort by: </h3>
-            <br>
+            <h6 style ="color: midnightblue" class="section-title"> Sort by:
 
 
 
@@ -197,10 +198,11 @@ to get the name or any value in the staff table, use the get and then the name o
                             <img src="<?= $this->Url->image('arrow-up.png', ['fullBase' => true, 'webroot' => 'img/', 'width' => 10]) ?>" alt="Up Arrow">
                         <?php endif; ?>
                     <?php endif; ?>
+            </h6>
                 </th>
             </tr>
-            <?= $this->Html->link(__('New Customer'), ['action' => 'add'], ['class' => 'btn btn-success float-right']) ?>
 
+            <br>
             <br>
             <br>
 
@@ -226,7 +228,7 @@ to get the name or any value in the staff table, use the get and then the name o
         </div>
 
 
-        <?php foreach ($assignedCustomers as $customer): ?>
+        <?php foreach ($escalatedCustomers as $customer): ?>
             <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
                 <div class="card">
                     <div class="card-header d-flex">
@@ -282,58 +284,39 @@ to get the name or any value in the staff table, use the get and then the name o
                                 ?>
                             </div>
 
-                            <!--                        upgrade button-->
 
-
-                            <div class="form-group">
-                                <?= $this->Form->label('selected_ticket', 'Select Ticket', ['class' => 'col-form-label']) ?>
-                                <?php
-                                $options = [];
-                                foreach ($assigntickets as $ticket) {
-                                    $options[$ticket->id] = $ticket->title;
-                                }
-                                echo $this->Form->select('selected_ticket', $options, [
-                                    'class' => 'form-control',
-                                    'id' => 'select-ticket',
-                                ]);
-                                ?>
-                            </div>
-
-                            <button id="navigate-button" class="btn btn-primary">Escalate the customer</button>
-
-
-
-
-                            <!--                                                --><?php //foreach ($assigntickets as $ticket): ?>
-                            <!--                            --><?php //echo $this->Html->link(
-                            //                                __('Escalate the customer'),
-                            //                                [
-                            //                                    'controller' => 'Tickets',
-                            //                                    'action' => 'edit',
-                            //                                    $ticket->id,
-                            //                                    '?' => ['cust_id' => $ticket->customer->id] // assign cust id to checking variable
-                            //                                ],
-                            //                                ['class' => 'btn btn-primary']
-                            //                            ); ?>
-                            <!--                            --><?php //echo ' '; ?>
-                            <!--                        --><?php //endforeach; ?>
-
-
-
-                            <!--                        -->
 
 
 
                         </div>
                         <?= $this->Html->link(__('View Full Profile'), ['action' => 'view', $customer->id], ['class' => 'btn btn-primary']) ?>
+                        <button id="undobutton-<?= $customer->id ?>"  class="btn btn-primary" style="margin-left: 2vw">Unescalate the customer</button>
+                        <script>
+                            document.getElementById("undobutton-<?= $customer->id ?>").addEventListener('click', function () {
+                                // Get the customer ID
+                                var customerId = '<?= $customer->id ?>';
+                                // console.log(customerId)
+
+                                // Construct the URL with the customer ID as a parameter
+                                var url = '/tickets/descalate?customerId=' + customerId;
+                                // var url = '/team010-app_fit3048/tickets/descalate?customerId=' + customerId;
+
+
+                                // Redirect to Descalate action with the customer ID parameter
+                                window.location.href = url;
+                            });
+
+
+
+                        </script>
                     </div>
                 </div>
 
             </div>
         <?php endforeach; ?>
-        <?php if (count($assignedCustomers)==0): ?>
+        <?php if (count($escalatedCustomers)==0): ?>
             <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12" >
-                <p>No assigned customers found.</p>
+                <p>No escalated customers found.</p>
 
             </div>
 
@@ -382,25 +365,13 @@ to get the name or any value in the staff table, use the get and then the name o
 <!--    --><?php //if ($this->Paginator->counter(__('Page {{page}} of {{pages}}, showing {{current}} record(s) out of {{count}} total')) === 'Page 1 of 0, showing 0 record(s) out of 0 total'): ?>
 <!--        <p>No results found.</p>-->
 <!--    --><?php //endif; ?>
-<script>
-    // JavaScript
-    document.getElementById('changeStaffButton').addEventListener('click', function () {
+<!--<script>-->
+<!--    // JavaScript-->
+<!--    document.getElementById('changeStaffButton').addEventListener('click', function () {-->
+<!---->
+<!--    });-->
+<!--</script>-->
 
-    });
-</script>
-<script>
-    document.getElementById('navigate-button').addEventListener('click', function () {
-        // get ticketID
-        var selectedTicketId = document.getElementById('select-ticket').value;
-
-        // refer to the update
-        // window.location.href = '/team010-app_fit3048/tickets/edit/' + selectedTicketId;
-
-        window.location.href = '/team010-app_fit3048/tickets/updateEscalate/' + selectedTicketId;
-    });
-
-
-</script>
 
 </body>
 </html>

@@ -134,8 +134,8 @@ to get the name or any value in the staff table, use the get and then the name o
                 <div class="row">
                     <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                         <div class="section-block" id="cardaction">
-                            <h3 class="section-title" style="color: royalblue; margin-top: -50px">Customer View</h3>
-                            <p style="color: royalblue" , > This page provides all profiles.  </p>
+                            <h3 class="section-title" style="color: midnightblue; margin-top: -50px">Customer View</h3>
+                            <p style="color: midnightblue" , > This page provides all profiles.  </p>
                         </div>
                     </div>
                 </div>
@@ -151,7 +151,9 @@ to get the name or any value in the staff table, use the get and then the name o
                                 <h4 style="color: midnightblue">Filter:</h4>
                                 <?= $this->Form->create(null, ['url' => ['controller' => 'Customers', 'action' => 'index'], 'type' => 'get', 'class' => 'form-inline']) ?>
                                 <div class="form-group mr-2">
-                                    <?= $this->Form->input('search', ['type' => 'text', 'class' => 'form-control', 'placeholder' => 'Search...']) ?>
+                                    <?= $this->Form->input('search', ['type' => 'text', 'class' => 'form-control', 'placeholder' => 'Search...',
+                                        'value' => isset($_GET['search']) ? $_GET['search'] : '']) ?>
+<!--                                    check whether a search parameter exist in url / if true get the value / flase return ' '-->
                                 </div>
                                 <div class="d-flex justify-content-end align-items-center">
                                     <div class="form-group mr-2">

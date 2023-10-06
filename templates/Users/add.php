@@ -36,10 +36,11 @@
                             <div class="card-body">
                                 <?= $this->Form->create($user, ['onsubmit' => 'return validateEmail();']) ?>
                                 <div class="form-group">
-                                    <?= $this->Form->label('f_name', 'First Name', ['class' => 'col-form-label']) ?>
+                                    <?= $this->Form->label('f_name', 'First Name*', ['class' => 'col-form-label']) ?>
                                     <?= $this->Form->input('f_name', [
-                                        'class' => 'form-control',
+                                        'class' => '',
                                         'maxlength' => 32, // Maximum of 32 characters
+                                        'size' => 32,
                                         'required' => true,
                                         'title' => 'Please enter your first name using letters and hyphens only',
                                         'oninput' => 'this.setCustomValidity(this.value.charAt(0) === " " ? "First name cannot start with a space" : "")',
@@ -51,10 +52,11 @@
                                     <small class="form-text text-muted">Letters and hyphens only.</small>
                                 </div>
                                 <div class="form-group">
-                                    <?= $this->Form->label('l_name', 'Last Name', ['class' => 'col-form-label']) ?>
+                                    <?= $this->Form->label('l_name', 'Last Name*', ['class' => 'col-form-label']) ?>
                                     <?= $this->Form->input('l_name', [
-                                        'class' => 'form-control',
+                                        'class' => '',
                                         'maxlength' => 32, // Maximum of 32 characters
+                                        'size' => 32,
                                         'required' => true,
                                         'title' => 'Please enter your last name using letters and hyphens only',
                                         'pattern' => '^[A-Za-z-]+$',
@@ -66,7 +68,7 @@
                                     <small class="form-text text-muted">Letters and hyphens only.</small>
                                 </div>
                                 <div class="form-group">
-                                    <?= $this->Form->label('email', 'Email Address') ?>
+                                    <?= $this->Form->label('email', 'Email Address*') ?>
                                     <?= $this->Form->input('email', [
                                         'class' => 'form-control',
                                         'placeholder' => 'name@mail.com',
@@ -83,7 +85,7 @@
                                     <small class="form-text text-muted">Please enter a valid email address.</small>
                                 </div>
                                 <div class="form-group">
-                                    <?= $this->Form->label('password', 'Password') ?>
+                                    <?= $this->Form->label('password', 'Password*') ?>
                                     <?= $this->Form->input('password', [
                                         'class' => 'form-control',
                                         'required' => true,
@@ -111,7 +113,7 @@
                                 ?>
 
                                 <div class="form-group" style="display: flex; align-items: center;">
-                                    <?= $this->Form->label('Staff Role Privileges', null, ['class' => 'col-form-label', 'style' => 'margin-right: 10px;']) ?>
+                                    <?= $this->Form->label('Staff Role Privileges*', null, ['class' => 'col-form-label', 'style' => 'margin-right: 10px;']) ?>
                                     <?=
                                     $this->Form->control('role', [
                                         'type' => 'select',

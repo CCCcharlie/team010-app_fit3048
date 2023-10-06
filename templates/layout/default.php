@@ -51,7 +51,7 @@
         <nav class="navbar navbar-expand-lg bg-white fixed-top" style="display: flex; justify-content: space-between;">
             <a class="navbar-brand" href="/customers/assigntome">
                 <?php $logo = $contentBlocks['navigation_header_logo']?>
-                <?= $this->Html->image($logo, ['alt' => 'GamBlock Logo', 'class' => 'navbar-b;and', 'style' => 'width: auto; height:60px']); ?>
+                <?= $this->Html->image($logo, ['alt' => 'GamBlock Logo', 'class' => 'navbar-brand', 'style' => 'width: auto; height:60px']); ?>
             </a>
 
             <?php
@@ -105,10 +105,6 @@
     <!-- left sidebar -->
     <!-- ============================================================== -->
     <div class="nav-left-sidebar sidebar-dark">
-        <div id="mySidebar" class="sidebar">
-            <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">Close side bars</a>
-            <div id="main">
-                <button class="openbtn" onclick="openNav()">☰ X</button>
         <div class="menu-list">
             <nav class="navbar navbar-expand-lg navbar-light">
                 <a class="d-xl-none d-lg-none" href="#">Customer View</a>
@@ -256,7 +252,7 @@
                                             <a class="nav-link" href="/customers">View All Customers</a>
                                         </li>
                                         <li class="nav-item">
-                                            <a class="nav-link" href="/customers/add">Add A Customer Profile</a>
+                                            <a class="nav-link" href="/customers/add">Add New Customer Profile</a>
                                         </li>
                                         <li class="nav-item">
                                             <a class="nav-link" href="/customers/archiveindex">View All Archived Profiles</a>
@@ -316,20 +312,6 @@
             </nav>
         </div>
     </div>
-    </div>
-    </div>
-
-    <script>
-        function openNav() {
-            document.getElementById("mySidebar").style.width = "500px";
-            document.getElementById("main").style.marginLeft = "500px";
-        }
-
-        function closeNav() {
-            document.getElementById("mySidebar").style.width = "2";
-            document.getElementById("main").style.marginLeft= "2";
-        }
-    </script>
     <!-- ============================================================== -->
     <!-- end left sidebar -->
     <!-- ============================================================== -->
@@ -399,6 +381,11 @@
     var activeBreadcrumb = document.querySelector(".breadcrumb-item.active");
     activeBreadcrumb.textContent = lastWord;
 </script>
+
+<?= $this->Html->script(['jquery-3.3.1.min.js', 'bootstrap.bundle.js', 'main-js', 'jquery.slimscroll.js']) ?>
+<?= $this->Html->script('https://kit.fontawesome.com/b5c616a120.js', ['crossorigin' => 'anonymous']) ?>
+
+
 </body>
 </html>
 

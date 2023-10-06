@@ -33,19 +33,20 @@
 
         </aside>
         <div class="customers add content">
-            <div class="row">
+            <div class="column">
                 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                     <div class="section-block" id="basicform">
                     </div>
                     <div class="card">
-                        <h5 class="card-header" style="color: royalblue">Add a New Customer</h5>
+                        <h4 class="card-header" style="color: midnightblue">Add a New Customer</h4>
                         <div class="card-body">
                             <?= $this->Form->create($customer, ['onsubmit' => 'return validateEmail();']) ?>
                             <div class="form-group">
                                 <?= $this->Form->label('f_name', 'First Name*', ['class' => 'col-form-label blue-label-text']) ?>
                                 <?= $this->Form->input('f_name', [
-                                    'class' => 'form-control',
+                                    'class' => '',
                                     'maxlength' => 32, // Maximum of 32 characters
+                                    'size' => 32,
                                     'required' => true,
                                     'title' => 'Please enter your first name using letters, hyphens and apostrophes only',
                                     'pattern' => '^[A-Za-z-]+$',
@@ -57,8 +58,9 @@
                             <div class="form-group">
                                 <?= $this->Form->label('l_name', 'Last Name*', ['class' => 'col-form-label blue-label-text']) ?>
                                 <?= $this->Form->input('l_name', [
-                                    'class' => 'form-control',
+                                    'class' => '',
                                     'maxlength' => 32, // Maximum of 32 characters
+                                    'size' => 32,
                                     'required' => true,
                                     'title' => 'Please enter your last name using letters and hyphens only',
                                     'pattern' => '^[A-Za-z-]+$',
@@ -109,7 +111,7 @@
                                         'title' => 'Add any notes here',
                                         'placeholder' => 'e.g., Tendency to contact through numerous different contact methods.',
                                         'maxlength' => 500,
-                                        'rows' => 5, // Adjust the number of rows to control the initial height
+                                        'rows' => 6, // Adjust the number of rows to control the initial height
                                         'oninput' => 'this.setCustomValidity(this.value.charAt(0) === " " ? "Notes cannot start with a space" : "")',
                                     ]
                                 ) ?>

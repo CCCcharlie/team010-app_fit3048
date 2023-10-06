@@ -203,7 +203,7 @@ body {
 .content__container:after {
     position: absolute;
     top: 0;
-    color: #16a085;
+    color: #419bc7;
     font-size: 42px;
     line-height: 40px;
     -webkit-animation-name: opacity;
@@ -221,13 +221,16 @@ body {
 }
 
 .content__container__list {
+    color: #419bc7!important;
+    font-weight: 800;
+
     margin-top: 0;
     padding-left: 110px;
     text-align: right;
     list-style: none;
-    animation-name: change; /* 使用定义的change动画 */
-    animation-duration: 10s; /* 动画持续时间 */
-    animation-iteration-count: infinite; /* 无限循环播放动画 */
+    animation-name: change; /* anime */
+    animation-duration: 10s; /* anime time */
+    animation-iteration-count: infinite; /* loop */
     animation-name: change;
     animation-duration: 10s;
     animation-iteration-count: infinite;

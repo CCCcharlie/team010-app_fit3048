@@ -47,7 +47,7 @@
                             <?= $this->Form->create($ticket) ?>
                             <fieldset>
                                 <div class="form-group">
-                                    <?= $this->Form->label('title', 'Title', ['class' => 'col-form-label']) ?>
+                                    <?= $this->Form->label('title', 'Title*', ['class' => 'col-form-label']) ?>
                                     <?= $this->Form->input('title', [
                                         'class' => 'form-control',
                                         'maxlength' => 50, // Maximum of 50 characters
@@ -61,7 +61,7 @@
 
                                 </div>
                                 <div class="form-group">
-                                    <?= $this->Form->label('type', 'Type', ['class' => 'col-form-label']) ?>
+                                    <?= $this->Form->label('type', 'Type*', ['class' => 'col-form-label']) ?>
                                     <?= $this->Form->input('type', [
                                         'class' => 'form-control',
                                         'maxlength' => 30, // Maximum of 30 characters
@@ -94,7 +94,7 @@
     </div>
     -->
                                 <div class="form-group">
-                                    <?= $this->Form->label('staff_id', 'Staff', ['class' => 'col-form-label']) ?>
+                                    <?= $this->Form->label('staff_id', 'Staff*', ['class' => 'col-form-label']) ?>
                                     <?php echo $this->Form->control('staff_id', ['options' => $users, 'label' => false]); ?>
                                 </div>
                             </fieldset>

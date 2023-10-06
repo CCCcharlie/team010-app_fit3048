@@ -49,7 +49,7 @@
                                     <fieldset>
 
                                         <div class="form-group">
-                                            <?= $this->Form->label('title', 'Title', ['class' => 'col-form-label']) ?>
+                                            <?= $this->Form->label('title', 'Title*', ['class' => 'col-form-label']) ?>
                                             <?= $this->Form->control('title', [
                                                 'label' => false, // Prevent default label from appearing again
                                                 'class' => 'form-control',
@@ -63,7 +63,7 @@
                                             <?= $this->Form->error('title'); ?>
                                         </div>
                                         <div class="form-group">
-                                            <?= $this->Form->label('type', 'Type', ['class' => 'col-form-label']) ?>
+                                            <?= $this->Form->label('type', 'Type*', ['class' => 'col-form-label']) ?>
                                             <?= $this->Form->control('type', [
                                                 'label' => false, // Prevent default label from appearing again
                                                 'class' => 'form-control',
@@ -96,7 +96,7 @@
         </div>
         -->
                                         <div class="form-group">
-                                            <?= $this->Form->label('staff_id', 'Staff', ['class' => 'col-form-label']) ?>
+                                            <?= $this->Form->label('staff_id', 'Staff*', ['class' => 'col-form-label']) ?>
                                             <?php echo $this->Form->control('staff_id', ['options' => $users, 'label'=>false]); ?>
                                         </div>
                                     </fieldset>
@@ -111,9 +111,9 @@
                                                 <div class ="col-6">
                                                     <?= $this->Form->button(__('Submit'), ['class' => 'btn btn-primary', 'style' => 'width: 100px; margin-right: 30px; margin-left: 90px']) ?>
                                                 </div>
-                                                <div class = "col-6">
-                                                    <?= $this->Html->link(__('Undo Changes'), ['action' => 'undo', $ticket->id, '?' => ['originalData' => $originalData]], ['class' => 'btn btn-warning', 'style' => 'width: 150px; margin-top: 20px']); ?>
-                                                </div>
+<!--                                                <div class = "col-6">-->
+<!--                                                    --><?php //= $this->Html->link(__('Undo Changes'), ['action' => 'undo', $ticket->id, '?' => ['originalData' => $originalData]], ['class' => 'btn btn-warning', 'style' => 'width: 150px; margin-top: 20px']); ?>
+<!--                                                </div>-->
         <!--              undo originalData not passing            debug($originalData);           -->
         <!--                                      --><?php //=  $this->getRequest()->getSession()->write('originalData', $originalData);?>
 

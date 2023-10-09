@@ -2,6 +2,7 @@
 declare(strict_types=1);
 
 namespace App\Controller;
+use Cake\ORM\TableRegistry;
 
 /**
  * Tickets Controller
@@ -276,7 +277,7 @@ class TicketsController extends AppController
         }
 
         if ($ticketsTable->delete($ticket)) {
-            $this->Flash->success(__('The ticket and associated contents have been deleted.'));
+            $this->Flash->success(__('The ticket titled: "{0}" and associated contents have been deleted.', $ticket->title));
         } else {
             $this->Flash->error(__('Unable to delete the ticket.'));
         }

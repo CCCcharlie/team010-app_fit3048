@@ -297,12 +297,12 @@ to get the name or any value in the staff table, use the get and then the name o
                                     </div>
                                     <!-- End of Header buttons -->
                                     <div id="allticket">
-                                        <!-- If user or staff, only show their tickets -->
+                                        <!-- If user or staff, only show their tickets AND tickets that are marked available to be seen by everybody -->
                                         <?php if ($this->Identity->get('role') === 'user' || $this->Identity->get('role') === 'staff'): ?>
                                             <div class="card">
                                                 <p>            <!-- Cards section -->
                                                     <?php foreach ($tickets as $ticket): ?>
-                                                    <?php if($this->Identity->get('id') === $ticket->staff_id): ?>
+                                                    <?php if($this->Identity->get('id') === $ticket->staff_id || $ticket->showall === true): ?>
                                                 <div class="col-xl-12 col-lg-12 col-md-12col-sm-12 col-12">
                                                     <div class="card">
                                                         <?php if ($ticket->closed == true) : ?>
@@ -321,6 +321,7 @@ to get the name or any value in the staff table, use the get and then the name o
                                                                     <?php elseif ($ticket->closed == false) : ?>
                                                                         <h6> Status: Open </h6>
                                                                     <?php endif; ?>
+                                                                        <h6> <span class="card-info">Visible to all?</span> <?= h($ticket->showall ? 'Yes' : 'No') ?> </h6>
                                                                 </div>
                                                                 <?php if ($customer->archive == 0): ?>
                                                                     <div class="toolbar ml-auto">
@@ -349,7 +350,6 @@ to get the name or any value in the staff table, use the get and then the name o
                                                                     </p>
                                                                     <p><span
                                                                             class="card-info">Assigned staff:</span>
-
                                                                         <?php
                                                                         if ($ticket->staff_id !== null) {
                                                                             echo $this->Html->link(__($ticket->user->f_name), ['controller' => 'Users', 'action' => 'view', $ticket->staff_id]);
@@ -358,13 +358,22 @@ to get the name or any value in the staff table, use the get and then the name o
                                                                         }
                                                                         ?>
                                                                     </p>
+                                                                    <p>
+                                                                        <div style="display: flex">
+                                                                            <span class="card-info">Notes</span>
+                                                                            <?php if(!empty($ticket->notes)): ?>
+                                                                                : <?= h($ticket->notes) ?>
+                                                                            <?php else: ?>
+                                                                                : -
+                                                                            <?php endif ?>
+                                                                        </div>
+                                                                    </p>
                                                                     <p><span
                                                                             class="card-info">Create time:</span> <?= $ticket->createtime->i18nFormat('yyyy-MM-dd HH:mm:ss', 'Australia/Sydney') ?>
                                                                     </p>
                                                                     <br>
                                                                 </div>
-                                                                <div
-                                                                    style="display: flex; justify-content: space-between">
+                                                                <div style="display: flex; justify-content: space-between">
                                                                     <a class="btn btn-primary"
                                                                        data-toggle="collapse"
                                                                        href="#collapseExample<?= $ticket->id ?>"
@@ -384,15 +393,13 @@ to get the name or any value in the staff table, use the get and then the name o
                                                                     ],
                                                                 ], ['class' => 'btn btn-primary']);
 
-                                                                //Removed delete for now, it breaks if try to delete with an attachment present inside
-
                                                                 ?>
+
+                                                                <?= $this->Form->postLink(__('Delete'), ['controller' => 'Tickets', 'action' => 'delete', $ticket->id], [
+                                                                    'class' => 'btn btn-danger',
+                                                                    'confirm' => __('Are you sure you want to delete Ticket title:  {0} From customer {1} {2}?', $ticket->title , $customer->f_name, $customer->l_name)
+                                                                ]) ?>
                                                             <?php endif; ?>
-                                                            <!--                                                                        --><?php //= $this->Form->postLink(__('Delete'), ['controller' => 'Tickets', 'action' => 'delete', $ticket->id], [
-//                                                                            'class' => 'btn btn-danger',
-//                                                                            'confirm' => __('Are you sure you want to delete Ticket title:  {0} \n From customer {1} {2}?', $ticket->title , $customer->f_name, $customer->l_name)
-//                                                                        ]) ?>
-                                                        <?php else: ?>
                                                         <?php endif; ?>
                                                             </span>
                                                                 </div>
@@ -474,7 +481,6 @@ to get the name or any value in the staff table, use the get and then the name o
                                                 </div>
                                             </div>
 
-                                            <!-- if its an admin or root, show all -->
                                         <?php else: ?>
                                             <div class="card">
                                                 <p>            <!-- Cards section -->
@@ -497,6 +503,7 @@ to get the name or any value in the staff table, use the get and then the name o
                                                                     <?php elseif ($ticket->closed == false) : ?>
                                                                         <h6> Status: Open </h6>
                                                                     <?php endif; ?>
+                                                                    <h6> <span class="card-info">Visible to all?</span> <?= h($ticket->showall ? 'Yes' : 'No') ?> </h6>
                                                                 </div>
                                                                 <?php if ($customer->archive == 0): ?>
                                                                     <div class="toolbar ml-auto">
@@ -534,13 +541,22 @@ to get the name or any value in the staff table, use the get and then the name o
                                                                         }
                                                                         ?>
                                                                     </p>
+                                                                    <p>
+                                                                    <div style="display: flex">
+                                                                        <span class="card-info">Notes</span>
+                                                                        <?php if(!empty($ticket->notes)): ?>
+                                                                            : <?= h($ticket->notes) ?>
+                                                                        <?php else: ?>
+                                                                            : -
+                                                                        <?php endif ?>
+                                                                    </div>
+                                                                    </p>
                                                                     <p><span
                                                                             class="card-info">Create time:</span> <?= $ticket->createtime->i18nFormat('yyyy-MM-dd HH:mm:ss', 'Australia/Sydney') ?>
                                                                     </p>
                                                                     <br>
                                                                 </div>
-                                                                <div
-                                                                    style="display: flex; justify-content: space-between">
+                                                                <div style="display: flex; justify-content: space-between">
                                                                     <a class="btn btn-primary"
                                                                        data-toggle="collapse"
                                                                        href="#collapseExample<?= $ticket->id ?>"
@@ -559,16 +575,14 @@ to get the name or any value in the staff table, use the get and then the name o
 //                                                                                'ticket_closed' => $ticket->closed
                                                                     ],
                                                                 ], ['class' => 'btn btn-primary']);
-
-                                                                //Removed delete for now, it breaks if try to delete with an attachment present inside
-
                                                                 ?>
+
+                                                                <?= $this->Form->postLink(__('Delete'), ['controller' => 'Tickets', 'action' => 'delete', $ticket->id], [
+                                                                    'class' => 'btn btn-danger',
+                                                                    'confirm' => __('Are you sure you want to delete Ticket title:  {0} \n From customer {1} {2}?', $ticket->title , $customer->f_name, $customer->l_name)
+                                                                ]) ?>
                                                             <?php endif; ?>
-                                                            <!--                                                                        --><?php //= $this->Form->postLink(__('Delete'), ['controller' => 'Tickets', 'action' => 'delete', $ticket->id], [
-//                                                                            'class' => 'btn btn-danger',
-//                                                                            'confirm' => __('Are you sure you want to delete Ticket title:  {0} \n From customer {1} {2}?', $ticket->title , $customer->f_name, $customer->l_name)
-//                                                                        ]) ?>
-                                                        <?php else: ?>
+
                                                         <?php endif; ?>
                                                             </span>
                                                                 </div>
@@ -664,7 +678,8 @@ to get the name or any value in the staff table, use the get and then the name o
                                                     <div
                                                         class="col-xl-12 col-lg-12 col-md-12col-sm-12 col-12">
                                                         <?php if ($this->Identity->get('role') === 'user' || $this->Identity->get('role') === 'staff'): ?>
-                                                            <?php if ($ticket->closed == true && $this->Identity->get('id') === $ticket->staff_id) : ?>
+                                                            <!-- show all ticket that are either allocated to the staff or "showall" is true AND its closed -->
+                                                            <?php if ($ticket->closed && $this->Identity->get('id') === $ticket->staff_id || ($ticket->showall && $ticket->closed)) : ?>
                                                                 <div class="card">
                                                                     <div class="card-header d-flex"
                                                                          style="background-color: lightgray">
@@ -678,6 +693,7 @@ to get the name or any value in the staff table, use the get and then the name o
                                                                             <?php elseif ($ticket->closed == false) : ?>
                                                                                 <h6> Status: Open </h6>
                                                                             <?php endif; ?>
+                                                                            <h6> <span class="card-info">Visible to all?</span> <?= h($ticket->showall ? 'Yes' : 'No') ?> </h6>
                                                                         </div>
                                                                         <div class="toolbar ml-auto">
                                                                             <?php if ($customer->archive == 0): ?>
@@ -702,19 +718,50 @@ to get the name or any value in the staff table, use the get and then the name o
                                                                                     class="card-info">Customer:</span> <?= h($customer->f_name) ?>
                                                                             </p>
                                                                             <p><span class="card-info">Assigned staff:</span> <?= $this->Html->link(__($ticket->user->f_name), ['controller' => 'Users', 'action' => 'view', $ticket->staff_id]) ?>
+                                                                            <p>
+                                                                            <div style="display: flex">
+                                                                                <span class="card-info">Notes</span>
+                                                                                <?php if(!empty($ticket->notes)): ?>
+                                                                                    : <?= h($ticket->notes) ?>
+                                                                                <?php else: ?>
+                                                                                    : -
+                                                                                <?php endif ?>
+                                                                            </div>
                                                                             </p>
                                                                             <p><span class="card-info">Create time:</span> <?= h($ticket->createtime) ?>
                                                                             </p>
                                                                             <br>
                                                                         </div>
-                                                                        <!--                                                                            <a href="#" class="btn btn-primary card__button" id="showButton">Go somewhere</a>-->
-                                                                        <a class="btn btn-primary"
-                                                                           data-toggle="collapse"
-                                                                           href="#collapseShowCloseTicket<?= $ticket->id ?>"
-                                                                           role="button" aria-expanded="false"
-                                                                           aria-controls="collapseExample">
-                                                                            Expand Attachments
-                                                                        </a>
+                                                                        <div style="display: flex; justify-content: space-between">
+                                                                            <a class="btn btn-primary"
+                                                                               data-toggle="collapse"
+                                                                               href="#collapseExample<?= $ticket->id ?>"
+                                                                               role="button" aria-expanded="false"
+                                                                               aria-controls="collapseExample">
+                                                                                Expand Attachments
+                                                                            </a>
+                                                                            <span>
+                                                        <?php if ($this->Identity->get('role') == 'root' || $this->Identity->get('role') == 'admin'): ?>
+                                                            <?php if ($customer->archive == 0): ?>
+                                                                <?php echo $this->Html->link(__('Edit'), ['controller' => 'Tickets', 'action' => 'edit', $ticket->id,
+                                                                    '?' => [
+                                                                        'f_name' => $customer->f_name,
+                                                                        'l_name' => $customer->l_name,
+                                                                        'cust_id' => $customer->id,
+//                                                                                'ticket_closed' => $ticket->closed
+                                                                    ],
+                                                                ], ['class' => 'btn btn-primary']);
+
+                                                                ?>
+
+                                                                <?= $this->Form->postLink(__('Delete'), ['controller' => 'Tickets', 'action' => 'delete', $ticket->id], [
+                                                                    'class' => 'btn btn-danger',
+                                                                    'confirm' => __('Are you sure you want to delete Ticket title:  {0} From customer {1} {2}?', $ticket->title , $customer->f_name, $customer->l_name)
+                                                                ]) ?>
+                                                            <?php endif; ?>
+                                                        <?php endif; ?>
+                                                            </span>
+                                                                        </div>
                                                                     </div>
                                                                     <!-- In order to show unique collapse for each class, its id must be different. -->
                                                                     <div class="collapse"
@@ -798,6 +845,7 @@ to get the name or any value in the staff table, use the get and then the name o
                                                                             <?php elseif ($ticket->closed == false) : ?>
                                                                                 <h6> Status: Open </h6>
                                                                             <?php endif; ?>
+                                                                            <h6> <span class="card-info">Visible to all?</span> <?= h($ticket->showall ? 'Yes' : 'No') ?> </h6>
                                                                         </div>
                                                                         <div class="toolbar ml-auto">
                                                                             <?php if ($customer->archive == 0): ?>
@@ -822,19 +870,51 @@ to get the name or any value in the staff table, use the get and then the name o
                                                                                     class="card-info">Customer:</span> <?= h($customer->f_name) ?>
                                                                             </p>
                                                                             <p><span class="card-info">Assigned staff:</span> <?= $this->Html->link(__($ticket->user->f_name), ['controller' => 'Users', 'action' => 'view', $ticket->staff_id]) ?>
+                                                                            <p>
+                                                                            <div style="display: flex">
+                                                                                <span class="card-info">Notes</span>
+                                                                                <?php if(!empty($ticket->notes)): ?>
+                                                                                    : <?= h($ticket->notes) ?>
+                                                                                <?php else: ?>
+                                                                                    : -
+                                                                                <?php endif ?>
+                                                                            </div>
                                                                             </p>
                                                                             <p><span class="card-info">Create time:</span> <?= h($ticket->createtime) ?>
                                                                             </p>
                                                                             <br>
                                                                         </div>
                                                                         <!--                                                                            <a href="#" class="btn btn-primary card__button" id="showButton">Go somewhere</a>-->
-                                                                        <a class="btn btn-primary"
-                                                                           data-toggle="collapse"
-                                                                           href="#collapseShowCloseTicket<?= $ticket->id ?>"
-                                                                           role="button" aria-expanded="false"
-                                                                           aria-controls="collapseExample">
-                                                                            Expand Attachments
-                                                                        </a>
+                                                                        <div style="display: flex; justify-content: space-between">
+                                                                            <a class="btn btn-primary"
+                                                                               data-toggle="collapse"
+                                                                               href="#collapseExample<?= $ticket->id ?>"
+                                                                               role="button" aria-expanded="false"
+                                                                               aria-controls="collapseExample">
+                                                                                Expand Attachments
+                                                                            </a>
+                                                                            <span>
+                                                        <?php if ($this->Identity->get('role') == 'root' || $this->Identity->get('role') == 'admin'): ?>
+                                                            <?php if ($customer->archive == 0): ?>
+                                                                <?php echo $this->Html->link(__('Edit'), ['controller' => 'Tickets', 'action' => 'edit', $ticket->id,
+                                                                    '?' => [
+                                                                        'f_name' => $customer->f_name,
+                                                                        'l_name' => $customer->l_name,
+                                                                        'cust_id' => $customer->id,
+//                                                                                'ticket_closed' => $ticket->closed
+                                                                    ],
+                                                                ], ['class' => 'btn btn-primary']);
+
+                                                                ?>
+
+                                                                <?= $this->Form->postLink(__('Delete'), ['controller' => 'Tickets', 'action' => 'delete', $ticket->id], [
+                                                                    'class' => 'btn btn-danger',
+                                                                    'confirm' => __('Are you sure you want to delete Ticket title:  {0} From customer {1} {2}?', $ticket->title , $customer->f_name, $customer->l_name)
+                                                                ]) ?>
+                                                            <?php endif; ?>
+                                                        <?php endif; ?>
+                                                            </span>
+                                                                        </div>
                                                                     </div>
                                                                     <!-- In order to show unique collapse for each class, its id must be different. -->
                                                                     <div class="collapse"
@@ -926,7 +1006,7 @@ to get the name or any value in the staff table, use the get and then the name o
                                                     <div
                                                         class="col-xl-12 col-lg-12 col-md-12col-sm-12 col-12">
                                                         <?php if ($this->Identity->get('role') === 'user' || $this->Identity->get('role') === 'staff'): ?>
-                                                            <?php if ($ticket->closed == false && $this->Identity->get('id') === $ticket->staff_id) : ?>
+                                                            <?php if (!$ticket->closed && $this->Identity->get('id') === $ticket->staff_id || (!$ticket->closed && $ticket->showall)) : ?>
                                                                 <div class="card">
                                                                     <div class="card-header d-flex"
                                                                          style="background-color: #50C878">
@@ -940,6 +1020,7 @@ to get the name or any value in the staff table, use the get and then the name o
                                                                             <?php elseif ($ticket->closed == false) : ?>
                                                                                 <h6> Status: Open </h6>
                                                                             <?php endif; ?>
+                                                                            <h6> <span class="card-info">Visible to all?</span> <?= h($ticket->showall ? 'Yes' : 'No') ?> </h6>
                                                                         </div>
                                                                         <div class="toolbar ml-auto">
                                                                             <?php if ($customer->archive == 0): ?>
@@ -964,19 +1045,50 @@ to get the name or any value in the staff table, use the get and then the name o
                                                                                     class="card-info">Customer:</span> <?= h($customer->f_name) ?>
                                                                             </p>
                                                                             <p><span class="card-info">Assigned staff:</span> <?= $this->Html->link(__($ticket->user->f_name), ['controller' => 'Users', 'action' => 'view', $ticket->staff_id]) ?>
+                                                                            <p>
+                                                                            <div style="display: flex">
+                                                                                <span class="card-info">Notes</span>
+                                                                                <?php if(!empty($ticket->notes)): ?>
+                                                                                    : <?= h($ticket->notes) ?>
+                                                                                <?php else: ?>
+                                                                                    : -
+                                                                                <?php endif ?>
+                                                                            </div>
                                                                             </p>
                                                                             <p><span class="card-info">Create time:</span> <?= h($ticket->createtime) ?>
                                                                             </p>
                                                                             <br>
                                                                         </div>
-                                                                        <!--                                                                            <a href="#" class="btn btn-primary card__button" id="showButton">Go somewhere</a>-->
-                                                                        <a class="btn btn-primary"
-                                                                           data-toggle="collapse"
-                                                                           href="#collapseShowCloseTicket<?= $ticket->id ?>"
-                                                                           role="button" aria-expanded="false"
-                                                                           aria-controls="collapseExample">
-                                                                            Expand Attachments
-                                                                        </a>
+                                                                        <div style="display: flex; justify-content: space-between">
+                                                                            <a class="btn btn-primary"
+                                                                               data-toggle="collapse"
+                                                                               href="#collapseExample<?= $ticket->id ?>"
+                                                                               role="button" aria-expanded="false"
+                                                                               aria-controls="collapseExample">
+                                                                                Expand Attachments
+                                                                            </a>
+                                                                            <span>
+                                                        <?php if ($this->Identity->get('role') == 'root' || $this->Identity->get('role') == 'admin'): ?>
+                                                            <?php if ($customer->archive == 0): ?>
+                                                                <?php echo $this->Html->link(__('Edit'), ['controller' => 'Tickets', 'action' => 'edit', $ticket->id,
+                                                                    '?' => [
+                                                                        'f_name' => $customer->f_name,
+                                                                        'l_name' => $customer->l_name,
+                                                                        'cust_id' => $customer->id,
+//                                                                                'ticket_closed' => $ticket->closed
+                                                                    ],
+                                                                ], ['class' => 'btn btn-primary']);
+
+                                                                ?>
+
+                                                                <?= $this->Form->postLink(__('Delete'), ['controller' => 'Tickets', 'action' => 'delete', $ticket->id], [
+                                                                    'class' => 'btn btn-danger',
+                                                                    'confirm' => __('Are you sure you want to delete Ticket title:  {0} From customer {1} {2}?', $ticket->title , $customer->f_name, $customer->l_name)
+                                                                ]) ?>
+                                                            <?php endif; ?>
+                                                        <?php endif; ?>
+                                                            </span>
+                                                                        </div>
                                                                     </div>
                                                                     <!-- In order to show unique collapse for each class, its id must be different. -->
                                                                     <div class="collapse"
@@ -1060,6 +1172,7 @@ to get the name or any value in the staff table, use the get and then the name o
                                                                             <?php elseif ($ticket->closed == false) : ?>
                                                                                 <h6> Status: Open </h6>
                                                                             <?php endif; ?>
+                                                                            <h6> <span class="card-info">Visible to all?</span> <?= h($ticket->showall ? 'Yes' : 'No') ?> </h6>
                                                                         </div>
                                                                         <div class="toolbar ml-auto">
                                                                             <?php if ($customer->archive == 0): ?>
@@ -1085,18 +1198,50 @@ to get the name or any value in the staff table, use the get and then the name o
                                                                             </p>
                                                                             <p><span class="card-info">Assigned staff:</span> <?= $this->Html->link(__($ticket->user->f_name), ['controller' => 'Users', 'action' => 'view', $ticket->staff_id]) ?>
                                                                             </p>
+                                                                            <p>
+                                                                            <div style="display: flex">
+                                                                                <span class="card-info">Notes</span>
+                                                                                <?php if(!empty($ticket->notes)): ?>
+                                                                                    : <?= h($ticket->notes) ?>
+                                                                                <?php else: ?>
+                                                                                    : -
+                                                                                <?php endif ?>
+                                                                            </div>
+                                                                            </p>
                                                                             <p><span class="card-info">Create time:</span> <?= h($ticket->createtime) ?>
                                                                             </p>
                                                                             <br>
                                                                         </div>
-                                                                        <!--                                                                            <a href="#" class="btn btn-primary card__button" id="showButton">Go somewhere</a>-->
-                                                                        <a class="btn btn-primary"
-                                                                           data-toggle="collapse"
-                                                                           href="#collapseShowCloseTicket<?= $ticket->id ?>"
-                                                                           role="button" aria-expanded="false"
-                                                                           aria-controls="collapseExample">
-                                                                            Expand Attachments
-                                                                        </a>
+                                                                        <div style="display: flex; justify-content: space-between">
+                                                                            <a class="btn btn-primary"
+                                                                               data-toggle="collapse"
+                                                                               href="#collapseExample<?= $ticket->id ?>"
+                                                                               role="button" aria-expanded="false"
+                                                                               aria-controls="collapseExample">
+                                                                                Expand Attachments
+                                                                            </a>
+                                                                            <span>
+                                                        <?php if ($this->Identity->get('role') == 'root' || $this->Identity->get('role') == 'admin'): ?>
+                                                            <?php if ($customer->archive == 0): ?>
+                                                                <?php echo $this->Html->link(__('Edit'), ['controller' => 'Tickets', 'action' => 'edit', $ticket->id,
+                                                                    '?' => [
+                                                                        'f_name' => $customer->f_name,
+                                                                        'l_name' => $customer->l_name,
+                                                                        'cust_id' => $customer->id,
+//                                                                                'ticket_closed' => $ticket->closed
+                                                                    ],
+                                                                ], ['class' => 'btn btn-primary']);
+
+                                                                ?>
+
+                                                                <?= $this->Form->postLink(__('Delete'), ['controller' => 'Tickets', 'action' => 'delete', $ticket->id], [
+                                                                    'class' => 'btn btn-danger',
+                                                                    'confirm' => __('Are you sure you want to delete Ticket title:  {0} From customer {1} {2}?', $ticket->title , $customer->f_name, $customer->l_name)
+                                                                ]) ?>
+                                                            <?php endif; ?>
+                                                        <?php endif; ?>
+                                                            </span>
+                                                                        </div>
                                                                     </div>
                                                                     <!-- In order to show unique collapse for each class, its id must be different. -->
                                                                     <div class="collapse"

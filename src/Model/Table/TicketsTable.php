@@ -107,6 +107,15 @@ class TicketsTable extends Table
             ->requirePresence('escalate', 'create')
             ->notEmptyString('escalate');
 
+        $validator
+            ->boolean('showall')
+            ->requirePresence('showall', 'create');
+
+        $validator
+            ->scalar('notes')
+            ->maxLength('notes', 300)
+            ->requirePresence('notes', 'create');
+
         return $validator;
     }
 

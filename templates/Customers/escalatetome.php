@@ -100,7 +100,7 @@ to get the name or any value in the staff table, use the get and then the name o
     <div class="row">
         <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
             <div class="section-block" id="cardaction">
-                <h3 class="section-title" style="color: midnightblue">Escalated Customers</h3>
+                <h3 class="section-title" style="color: midnightblue; margin-top: -25px">Escalated Customers</h3>
                 <p style ="color: midnightblue"> List of customers with tickets escalated.</p>
             </div>
         </div>

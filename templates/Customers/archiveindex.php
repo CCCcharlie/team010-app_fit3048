@@ -99,6 +99,16 @@ $checkConnection = function (string $name) {
         <!-- ============================================================== -->
         <!-- pageheader  -->
         <!-- ============================================================== -->
+        <div class="page-breadcrumb">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="/" class="breadcrumb-link">Home</a></li>
+                    <li class="breadcrumb-item"><a href="/customers" class="breadcrumb-link">Customers</a></li>
+                    <li class="breadcrumb-item active" aria-current="page"> Archived Customer</li>
+                </ol>
+            </nav>
+        </div>
+
         <div class="row">
             <div class="F">
                     <!-- To obtain the identity, use $identity = $this->request->getAttribute('authentication')->getIdentity(); to find the currently logged in entity
@@ -120,8 +130,8 @@ $checkConnection = function (string $name) {
         <div class="customers index content">
             <div class="row">
                 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-                    <div class="section-block" id="cardaction">
-                        <h3 class="section-title" style="color: midnightblue;" >Archived Customer View</h3>
+                    <div class="section-block"    style=" margin-top: -5vh;"  id="cardaction">
+                        <h3 class="section-title" style="color: midnightblue; " >Archived Customer View</h3>
                         <p style="color: midnightblue"> This page shows all archived profiles. </p>
                     </div>
                 </div>

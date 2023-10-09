@@ -373,13 +373,13 @@
     var pageTitle = document.title;
 
     // split the title
-    var words = pageTitle.split(' ');
+    var words = pageTitle.split('/');
 
     // get the last word
-    var lastWord = words[words.length - 1];
+    var lastWord = words[words.length -1];
     // update the car
-    var activeBreadcrumb = document.querySelector(".breadcrumb-item.active");
-    activeBreadcrumb.textContent = lastWord;
+    // var activeBreadcrumb = document.querySelector(".breadcrumb-item.active");
+    // activeBreadcrumb.textContent = lastWord;
 </script>
 
 <?= $this->Html->script(['jquery-3.3.1.min.js', 'bootstrap.bundle.js', 'main-js', 'jquery.slimscroll.js']) ?>

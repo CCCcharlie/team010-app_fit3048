@@ -39,6 +39,16 @@
             <!-- ============================================================== -->
             <div class="row">
                 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+
+                    <div class="page-breadcrumb">
+                        <nav aria-label="breadcrumb">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="/" class="breadcrumb-link">Home</a></li>
+                                <li class="breadcrumb-item active" aria-current="page"> Views All Staffs</li>
+                            </ol>
+                        </nav>
+                    </div>
+
                     <?php if (isset($successMessage)): ?>
                         <div class="p-3 mb-2 bg-success text-white"><?= h($successMessage) ?></div>
                     <?php endif; ?>
@@ -64,7 +74,7 @@ to get the name or any value in the staff table, use the get and then the name o
             <!-- ============================================================== -->
             <!-- end pageheader  -->
             <!-- ============================================================== -->
-<div class="users index content">
+<!--<div class="users index content">-->
 <div class="section-block" id="cardaction">
 <h3 class="section-title" style="color: midnightblue"><?= __('Staff Accounts') ?></h3>
 
@@ -147,7 +157,7 @@ to get the name or any value in the staff table, use the get and then the name o
     </tbody>
 </table>
 </div>
-</div>
+<!--</div>-->
 
             <!--EXPLAINING THE SCRIPTS -->
             <!--Concept - Template-->

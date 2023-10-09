@@ -31,10 +31,20 @@
 
 <body>
 
+
         </aside>
         <div class="customers add content">
             <div class="column">
                 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                    <div class="page-breadcrumb">
+                        <nav aria-label="breadcrumb">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="/" class="breadcrumb-link">Home</a></li>
+                                <li class="breadcrumb-item"><a href="/customers" class="breadcrumb-link">Customers</a></li>
+                                <li class="breadcrumb-item active" aria-current="page">Add Customers </li>
+                            </ol>
+                        </nav>
+                    </div>
                     <div class="section-block" id="basicform">
                     </div>
                     <div class="card">

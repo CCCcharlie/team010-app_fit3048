@@ -38,7 +38,7 @@
     <h3 style="color: midnightblue"><?= __('Unassigned Tickets') ?></h3>
     <p style="color: midnightblue"> These profiles do not have an assigned staff member. Please assign a staff member to these profiles. </p>
 
-    <div class="table-responsive table table-hover table-striped">
+    <div class="table-responsive table table-hover table-striped" style="margin-left: 70px; margin-top: 40px">
         <table>
             <thead>
             <tr>

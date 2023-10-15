@@ -252,7 +252,7 @@
                                             <a class="nav-link" href="/customers">View All Customers</a>
                                         </li>
                                         <li class="nav-item">
-                                            <a class="nav-link" href="/customers/add">Add A Customer Profile</a>
+                                            <a class="nav-link" href="/customers/add">Add New Customer Profile</a>
                                         </li>
                                         <li class="nav-item">
                                             <a class="nav-link" href="/customers/archiveindex">View All Archived Profiles</a>
@@ -373,13 +373,13 @@
     var pageTitle = document.title;
 
     // split the title
-    var words = pageTitle.split(' ');
+    var words = pageTitle.split('/');
 
     // get the last word
-    var lastWord = words[words.length - 1];
+    var lastWord = words[words.length -1];
     // update the car
-    var activeBreadcrumb = document.querySelector(".breadcrumb-item.active");
-    activeBreadcrumb.textContent = lastWord;
+    // var activeBreadcrumb = document.querySelector(".breadcrumb-item.active");
+    // activeBreadcrumb.textContent = lastWord;
 </script>
 
 <?= $this->Html->script(['jquery-3.3.1.min.js', 'bootstrap.bundle.js', 'main-js', 'jquery.slimscroll.js']) ?>

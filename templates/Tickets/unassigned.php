@@ -25,10 +25,20 @@
 </head>
 <body>
 <div class="tickets index content">
-    <h3><?= __('Unassigned Tickets') ?></h3>
+    <div class="page-breadcrumb">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="/" class="breadcrumb-link">Home</a></li>
+                <li class="breadcrumb-item"><a href="/tickets" class="breadcrumb-link"> View tickets</a></li>
+                <li class="breadcrumb-item active" aria-current="page"> View Unassigned tickets</li>
+            </ol>
+        </nav>
+    </div>
+
+    <h3 style="color: midnightblue"><?= __('Unassigned Tickets') ?></h3>
     <p style="color: midnightblue"> These profiles do not have an assigned staff member. Please assign a staff member to these profiles. </p>
 
-    <div class="table-responsive table table-hover table-striped">
+    <div class="table-responsive table table-hover table-striped" style="margin-left: 70px; margin-top: 40px">
         <table>
             <thead>
             <tr>

@@ -22,6 +22,9 @@ use Cake\ORM\Entity;
  * @property \App\Model\Entity\Content[] $contents
  *
  * @property bool $escalate
+ *
+ * @property bool $showall
+ * @property string $notes
  */
 class Ticket extends Entity
 {
@@ -46,5 +49,7 @@ class Ticket extends Entity
         'user' => true,
         'contents' => true,
         'escalate' => true,
+        'showall' => true,
+        'notes' => true,
     ];
 }

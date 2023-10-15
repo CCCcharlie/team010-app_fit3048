@@ -31,14 +31,24 @@
 
 <body>
 
+
         </aside>
         <div class="customers add content">
             <div class="column">
                 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                    <div class="page-breadcrumb">
+                        <nav aria-label="breadcrumb">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="/" class="breadcrumb-link">Home</a></li>
+                                <li class="breadcrumb-item"><a href="/customers" class="breadcrumb-link">Customers</a></li>
+                                <li class="breadcrumb-item active" aria-current="page">Add Customers </li>
+                            </ol>
+                        </nav>
+                    </div>
                     <div class="section-block" id="basicform">
                     </div>
                     <div class="card">
-                        <h5 class="card-header" style="color: royalblue">Add a New Customer</h5>
+                        <h4 class="card-header" style="color: midnightblue">Add a New Customer</h4>
                         <div class="card-body">
                             <?= $this->Form->create($customer, ['onsubmit' => 'return validateEmail();']) ?>
                             <div class="form-group">
@@ -115,7 +125,6 @@
                                         'oninput' => 'this.setCustomValidity(this.value.charAt(0) === " " ? "Notes cannot start with a space" : "")',
                                     ]
                                 ) ?>
-
                                 <!-- Display validation error for the 'f_name' field -->
                                 <?= $this->Form->error('notes'); ?>
                                 <small class="form-text text-muted">500 Character limit. Not Required</small>

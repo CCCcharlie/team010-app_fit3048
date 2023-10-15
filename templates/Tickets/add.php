@@ -97,6 +97,25 @@
                                     <?= $this->Form->label('staff_id', 'Staff*', ['class' => 'col-form-label']) ?>
                                     <?php echo $this->Form->control('staff_id', ['options' => $users, 'label' => false]); ?>
                                 </div>
+
+                                <div class = "form-group">
+                                    <?= $this->Form->label('notes', 'Notes', ['class' => 'col-form-label']) ?>
+                                    <?= $this->Form->textarea('notes', [
+                                        'class' => 'form-control',
+                                        'required' => false,
+                                        'maxlength' => 300,
+                                        'rows' => 3,
+                                        'placeholder' => 'Add a note for this ticket here',
+                                    ]) ?>
+                                    <!-- Display validation error for the 'f_name' field -->
+                                    <?= $this->Form->error('notes'); ?>
+                                </div>
+
+                                <div class="form-group" style="display: flex; align-items: center;">
+                                    <?= $this->Form->label('showall', "Visible to all", ['class' => 'col-form-label', 'style' => 'margin-right: 10px;']) ?>
+                                    <?= $this->Form->checkbox('showall', ['checked' => false, 'class' => '', 'required' => false]) ?>
+                                </div>
+
                             </fieldset>
                             <div class="form-group d-flex justify-content-between align-items-center">
                                 <?= $this->Form->create(null, ['url' => ['controller' => 'Customers', 'action' => 'view', $custId]]) ?>

@@ -37,20 +37,31 @@
 <div class="users index content">
     <!-- ============================================================== -->
     <!-- pageheader  -->
+
+    <div class="page-breadcrumb">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="/" class="breadcrumb-link">Home</a></li>
+
+                <li class="breadcrumb-item active" aria-current="page"> Site Editor </li>
+            </ol>
+        </nav>
+    </div>
+
     <!-- ============================================================== -->
     <!-- ============================================================== -->
     <!-- end pageheader  -->
     <!-- ============================================================== -->
         <div class="section-block" id="cardaction">
-            <h3 class="section-title"><?= __('Site Editor') ?></h3>
-            <div class="accordion cb">
-                <div class="accordion-header button">
+            <h3 class="section-title" style="color: midnightblue"><?= __('Site Editor') ?></h3>
+            <div class="accordion cb" style="color: midnightblue">
+                <div class="accordion-header button" style="color: midnightblue">
                     <button>
-                        <span class="icon">&#9654;</span> Welcome to the Site Content Editor. If you are unsure of how to use this page. <span> <strong> Click me! </strong> </span> <br>
+                        <span class="icon" style="color: midnightblue"> &#9654; Welcome to the Site Content Editor. If you are unsure of how to use this page. <span> <strong> Click me! </strong> </span> <br>
                     </button>
                 </div>
-                <div class="container" style="background-color: #ADD8E6; border: 2px solid black;">
-                    <div class="accordion-panel">
+                <div class="container" style="background-color: #ADD8E6; border: 2px midnightblue;">
+                    <div class="accordion-panel" style="color: midnightblue">
                         <p>This is the site content editor. It's here to let you change your website and keep things up to-date. <br>
                         Don't know how to edit? Follow the tips listed here: </p>
                         <p>1. Find the piece you want to edit through using both the hint and the description.</p>

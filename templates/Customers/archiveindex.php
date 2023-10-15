@@ -99,6 +99,16 @@ $checkConnection = function (string $name) {
         <!-- ============================================================== -->
         <!-- pageheader  -->
         <!-- ============================================================== -->
+        <div class="page-breadcrumb">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="/" class="breadcrumb-link">Home</a></li>
+                    <li class="breadcrumb-item"><a href="/customers" class="breadcrumb-link">Customers</a></li>
+                    <li class="breadcrumb-item active" aria-current="page"> Archived Customer</li>
+                </ol>
+            </nav>
+        </div>
+
         <div class="row">
             <div class="F">
                     <!-- To obtain the identity, use $identity = $this->request->getAttribute('authentication')->getIdentity(); to find the currently logged in entity
@@ -120,8 +130,8 @@ $checkConnection = function (string $name) {
         <div class="customers index content">
             <div class="row">
                 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-                    <div class="section-block" id="cardaction">
-                        <h3 class="section-title" style="color: midnightblue">Archived Customer View</h3>
+                    <div class="section-block"    style=" margin-top: -5vh;"  id="cardaction">
+                        <h3 class="section-title" style="color: midnightblue; " >Archived Customer View</h3>
                         <p style="color: midnightblue"> This page shows all archived profiles. </p>
                     </div>
                 </div>
@@ -239,7 +249,7 @@ $checkConnection = function (string $name) {
 
 
                         <!--table view option-->
-                        <table class="table table-hover table-striped" id="customers-table">
+                        <table class="table table-hover table-striped" id="customers-table" style="margin-left: 150px">
                             <thead>
                             <tr>
                                 <th class="col-md-1">
@@ -334,15 +344,18 @@ $checkConnection = function (string $name) {
                                         <?php endif; ?>
                                     </td>
                                     <td style="width: 200px">
+                                        <div style="display: flex; flex-direction: column;">
                                         <?= $this->Form->postLink(
                                             __('Delete Profile'),
                                             ['action' => 'deleteWithContents', $customer->id],
                                             [
                                                 'class' => 'btn btn-danger',
                                                 'confirm' => __('Are you sure you want to delete this customer profile and its associated contents? This process is irreversible!'),
+                                                'style' => 'min-width: 65%;'
                                             ]
                                         ) ?>
-                                        <?= $this->Html->link(__('View Full Profile'), ['action' => 'view', $customer->id], ['class' => 'btn btn-primary']) ?>
+                                        <?= $this->Html->link(__('View Profile'), ['action' => 'view', $customer->id], ['class' => 'btn btn-primary', 'style' => 'min-width: 65%;']) ?>
+                                        </div>
                                     </td>
 
                                 </tr>
@@ -357,6 +370,8 @@ $checkConnection = function (string $name) {
                             </tbody>
                         </table>
                     </div>
+                </div>
+                </div>
 
                     <!--                        <a href="javascript: " id="return-to-top"><i class="icon-chevron-up"></i></a>-->
 

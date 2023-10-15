@@ -99,7 +99,7 @@ to get the name or any value in the staff table, use the get and then the name o
 
     <div class="row">
         <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-            <div class="section-block" id="cardaction">
+            <div class="section-block" style=" margin-top: -3vh;" id="cardaction">
                 <h3 class="section-title" style="color: midnightblue">Escalated Customers</h3>
                 <p style ="color: midnightblue"> List of customers with tickets escalated.</p>
             </div>
@@ -120,8 +120,7 @@ to get the name or any value in the staff table, use the get and then the name o
 
 
             <br>
-            <h3 style ="color: midnightblue" class="section-title"> Sort by: </h3>
-            <br>
+            <h6 style ="color: midnightblue" class="section-title"> Sort by:
 
 
 
@@ -199,9 +198,11 @@ to get the name or any value in the staff table, use the get and then the name o
                             <img src="<?= $this->Url->image('arrow-up.png', ['fullBase' => true, 'webroot' => 'img/', 'width' => 10]) ?>" alt="Up Arrow">
                         <?php endif; ?>
                     <?php endif; ?>
+            </h6>
                 </th>
             </tr>
 
+            <br>
             <br>
             <br>
 

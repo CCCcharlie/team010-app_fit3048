@@ -666,9 +666,9 @@ to get the name or any value in the staff table, use the get and then the name o
                                         <div class="card">
                                             <!-- Checks first whether or not there are any tickets that are closed. If so, say that there
                                             are no closed tickets (same is applied for open tickets-->
-                                            <?php if (empty(array_filter($tickets, function ($ticket) {
-                                                return $ticket->closed == true;
-                                            }))) : ?>
+                                            <?php if (count(array_filter($tickets, function ($ticket) {
+                                                    return $ticket->closed === true;
+                                                })) === 0): ?>
                                                 <div class="alert alert-primary" role="alert">
                                                     <p>No Closed tickets found.</p>
                                                 </div>
@@ -994,9 +994,9 @@ to get the name or any value in the staff table, use the get and then the name o
                                         <div class="card">
                                             <!-- Checks first whether or not there are any tickets that are closed. If so, say that there
                                             are no closed tickets (same is applied for open tickets-->
-                                            <?php if (empty(array_filter($tickets, function ($ticket) {
-                                                return $ticket->closed == true;
-                                            }))) : ?>
+                                            <?php if (count(array_filter($tickets, function ($ticket) {
+                                                    return $ticket->closed === false;
+                                                    })) === 0): ?>
                                                 <div class="alert alert-primary" role="alert">
                                                     <p>No Open tickets found.</p>
                                                 </div>

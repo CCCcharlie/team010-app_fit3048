@@ -115,7 +115,7 @@ class CounsellorsTable extends Table
             ->scalar('phone')
             ->maxLength('phone', 20)
             ->add('phone', 'custom', [
-                'rule' => ['custom', '/^[^A-Za-z]+$/'],
+                'rule' => ['custom', '\(\+\d{2}\) \d{3}-\d{3}-\d{3}'],
                 'message' => 'Only non-alphabetic characters are allowed.'
             ])
             ->allowEmptyString('phone');

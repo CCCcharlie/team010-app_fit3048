@@ -85,12 +85,12 @@
                                         'class' => '', 'maxlength' => 20,
                                         'size' => 20,
                                         'placeholder' => '(+61) 123-456-789',
-                                        'pattern' => '^[^A-Za-z]+$',
+                                        'pattern' => '\(\+\d{2}\) \d{3}-\d{3}-\d{3}', // Ensures its this format
                                         'oninput' => 'this.setCustomValidity(this.value.charAt(0) === " " ? Notes cannot start with a space" : "")'
                                     ]) ?>
                                     <!-- Display validation error for the 'contact' field -->
                                     <?= $this->Form->error('phone'); ?>
-                                    <small class="form-text text-muted">Phone must not contain Alphabetical letters</small>
+                                    <small class="form-text text-muted">Please follow the format: "(+61) 123-456-789"</small>
                                 </div>
                                 <div class="form-group">
                                     <?= $this->Form->label('email', 'Email Address', ['class' => 'blue-label-text']) ?>

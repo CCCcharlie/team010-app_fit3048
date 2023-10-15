@@ -76,7 +76,6 @@ class CustomersController extends AppController
      */
     public function index()
     {
-
         $query = $this->Customers->find();
 
         $search = $this->request->getQuery('search');

@@ -60,18 +60,65 @@ class CounsellorsTable extends Table
             ->scalar('f_name')
             ->maxLength('f_name', 32)
             ->requirePresence('f_name', 'create')
-            ->notEmptyString('f_name');
+            ->notEmptyString('f_name')
+            ->add('f_name', [
+                'validCharacters' => [
+                    'rule' => ['custom', '/^(?! )[a-zA-Z]+(?:[-\'\s]{1}[a-zA-Z]+)*$/'],
+                    'message' => 'Please enter a valid name. Names cannot have multiple "-", or apostrophes in a row. Names cannot have numbers. Names cannot start with a space. Names must be separated with
+                    a "-" instead of a space. Name cannot have trailling spaces'
+                ]
+            ]);
 
         $validator
             ->scalar('l_name')
             ->maxLength('l_name', 32)
             ->requirePresence('l_name', 'create')
-            ->notEmptyString('l_name');
+            ->notEmptyString('l_name')
+            ->add('l_name', [
+                'validCharacters' => [
+                    'rule' => ['custom', '/^(?! )[a-zA-Z]+(?:[-\'\s]{1}[a-zA-Z]+)*$/'],
+                    'message' => 'Please enter a valid name. Names cannot have multiple "-", or apostrophes in a row. Names cannot have numbers. Names cannot start with a space. Names must be separated with
+                    a "-" instead of a space Name cannot have trailling spaces'
+                ]
+            ]);
 
         $validator
             ->scalar('notes')
             ->maxLength('notes', 150)
             ->allowEmptyString('notes');
+
+        $validator
+            ->scalar('email')
+            ->maxLength('email', 320)
+            ->requirePresence('email', 'create')
+            ->notEmptyString('email')
+            ->add('email', [
+                'validEmail' => [
+                    'rule' => 'email',
+                    'message' => 'Please enter a valid email address. Eg. test@holistichealings.com'
+                ],
+                'emailContainsAt' => [
+                    'rule' => ['custom', '/@/'],
+                    'message' => 'Your e-mail must contain the @ symbol.'
+                ],
+                'noConsecutiveDelimiters' => [
+                    'rule' => ['custom', '/^(?!.*(\.\.|\@\@)).*$/'],
+                    'message' => 'Your e-mail address cannot contain consecutive delimiters (e.g. ".." or "@@").'
+                ],
+                'noSpecialCharacters' => [
+                    'rule' => ['custom', '/^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/'],
+                    'message' => 'Your e-mail address can only contain letters, digits, hyphens, underscores, dots, and at symbols.'
+                ]
+            ]);
+
+        $validator
+            ->scalar('phone')
+            ->maxLength('phone', 20)
+            ->add('phone', 'custom', [
+                'rule' => ['custom', '/^[^A-Za-z]+$/'],
+                'message' => 'Only non-alphabetic characters are allowed.'
+            ])
+            ->allowEmptyString('phone');
 
         $validator
             ->integer('cust_id')

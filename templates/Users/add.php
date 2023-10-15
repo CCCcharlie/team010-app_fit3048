@@ -43,6 +43,7 @@
                                         'size' => 32,
                                         'required' => true,
                                         'title' => 'Please enter your first name using letters and hyphens only',
+                                        'pattern' => '^[A-Za-z-]+$',
                                         'oninput' => 'this.setCustomValidity(this.value.charAt(0) === " " ? "First name cannot start with a space" : "")',
                                     ]) ?>
 

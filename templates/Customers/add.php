@@ -125,7 +125,6 @@
                                         'oninput' => 'this.setCustomValidity(this.value.charAt(0) === " " ? "Notes cannot start with a space" : "")',
                                     ]
                                 ) ?>
-
                                 <!-- Display validation error for the 'f_name' field -->
                                 <?= $this->Form->error('notes'); ?>
                                 <small class="form-text text-muted">500 Character limit. Not Required</small>

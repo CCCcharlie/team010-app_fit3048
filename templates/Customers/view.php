@@ -1442,8 +1442,19 @@ to get the name or any value in the staff table, use the get and then the name o
                                             echo '<td>' . h($counsellor->f_name) . '</td>';
                                             echo '<td>' . h($counsellor->l_name) . '</td>';
                                             echo '<td>' . h($counsellor->notes) . '</td>';
-                                            echo '<td>' . h($counsellor->contact) . '</td>';
-
+                                            if (empty($counsellor->email) && empty($counsellor->phone)) {
+                                                // Both email and phone are empty
+                                                echo '<td>' . "No email or phone provided" . '</td>';
+                                            } else {
+                                                echo '<td>';
+                                                if (!empty($counsellor->email)) {
+                                                    echo h($counsellor->email) . '<br>';
+                                                }
+                                                if (!empty($counsellor->phone)) {
+                                                    echo h($counsellor->phone);
+                                                }
+                                                echo '</td>';
+                                            }
                                             // Actions column with View, Edit, and Delete buttons
                                             echo '<td>';
 

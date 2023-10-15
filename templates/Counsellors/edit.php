@@ -40,14 +40,13 @@
                             'size' => 32,
                             'required' => true,
                             'title' => 'Please enter your first name using letters and hyphens only',
-                            'pattern' => '^[A-Za-z-]+$',
+                            'pattern' => '\(\+\d{2}\) \d{3}-\d{3}-\d{3}', // Ensures its this format
                             'oninput' => 'this.setCustomValidity(this.value.charAt(0) === " " ? "First name cannot start with a space" : "")',
                         ]) ?>
 
                         <!-- Display validation error for the 'f_name' field -->
                         <?= $this->Form->error('f_name'); ?>
-
-                        <small class="form-text text-muted">Letters and hyphens only.</small>
+                        <small class="form-text text-muted">Please follow the format: "(+61) 123-456-789"</small>
                     </div>
                     <div class="form-group">
                         <?= $this->Form->label('l_name', 'Last Name*', ['class' => 'col-form-label']) ?>

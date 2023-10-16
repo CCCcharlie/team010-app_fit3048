@@ -147,7 +147,6 @@ class UsersController extends AppController
         parent::initialize();
 
         $this->set('role_choice', [
-            'root' => 'Root',
             'admin' => 'Admin',
             'staff' => 'Staff',
             'user' => 'User',

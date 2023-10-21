@@ -99,10 +99,29 @@ to get the name or any value in the staff table, use the get and then the name o
 
     <div class="row">
         <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-            <div class="section-block" style=" margin-top: -3vh;" id="cardaction">
-                <h3 class="section-title" style="color: midnightblue">Escalated Customers</h3>
-                <p style ="color: midnightblue"> List of customers with tickets escalated.</p>
+            <div class="section-block" id="cardaction">
+                <h3 class="section-title" style="color: midnightblue">Escalated Customers</h3>                <div class="accordion cb" style="color: midnightblue">
+                    <div class="accordion-header button" style="color: midnightblue">
+                        <button>
+                        <span class="icon" style="color: midnightblue"> &#9654; Welcome to the customers with tickets escalated. If you are unsure of how to use this page. <span> <strong> Click me! </strong> </span> <br>
+                        </button>
+                    </div>
+                    <div class="container" style="background-color: #ADD8E6; border: 2px midnightblue;">
+                        <div class="accordion-panel" style="color: midnightblue">
+                            <p>	Search Customer using search bar.
+                                <br> Action: </p>
+                            <p>		Viewing full profile of the customer.
+                            </p>
+                            <p>		Unescalate the customer and assign it back to the original staff.
+                            </p>
+                            <p>		Sort the customer base on different condition.
+                            </p>
+
+                        </div>
+                    </div>
+                </div>
             </div>
+
         </div>
     </div>
     <div class="row">
@@ -371,6 +390,31 @@ to get the name or any value in the staff table, use the get and then the name o
 <!---->
 <!--    });-->
 <!--</script>-->
+<script>
+    var acc = document.querySelectorAll(".accordion-header");
+    var i =0;
+
+    for (i = 0; i < acc.length; i++) {
+
+        var panel = acc[i].nextElementSibling; // Get the panel
+
+        /* Hide panel initially */
+        panel.style.display = "none";
+
+        acc[i].addEventListener("click", function() {
+            /* Toggle active class to expand/collapse panel */
+            this.classList.toggle("active");
+
+            /* Toggle display property of panel to show/hide content */
+            var panel = this.nextElementSibling;
+            if (panel.style.display === "block") {
+                panel.style.display = "none";
+            } else {
+                panel.style.display = "block";
+            }
+        });
+    }
+</script>
 
 
 </body>

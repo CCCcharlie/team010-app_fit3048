@@ -54,6 +54,7 @@ $checkConnection = function (string $name) {
 
 
 <head>
+
     <?= $this->Html->meta('icon', 'favicon.ico', ['type' => 'icon']) ?>
 
     <!-- Required meta tags -->
@@ -108,6 +109,30 @@ to get the name or any value in the staff table, use the get and then the name o
     <!-- ============================================================== -->
     <div class="row">
         <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+            <div class="section-block" id="cardaction">
+                <h3 class="section-title" style="color: midnightblue"><?= __('Customer profile') ?></h3>
+                <div class="accordion cb" style="color: midnightblue">
+                    <div class="accordion-header button" style="color: midnightblue">
+                        <button>
+                        <span class="icon" style="color: midnightblue"> &#9654; Welcome to the Customer profile. If you are unsure of how to use this page. <span> <strong> Click me! </strong> </span> <br>
+                        </button>
+                    </div>
+                    <div class="container" style="background-color: #ADD8E6; border: 2px midnightblue;">
+                        <div class="accordion-panel" style="color: midnightblue">
+                            <p>	Select the information want to view using the top navigation bar
+                                <br>View Customer Tickets: </p>
+                            <p>		Using fillers option to view the tickets close/open
+                            </p>
+                            <p>		Create a tickets for the current customer
+                                </p>
+                            <p>		Expand attachment to view, download or delete the file relate to it, add attachments to the tickets
+                            </p>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             <div class="page-header">
                 <!-- To obtain the identity, use $identity = $this->request->getAttribute('authentication')->getIdentity(); to find the currently logged in entity
                 to get the name or any value in the staff table, use the get and then the name of the attribute $identity->get('staff_fname')-->
@@ -1569,6 +1594,34 @@ to get the name or any value in the staff table, use the get and then the name o
             }
         });
     });
+
+
+
+</script>
+<script>
+    var acc = document.querySelectorAll(".accordion-header");
+    var i =0;
+
+    for (i = 0; i < acc.length; i++) {
+
+        var panel = acc[i].nextElementSibling; // Get the panel
+
+        /* Hide panel initially */
+        panel.style.display = "none";
+
+        acc[i].addEventListener("click", function() {
+            /* Toggle active class to expand/collapse panel */
+            this.classList.toggle("active");
+
+            /* Toggle display property of panel to show/hide content */
+            var panel = this.nextElementSibling;
+            if (panel.style.display === "block") {
+                panel.style.display = "none";
+            } else {
+                panel.style.display = "block";
+            }
+        });
+    }
 </script>
 
 </body>

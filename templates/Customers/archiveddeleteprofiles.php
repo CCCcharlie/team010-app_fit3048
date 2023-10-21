@@ -132,7 +132,28 @@ to get the name or any value in the staff table, use the get and then the name o
             <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                 <div class="section-block" id="cardaction">
                     <h3 class="section-title" style="color: midnightblue; margin-top:-50px; margin-left:-15px">Outdated Archived Customer View</h3>
-                    <p style="color: midnightblue; margin-left:-15px"> These profiles have been archived for a period longer than <?php echo number_format(($archivedTimeInSeconds / 31556952), 2); ?> years. It is strongly recommended that you delete these profiles. </p>
+                        <div class="accordion-header button" style="color: midnightblue">
+                            <button>
+                        <span class="icon" style="color: midnightblue"> &#9654; Welcome to the Outdated Archived Customer View. If you are unsure of how to use this page. <span> <strong> Click me! </strong> </span> <br>
+                            </button>
+                        </div>
+                        <div class="container" style="background-color: #ADD8E6; border: 2px midnightblue;">
+                            <div class="accordion-panel" style="color: midnightblue">
+                                <p style="color: midnightblue; margin-left:-15px"> These profiles have been archived for a period longer than <?php echo number_format(($archivedTimeInSeconds / 31556952), 2); ?> years. It is strongly recommended that you delete these profiles.
+                                    <br> Action: </p>
+                                <p>		delect all the customers been archived.
+                                </p>
+                                <p>		delect the particular customer.
+                                </p>
+                                <p>		view the customer profile.
+                                </p>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="section-block" id="cardaction">
                 </div>
             </div>
         </di>
@@ -416,6 +437,32 @@ to get the name or any value in the staff table, use the get and then the name o
         });
     });
 </script>
+<script>
+    var acc = document.querySelectorAll(".accordion-header");
+    var i =0;
+
+    for (i = 0; i < acc.length; i++) {
+
+        var panel = acc[i].nextElementSibling; // Get the panel
+
+        /* Hide panel initially */
+        panel.style.display = "none";
+
+        acc[i].addEventListener("click", function() {
+            /* Toggle active class to expand/collapse panel */
+            this.classList.toggle("active");
+
+            /* Toggle display property of panel to show/hide content */
+            var panel = this.nextElementSibling;
+            if (panel.style.display === "block") {
+                panel.style.display = "none";
+            } else {
+                panel.style.display = "block";
+            }
+        });
+    }
+</script>
+
 
 
 </html>

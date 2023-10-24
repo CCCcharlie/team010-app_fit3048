@@ -108,14 +108,16 @@ to get the name or any value in the staff table, use the get and then the name o
                     </div>
                     <div class="container" style="background-color: #ADD8E6; border: 2px midnightblue;">
                         <div class="accordion-panel" style="color: midnightblue">
-                            <p>	Search Customer using search bar.
-                                <br> Action: </p>
+                            <p> This page show customer profiles that have been escalated
+                                <br> Availabe Actions: </p>
                             <p>		Viewing full profile of the customer.
                             </p>
-                            <p>		Unescalate the customer and assign it back to the original staff.
+                            <p>		Unescalating the customer and assign it back to the original staff.
                             </p>
-                            <p>		Sort the customer base on different condition.
+                            <p>		Sorting the customer base on different condition.
                             </p>
+
+                              <p>	Search Customer using search bar.</p>
 
                         </div>
                     </div>

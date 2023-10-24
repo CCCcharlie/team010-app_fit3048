@@ -119,13 +119,18 @@ to get the name or any value in the staff table, use the get and then the name o
                     </div>
                     <div class="container" style="background-color: #ADD8E6; border: 2px midnightblue;">
                         <div class="accordion-panel" style="color: midnightblue">
-                            <p>	Select the information want to view using the top navigation bar
-                                <br>View Customer Tickets: </p>
-                            <p>		Using fillers option to view the tickets close/open
+                            <p>	Select the information you need (tickets, contacts, devices and counsellor) for each customer using the navigation boxes
+
+                            <p><u>Viewing Customer Tickets: </u> </p>
+                            <p>		Using fillers option to view the closed or opened tickets
                             </p>
                             <p>		Create a tickets for the current customer
                                 </p>
-                            <p>		Expand attachment to view, download or delete the file relate to it, add attachments to the tickets
+                            <p>		Each ticket can be expanded its attachment to view, add, download or delete the file relate to the tickets
+
+                            <p>  <u> To edit customer name and status, click on "Edit Customer"</u> </p>
+
+                            <p>  <u> To archive customers, click on "Archive Customer" </u> </p>
                             </p>
 
                         </div>

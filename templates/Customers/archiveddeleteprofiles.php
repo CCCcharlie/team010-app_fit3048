@@ -140,12 +140,12 @@ to get the name or any value in the staff table, use the get and then the name o
                         <div class="container" style="background-color: #ADD8E6; border: 2px midnightblue;">
                             <div class="accordion-panel" style="color: midnightblue">
                                 <p style="color: midnightblue; margin-left:-15px"> These profiles have been archived for a period longer than <?php echo number_format(($archivedTimeInSeconds / 31556952), 2); ?> years. It is strongly recommended that you delete these profiles.
-                                    <br> Action: </p>
-                                <p>		delect all the customers been archived.
+                                    <br> Available Actions: </p>
+                                <p>		1) Delete all the customers been archived.
                                 </p>
-                                <p>		delect the particular customer.
+                                <p>		2) Delete the particular customer.
                                 </p>
-                                <p>		view the customer profile.
+                                <p>		3) View the customer profile.
                                 </p>
 
                             </div>

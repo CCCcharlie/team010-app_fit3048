@@ -130,7 +130,7 @@ to get the name or any value in the staff table, use the get and then the name o
     <div class="customers index content">
         <div class="row">
             <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-                <div class="section-block" id="cardaction">
+                <div class="section-block container" style="float: left;"  id="cardaction">
                     <h3 class="section-title" style="color: midnightblue; margin-top:-50px; margin-left:-15px">Outdated Archived Customer View</h3>
                         <div class="accordion-header button" style="color: midnightblue">
                             <button>

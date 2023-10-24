@@ -52,7 +52,7 @@
     <!-- ============================================================== -->
     <!-- end pageheader  -->
     <!-- ============================================================== -->
-        <div class="section-block" id="cardaction">
+        <div class="section-block container" style="float: left;" id="cardaction">
             <h3 class="section-title" style="color: midnightblue"><?= __('Site Editor') ?></h3>
             <div class="accordion cb" style="color: midnightblue">
                 <div class="accordion-header button" style="color: midnightblue">

@@ -133,6 +133,12 @@ to get the name or any value in the staff table, use the get and then the name o
                             <p>  <u> To archive customers, click on "Archive Customer" </u> </p>
                             </p>
 
+                            <p><u>To escalate customers profile:</u></p>
+                            <p>1) Select a customer profile, create a ticket for that profile</p>
+                            <p>2) In creating ticket page, make sure the "Staff" name is the user name</p>
+                            <p>3) After submitting the ticket, check Assigned to me page</p>
+                            <p>4) Clicking on "Escalating the customer" to escalate the profiles</p>
+
                         </div>
                     </div>
                 </div>

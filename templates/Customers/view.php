@@ -109,7 +109,7 @@ to get the name or any value in the staff table, use the get and then the name o
     <!-- ============================================================== -->
     <div class="row">
         <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-            <div class="section-block" id="cardaction">
+            <div class="section-block container" style="float: left;"  id="cardaction">
                 <h3 class="section-title" style="color: midnightblue"><?= __('Customer profile') ?></h3>
                 <div class="accordion cb" style="color: midnightblue">
                     <div class="accordion-header button" style="color: midnightblue">

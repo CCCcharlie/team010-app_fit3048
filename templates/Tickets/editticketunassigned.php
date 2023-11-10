@@ -6,8 +6,6 @@
  * @var string[]|\Cake\Collection\CollectionInterface $users
  */
 
-//$this->disableAutoLayout();
-// Test.
 ?>
 
 <!doctype html>
@@ -41,7 +39,9 @@
             <div class="section-block" id="basicform">
             </div>
             <div class="card">
-                <h5 class="card-header"><legend><?= __('Edit Ticket for customer: ' . $fullName) ?></legend></h5>
+                <h5 class="card-header">
+                    <legend><?= __('Edit Ticket for customer: ' . $fullName) ?></legend>
+                </h5>
                 <div class="card-body">
                     <div class="column-responsive column-80">
                         <div class="tickets form content">
@@ -74,28 +74,9 @@
                                     <!-- Display validation error for the 'type' field -->
                                     <?= $this->Form->error('type'); ?>
                                 </div>
-                                <!-- Uncomment and style the following controls as needed -->
-                                <!--
-        <div class="form-group">
-        <?= $this->Form->label('createtime', 'Create Time', ['class' => 'col-form-label']) ?>
-        <?= $this->Form->input('createtime', ['class' => 'form-control']) ?>
-        </div>
-        <div class="form-group">
-        <?= $this->Form->label('closetime', 'Close Time', ['class' => 'col-form-label']) ?>
-        <?= $this->Form->input('closetime', ['class' => 'form-control']) ?>
-        </div>
-        <div class="form-group">
-        <?= $this->Form->label('closed', 'Closed', ['class' => 'col-form-label']) ?>
-        <?= $this->Form->input('closed', ['class' => 'form-control']) ?>
-        </div>
-        <div class="form-group">
-        <?= $this->Form->label('cust_id', 'Customer', ['class' => 'col-form-label']) ?>
-        <?= $this->Form->input('cust_id', ['class' => 'form-control', 'options' => $customers]) ?>
-        </div>
-        -->
                                 <div class="form-group">
                                     <?= $this->Form->label('staff_id', 'Staff*', ['class' => 'col-form-label']) ?>
-                                    <?php echo $this->Form->control('staff_id', ['options' => $users, 'label'=>false]); ?>
+                                    <?php echo $this->Form->control('staff_id', ['options' => $users, 'label' => false]); ?>
                                 </div>
                             </fieldset>
                             <div class="form-group d-flex justify-content-between align-items-center">
@@ -105,11 +86,7 @@
                                     ['class' => 'btn btn-rounded btn-secondary']) ?>
 
                                 <?= $this->Form->button(__('Submit'), ['class' => 'btn btn-primary']) ?>
-                                <!--              undo originalData not passing            debug($originalData);           -->
-                                <!--                                      --><?php //=  $this->getRequest()->getSession()->write('originalData', $originalData);?>
-
                                 <?= $this->Html->link(__('Undo Changes'), ['action' => 'undo', $ticket->id, '?' => ['originalData' => $originalData]], ['class' => 'btn btn-warning']); ?>
-
 
                             </div>
                         </div>

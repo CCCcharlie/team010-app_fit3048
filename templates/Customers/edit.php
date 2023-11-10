@@ -4,7 +4,6 @@
  * @var \App\Model\Entity\Customer $customer
  */
 
-//$this->disableAutoLayout();
 ?><!doctype html>
 <html lang="en">
 
@@ -51,9 +50,6 @@
                 //                        debug($identity->get('f_name'));
                 //                        exit();
                 ?>
-                <!-- Can you add login user to name here if you get chance Bryan?  -->
-                <!-- Sure Alex-->
-
             </div>
         </div>
     </div>
@@ -62,14 +58,6 @@
     <!-- ============================================================== -->
     <div class="row">
         <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12" style="padding-bottom: 100px">
-            <!--                    <div style="position: sticky; top: 0px; float: right; background-color: #f5f5f5; padding: 20px; width: 250px;">-->
-            <!--                        <ul style="padding: 0; margin: 0; list-style: none;">-->
-            <!--                            <h4>Actions:</h4>-->
-            <!--                            <li>-->
-            <?php //= $this->Form->postLink(__('> Delete Customer'), ['action' => 'delete', $customer->id], ['confirm' => __('Are you sure you want to delete # {0}?', $customer->id), 'style' => 'display: block; padding: 10px 0; text-decoration: none; color: #333; border: 1px solid transparent; transition: border-color 0.3s ease;']) ?><!--</li>-->
-            <!--                        </ul>-->
-            <!--                    </div>-->
-
             </aside>
             <div class="row">
                 <!-- ============================================================== -->
@@ -89,27 +77,27 @@
                                 <h3 class="font-16" style="display: flex; justify-content: space-around">Name:</h3>
                                 <div class="text-center">
 
-                                        <?= $this->Form->input('f_name', [
-                                            'class' => '',
-                                            'text-align' => 'center',
-                                            'maxlength' => 32,
-                                            'required' => true,
-                                            'title' => 'Please enter your first name using letters, hyphens, and apostrophes only',
-                                            'pattern' => '^(?! )[A-Za-z-]+$',
-                                            'label' => 'First Name*',
-                                            'label' => ['class' => 'col-form-label blue-label-text']
-                                        ]) ?>
+                                    <?= $this->Form->input('f_name', [
+                                        'class' => '',
+                                        'text-align' => 'center',
+                                        'maxlength' => 32,
+                                        'required' => true,
+                                        'title' => 'Please enter your first name using letters, hyphens, and apostrophes only',
+                                        'pattern' => '^(?! )[A-Za-z-]+$',
+                                        'label' => 'First Name*',
+                                        'label' => ['class' => 'col-form-label blue-label-text']
+                                    ]) ?>
 
-                                        <?= $this->Form->input('l_name', [
-                                            'class' => '',
-                                            'text-align' => 'center',
-                                            'maxlength' => 32,
-                                            'required' => true,
-                                            'title' => 'Please enter your last name using letters and hyphens only',
-                                            'pattern' => '^(?! )[A-Za-z-]+$',
-                                            'label' => 'Last Name*',
-                                            'label' => ['class' => 'col-form-label blue-label-text']
-                                        ]) ?>
+                                    <?= $this->Form->input('l_name', [
+                                        'class' => '',
+                                        'text-align' => 'center',
+                                        'maxlength' => 32,
+                                        'required' => true,
+                                        'title' => 'Please enter your last name using letters and hyphens only',
+                                        'pattern' => '^(?! )[A-Za-z-]+$',
+                                        'label' => 'Last Name*',
+                                        'label' => ['class' => 'col-form-label blue-label-text']
+                                    ]) ?>
                                 </div>
                             </div>
 
@@ -127,7 +115,6 @@
                                     ) ?>
                                 </div>
                             </div>
-
 
                             <!-- Email Address Field -->
                             <div class="card-body border-top">
@@ -160,84 +147,79 @@
                                         'maxlength' => 500
                                     ]) ?></p>
                                 <?= $this->Form->error('notes'); ?>
-<!--                                <textarea name="notes" id="notes" class="form-control" title="Enter notes" placeholder="Notes go here.." maxlength="500" style="height: 150px;"></textarea>-->
                             </div>
 
                             <?= $this->Html->link(__('Return to Customer'), ['controller' => 'Customers', 'action' => 'view', $customer->id], ['class' => 'btn btn-rounded btn-secondary']) ?>
 
                             <?= $this->Form->button(__('Submit'), ['class' => 'btn btn-rounded btn-primary', 'id' => 'submit-button']) ?>
                             <?= $this->Form->end() ?>
+                        </div>
+                        <!-- ============================================================== -->
+                        <!-- end card profile -->
+                        <!-- ============================================================== -->
                     </div>
                     <!-- ============================================================== -->
-                    <!-- end card profile -->
+                    <!-- end profile -->
                     <!-- ============================================================== -->
                 </div>
-                <!-- ============================================================== -->
-                <!-- end profile -->
-                <!-- ============================================================== -->
-            </div>
-            <div class="col-xl-9 col-lg-9 col-md-7 col-sm-12 col-12">
-                <!-- ============================================================== -->
-                <!-- campaign tab one -->
-                <!-- ============================================================== -->
+                <div class="col-xl-9 col-lg-9 col-md-7 col-sm-12 col-12">
+                    <!-- ============================================================== -->
+                    <!-- campaign tab one -->
+                    <!-- ============================================================== -->
 
-                <!-- ============================================================== -->
-                <!-- end data -->
-                <!-- ============================================================== -->
+                    <!-- ============================================================== -->
+                    <!-- end data -->
+                    <!-- ============================================================== -->
+                </div>
             </div>
         </div>
+        <!-- ============================================================== -->
+        <!-- end content -->
+        <!-- ============================================================== -->
+
     </div>
-    <!-- ============================================================== -->
-    <!-- end content -->
-    <!-- ============================================================== -->
 
-</div>
-
-<!--EXPLAINING THE SCRIPTS -->
-<!--Concept - Template-->
-<!--SlimScroll - JS Plugin. Allows for any div to be scrollable.-->
-<!--Jquery  - Essential Javascript library-->
-<!--Add any explinations here for any scripts you add. - Alex-->
+    <!--EXPLAINING THE SCRIPTS -->
+    <!--Concept - Template-->
+    <!--SlimScroll - JS Plugin. Allows for any div to be scrollable.-->
+    <!--Jquery  - Essential Javascript library-->
+    <!--Add any explinations here for any scripts you add. - Alex-->
 
 
-<?= $this->Html->script(['jquery-3.3.1.min.js', 'bootstrap.bundle.js', 'main-js', 'jquery.slimscroll.js']) ?>
-<?= $this->Html->script('https://kit.fontawesome.com/b5c616a120.js', ['crossorigin' => 'anonymous']) ?>
+    <?= $this->Html->script(['jquery-3.3.1.min.js', 'bootstrap.bundle.js', 'main-js', 'jquery.slimscroll.js']) ?>
+    <?= $this->Html->script('https://kit.fontawesome.com/b5c616a120.js', ['crossorigin' => 'anonymous']) ?>
 
-<script>
-    $(document).ready(function() {
-        // Initial state setup
-        $("#allticket").show();
-        $("#closeticket").hide();
-        $("#openticket").hide();
+    <script>
+        $(document).ready(function () {
+            // Initial state setup
+            $("#allticket").show();
+            $("#closeticket").hide();
+            $("#openticket").hide();
 
 
-        $("input[name='options']").change(function() {
-            if ($("#showallticket").is(":checked")) {
-                $("#allticket").show();
-                $("#closeticket").hide();
-                $("#openticket").hide();
-            } else if ($("#showcloseticket").is(":checked")) {
-                $("#allticket").hide();
-                $("#closeticket").show();
-                $("#openticket").hide();
-            } else if ($("#showopenticket").is(":checked")) {
-                $("#allticket").hide();
-                $("#closeticket").hide();
-                $("#openticket").show();
-            } else {
-                $("#allticket").hide();
-                $("#closeticket").hide();
-                $("#openticket").hide();
-            }
+            $("input[name='options']").change(function () {
+                if ($("#showallticket").is(":checked")) {
+                    $("#allticket").show();
+                    $("#closeticket").hide();
+                    $("#openticket").hide();
+                } else if ($("#showcloseticket").is(":checked")) {
+                    $("#allticket").hide();
+                    $("#closeticket").show();
+                    $("#openticket").hide();
+                } else if ($("#showopenticket").is(":checked")) {
+                    $("#allticket").hide();
+                    $("#closeticket").hide();
+                    $("#openticket").show();
+                } else {
+                    $("#allticket").hide();
+                    $("#closeticket").hide();
+                    $("#openticket").hide();
+                }
+            });
         });
-    });
 
 
-
-
-
-
-</script>
+    </script>
 
 </body>
 

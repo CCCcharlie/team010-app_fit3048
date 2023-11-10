@@ -102,10 +102,6 @@
                                 </div>
 
                                 <small class="text-muted" style="font-style: italic;">Please note: Setting a user to Admin will give them control over ALL other accounts. With exception to Root. Use this sparingly.</small>
-<!--                                    <div class="form-group" style="display: flex; align-items: center;">-->
-<!--                                        --><?php //= $this->Form->label('Set User As Admin?', null, ['class' => 'col-form-label', 'style' => 'margin-right: 10px;']) ?>
-<!--                                        --><?php //= $this->Form->control('admin_status', ['label' => false, 'class' => 'form-control']) ?>
-<!--                                    </div>-->
 
                                 <?php
                                 $filteredRoleChoice = array_filter($role_choice, function ($value) {

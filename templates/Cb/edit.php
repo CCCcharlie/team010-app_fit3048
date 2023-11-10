@@ -73,8 +73,6 @@
 
 
                     <?php
-                    //                    debug($content_types === "text");
-
                     //  content_value and content_image is simply the name of the field, not content_value in database
                     //  therefore I can add another validator rule for name content_value for texts and content_image for images
                     if ($cb->content_type == "Number") {

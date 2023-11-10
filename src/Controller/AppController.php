@@ -83,8 +83,6 @@ class AppController extends Controller
 
     public function checkLoggedIn()
     {
-//        debug($this->Authentication->getIdentity() === null);
-//        debug($this->redirect(['controller' => 'Auth', 'action' => 'login']));
         if($this->Authentication->getIdentity() === null) {
             return null;
         } else {
@@ -113,10 +111,6 @@ class AppController extends Controller
         $seed = uniqid();
         mt_srand(crc32($seed)); // Using CRC32 hash of the uniqid as the seed
 
-//            debug(mt_rand());
-//            debug($customer);
-//            debug($customer->id);
-
         //Get first three letters of names
         $threeCharAttribute1 = substr($importantAttribute1, 0, 3);
         $threeCharAttribute2 = substr($importantAttribute2, 0, 3);
@@ -134,8 +128,6 @@ class AppController extends Controller
         $formattedRandNumStrings = substr($randNumStrings, 0, 3) . '-' . substr($randNumStrings, 3, 3) . '-' . substr($randNumStrings, 6);
 
         $formattedId = $identifier . '-' . $threeCharAttribute1 . $threeCharAttribute2 . '-' . $formattedRandNumStrings;
-//            debug($formattedId);
-//            exit;
 
         return $formattedId;
 

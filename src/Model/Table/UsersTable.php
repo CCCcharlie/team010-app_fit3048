@@ -82,11 +82,6 @@ class UsersTable extends Table
                     'message' => 'Please enter a valid name. Names cannot have multiple "-", or apostrophes in a row. Names cannot have numbers. Names cannot start with a space. '
                 ]
             ]);
-//        $validator
-//            ->integer('age')
-//            ->requirePresence('age', 'create')
-//            ->notEmptyString('age');
-
         $validator
             ->scalar('email')
             ->maxLength('email', 320)
@@ -137,11 +132,6 @@ class UsersTable extends Table
             ->scalar('timezone')
             ->maxLength('timezone', 50)
             ->allowEmptyString('timezone');
-
-//        $validator
-//            ->boolean('admin_status')
-//            ->requirePresence('admin_status', 'create')
-//            ->notEmptyString('admin_status');
 
         $validator
             ->scalar('nonce')

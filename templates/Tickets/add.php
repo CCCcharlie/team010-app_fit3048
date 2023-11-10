@@ -74,25 +74,6 @@
                                     <?= $this->Form->error('type'); ?>
 
                                 </div>
-                                <!-- Uncomment and style the following controls as needed -->
-                                <!--
-    <div class="form-group">
-        <?= $this->Form->label('createtime', 'Create Time', ['class' => 'col-form-label']) ?>
-        <?= $this->Form->input('createtime', ['class' => 'form-control']) ?>
-    </div>
-    <div class="form-group">
-        <?= $this->Form->label('closetime', 'Close Time', ['class' => 'col-form-label']) ?>
-        <?= $this->Form->input('closetime', ['class' => 'form-control']) ?>
-    </div>
-    <div class="form-group">
-        <?= $this->Form->label('closed', 'Closed', ['class' => 'col-form-label']) ?>
-        <?= $this->Form->input('closed', ['class' => 'form-control']) ?>
-    </div>
-    <div class="form-group">
-        <?= $this->Form->label('cust_id', 'Customer', ['class' => 'col-form-label']) ?>
-        <?= $this->Form->input('cust_id', ['class' => 'form-control', 'options' => $customers]) ?>
-    </div>
-    -->
                                 <div class="form-group">
                                     <?= $this->Form->label('staff_id', 'Staff*', ['class' => 'col-form-label']) ?>
                                     <?php echo $this->Form->control('staff_id', ['options' => $users, 'label' => false]); ?>
@@ -137,10 +118,6 @@
                         Template by <a href="https://colorlib.com/wp/">Colorlib</a>.
                     </div>
                     <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12">
-                        <!--                                        <div class="text-md-right footer-links d-none d-sm-block">-->
-                        <!--                                            <a href="javascript: void(0);">Documentation</a>-->
-                        <!--                                            <a href="javascript: void(0);">Contact Points</a>-->
-                        <!--                                        </div>-->
                     </div>
                 </div>
             </div>

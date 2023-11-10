@@ -71,13 +71,6 @@ class ContentsController extends AppController
      */
     public function add()
     {
-//        $this->paginate = [
-//            'contain' => ['Tickets.Customers'],
-//        ];
-//        $contents = $this->paginate($this->Contents);
-//
-//        $this->set(compact('contents'));
-
         //Obtain the query via key value pair [called from customer table view]
         $ticketId = $this->request->getQuery('ticket_id');
         $firstName = $this->request->getQuery('f_name');
@@ -103,13 +96,6 @@ class ContentsController extends AppController
 
             $checkText = $this->request->getData('content');
 
-
-//            debug($checkFile);
-//            debug($checkImage);
-//            debug($checkText);
-
-//            exit;
-
             if (!$content->getErrors() && ($checkFile || $checkImage)) {
                 //IMPORTANT NOTE: File here is both file and image (I know its confusing)
                 //This line gets data (image) with name of 'image_file' (from services' add.php)
@@ -128,23 +114,21 @@ class ContentsController extends AppController
                 $file_type = $file->getClientMediaType();
                 $file_name = $file->getClientFilename();
 
-//                debug($file_type);
-
-                //Check if the file is an image type (PNG/JPEG/JPG) or regular file type (EX: PDF)
-                //This is crucial because images should be stored in img of the webroot folder, not the file\user-files
-//                image media type = image/jpg', 'image/png', 'image/jpeg'
+                // Check if the file is an image type (PNG/JPEG/JPG) or regular file type (EX: PDF)
+                // This is crucial because images should be stored in img of the webroot folder, not the file\user-files
+                // image media type = image/jpg', 'image/png', 'image/jpeg'
                 if($file_type === 'image/jpg' || $file_type === 'image/png' || $file_type === 'image/jpeg'){
-                    //if a directory was not made already, create one
+                    // if a directory was not made already, create one
                     if (!is_dir(WWW_ROOT . 'img' . DS . 'conversation')) {
                         mkdir(WWW_ROOT . 'img' . DS . 'conversation');
                     }
-                    //Set target path to webroot/img/conversation/name_of_image
+                    // Set target path to webroot/img/conversation/name_of_image
                     $targetPath = WWW_ROOT . 'img' . DS . 'conversation' . DS . $file_name;
 
-                    //Move the image obtained from the form, to the path defined above
+                    // Move the image obtained from the form, to the path defined above
                     $file->moveTo($targetPath);
 
-                    //Similary to the add function here, store it in database the folder and the name of the image
+                    // Similary to the add function here, store it in database the folder and the name of the image
                     $content->content =  'conversation/' . $file_name;
                 } else {
 
@@ -184,10 +168,6 @@ class ContentsController extends AppController
                 // nearing that number would collide and replace uniqueness
                 $seed = uniqid();
                 mt_srand(crc32($seed)); // Using CRC32 hash of the uniqid as the seed
-//                debug(mt_rand());
-//                debug("hi");
-//                $seed = uniqid();
-//                srand(crc32($seed)); // Using CRC32 hash of the uniqid as the seed
 
                 $createTextFileName = 'created_text_' . mt_rand() . '.html';
 
@@ -303,13 +283,6 @@ class ContentsController extends AppController
         $filePath = WWW_ROOT . 'file' . DS . 'user-file' . DS . $fileName; // Path to the uploaded file
         $imageFilePath = WWW_ROOT . 'img' . DS . $fileName; //path to the image file
         $createTextFilePath = WWW_ROOT . 'file' . DS . 'created-text' . DS . $fileName; // path to the created text file
-
-//        debug($fileName);
-//        debug($filePath);
-//        debug($imageFilePath);
-//        debug($createTextFilePath);
-//        exit;
-
         //Because filename is expected to be receiving both IMAGES and FILES, we need to check if the item exists or not for both
         //cases in the if statement below
         $response = new Response();

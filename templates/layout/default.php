@@ -68,32 +68,6 @@
                         <?php echo $this->Html->link(__('Logout'), ['controller' => 'Auth', 'action' => 'logout'], ['style' => 'padding-right: 40px;']); ?>
                     </a>
                 </div>
-
-                <!--            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"-->
-                <!--                    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">-->
-                <!--                <span class="navbar-toggler-icon"></span>-->
-                <!--            </button>-->
-
-                <!--            <div class="collapse navbar-collapse" id="navbarSupportedContent">-->
-                <!--                <ul class="navbar-nav ml-auto navbar-right-top">-->
-                <!---->
-                <!--                    <li class="nav-item dropdown nav-user">-->
-                <!--                        <a class="nav-link nav-user-file" href="#" id="navbarDropdownMenuLink2" data-toggle="dropdown"-->
-                <!--                           aria-haspopup="true" aria-expanded="false"><img src="../assets/images/avatar-1.jpg" alt=""-->
-                <!--                                                                           class="user-avatar-md rounded-circle"></a>-->
-                <!--                        <div class="dropdown-menu dropdown-menu-right nav-user-dropdown"-->
-                <!--                             aria-labelledby="navbarDropdownMenuLink2">-->
-                <!--                            <div class="nav-user-info">-->
-                <!--                                <h5 class="mb-0 text-white nav-user-name">-->
-                <!--                                    Example User</h5>-->
-                <!--                            </div>-->
-                <!--                            <a class="dropdown-item" href="#"><i-->
-                <!--                                    class="fas fa-power-off mr-2"></i> --><?php //echo $this->Html->link(__('Logout'), ['controller' => 'Auth', 'action' => 'logout']); ?>
-                <!--                            </a>-->
-                <!--                        </div>-->
-                <!--                    </li>-->
-                <!--                </ul>-->
-                <!--            </div>-->
         </nav>
     </div>
     <!-- ============================================================== -->
@@ -351,11 +325,6 @@
                             Copyright © GamBlock®. All rights reserved. This site is for access by GamBlock® Staff Only.
                             Template by <a href="https://colorlib.com/wp/">Colorlib</a>.
                         </div>
-                        <!--                    <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12">-->
-                        <!--                        <div class="text-md-right footer-links d-none d-sm-block">-->
-                        <!--                            <a href="javascript: void(0);">Documentation</a>-->
-                        <!--                            <a href="javascript: void(0);">Contact Points</a>-->
-                        <!--                        </div>-->
                     </div>
                 </div>
             </div>
@@ -377,9 +346,6 @@
 
     // get the last word
     var lastWord = words[words.length -1];
-    // update the car
-    // var activeBreadcrumb = document.querySelector(".breadcrumb-item.active");
-    // activeBreadcrumb.textContent = lastWord;
 </script>
 
 <?= $this->Html->script(['jquery-3.3.1.min.js', 'bootstrap.bundle.js', 'main-js', 'jquery.slimscroll.js']) ?>

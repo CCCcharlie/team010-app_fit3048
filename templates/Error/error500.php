@@ -1,21 +1,4 @@
 <?php
-//$this->layout = 'error';
-//
-//$customMessage = 'Error 500: Unknown Error Occurred';
-//
-//?>
-<!---->
-<!---->
-<!--<h2>--><?php //= h($customMessage) ?><!--</h2>-->
-<?php ////debug($message);?>
-<!--<p class="error">-->
-<!--    <strong>--><?php //= __d('cake', 'Error') ?><!--: </strong>-->
-<!--    --><?php //= __d('cake', 'An internal error has occurred') ?>
-<!--      <a href="--><?php ////= $this->Url->build(['controller' => 'Pages', 'action' => 'Home']) ?><!--">Take me home!</a>-->
-<!--</p>-->
-
-
-<?php
 /**
  * @var \App\View\AppView $this
  * @var \Cake\Database\StatementInterface $error

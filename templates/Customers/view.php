@@ -27,8 +27,6 @@ use Cake\Datasource\ConnectionManager;
 use Cake\Error\Debugger;
 use Cake\Http\Exception\NotFoundException;
 
-//$this->disableAutoLayout();
-
 $checkConnection = function (string $name) {
     $error = null;
     $connected = false;
@@ -97,8 +95,6 @@ to get the name or any value in the staff table, use the get and then the name o
         //                        debug($identity->get('f_name'));
         //                        exit();
         ?>
-        <!--                                <h2 class="pageheader-title" style="color: lightslategrey">Welcome, -->
-        <?php //= $identity->get('f_name'); ?><!--</h2>-->
 
     </div>
 </div>
@@ -109,7 +105,7 @@ to get the name or any value in the staff table, use the get and then the name o
     <!-- ============================================================== -->
     <div class="row">
         <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-            <div class="section-block container" style="float: left;"  id="cardaction">
+            <div class="section-block container" style="float: left;" id="cardaction">
                 <h3 class="section-title" style="color: midnightblue"><?= __('Customer profile') ?></h3>
                 <div class="accordion cb" style="color: midnightblue">
                     <div class="accordion-header button" style="color: midnightblue">
@@ -119,18 +115,20 @@ to get the name or any value in the staff table, use the get and then the name o
                     </div>
                     <div class="container" style="background-color: #ADD8E6; border: 2px midnightblue;">
                         <div class="accordion-panel" style="color: midnightblue">
-                            <p>	Select the information you need (tickets, contacts, devices and counsellor) for each customer using the navigation boxes
+                            <p> Select the information you need (tickets, contacts, devices and counsellor) for each
+                                customer using the navigation boxes
 
-                            <p><u>Viewing Customer Tickets: </u> </p>
-                            <p>		Using fillers option to view the closed or opened tickets
+                            <p><u>Viewing Customer Tickets: </u></p>
+                            <p> Using fillers option to view the closed or opened tickets
                             </p>
-                            <p>		Create a tickets for the current customer
-                                </p>
-                            <p>		Each ticket can be expanded its attachment to view, add, download or delete the file relate to the tickets
+                            <p> Create a tickets for the current customer
+                            </p>
+                            <p> Each ticket can be expanded its attachment to view, add, download or delete the file
+                                relate to the tickets
 
-                            <p>  <u> To edit customer name and status, click on "Edit Customer"</u> </p>
+                            <p><u> To edit customer name and status, click on "Edit Customer"</u></p>
 
-                            <p>  <u> To archive customers, click on "Archive Customer" </u> </p>
+                            <p><u> To archive customers, click on "Archive Customer" </u></p>
                             </p>
 
                             <p><u>To escalate customers profile:</u></p>
@@ -145,17 +143,6 @@ to get the name or any value in the staff table, use the get and then the name o
             </div>
 
             <div class="page-header">
-                <!-- To obtain the identity, use $identity = $this->request->getAttribute('authentication')->getIdentity(); to find the currently logged in entity
-                to get the name or any value in the staff table, use the get and then the name of the attribute $identity->get('staff_fname')-->
-                <?php $identity = $this->request->getAttribute('authentication')->getIdentity();
-                //                        debug($identity->get('f_name'));
-                //                        exit();
-                ?>
-                <!--                        <h2 class="pageheader-title" style="color:lightslategrey">Welcome, -->
-                <?php //= $identity->get('f_name'); ?><!--</h2>-->
-
-                <!-- Can you add login user to name here if you get chance Bryan?  -->
-                <!-- Sure Alex-->
 
             </div>
         </div>
@@ -165,18 +152,6 @@ to get the name or any value in the staff table, use the get and then the name o
     <!-- ============================================================== -->
     <div class="row">
         <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12" style="padding-bottom: 100px">
-            <!--                    <div style="position: sticky; top: 0px; float: right; background-color: #f5f5f5; padding: 10px; width: 200px;">-->
-            <!--                        <h4 style="margin-bottom: 5px; font-size: 14px;">Actions:</h4>-->
-            <!--                        <ul style="padding: 0; margin: 0; list-style: none; font-size: 12px;">-->
-            <!--                            <li style="margin-bottom: 3px;">-->
-            <!--                                --><?php //= $this->Html->link(__('Edit Customer'), ['action' => 'edit', $customer->id], ['style' => 'display: block; text-decoration: none; color: #333;']) ?>
-            <!--                            </li>-->
-            <!--                            <li>-->
-            <?php //= $this->Form->postLink(__('> Delete'), [ 'action' => 'delete', $customer->id], ['style' => 'display: block; padding: 10px 0; text-decoration: none; color: #333; border: 1px solid transparent; transition: border-color 0.3s ease;', 'confirm' => __('Are you sure you want to delete customer: {0} {1} ?', $customer->f_name, $customer->l_name)]); ?><!-- </li>-->
-            <!--                            <li>-->
-            <?php //= $this->Form->postLink(__('> Delete Customer'), ['action' => 'delete', $customer->id], ['confirm' => __('Are you sure you want to delete # {0}?', $customer->id), 'style' => 'display: block; padding: 10px 0; text-decoration: none; color: #333; border: 1px solid transparent; transition: border-color 0.3s ease;']) ?><!--</li>-->
-            <!--                        </ul>-->
-            <!--                    </div>-->
 
             </aside>
             <div class="row">
@@ -250,7 +225,6 @@ to get the name or any value in the staff table, use the get and then the name o
                                 ) ?>
 
                                 <!-- Show the "Delete Customer Profile" button if archive is 1 -->
-
 
 
                             <?php endif; ?>
@@ -337,8 +311,10 @@ to get the name or any value in the staff table, use the get and then the name o
                                         <?php if ($this->Identity->get('role') === 'user' || $this->Identity->get('role') === 'staff'): ?>
                                             <div class="card">
                                                 <p>            <!-- Cards section -->
-                                                    <?php foreach ($tickets as $ticket): ?>
-                                                    <?php if($this->Identity->get('id') === $ticket->staff_id || $ticket->showall === true): ?>
+                                                    <?php foreach ($tickets
+
+                                                    as $ticket): ?>
+                                                    <?php if ($this->Identity->get('id') === $ticket->staff_id || $ticket->showall === true): ?>
                                                 <div class="col-xl-12 col-lg-12 col-md-12col-sm-12 col-12">
                                                     <div class="card">
                                                         <?php if ($ticket->closed == true) : ?>
@@ -357,7 +333,9 @@ to get the name or any value in the staff table, use the get and then the name o
                                                                     <?php elseif ($ticket->closed == false) : ?>
                                                                         <h6> Status: Open </h6>
                                                                     <?php endif; ?>
-                                                                        <h6> <span class="card-info">Visible to all?</span> <?= h($ticket->showall ? 'Yes' : 'No') ?> </h6>
+                                                                    <h6><span
+                                                                            class="card-info">Visible to all?</span> <?= h($ticket->showall ? 'Yes' : 'No') ?>
+                                                                    </h6>
                                                                 </div>
                                                                 <?php if ($customer->archive == 0): ?>
                                                                     <div class="toolbar ml-auto">
@@ -395,21 +373,22 @@ to get the name or any value in the staff table, use the get and then the name o
                                                                         ?>
                                                                     </p>
                                                                     <p>
-                                                                        <div style="display: flex">
-                                                                            <span class="card-info">Notes</span>
-                                                                            <?php if(!empty($ticket->notes)): ?>
-                                                                                : <?= h($ticket->notes) ?>
-                                                                            <?php else: ?>
-                                                                                : -
-                                                                            <?php endif ?>
-                                                                        </div>
+                                                                    <div style="display: flex">
+                                                                        <span class="card-info">Notes</span>
+                                                                        <?php if (!empty($ticket->notes)): ?>
+                                                                            : <?= h($ticket->notes) ?>
+                                                                        <?php else: ?>
+                                                                            : -
+                                                                        <?php endif ?>
+                                                                    </div>
                                                                     </p>
                                                                     <p><span
                                                                             class="card-info">Create time:</span> <?= $ticket->createtime->i18nFormat('yyyy-MM-dd HH:mm:ss', 'Australia/Sydney') ?>
                                                                     </p>
                                                                     <br>
                                                                 </div>
-                                                                <div style="display: flex; justify-content: space-between">
+                                                                <div
+                                                                    style="display: flex; justify-content: space-between">
                                                                     <a class="btn btn-primary"
                                                                        data-toggle="collapse"
                                                                        href="#collapseExample<?= $ticket->id ?>"
@@ -433,7 +412,7 @@ to get the name or any value in the staff table, use the get and then the name o
 
                                                                 <?= $this->Form->postLink(__('Delete'), ['controller' => 'Tickets', 'action' => 'delete', $ticket->id], [
                                                                     'class' => 'btn btn-danger',
-                                                                    'confirm' => __('Are you sure you want to delete Ticket title:  {0} From customer {1} {2}?', $ticket->title , $customer->f_name, $customer->l_name)
+                                                                    'confirm' => __('Are you sure you want to delete Ticket title:  {0} From customer {1} {2}?', $ticket->title, $customer->f_name, $customer->l_name)
                                                                 ]) ?>
                                                             <?php endif; ?>
                                                         <?php endif; ?>
@@ -520,7 +499,9 @@ to get the name or any value in the staff table, use the get and then the name o
                                         <?php else: ?>
                                             <div class="card">
                                                 <p>            <!-- Cards section -->
-                                                    <?php foreach ($tickets as $ticket): ?>
+                                                    <?php foreach ($tickets
+
+                                                    as $ticket): ?>
                                                 <div class="col-xl-12 col-lg-12 col-md-12col-sm-12 col-12">
                                                     <div class="card">
                                                         <?php if ($ticket->closed == true) : ?>
@@ -539,7 +520,9 @@ to get the name or any value in the staff table, use the get and then the name o
                                                                     <?php elseif ($ticket->closed == false) : ?>
                                                                         <h6> Status: Open </h6>
                                                                     <?php endif; ?>
-                                                                    <h6> <span class="card-info">Visible to all?</span> <?= h($ticket->showall ? 'Yes' : 'No') ?> </h6>
+                                                                    <h6><span
+                                                                            class="card-info">Visible to all?</span> <?= h($ticket->showall ? 'Yes' : 'No') ?>
+                                                                    </h6>
                                                                 </div>
                                                                 <?php if ($customer->archive == 0): ?>
                                                                     <div class="toolbar ml-auto">
@@ -580,7 +563,7 @@ to get the name or any value in the staff table, use the get and then the name o
                                                                     <p>
                                                                     <div style="display: flex">
                                                                         <span class="card-info">Notes</span>
-                                                                        <?php if(!empty($ticket->notes)): ?>
+                                                                        <?php if (!empty($ticket->notes)): ?>
                                                                             : <?= h($ticket->notes) ?>
                                                                         <?php else: ?>
                                                                             : -
@@ -592,7 +575,8 @@ to get the name or any value in the staff table, use the get and then the name o
                                                                     </p>
                                                                     <br>
                                                                 </div>
-                                                                <div style="display: flex; justify-content: space-between">
+                                                                <div
+                                                                    style="display: flex; justify-content: space-between">
                                                                     <a class="btn btn-primary"
                                                                        data-toggle="collapse"
                                                                        href="#collapseExample<?= $ticket->id ?>"
@@ -615,7 +599,7 @@ to get the name or any value in the staff table, use the get and then the name o
 
                                                                 <?= $this->Form->postLink(__('Delete'), ['controller' => 'Tickets', 'action' => 'delete', $ticket->id], [
                                                                     'class' => 'btn btn-danger',
-                                                                    'confirm' => __('Are you sure you want to delete Ticket title:  {0} \n From customer {1} {2}?', $ticket->title , $customer->f_name, $customer->l_name)
+                                                                    'confirm' => __('Are you sure you want to delete Ticket title:  {0} \n From customer {1} {2}?', $ticket->title, $customer->f_name, $customer->l_name)
                                                                 ]) ?>
                                                             <?php endif; ?>
 
@@ -729,7 +713,9 @@ to get the name or any value in the staff table, use the get and then the name o
                                                                             <?php elseif ($ticket->closed == false) : ?>
                                                                                 <h6> Status: Open </h6>
                                                                             <?php endif; ?>
-                                                                            <h6> <span class="card-info">Visible to all?</span> <?= h($ticket->showall ? 'Yes' : 'No') ?> </h6>
+                                                                            <h6><span
+                                                                                    class="card-info">Visible to all?</span> <?= h($ticket->showall ? 'Yes' : 'No') ?>
+                                                                            </h6>
                                                                         </div>
                                                                         <div class="toolbar ml-auto">
                                                                             <?php if ($customer->archive == 0): ?>
@@ -748,27 +734,31 @@ to get the name or any value in the staff table, use the get and then the name o
                                                                     </div>
                                                                     <div class="card-body">
                                                                         <div class="card-text">
-                                                                            <p><span class="card-info">Ticket ID:</span> <?= h($ticket->id) ?>
+                                                                            <p><span
+                                                                                    class="card-info">Ticket ID:</span> <?= h($ticket->id) ?>
                                                                             </p>
                                                                             <p><span
                                                                                     class="card-info">Customer:</span> <?= h($customer->f_name) ?>
                                                                             </p>
-                                                                            <p><span class="card-info">Assigned staff:</span> <?= $this->Html->link(__($ticket->user->f_name), ['controller' => 'Users', 'action' => 'view', $ticket->staff_id]) ?>
+                                                                            <p><span
+                                                                                    class="card-info">Assigned staff:</span> <?= $this->Html->link(__($ticket->user->f_name), ['controller' => 'Users', 'action' => 'view', $ticket->staff_id]) ?>
                                                                             <p>
                                                                             <div style="display: flex">
                                                                                 <span class="card-info">Notes</span>
-                                                                                <?php if(!empty($ticket->notes)): ?>
+                                                                                <?php if (!empty($ticket->notes)): ?>
                                                                                     : <?= h($ticket->notes) ?>
                                                                                 <?php else: ?>
                                                                                     : -
                                                                                 <?php endif ?>
                                                                             </div>
                                                                             </p>
-                                                                            <p><span class="card-info">Create time:</span> <?= h($ticket->createtime) ?>
+                                                                            <p><span
+                                                                                    class="card-info">Create time:</span> <?= h($ticket->createtime) ?>
                                                                             </p>
                                                                             <br>
                                                                         </div>
-                                                                        <div style="display: flex; justify-content: space-between">
+                                                                        <div
+                                                                            style="display: flex; justify-content: space-between">
                                                                             <a class="btn btn-primary"
                                                                                data-toggle="collapse"
                                                                                href="#collapseExample<?= $ticket->id ?>"
@@ -792,7 +782,7 @@ to get the name or any value in the staff table, use the get and then the name o
 
                                                                 <?= $this->Form->postLink(__('Delete'), ['controller' => 'Tickets', 'action' => 'delete', $ticket->id], [
                                                                     'class' => 'btn btn-danger',
-                                                                    'confirm' => __('Are you sure you want to delete Ticket title:  {0} From customer {1} {2}?', $ticket->title , $customer->f_name, $customer->l_name)
+                                                                    'confirm' => __('Are you sure you want to delete Ticket title:  {0} From customer {1} {2}?', $ticket->title, $customer->f_name, $customer->l_name)
                                                                 ]) ?>
                                                             <?php endif; ?>
                                                         <?php endif; ?>
@@ -881,7 +871,9 @@ to get the name or any value in the staff table, use the get and then the name o
                                                                             <?php elseif ($ticket->closed == false) : ?>
                                                                                 <h6> Status: Open </h6>
                                                                             <?php endif; ?>
-                                                                            <h6> <span class="card-info">Visible to all?</span> <?= h($ticket->showall ? 'Yes' : 'No') ?> </h6>
+                                                                            <h6><span
+                                                                                    class="card-info">Visible to all?</span> <?= h($ticket->showall ? 'Yes' : 'No') ?>
+                                                                            </h6>
                                                                         </div>
                                                                         <div class="toolbar ml-auto">
                                                                             <?php if ($customer->archive == 0): ?>
@@ -900,28 +892,32 @@ to get the name or any value in the staff table, use the get and then the name o
                                                                     </div>
                                                                     <div class="card-body">
                                                                         <div class="card-text">
-                                                                            <p><span class="card-info">Ticket ID:</span> <?= h($ticket->id) ?>
+                                                                            <p><span
+                                                                                    class="card-info">Ticket ID:</span> <?= h($ticket->id) ?>
                                                                             </p>
                                                                             <p><span
                                                                                     class="card-info">Customer:</span> <?= h($customer->f_name) ?>
                                                                             </p>
-                                                                            <p><span class="card-info">Assigned staff:</span> <?= $this->Html->link(__($ticket->user->f_name), ['controller' => 'Users', 'action' => 'view', $ticket->staff_id]) ?>
+                                                                            <p><span
+                                                                                    class="card-info">Assigned staff:</span> <?= $this->Html->link(__($ticket->user->f_name), ['controller' => 'Users', 'action' => 'view', $ticket->staff_id]) ?>
                                                                             <p>
                                                                             <div style="display: flex">
                                                                                 <span class="card-info">Notes</span>
-                                                                                <?php if(!empty($ticket->notes)): ?>
+                                                                                <?php if (!empty($ticket->notes)): ?>
                                                                                     : <?= h($ticket->notes) ?>
                                                                                 <?php else: ?>
                                                                                     : -
                                                                                 <?php endif ?>
                                                                             </div>
                                                                             </p>
-                                                                            <p><span class="card-info">Create time:</span> <?= h($ticket->createtime) ?>
+                                                                            <p><span
+                                                                                    class="card-info">Create time:</span> <?= h($ticket->createtime) ?>
                                                                             </p>
                                                                             <br>
                                                                         </div>
                                                                         <!--                                                                            <a href="#" class="btn btn-primary card__button" id="showButton">Go somewhere</a>-->
-                                                                        <div style="display: flex; justify-content: space-between">
+                                                                        <div
+                                                                            style="display: flex; justify-content: space-between">
                                                                             <a class="btn btn-primary"
                                                                                data-toggle="collapse"
                                                                                href="#collapseExample<?= $ticket->id ?>"
@@ -945,7 +941,7 @@ to get the name or any value in the staff table, use the get and then the name o
 
                                                                 <?= $this->Form->postLink(__('Delete'), ['controller' => 'Tickets', 'action' => 'delete', $ticket->id], [
                                                                     'class' => 'btn btn-danger',
-                                                                    'confirm' => __('Are you sure you want to delete Ticket title:  {0} From customer {1} {2}?', $ticket->title , $customer->f_name, $customer->l_name)
+                                                                    'confirm' => __('Are you sure you want to delete Ticket title:  {0} From customer {1} {2}?', $ticket->title, $customer->f_name, $customer->l_name)
                                                                 ]) ?>
                                                             <?php endif; ?>
                                                         <?php endif; ?>
@@ -1032,7 +1028,7 @@ to get the name or any value in the staff table, use the get and then the name o
                                             are no closed tickets (same is applied for open tickets-->
                                             <?php if (count(array_filter($tickets, function ($ticket) {
                                                     return $ticket->closed === false;
-                                                    })) === 0): ?>
+                                                })) === 0): ?>
                                                 <div class="alert alert-primary" role="alert">
                                                     <p>No Open tickets found.</p>
                                                 </div>
@@ -1056,7 +1052,9 @@ to get the name or any value in the staff table, use the get and then the name o
                                                                             <?php elseif ($ticket->closed == false) : ?>
                                                                                 <h6> Status: Open </h6>
                                                                             <?php endif; ?>
-                                                                            <h6> <span class="card-info">Visible to all?</span> <?= h($ticket->showall ? 'Yes' : 'No') ?> </h6>
+                                                                            <h6><span
+                                                                                    class="card-info">Visible to all?</span> <?= h($ticket->showall ? 'Yes' : 'No') ?>
+                                                                            </h6>
                                                                         </div>
                                                                         <div class="toolbar ml-auto">
                                                                             <?php if ($customer->archive == 0): ?>
@@ -1075,27 +1073,31 @@ to get the name or any value in the staff table, use the get and then the name o
                                                                     </div>
                                                                     <div class="card-body">
                                                                         <div class="card-text">
-                                                                            <p><span class="card-info">Ticket ID:</span> <?= h($ticket->id) ?>
+                                                                            <p><span
+                                                                                    class="card-info">Ticket ID:</span> <?= h($ticket->id) ?>
                                                                             </p>
                                                                             <p><span
                                                                                     class="card-info">Customer:</span> <?= h($customer->f_name) ?>
                                                                             </p>
-                                                                            <p><span class="card-info">Assigned staff:</span> <?= $this->Html->link(__($ticket->user->f_name), ['controller' => 'Users', 'action' => 'view', $ticket->staff_id]) ?>
+                                                                            <p><span
+                                                                                    class="card-info">Assigned staff:</span> <?= $this->Html->link(__($ticket->user->f_name), ['controller' => 'Users', 'action' => 'view', $ticket->staff_id]) ?>
                                                                             <p>
                                                                             <div style="display: flex">
                                                                                 <span class="card-info">Notes</span>
-                                                                                <?php if(!empty($ticket->notes)): ?>
+                                                                                <?php if (!empty($ticket->notes)): ?>
                                                                                     : <?= h($ticket->notes) ?>
                                                                                 <?php else: ?>
                                                                                     : -
                                                                                 <?php endif ?>
                                                                             </div>
                                                                             </p>
-                                                                            <p><span class="card-info">Create time:</span> <?= h($ticket->createtime) ?>
+                                                                            <p><span
+                                                                                    class="card-info">Create time:</span> <?= h($ticket->createtime) ?>
                                                                             </p>
                                                                             <br>
                                                                         </div>
-                                                                        <div style="display: flex; justify-content: space-between">
+                                                                        <div
+                                                                            style="display: flex; justify-content: space-between">
                                                                             <a class="btn btn-primary"
                                                                                data-toggle="collapse"
                                                                                href="#collapseExample<?= $ticket->id ?>"
@@ -1119,7 +1121,7 @@ to get the name or any value in the staff table, use the get and then the name o
 
                                                                 <?= $this->Form->postLink(__('Delete'), ['controller' => 'Tickets', 'action' => 'delete', $ticket->id], [
                                                                     'class' => 'btn btn-danger',
-                                                                    'confirm' => __('Are you sure you want to delete Ticket title:  {0} From customer {1} {2}?', $ticket->title , $customer->f_name, $customer->l_name)
+                                                                    'confirm' => __('Are you sure you want to delete Ticket title:  {0} From customer {1} {2}?', $ticket->title, $customer->f_name, $customer->l_name)
                                                                 ]) ?>
                                                             <?php endif; ?>
                                                         <?php endif; ?>
@@ -1208,7 +1210,9 @@ to get the name or any value in the staff table, use the get and then the name o
                                                                             <?php elseif ($ticket->closed == false) : ?>
                                                                                 <h6> Status: Open </h6>
                                                                             <?php endif; ?>
-                                                                            <h6> <span class="card-info">Visible to all?</span> <?= h($ticket->showall ? 'Yes' : 'No') ?> </h6>
+                                                                            <h6><span
+                                                                                    class="card-info">Visible to all?</span> <?= h($ticket->showall ? 'Yes' : 'No') ?>
+                                                                            </h6>
                                                                         </div>
                                                                         <div class="toolbar ml-auto">
                                                                             <?php if ($customer->archive == 0): ?>
@@ -1227,28 +1231,32 @@ to get the name or any value in the staff table, use the get and then the name o
                                                                     </div>
                                                                     <div class="card-body">
                                                                         <div class="card-text">
-                                                                            <p><span class="card-info">Ticket ID:</span> <?= h($ticket->id) ?>
+                                                                            <p><span
+                                                                                    class="card-info">Ticket ID:</span> <?= h($ticket->id) ?>
                                                                             </p>
                                                                             <p><span
                                                                                     class="card-info">Customer:</span> <?= h($customer->f_name) ?>
                                                                             </p>
-                                                                            <p><span class="card-info">Assigned staff:</span> <?= $this->Html->link(__($ticket->user->f_name), ['controller' => 'Users', 'action' => 'view', $ticket->staff_id]) ?>
+                                                                            <p><span
+                                                                                    class="card-info">Assigned staff:</span> <?= $this->Html->link(__($ticket->user->f_name), ['controller' => 'Users', 'action' => 'view', $ticket->staff_id]) ?>
                                                                             </p>
                                                                             <p>
                                                                             <div style="display: flex">
                                                                                 <span class="card-info">Notes</span>
-                                                                                <?php if(!empty($ticket->notes)): ?>
+                                                                                <?php if (!empty($ticket->notes)): ?>
                                                                                     : <?= h($ticket->notes) ?>
                                                                                 <?php else: ?>
                                                                                     : -
                                                                                 <?php endif ?>
                                                                             </div>
                                                                             </p>
-                                                                            <p><span class="card-info">Create time:</span> <?= h($ticket->createtime) ?>
+                                                                            <p><span
+                                                                                    class="card-info">Create time:</span> <?= h($ticket->createtime) ?>
                                                                             </p>
                                                                             <br>
                                                                         </div>
-                                                                        <div style="display: flex; justify-content: space-between">
+                                                                        <div
+                                                                            style="display: flex; justify-content: space-between">
                                                                             <a class="btn btn-primary"
                                                                                data-toggle="collapse"
                                                                                href="#collapseExample<?= $ticket->id ?>"
@@ -1272,7 +1280,7 @@ to get the name or any value in the staff table, use the get and then the name o
 
                                                                 <?= $this->Form->postLink(__('Delete'), ['controller' => 'Tickets', 'action' => 'delete', $ticket->id], [
                                                                     'class' => 'btn btn-danger',
-                                                                    'confirm' => __('Are you sure you want to delete Ticket title:  {0} From customer {1} {2}?', $ticket->title , $customer->f_name, $customer->l_name)
+                                                                    'confirm' => __('Are you sure you want to delete Ticket title:  {0} From customer {1} {2}?', $ticket->title, $customer->f_name, $customer->l_name)
                                                                 ]) ?>
                                                             <?php endif; ?>
                                                         <?php endif; ?>
@@ -1533,7 +1541,6 @@ to get the name or any value in the staff table, use the get and then the name o
                                     <?php endif; ?>
 
 
-
                                 </div>
                             </div>
                         </div>
@@ -1607,11 +1614,10 @@ to get the name or any value in the staff table, use the get and then the name o
     });
 
 
-
 </script>
 <script>
     var acc = document.querySelectorAll(".accordion-header");
-    var i =0;
+    var i = 0;
 
     for (i = 0; i < acc.length; i++) {
 
@@ -1620,7 +1626,7 @@ to get the name or any value in the staff table, use the get and then the name o
         /* Hide panel initially */
         panel.style.display = "none";
 
-        acc[i].addEventListener("click", function() {
+        acc[i].addEventListener("click", function () {
             /* Toggle active class to expand/collapse panel */
             this.classList.toggle("active");
 

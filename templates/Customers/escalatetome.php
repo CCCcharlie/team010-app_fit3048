@@ -1,4 +1,3 @@
-
 <?php
 ?>
 
@@ -73,22 +72,12 @@
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item"><a href="/" class="breadcrumb-link">Home</a></li>
-                            <li class="breadcrumb-item"><a href="/customers" class="breadcrumb-link">View all customer</a></li>
+                            <li class="breadcrumb-item"><a href="/customers" class="breadcrumb-link">View all
+                                    customer</a></li>
                             <li class="breadcrumb-item active" aria-current="page">Escalate to me</li>
                         </ol>
                     </nav>
                 </div>
-                <!-- To obtain the identity, use $identity = $this->request->getAttribute('authentication')->getIdentity(); to find the currently logged in entity
-to get the name or any value in the staff table, use the get and then the name of the attribute $identity->get('staff_fname')-->
-                <?php $identity = $this->request->getAttribute('authentication')->getIdentity();
-                //                        debug($identity->get('f_name'));
-                //                        exit();
-                ?>
-                <!--                                <h2 class="pageheader-title" style="color: lightslategrey">Welcome, --><?php //= $identity->get('f_name'); ?><!--</h2>-->
-
-                <!-- Can you add login user to name here if you get chance Bryan?  -->
-                <!-- Sure Alex-->
-
                 <p class="pageheader-text"></p>
             </div>
         </div>
@@ -99,8 +88,9 @@ to get the name or any value in the staff table, use the get and then the name o
 
     <div class="row">
         <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-            <div class="section-block container" style="float: left;"  id="cardaction">
-                <h3 class="section-title" style="color: midnightblue">Escalated Customers</h3>                <div class="accordion cb" style="color: midnightblue">
+            <div class="section-block container" style="float: left;" id="cardaction">
+                <h3 class="section-title" style="color: midnightblue">Escalated Customers</h3>
+                <div class="accordion cb" style="color: midnightblue">
                     <div class="accordion-header button" style="color: midnightblue">
                         <button>
                         <span class="icon" style="color: midnightblue"> &#9654; Welcome to the customers with tickets escalated. If you are unsure of how to use this page. <span> <strong> Click me! </strong> </span> <br>
@@ -110,14 +100,14 @@ to get the name or any value in the staff table, use the get and then the name o
                         <div class="accordion-panel" style="color: midnightblue">
                             <p> This page show customer profiles that have been escalated
                                 <br> Availabe Actions: </p>
-                            <p>		Viewing full profile of the customer.
+                            <p> Viewing full profile of the customer.
                             </p>
-                            <p>		Unescalating the customer and assign it back to the original staff.
+                            <p> Unescalating the customer and assign it back to the original staff.
                             </p>
-                            <p>		Sorting the customer base on different condition.
+                            <p> Sorting the customer base on different condition.
                             </p>
 
-                              <p>	Search Customer using search bar.</p>
+                            <p> Search Customer using search bar.</p>
 
                         </div>
                     </div>
@@ -129,10 +119,10 @@ to get the name or any value in the staff table, use the get and then the name o
     <div class="row">
         <div class="col-md-12">
             <?= $this->Form->create(null, ['url' => ['controller' => 'Customers', 'action' => 'index'], 'type' => 'get', 'class' => 'form-inline']) ?>
-            <div class="form-group mr-2" >
+            <div class="form-group mr-2">
                 <?= $this->Form->input('search', ['type' => 'text', 'class' => 'form-control', 'placeholder' => 'Search...',
                     'value' => isset($_GET['search']) ? $_GET['search'] : '']) ?>
-                <!--                                    check whether a search parameter exist in url / if true get the value / flase return ' '-->
+                <!-- check whether a search parameter exist in url / if true get the value / flase return ' '-->
             </div>
             <?= $this->Form->button(__('Search'), ['class' => 'btn btn-primary']) ?>
 
@@ -141,92 +131,82 @@ to get the name or any value in the staff table, use the get and then the name o
 
 
             <br>
-            <h6 style ="color: midnightblue" class="section-title"> Sort by:
+            <h6 style="color: midnightblue" class="section-title"> Sort by:
 
 
-
-            <tr>
-                <th>
-                    <?php
-                    $sortField = 'f_name';
-                    $sortDir = 'asc';
-                    if ($this->Paginator->sortKey() === $sortField) {
-                        $sortDir = ($this->Paginator->sortDir() === 'asc') ? 'desc' : 'asc';
-                    }
-                    ?>
-                    <?= $this->Paginator->sort('f_name', 'First Name', ['direction' => $sortDir]) ?>
-                    <?php if ($this->Paginator->sortKey() === 'f_name') : ?>
-                        <?php if ($sortDir === 'asc') : ?>
-                            <img src="<?= $this->Url->image('arrow-down.png', ['fullBase' => true, 'webroot' => 'img/', 'width' => 10]) ?>" alt="Down Arrow">
-                        <?php else : ?>
-                            <img src="<?= $this->Url->image('arrow-up.png', ['fullBase' => true, 'webroot' => 'img/', 'width' => 10]) ?>" alt="Up Arrow">
+                <tr>
+                    <th>
+                        <?php
+                        $sortField = 'f_name';
+                        $sortDir = 'asc';
+                        if ($this->Paginator->sortKey() === $sortField) {
+                            $sortDir = ($this->Paginator->sortDir() === 'asc') ? 'desc' : 'asc';
+                        }
+                        ?>
+                        <?= $this->Paginator->sort('f_name', 'First Name', ['direction' => $sortDir]) ?>
+                        <?php if ($this->Paginator->sortKey() === 'f_name') : ?>
+                            <?php if ($sortDir === 'asc') : ?>
+                                <img
+                                    src="<?= $this->Url->image('arrow-down.png', ['fullBase' => true, 'webroot' => 'img/', 'width' => 10]) ?>"
+                                    alt="Down Arrow">
+                            <?php else : ?>
+                                <img
+                                    src="<?= $this->Url->image('arrow-up.png', ['fullBase' => true, 'webroot' => 'img/', 'width' => 10]) ?>"
+                                    alt="Up Arrow">
+                            <?php endif; ?>
                         <?php endif; ?>
-                    <?php endif; ?>
-                    |
-                </th>
+                        |
+                    </th>
 
-                <th>
-                    <?php
-                    $sortField = 'l_name';
-                    $sortDir = 'asc';
-                    if ($this->Paginator->sortKey() === $sortField) {
-                        $sortDir = ($this->Paginator->sortDir() === 'asc') ? 'desc' : 'asc';
-                    }
-                    ?>
-                    <?= $this->Paginator->sort('l_name', 'Last Name', ['direction' => $sortDir]) ?>
-                    <?php if ($this->Paginator->sortKey() === 'l_name') : ?>
-                        <?php if ($sortDir === 'asc') : ?>
-                            <img src="<?= $this->Url->image('arrow-down.png', ['fullBase' => true, 'webroot' => 'img/', 'width' => 10]) ?>" alt="Down Arrow">
-                        <?php else : ?>
-                            <img src="<?= $this->Url->image('arrow-up.png', ['fullBase' => true, 'webroot' => 'img/', 'width' => 10]) ?>" alt="Up Arrow">
+                    <th>
+                        <?php
+                        $sortField = 'l_name';
+                        $sortDir = 'asc';
+                        if ($this->Paginator->sortKey() === $sortField) {
+                            $sortDir = ($this->Paginator->sortDir() === 'asc') ? 'desc' : 'asc';
+                        }
+                        ?>
+                        <?= $this->Paginator->sort('l_name', 'Last Name', ['direction' => $sortDir]) ?>
+                        <?php if ($this->Paginator->sortKey() === 'l_name') : ?>
+                            <?php if ($sortDir === 'asc') : ?>
+                                <img
+                                    src="<?= $this->Url->image('arrow-down.png', ['fullBase' => true, 'webroot' => 'img/', 'width' => 10]) ?>"
+                                    alt="Down Arrow">
+                            <?php else : ?>
+                                <img
+                                    src="<?= $this->Url->image('arrow-up.png', ['fullBase' => true, 'webroot' => 'img/', 'width' => 10]) ?>"
+                                    alt="Up Arrow">
+                            <?php endif; ?>
                         <?php endif; ?>
-                    <?php endif; ?>
-                    |
-                </th>
-
-                <!--                                <th>-->
-                <!--                                    --><?php
-                //                                    $sortField = 'age';
-                //                                    $sortDir = 'asc';
-                //                                    if ($this->Paginator->sortKey() === $sortField) {
-                //                                        $sortDir = ($this->Paginator->sortDir() === 'asc') ? 'desc' : 'asc';
-                //                                    }
-                //                                    ?>
-                <!--                                    --><?php //= $this->Paginator->sort('age', 'Age', ['direction' => $sortDir]) ?>
-                <!--                                    --><?php //if ($this->Paginator->sortKey() === 'age') : ?>
-                <!--                                        --><?php //if ($sortDir === 'asc') : ?>
-                <!--                                            <img src="--><?php //= $this->Url->image('arrow-down.png', ['fullBase' => true, 'webroot' => 'img/', 'width' => 10]) ?><!--" alt="Down Arrow">-->
-                <!--                                        --><?php //else : ?>
-                <!--                                            <img src="--><?php //= $this->Url->image('arrow-up.png', ['fullBase' => true, 'webroot' => 'img/', 'width' => 10]) ?><!--" alt="Up Arrow">-->
-                <!--                                        --><?php //endif; ?>
-                <!--                                    --><?php //endif; ?>
-                <!--                                    |-->
-                <!--                                </th>-->
-
-                <th>
-                    <?php
-                    $sortField = 'email';
-                    $sortDir = 'asc';
-                    if ($this->Paginator->sortKey() === $sortField) {
-                        $sortDir = ($this->Paginator->sortDir() === 'asc') ? 'desc' : 'asc';
-                    }
-                    ?>
-                    <?= $this->Paginator->sort('email', 'Email', ['direction' => $sortDir]) ?>
-                    <?php if ($this->Paginator->sortKey() === 'email') : ?>
-                        <?php if ($sortDir === 'asc') : ?>
-                            <img src="<?= $this->Url->image('arrow-down.png', ['fullBase' => true, 'webroot' => 'img/', 'width' => 10]) ?>" alt="Down Arrow">
-                        <?php else : ?>
-                            <img src="<?= $this->Url->image('arrow-up.png', ['fullBase' => true, 'webroot' => 'img/', 'width' => 10]) ?>" alt="Up Arrow">
+                        |
+                    </th>
+                    <th>
+                        <?php
+                        $sortField = 'email';
+                        $sortDir = 'asc';
+                        if ($this->Paginator->sortKey() === $sortField) {
+                            $sortDir = ($this->Paginator->sortDir() === 'asc') ? 'desc' : 'asc';
+                        }
+                        ?>
+                        <?= $this->Paginator->sort('email', 'Email', ['direction' => $sortDir]) ?>
+                        <?php if ($this->Paginator->sortKey() === 'email') : ?>
+                            <?php if ($sortDir === 'asc') : ?>
+                                <img
+                                    src="<?= $this->Url->image('arrow-down.png', ['fullBase' => true, 'webroot' => 'img/', 'width' => 10]) ?>"
+                                    alt="Down Arrow">
+                            <?php else : ?>
+                                <img
+                                    src="<?= $this->Url->image('arrow-up.png', ['fullBase' => true, 'webroot' => 'img/', 'width' => 10]) ?>"
+                                    alt="Up Arrow">
+                            <?php endif; ?>
                         <?php endif; ?>
-                    <?php endif; ?>
             </h6>
-                </th>
+            </th>
             </tr>
 
             <br>
             <br>
             <br>
-
 
 
         </div>
@@ -239,7 +219,8 @@ to get the name or any value in the staff table, use the get and then the name o
             .nav-pills .nav-link.active {
                 font-weight: bolder;
             }
-            .align-right{
+
+            .align-right {
                 right: 0px;
             }
         </style>
@@ -257,25 +238,33 @@ to get the name or any value in the staff table, use the get and then the name o
                         <div class="toolbar card-toolbar-tabs ml-auto">
                             <ul class="nav nav-pills" role="tablist">
                                 <li class="nav-item">
-                                    <a class="nav-link active" id="pills-home-tab-<?= $customer->id ?>" data-toggle="pill" href="#pills-home-<?= $customer->id ?>" role="tab" aria-controls="pills-home" aria-selected="true">Home</a>
+                                    <a class="nav-link active" id="pills-home-tab-<?= $customer->id ?>"
+                                       data-toggle="pill" href="#pills-home-<?= $customer->id ?>" role="tab"
+                                       aria-controls="pills-home" aria-selected="true">Home</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" id="pills-profile-tab-<?= $customer->id ?>" data-toggle="pill" href="#pills-profile-<?= $customer->id ?>" role="tab" aria-controls="pills-profile" aria-selected="false">Technical Details</a>
+                                    <a class="nav-link" id="pills-profile-tab-<?= $customer->id ?>" data-toggle="pill"
+                                       href="#pills-profile-<?= $customer->id ?>" role="tab"
+                                       aria-controls="pills-profile" aria-selected="false">Technical Details</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" id="pills-contact-tab-<?= $customer->id ?>" data-toggle="pill" href="#pills-contact-<?= $customer->id ?>" role="tab" aria-controls="pills-contact" aria-selected="false">Contact Methods</a>
+                                    <a class="nav-link" id="pills-contact-tab-<?= $customer->id ?>" data-toggle="pill"
+                                       href="#pills-contact-<?= $customer->id ?>" role="tab"
+                                       aria-controls="pills-contact" aria-selected="false">Contact Methods</a>
                                 </li>
                             </ul>
                         </div>
                     </div>
                     <div class="card-body">
                         <div class="tab-content mb-3" id="pills-tabContent-<?= $customer->id ?>">
-                            <div class="tab-pane fade show active" id="pills-home-<?= $customer->id ?>" role="tabpanel" aria-labelledby="pills-home-tab-<?= $customer->id ?>">
+                            <div class="tab-pane fade show active" id="pills-home-<?= $customer->id ?>" role="tabpanel"
+                                 aria-labelledby="pills-home-tab-<?= $customer->id ?>">
                                 <br> Status: <?= h($customer->status) ?>
                                 <br> Notes: <?= h($customer->notes) ?>
 
                             </div>
-                            <div class="tab-pane fade" id="pills-profile-<?= $customer->id ?>" role="tabpanel" aria-labelledby="pills-profile-tab-<?= $customer->id ?>">
+                            <div class="tab-pane fade" id="pills-profile-<?= $customer->id ?>" role="tabpanel"
+                                 aria-labelledby="pills-profile-tab-<?= $customer->id ?>">
                                 <!-- Add stuff like technical details and devices. -->
                                 <?php
                                 if (!empty($customer->devices)) {
@@ -292,7 +281,8 @@ to get the name or any value in the staff table, use the get and then the name o
                                 ?>
                             </div>
 
-                            <div class="tab-pane fade" id="pills-contact-<?= $customer->id ?>" role="tabpanel" aria-labelledby="pills-contact-tab-<?= $customer->id ?>">
+                            <div class="tab-pane fade" id="pills-contact-<?= $customer->id ?>" role="tabpanel"
+                                 aria-labelledby="pills-contact-tab-<?= $customer->id ?>">
                                 <br>Primary E-mail: <?= h($customer->email) ?>
                                 <?php
                                 if (!empty($customer->commdetails)) {
@@ -306,27 +296,20 @@ to get the name or any value in the staff table, use the get and then the name o
                             </div>
 
 
-
-
-
                         </div>
                         <?= $this->Html->link(__('View Full Profile'), ['action' => 'view', $customer->id], ['class' => 'btn btn-primary']) ?>
-                        <button id="undobutton-<?= $customer->id ?>"  class="btn btn-primary" style="margin-left: 2vw">Unescalate the customer</button>
+                        <button id="undobutton-<?= $customer->id ?>" class="btn btn-primary" style="margin-left: 2vw">
+                            Unescalate the customer
+                        </button>
                         <script>
                             document.getElementById("undobutton-<?= $customer->id ?>").addEventListener('click', function () {
                                 // Get the customer ID
                                 var customerId = '<?= $customer->id ?>';
-                                // console.log(customerId)
-
                                 // Construct the URL with the customer ID as a parameter
                                 var url = '/tickets/descalate?customerId=' + customerId;
-                                // var url = '/team010-app_fit3048/tickets/descalate?customerId=' + customerId;
 
-
-                                // Redirect to Descalate action with the customer ID parameter
                                 window.location.href = url;
                             });
-
 
 
                         </script>
@@ -335,8 +318,8 @@ to get the name or any value in the staff table, use the get and then the name o
 
             </div>
         <?php endforeach; ?>
-        <?php if (count($escalatedCustomers)==0): ?>
-            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12" >
+        <?php if (count($escalatedCustomers) == 0): ?>
+            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                 <p>No escalated customers found.</p>
 
             </div>
@@ -345,26 +328,6 @@ to get the name or any value in the staff table, use the get and then the name o
         <?php endif; ?>
 
     </div>
-
-    <!--                        <a href="javascript: " id="return-to-top"><i class="icon-chevron-up"></i></a>-->
-    <!--                    <div class = "card-footer-item" >-->
-    <!---->
-    <!---->
-    <!---->
-    <!--                        <div class="pagination-controls">-->
-    <!--                            <p class="pagination-counter">-->
-    <!--                            <form class="pagination-goto">-->
-    <!--                                <label for="goto-page">Go to page:</label>-->
-    <!---->
-    <!--                                <input type="text" id="goto-page" name="page">-->
-    <!--                                <button class="btn btn-primary" type="submit">Go</button>-->
-    <!---->
-    <!--                            </form>-->
-    <!--                        </div>-->
-    <!--                        <p class="pagination-counter">--><?php //= $this->Paginator->counter(__('Page {{page}} of {{pages}}, showing {{current}} record(s) out of {{count}} total')) ?><!--</p>-->
-    <!--                    </div>-->
-
-
 
 
 </div>
@@ -376,25 +339,13 @@ to get the name or any value in the staff table, use the get and then the name o
 <!--Add any explinations here for any scripts you add. - Alex-->
 
 
-
-
 <?= $this->Html->script('https://kit.fontawesome.com/b5c616a120.js', ['crossorigin' => 'anonymous']) ?>
 <?= $this->Html->script(['jquery-3.3.1.min.js', 'bootstrap.bundle.js', 'main-js', 'jquery.slimscroll.js', 'gototoparrow.js']) ?>
 
 
-
-<!--    --><?php //if ($this->Paginator->counter(__('Page {{page}} of {{pages}}, showing {{current}} record(s) out of {{count}} total')) === 'Page 1 of 0, showing 0 record(s) out of 0 total'): ?>
-<!--        <p>No results found.</p>-->
-<!--    --><?php //endif; ?>
-<!--<script>-->
-<!--    // JavaScript-->
-<!--    document.getElementById('changeStaffButton').addEventListener('click', function () {-->
-<!---->
-<!--    });-->
-<!--</script>-->
 <script>
     var acc = document.querySelectorAll(".accordion-header");
-    var i =0;
+    var i = 0;
 
     for (i = 0; i < acc.length; i++) {
 
@@ -403,7 +354,7 @@ to get the name or any value in the staff table, use the get and then the name o
         /* Hide panel initially */
         panel.style.display = "none";
 
-        acc[i].addEventListener("click", function() {
+        acc[i].addEventListener("click", function () {
             /* Toggle active class to expand/collapse panel */
             this.classList.toggle("active");
 

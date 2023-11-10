@@ -110,15 +110,10 @@ class CbController extends AppController
             //IMPORTANT: updates the content of previous_value to the content of the current value before the change is made.
             //Basically acts as storing the previous value of content value
             $cb->previous_value = $cb->content_value;
-//            debug($cb);
-//            exit();
             //First check if theres errors or not and if image, we dont want to do stuff if its text lmao
             if (!$cb->getErrors() && $cb->content_type == "image") {
                 //Gets from field name of edit.php of services
                 $image = $this->request->getData('content_image');
-
-//                debug($image);
-//                exit();
 
                 //get image name
                 $image_name = $image->getClientFilename();
@@ -138,9 +133,6 @@ class CbController extends AppController
                     $cb->content_value =  $image_name;
                 }
             }
-//            debug($cb);
-//            exit;
-
             if ($this->Cb->save($cb)) {
                 $this->Flash->success(__('The block: ' . $cb->hint . ' has been saved'));
 

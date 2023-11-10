@@ -201,8 +201,6 @@ class AuthController extends AppController {
 
         // Note: theres a strange bug that maxAttemptTimeOut to be +2 of what it should be, so If it is set to 5,
         // instead it locks out at 7
-//        debug($contentBlocks);
-
         $maxAttemptTimeOut = (int)$contentBlocks['security_max_attempts_timeout'];
         $timeMultiplyFactor = (int)$contentBlocks['security_time_multiply_factor'];
         $maxTimeoutDuration = (int)$contentBlocks['security_max_timeout_duration'];
@@ -222,10 +220,7 @@ class AuthController extends AppController {
         } else {
 
         }
-//        debug($maxAttemptTimeOut);
-//        debug($timeMultiplyFactor);
-//        debug($maxTimeoutDuration);
-//        exit;
+
         // Define maximum number of consecutive unsuccessful attempts before imposing timeouts. Put a CB on me when making a CMS
         $maxAttemptsBeforeTimeout = $maxAttemptTimeOut;
 
@@ -287,7 +282,6 @@ class AuthController extends AppController {
             $fallbackLocation = ['controller' => 'Customers', 'action' => 'index'];
 
             // Redirect the user to the location they're trying to access
-//            return $this->redirect($this->Authentication->getLoginRedirect() ?? $fallbackLocation);
             // Because assigntome is available to all, to prevent unecessary flash errors, redirect them there
 
             return $this->redirect(['controller' => 'Customers', 'action' => 'assigntome']);
@@ -310,8 +304,6 @@ class AuthController extends AppController {
             $this->request->getSession()->write('login_attempts', ['count' => $totalAttempts, 'last_attempt_time' => $currentTime]);
 
             // Display the appropriate error message
-//            debug($totalAttempts);
-//            debug($maxAttemptsBeforeTimeout);
             if ($totalAttempts > $maxAttemptsBeforeTimeout + 2) {
                 $this->Flash->error("Too many unsuccessful attempts. You are locked out.");
             } elseif (!$recaptchaResult['success']) {

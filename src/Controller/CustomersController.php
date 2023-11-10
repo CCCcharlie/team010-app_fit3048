@@ -95,11 +95,7 @@ class CustomersController extends AppController
                 ->where($searchConditions);
         }
 
-
-        $totalRecords = $query->count(); // Get the total number of records
-
         $this->paginate = [
-//            'limit' => $totalRecords, // Set the limit to the total number of records
             'limit' => 25,
             'contain' => ['Tickets', 'Devices', 'Commdetails', 'Counsellors'],
         ];
@@ -277,15 +273,9 @@ class CustomersController extends AppController
             ->distinct(['Customers.id'])// Add this line to ensure distinct customers
             ->all();
 
-//        debug($assignedCustomers);
-//        exit;
-
-//debug($assignedCustomers);
-//exit;
         // pass data
         $this->set('assignedCustomers', $assignedCustomers);
 
-//
 // Get the related tickets for assigned customers
         $assigntickets = $this->Customers->Tickets->find()
             ->where([
@@ -297,31 +287,11 @@ class CustomersController extends AppController
 
 // Pass the tickets data to the view
 
-//        debug($assigntickets);
-//exit;
         $this->set('assigntickets', $assigntickets);
 
     }
     public function escalatetome()
     {
-
-
-
-        // Get the current user id
-//        $identity = $this->request->getAttribute('authentication')->getIdentity();
-//        $currentStaffId = $identity->get('id');
-//
-//        // get the relate cust
-//        $assignedCustomers = $this->Customers->find()
-//            ->innerJoinWith('Tickets', function ($query) use ($currentStaffId) {
-//                return $query->where([
-//                    'Tickets.staff_id' => $currentStaffId,
-////                    'Tickets.closetime IS NULL',
-//                    'Tickets.escalate IS TRUE'
-//                ]);
-//            })
-//            ->distinct(['Customers.id'])// Add this line to ensure distinct customers
-//            ->all();
 
 //finding all the  customer with escalate is true
 
@@ -336,23 +306,6 @@ class CustomersController extends AppController
 
         // pass data
         $this->set('escalatedCustomers', $escalatedCustomers);
-
-//
-// Get the related tickets for assigned customers
-//        $escaltedtickets = $this->Customers->Tickets->find()
-//            ->where([
-//                'Tickets.cust_id' => $escalatedCustomers,
-////                'Tickets.closetime IS NULL'
-//            ])
-//            ->contain(['Users', 'Contents', 'Customers'])
-//            ->all();
-
-//        debug($escalatedCustomers);
-//        exit;
-// Pass the tickets data to the view
-
-
-//        $this->set('escaltedtickets', $escaltedtickets);
 
     }
     /**
@@ -416,9 +369,6 @@ class CustomersController extends AppController
         if ($this->request->is('post')) {
             $customer = $this->Customers->patchEntity($customer, $this->request->getData());
 
-//            debug($customer);
-//            exit;
-
             //Generate ID only if no errors precaution
             if($customer->hasErrors() === false) {
                 /////////////////////////////
@@ -461,24 +411,6 @@ class CustomersController extends AppController
         ]);
         if ($this->request->is(['patch', 'post', 'put'])) {
             $customer = $this->Customers->patchEntity($customer, $this->request->getData());
-
-            // WARNING: Changing PK is NOT RECOMMENDED AT ALL AND IS A HASSLE UNLESS YOU KNOW WHAT YOU ARE DOING
-//            $previousId = $customer->id;
-            /////////////////////////////
-            // Generate the unique id  //
-            /////////////////////////////
-
-            // Call the generate id function in the AppController.php
-
-//            $identifier = 'CUS';
-//            $generateId = $this->generateId($identifier, $customer->f_name, $customer->l_name);
-//
-//            $customer->id = $generateId;
-
-            ////////////////////////////////
-            // End Generate the unique id //
-            ////////////////////////////////
-
             if ($this->Customers->save($customer)) {
                 $this->Flash->success(__('The profile edit has been saved!.'));
 

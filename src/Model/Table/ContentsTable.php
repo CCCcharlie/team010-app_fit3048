@@ -60,7 +60,6 @@ class ContentsTable extends Table
         $validator
             ->scalar('content')
             ->maxLength('content', 500)
-//            ->requirePresence('content', 'create');
             ->notEmptyString('content');
 
         $validator

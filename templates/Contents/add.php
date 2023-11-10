@@ -27,82 +27,55 @@
     <link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
 
 
-
-
-
 </head>
 
 <body>
-    <div class="contents add content">
-        <div class="row">
-                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-                    <div class="section-block" id="basicform">
-                    </div>
-                    <div class="card">
-                        <?= $this->Form->create($content, ['type'=> 'file']) ?>
-                        <fieldset>
-                            <h5 class="card-header">
-                                <legend>
-                                    <?= __('Add content for customer: ' . $fullName) ?>
-                                    <br>
-                                </legend>
-                            </h5>
-                            <?php
-                            //                    echo $this->Form->control('content');
-                            //                    echo $this->Form->control('createtime');
-                            //                    echo $this->Form->control('ticket_id', ['options' => $tickets, 'default' => $ticketId]);
-                            //Default value, not very safe
-                            //echo $this->Form->text('ticket_id', ['value' => $ticketId, 'readonly' => true, 'class' => 'form-control']);
-                            echo $this->Form->control('content_type', [
-                                'type' => 'select',
-                                'options' => $content_types,
-                                //onchange actually exists to call JS
-                                'onchange' => 'switchInput()',
-                            ]);
-                            //     t               echo $this->Form->control('file', ['type' => 'file']);
-                            echo '<div id="inputContainer" >';
-                            // The dynamic input field will be added here
-                            echo '</div>';
-                            echo '<!-- Image preview area -->';
-                            echo '<div id="imagePreview" style="display: none;">';
-                            echo '<img id="previewImage" src="#" alt="Image Preview" />';
-                            echo '</div>';
-                            ?>
+<div class="contents add content">
+    <div class="row">
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+            <div class="section-block" id="basicform">
+            </div>
+            <div class="card">
+                <?= $this->Form->create($content, ['type' => 'file']) ?>
+                <fieldset>
+                    <h5 class="card-header">
+                        <legend>
+                            <?= __('Add content for customer: ' . $fullName) ?>
+                            <br>
+                        </legend>
+                    </h5>
+                    <?php
+                    echo $this->Form->control('content_type', [
+                        'type' => 'select',
+                        'options' => $content_types,
+                        //onchange actually exists to call JS
+                        'onchange' => 'switchInput()',
+                    ]);
+                    //     t               echo $this->Form->control('file', ['type' => 'file']);
+                    echo '<div id="inputContainer" >';
+                    // The dynamic input field will be added here
+                    echo '</div>';
+                    echo '<!-- Image preview area -->';
+                    echo '<div id="imagePreview" style="display: none;">';
+                    echo '<img id="previewImage" src="#" alt="Image Preview" />';
+                    echo '</div>';
+                    ?>
 
-                            <!-- Display validation error for the 'image' field -->
-                            <?= $this->Form->error('image'); ?>
-                            <!-- Display validation error for the 'image' field -->
-                            <?= $this->Form->error('file'); ?>
+                    <!-- Display validation error for the 'image' field -->
+                    <?= $this->Form->error('image'); ?>
+                    <!-- Display validation error for the 'image' field -->
+                    <?= $this->Form->error('file'); ?>
 
-                        </fieldset>
-                        <div class="form-group d-flex justify-content-between align-items-center">
-                            <?= $this->Html->link(__('Return to Customer'), ['controller' => 'Customers', 'action' => 'view', $custId], ['class' => 'btn btn-rounded btn-secondary']) ?>
-                            <?= $this->Form->button(__('Submit'), ['class' => 'btn btn-primary']) ?>
-                        </div>
-                        <?= $this->Form->end() ?>
-                    </div>
-                                        <!-- Uncomment and style the following controls as needed -->
-                                        <!--
-    <div class="form-group">
-        <?= $this->Form->label('createtime', 'Create Time', ['class' => 'col-form-label']) ?>
-        <?= $this->Form->input('createtime', ['class' => 'form-control']) ?>
+                </fieldset>
+                <div class="form-group d-flex justify-content-between align-items-center">
+                    <?= $this->Html->link(__('Return to Customer'), ['controller' => 'Customers', 'action' => 'view', $custId], ['class' => 'btn btn-rounded btn-secondary']) ?>
+                    <?= $this->Form->button(__('Submit'), ['class' => 'btn btn-primary']) ?>
+                </div>
+                <?= $this->Form->end() ?>
+            </div>
+        </div>
     </div>
-    <div class="form-group">
-        <?= $this->Form->label('closetime', 'Close Time', ['class' => 'col-form-label']) ?>
-        <?= $this->Form->input('closetime', ['class' => 'form-control']) ?>
-    </div>
-    <div class="form-group">
-        <?= $this->Form->label('closed', 'Closed', ['class' => 'col-form-label']) ?>
-        <?= $this->Form->input('closed', ['class' => 'form-control']) ?>
-    </div>
-    <div class="form-group">
-        <?= $this->Form->label('cust_id', 'Customer', ['class' => 'col-form-label']) ?>
-        <?= $this->Form->input('cust_id', ['class' => 'form-control', 'options' => $customers]) ?>
-    </div>
-    -->
-                                </div>
-                            </div>
-    </div>
+</div>
 
 
 <script>
@@ -148,7 +121,7 @@
             imageInput.required = true; // Set the required attribute
             imageInput.addEventListener("change", showPreview); // Add event listener
             inputContainer.appendChild(imageInput);
-        }else if (selectedOption === "file") {
+        } else if (selectedOption === "file") {
             var fileInput = document.createElement("input");
             fileInput.type = "file";
             fileInput.name = "file"; //
@@ -158,11 +131,12 @@
 
         }
     }
+
     function showPreview(event) {
         var input = event.target;
         if (input.files && input.files[0]) {
             var reader = new FileReader();
-            reader.onload = function(e) {
+            reader.onload = function (e) {
                 var previewImage = document.getElementById("previewImage");
                 previewImage.src = e.target.result;
                 document.getElementById("imagePreview").style.display = "block";

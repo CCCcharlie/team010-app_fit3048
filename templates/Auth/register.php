@@ -24,8 +24,6 @@
                 echo $this->Form->control('password');
                 echo $this->Form->control('timezone');
                 echo $this->Form->control('admin_status');
-//                echo $this->Form->control('nonce');
-//                echo $this->Form->control('nonce_expiry');
                 ?>
             </fieldset>
             <?= $this->Form->button(__('Submit')) ?>

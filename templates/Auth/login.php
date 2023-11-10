@@ -42,8 +42,6 @@ $this->assign('title', 'Login');
         <title>GamBlock® - Customer Management</title>
 
         <div class="card-body">
-<!--    <div class="row">-->
-<!--        <div class="column column-50 column-offset-25">-->
             <div class=" form-group">
                 <div class = "login-form-container">
 
@@ -136,10 +134,6 @@ $this->assign('title', 'Login');
                 </fieldset>
 
                 <hr class="hr-between-buttons">
-
-<!--                --><?php //= $this->Html->link('Register new user', ['controller' => 'Auth', 'action' => 'register'], ['class' => 'button button-clear']) ?>
-<!--                --><?php //= $this->Html->link('Go to Homepage', '/', ['class' => 'button button-clear']) ?>
-
     </div>
 
 </div>

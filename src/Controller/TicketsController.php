@@ -28,8 +28,6 @@ class TicketsController extends AppController
         $tickets = $this->paginate($this->Tickets);
 
         $this->set(compact('tickets'));
-    //        debug($tickets);
-//        exit();
     }
 
     /**
@@ -40,13 +38,10 @@ class TicketsController extends AppController
      */
     public function unassigned()
     {
-
         $unassignedTickets = $this->Tickets->find()
             ->where(['staff_id IS NULL'])
             ->contain(['Customers', 'Users'])
             ->all();
-
-
         $this->set(compact('unassignedTickets'));
 
     }
@@ -85,9 +80,6 @@ class TicketsController extends AppController
         $ticket = $this->Tickets->newEmptyEntity();
         if ($this->request->is('post')) {
             $ticket = $this->Tickets->patchEntity($ticket, $this->request->getData());
-
-    //            debug($ticket);
-    //            exit;
             //closed is a boolean variable where closed = 0 mean it is Open
             $ticket->closed = false;
             $ticket->cust_id = $custId;
@@ -121,10 +113,10 @@ class TicketsController extends AppController
         }
         $customers = $this->Tickets->Customers->find('list', ['limit' => 200])->all();
 
-        //Users are written in a way to display in a drop down easily.
-        //Key field refers to what will be stored in the form
+        // Users are written in a way to display in a drop down easily.
+        // Key field refers to what will be stored in the form
         // Value field is what will be shown
-        //In this case, it shows f_name of Staff but it stores the ID into the database
+        // In this case, it shows f_name of Staff but it stores the ID into the database
         $users = $this->Tickets->Users->find('list', [
             'keyField' => 'id',
             'valueField' => 'f_name',
@@ -148,35 +140,27 @@ class TicketsController extends AppController
         $lastName = $this->request->getQuery('l_name');
         $custId = $this->request->getQuery('cust_id');
         $fullName = $firstName . ' ' . $lastName;
-//        $ticketClosedStatus = $this->request->getQuery('ticket_closed');
 
         $this->set(compact('fullName', 'custId'));
 
         $ticket = $this->Tickets->get($id, [
             'contain' => [],
         ]);
-//
+
         // Obtain the orginal data
         $originalData = $this->Tickets->get($id, [
             'contain' => [],
         ]);
         $this->set(compact('originalData', 'originalData'));
 
-
-//
         if ($this->request->is(['patch', 'post', 'put'])) {
             $ticket = $this->Tickets->patchEntity($ticket, $this->request->getData());
-
-//            debug($ticket);
-//            debug($id);
-//            exit;
-//
             if ($this->Tickets->save($ticket)) {
                 $this->Flash->success(__('The Ticket now titled: "'. $ticket->title . '" is successfully edited'));
                 // Save the original data in the session
                 $this->getRequest()->getSession()->write('originalData', $originalData);
 
-//                for undo action
+                //for undo action
                return $this->redirect(['controller' => 'Customers', 'action' => 'view', $custId]);
             }
             $this->Flash->error(__('This Ticket could not be saved. Please, try again.'));
@@ -188,9 +172,8 @@ class TicketsController extends AppController
             'limit' => 200
         ])->all();
         $this->set(compact('ticket', 'customers', 'users'));
-//        return to current address
+        // return to current address
         $refererUrl = $this->referer();
-//
     }
 
     /**
@@ -207,15 +190,14 @@ class TicketsController extends AppController
         $lastName = $this->request->getQuery('l_name');
         $custId = $this->request->getQuery('cust_id');
         $fullName = $firstName . ' ' . $lastName;
-//        $ticketClosedStatus = $this->request->getQuery('ticket_closed');
 
         $this->set(compact('fullName', 'custId'));
 
         $ticket = $this->Tickets->get($id, [
             'contain' => [],
         ]);
-//
-        // Obtain the orginal data
+
+        // Obtain the original data
         $originalData = $this->Tickets->get($id, [
             'contain' => [],
         ]);
@@ -225,18 +207,10 @@ class TicketsController extends AppController
 //
         if ($this->request->is(['patch', 'post', 'put'])) {
             $ticket = $this->Tickets->patchEntity($ticket, $this->request->getData());
-
-//            debug($ticket);
-//            debug($id);
-//            exit;
-//
             if ($this->Tickets->save($ticket)) {
                 $this->Flash->success(__('The Ticket: "'. $ticket->title . '" is successfully assigned'));
                 // Save the original data in the session
                 $this->getRequest()->getSession()->write('originalData', $originalData);
-
-//                for undo action
-//                return $this->redirect($this->redirect);
                 return $this->redirect(['action' => 'unassigned']);
             }
             $this->Flash->error(__('This Ticket could not be assigned. Please, try again.'));
@@ -314,7 +288,6 @@ class TicketsController extends AppController
         $lastName = $this->request->getQuery('l_name');
         $custId = $this->request->getQuery('cust_id');
         $fullName = $firstName . ' ' . $lastName;
-//        $ticketClosedStatus = $this->request->getQuery('ticket_closed');
 
         $this->set(compact('fullName', 'custId'));
 
@@ -323,11 +296,6 @@ class TicketsController extends AppController
         ]);
         if ($this->request->is(['patch', 'post', 'put'])) {
             $ticket = $this->Tickets->patchEntity($ticket, $this->request->getData());
-
-//            debug($ticket);
-//            debug($id);
-//            exit;
-
             if ($this->Tickets->save($ticket)) {
                 $this->Flash->success(__('The ticket has been saved.'));
                 return $this->redirect(['controller' => 'Customers', 'action' => 'view', $custId]);
@@ -341,9 +309,6 @@ class TicketsController extends AppController
             'limit' => 200
         ])->all();
         $this->set(compact('ticket', 'customers', 'users'));
-
-
-
 
     }
 
@@ -366,8 +331,6 @@ class TicketsController extends AppController
             $this->Flash->error(__('Unable to undo changes.'));
         }
 
-
-//        return $this->redirect($this->referer());
         return $this->redirect(['controller' => 'Customers', 'action' => 'view', $originalData['cust_id']]);
 
     }
@@ -402,22 +365,10 @@ class TicketsController extends AppController
             ])
             ->contain(['Users',  'Customers'])
             ->all();
-//        debug($id);
-//        exit();
 
-//        $rootuser = $this->Tickets->Users->find()
-//            ->where([
-//                'Users.role' => 'root',
-//                'Users.id' != $staffId
-//            ])
-//            ->contain(['Tickets'])
-//            ->first();
-//        $rootuserid = $rootuser->id;
-
-
-// store the note to add
+        // store the note to add
         $noteToAdd = ' Escalated by ' . $identity->get('f_name') . ' ' . $identity->get('l_name');
-//        initialise the flag message
+        // initialise the flag message
         $success = false;
         $error = false;
         $Customersname='';
@@ -426,9 +377,7 @@ class TicketsController extends AppController
             // Update "escalate" to true（1）
             $ticket->escalate = true;
 
-//            comment out cuz not assigned based on id
-//            $ticket->staff_id = $rootuserid;
-
+            // comment out cuz not assigned based on id
             //delect previous note
             $Customers = $this->Tickets->Customers->find()
                 ->matching('Tickets', function ($q) use ($ticket) {
@@ -440,7 +389,7 @@ class TicketsController extends AppController
             $pattern = '/escalated by.*/i';
             $note = preg_replace($pattern, '', $note);
             $Customers->notes = $note;
-//            bring note
+            // bring note
             if (strpos($Customers->notes, $noteToAdd) === false) {
                 // if note not being included add
                 $Customers->notes .= ' ' . $noteToAdd;
@@ -448,29 +397,22 @@ class TicketsController extends AppController
 
             $this->request->getSession()->write('escalatedTickets', $assigntickets);
 
-//note  for the customer
+            // note for the customer
             if ($this->Tickets->Customers->save($Customers)) {
-//                $this->Flash->success(__('Note being added for Escalation : {0}', $ticket->title));
                 $success = true;
             } else {
-//                $this->Flash->error(__('Note have not being added for Escalation : {0}', $ticket->title));
                 $error = true;
-
             }
             // Save the ticket
             if ($this->Tickets->save($ticket)) {
                 $this->request->getSession()->write('escalated', true);
-//                $this->Flash->success(__('Escalation successful for Ticket : {0}', $ticket->title));
                 $success = true;
 
             } else {
-//                $this->Flash->error(__('Escalation failed for Ticket : {0}', $ticket->title));
                 $error = true;
 
             }
         }
-//                    debug($Customersname);
-//        exit();
         if ($error) {
             $this->Flash->error(__('There was an error during escalation.'));
         } elseif ($success) {
@@ -478,14 +420,13 @@ class TicketsController extends AppController
 
         }
 
-        //
         return $this->redirect(['controller' => 'Customers', 'action' => 'assigntome']);
     }
 
     public function undoEscalate()
 
     {
-//        initialise the flag message
+        // initialise the flag message
         $success = false;
         $error = false;
         $Customersname='';
@@ -521,24 +462,16 @@ class TicketsController extends AppController
 
 // note
             if ($this->Tickets->Customers->save($Customers)) {
-//                $this->Flash->success(__('Note being undo for Escalation : {0}', $ticket->title));
                 $success = true;
-
             } else {
-//                $this->Flash->error(__('Note have not being undo for Escalation : {0}', $ticket->title));
                 $error = true;
-
             }
             // Save the ticket
             if ($this->Tickets->save($ticket)) {
                 $this->request->getSession()->write('escalated', false);
                 $success = true;
-
-//                $this->Flash->success(__('Deescalation successful for Ticket : {0}', $ticket->title));
             } else {
                 $error = true;
-
-//                $this->Flash->error(__('Deescalation failed for Ticket : {0}', $ticket->title));
             }
         }
 
@@ -571,8 +504,6 @@ class TicketsController extends AppController
             ])
             ->contain(['Users',  'Customers'])
             ->all();
-//                    debug($escalatedTickets);
-//        exit();
 
         $identity = $this->request->getAttribute('authentication')->getIdentity();
         $staffId = $identity->get('id');
@@ -582,10 +513,6 @@ class TicketsController extends AppController
         foreach ($escalatedTickets as $ticket) {
             // Update "escalate" to false (0)
             $ticket->escalate = false;
-
-//            $ticket->staff_id = $staffId; // Set staff_id back to the current user's ID
-//            $ticket->closetime = null;
-
 //
             $Customers = $this->Tickets->Customers->find()
                 ->matching('Tickets', function ($q) use ($ticket) {

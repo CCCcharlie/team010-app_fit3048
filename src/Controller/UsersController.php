@@ -30,12 +30,6 @@ class UsersController extends AppController
         // Check if user is not an admin and redirect to index
         $loggedId = $this->Authentication->getIdentity()->id;
 
-//        debug($adminRole);
-//        debug($adminRole !== 'root');
-//        debug($adminRole !== 'admin');
-
-//        debug($this->request);
-
         $userId = null;
         $userRole = null;
 
@@ -44,15 +38,6 @@ class UsersController extends AppController
             $userId = $parameters[0];
             $userRole = $parameters[1];
         }
-
-//        debug($parameters);
-//        debug($userId);
-//        debug($userRole);
-
-    //        debug(($userId !== null && $userRole !== null));
-
-//        debug($userRole);
-//        exit;
 
         // Whitelist "admin" and "root",  nobody else cannot access staff members besides them
 //
@@ -63,34 +48,8 @@ class UsersController extends AppController
             // they are either root or admin, do something
         }
         // Dont let admin edit other admin/root, only allow themselves
-        // Scenario 1:
-        // Admin attempting to edit Other admin (not his) or root
 
-//        debug($adminRole === 'admin');
-//        debug($userRole !== 'admin' && $userRole !== 'root');
-//        debug($loggedId !== $userId);
-//
-//        debug($adminRole === 'admin' && $userRole !== 'admin' && $userRole !== 'root' && $loggedId !== $userId);
-//
-//
-//        debug($userRole === 'admin' || $userRole === 'root');
-//        debug($adminRole === 'admin' && ($userRole === 'admin' || $userRole === 'root') && $loggedId !== $userId);
-//
-//        debug($userRole);
-//        debug(!in_array($userRole, ['user', 'staff']));
-//        exit;
-
-//        debug($this->request->getParam('action') === 'edit' || $this->request->getParam('action'));
-//        debug($adminRole === 'admin' || $adminRole === 'root');
-//        debug(count($parameters) == 2);
-//        debug(($this->request->getParam('action') === 'edit' || $this->request->getParam('action') === 'delete' && ($adminRole === 'admin' || $adminRole === 'root') && count($parameters) == 2));
-//        exit;
-
-        //Fabulous logic for mostly admin access
         $action = $this->request->getParam('action');
-
-//        debug($action);
-//        exit;
 
         if ($action === 'edit' || $action === 'delete') {
             if ($adminRole === 'admin' || $adminRole === 'root') {
@@ -128,18 +87,12 @@ class UsersController extends AppController
             // No action needed for 'index' or root attempting to add
         } else {
 
-
             // Invalid action
             $this->Flash->error(__('Invalid action'));
 
             return $this->redirect(['action' => 'index']);
         }
 
-        //Attempting to edit without parameter "role"
-//        if(empty($parameters[1]) && $adminRole === 'admin'){
-//            $this->Flash->error(__('Nice try'));
-//            return $this->redirect(['action' => 'index']);
-//        }
     }
 
     public function initialize(): void
@@ -187,10 +140,6 @@ class UsersController extends AppController
         $user = $this->Users->newEmptyEntity();
         if ($this->request->is('post')) {
             $user = $this->Users->patchEntity($user, $this->request->getData());
-
-//            debug($user->hasErrors());
-//            exit;
-
             // Ah so the reason f_name does not show up when fail validation on first name is because f_name has an ERROR,
             // which is why f_name is NULL during id generation.
             // Therefore, we must check first if theres error FIRST and THEN generate ID if no error
@@ -290,17 +239,12 @@ class UsersController extends AppController
      */
     public function unassignedTickets($user = null)
     {
-//        debug($user);
-
         // Get all tickets related to the user about to be deleted
         $tickets = $this->Users->Tickets->find()
             ->where([
                 'Tickets.staff_id' => $user->id,
             ])
             ->all();
-
-//        debug($tickets);
-
         //Checks first if the query returns any result and if so:
         //Loop through the tickets array object, change ticket to null, save it.
         if (count($tickets) > 0) {
@@ -314,7 +258,5 @@ class UsersController extends AppController
         }
 
         return count($tickets);
-//        debug($tickets);
-//        exit;
     }
 }

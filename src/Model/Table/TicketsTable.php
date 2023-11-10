@@ -47,11 +47,9 @@ class TicketsTable extends Table
 
         $this->belongsTo('Customers', [
             'foreignKey' => 'cust_id',
-//            'joinType' => 'INNER',
         ]);
         $this->belongsTo('Users', [
             'foreignKey' => 'staff_id',
-//            'joinType' => 'INNER',
         ]);
         $this->hasMany('Contents', [
             'foreignKey' => 'ticket_id',
@@ -89,7 +87,6 @@ class TicketsTable extends Table
 
         $validator
             ->boolean('closed')
-//            ->requirePresence('closed', 'create')
             ->notEmptyString('closed');
 
         $validator
